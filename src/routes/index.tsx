@@ -47,21 +47,34 @@ function Home() {
       <section className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8 lg:p-10 shadow-xs">
         <div className="absolute inset-y-0 left-0 w-2 bg-rule" />
         
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className="text-[11px] uppercase tracking-[0.14em] font-mono">
-            Proceso de Selección CNSC · DIAN 2676
-          </Badge>
-          <span className="text-xs text-muted">Acuerdo 21 de 2025</span>
+        <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="outline" className="text-[11px] uppercase tracking-[0.14em] font-mono">
+                Proceso de Selección CNSC · DIAN 2676
+              </Badge>
+              <span className="text-xs text-muted">Acuerdo 21 de 2025</span>
+            </div>
+
+            <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold leading-[1.12] text-balance sm:text-4xl lg:text-5xl text-ink">
+              Plataforma Integral de Preparación por Competencias y Roles
+            </h1>
+
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+              Sistema especializado de entrenamiento para las pruebas escritas de ingreso y ascenso a la DIAN. 
+              Alineado al Modelo de Estructura de Roles y Funciones (MERF), el Estatuto Tributario, el CPACA y el Código de Integridad.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-border/80 bg-paper/50 shadow-2xs">
+            <img
+              src="/hero-merito.jpg"
+              alt="Mérito · Preparación Concurso DIAN 2676"
+              className="h-full w-full object-cover aspect-16/9 transition-transform duration-500 hover:scale-102"
+              loading="eager"
+            />
+          </div>
         </div>
-
-        <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold leading-[1.12] text-balance sm:text-4xl lg:text-5xl text-ink">
-          Plataforma Integral de Preparación por Competencias y Roles
-        </h1>
-
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-          Sistema especializado de entrenamiento para las pruebas escritas de ingreso y ascenso a la DIAN. 
-          Alineado al Modelo de Estructura de Roles y Funciones (MERF), el Estatuto Tributario, el CPACA y el Código de Integridad.
-        </p>
 
         {/* ── Tarjeta de Cargo Activo ── */}
         <div className="mt-6 rounded-xl border border-border/90 bg-paper/70 p-4 sm:p-5">
