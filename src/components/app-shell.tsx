@@ -52,17 +52,17 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 border-b border-border/80 bg-bg/90 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 lg:h-16 lg:px-6">
           <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-sm border border-border bg-surface">
-              <span className="font-display text-[13px] font-semibold tracking-tight text-ink">
-                26
+            <span className="flex size-8 items-center justify-center rounded-lg border border-accent/40 bg-surface shadow-2xs">
+              <span className="font-display text-[15px] font-bold tracking-tight text-accent">
+                M
               </span>
             </span>
             <span className="min-w-0">
-              <span className="block font-display text-[15px] font-semibold leading-none tracking-tight">
-                Cuaderno 2676
+              <span className="block font-display text-[16px] font-bold leading-none tracking-tight text-ink">
+                Mérito
               </span>
-              <span className="mt-0.5 block truncate text-[11px] uppercase tracking-[0.14em] text-muted">
-                Preparación Concurso DIAN · {cargo.shortLabel}
+              <span className="mt-0.5 block truncate text-[11px] uppercase tracking-[0.12em] text-muted">
+                by TributoApp · Concurso DIAN
               </span>
             </span>
           </Link>

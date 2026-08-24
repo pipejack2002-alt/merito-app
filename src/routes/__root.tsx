@@ -4,7 +4,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Cuaderno 2676";
+const APP_NAME = "Mérito · Preparación Concurso DIAN 2676";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -15,7 +15,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Preparación para el concurso DIAN 2676 · Analista II de cartera, recaudo y devoluciones. Resúmenes, cuestionarios y simulacro.",
+          "Mérito by TributoApp · Plataforma Integral de Preparación para el Concurso de Méritos DIAN 2676 (CNSC). Simulador oficial, biblioteca de estudio y entrenamiento por competencias.",
       },
       { name: "theme-color", content: "#1A2332" },
     ],
