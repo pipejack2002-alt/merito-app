@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
-import { CnscExam, loadExamSession } from "@/components/cnsc-exam";
+import { CnscExam } from "@/components/cnsc-exam";
+import { loadExamSession } from "@/lib/quiz-session";
 import { shuffle, SIMULACRO } from "@/data/questions";
 import { useProgress } from "@/lib/progress-store";
 import { useCargo } from "@/lib/use-cargo";
@@ -37,9 +38,7 @@ function SimulacroExamen() {
     const prev = loadExamSession();
     if (prev && prev.cargoId === cargo.id) {
       const map = new Map(all.map((q) => [q.id, q]));
-      const restored = prev.ids
-        .map((id) => map.get(id))
-        .filter((q): q is Question => Boolean(q));
+      const restored = prev.ids.map((id) => map.get(id)).filter((q): q is Question => Boolean(q));
       if (restored.length === prev.ids.length && restored.length > 0) {
         return restored;
       }

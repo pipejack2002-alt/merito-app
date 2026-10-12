@@ -11,8 +11,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El primer acto propio del procedimiento de cobro coactivo es",
     choices: [
       { id: "a", text: "decretar de inmediato el remate de bienes inmuebles del deudor." },
-      { id: "b", text: "librar el mandamiento de pago ordenando cancelar la obligación más los intereses." },
-      { id: "c", text: "compensar de oficio con un saldo a favor de IVA que aún no ha sido verificado." },
+      {
+        id: "b",
+        text: "librar el mandamiento de pago ordenando cancelar la obligación más los intereses.",
+      },
+      {
+        id: "c",
+        text: "compensar de oficio con un saldo a favor de IVA que aún no ha sido verificado.",
+      },
       { id: "d", text: "archivar el expediente porque el deudor no contestó el persuasivo." },
     ],
     correct: "b",
@@ -47,8 +53,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Según el artículo 828 del Estatuto Tributario, prestan mérito ejecutivo, entre otros:",
     choices: [
       { id: "a", text: "únicamente las sentencias de la jurisdicción contenciosa." },
-      { id: "b", text: "las liquidaciones privadas, desde el día en que se presentan, aunque no se haya vencido el plazo para pagar." },
-      { id: "c", text: "las liquidaciones privadas y sus correcciones, desde el vencimiento de la fecha para su cancelación, y las liquidaciones oficiales ejecutoriadas." },
+      {
+        id: "b",
+        text: "las liquidaciones privadas, desde el día en que se presentan, aunque no se haya vencido el plazo para pagar.",
+      },
+      {
+        id: "c",
+        text: "las liquidaciones privadas y sus correcciones, desde el vencimiento de la fecha para su cancelación, y las liquidaciones oficiales ejecutoriadas.",
+      },
       { id: "d", text: "cualquier oficio interno de la DIAN que mencione una deuda." },
     ],
     correct: "c",
@@ -85,7 +97,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       { id: "a", text: "el pago efectivo." },
       { id: "b", text: "la prescripción de la acción de cobro." },
       { id: "c", text: "la inconveniencia económica del embargo para la empresa deudora." },
-      { id: "d", text: "la falta de título ejecutivo o la incompetencia del funcionario que lo profirió." },
+      {
+        id: "d",
+        text: "la falta de título ejecutivo o la incompetencia del funcionario que lo profirió.",
+      },
     ],
     correct: "c",
     explanation:
@@ -120,10 +135,19 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Un deudor notificado del mandamiento alega que ya pagó con un recibo de banco de hace ocho meses que no aparece imputado en cuenta corriente. Aporta copia del 490.",
     stem: "La conducta correcta del Analista II es",
     choices: [
-      { id: "a", text: "ignorar el recibo porque el sistema ‘es la verdad oficial’ y seguir al remate." },
-      { id: "b", text: "verificar el pago con la EAR y la cuenta corriente; si se confirma, tramitar la excepción de pago efectivo." },
+      {
+        id: "a",
+        text: "ignorar el recibo porque el sistema ‘es la verdad oficial’ y seguir al remate.",
+      },
+      {
+        id: "b",
+        text: "verificar el pago con la EAR y la cuenta corriente; si se confirma, tramitar la excepción de pago efectivo.",
+      },
       { id: "c", text: "devolver el recibo y exigir que demande ante el Consejo de Estado." },
-      { id: "d", text: "levantar todas las medidas sin dejar constancia, para no dañar la imagen de la entidad." },
+      {
+        id: "d",
+        text: "levantar todas las medidas sin dejar constancia, para no dañar la imagen de la entidad.",
+      },
     ],
     correct: "b",
     explanation:
@@ -140,10 +164,22 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Una obligación de IVA acaba de quedar en mora. No hay mandamiento. El jefe de grupo pide ‘hacer presión real’ porque la meta de recaudo del mes está baja.",
     stem: "En esta etapa, el Analista II debe",
     choices: [
-      { id: "a", text: "decretar embargo preventivo de cuentas, porque el 837 lo permite en cualquier momento." },
-      { id: "b", text: "gestionar cobro persuasivo: contactar, informar la deuda, invitar al pago o a una facilidad, y dejar registro en el sistema." },
-      { id: "c", text: "publicar al deudor en redes sociales de la seccional para que pague por vergüenza." },
-      { id: "d", text: "omitir el persuasivo siempre, porque no es requisito legal del coactivo y retrasa la meta." },
+      {
+        id: "a",
+        text: "decretar embargo preventivo de cuentas, porque el 837 lo permite en cualquier momento.",
+      },
+      {
+        id: "b",
+        text: "gestionar cobro persuasivo: contactar, informar la deuda, invitar al pago o a una facilidad, y dejar registro en el sistema.",
+      },
+      {
+        id: "c",
+        text: "publicar al deudor en redes sociales de la seccional para que pague por vergüenza.",
+      },
+      {
+        id: "d",
+        text: "omitir el persuasivo siempre, porque no es requisito legal del coactivo y retrasa la meta.",
+      },
     ],
     correct: "b",
     explanation:
@@ -178,8 +214,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Se libró mandamiento y se embargó un inmueble. El deudor ofrece una facilidad de pago con garantía hipotecaria de otro bien, suficiente para cubrir capital, intereses y costas.",
     stem: "Respecto de las cautelares, lo procedente es",
     choices: [
-      { id: "a", text: "mantener el embargo indefinidamente, aunque la nueva garantía sea mejor, ‘por si acaso’." },
-      { id: "b", text: "evaluar, según el art. 841, el levantamiento de las cautelares si la facilidad se otorga con garantía suficiente." },
+      {
+        id: "a",
+        text: "mantener el embargo indefinidamente, aunque la nueva garantía sea mejor, ‘por si acaso’.",
+      },
+      {
+        id: "b",
+        text: "evaluar, según el art. 841, el levantamiento de las cautelares si la facilidad se otorga con garantía suficiente.",
+      },
       { id: "c", text: "levantar el embargo de palabra, sin acto, para agilizar." },
       { id: "d", text: "pasar directo a remate porque toda facilidad es ilegal." },
     ],
@@ -200,8 +242,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     choices: [
       { id: "a", text: "devolver el 100 % y cobrar la retención ‘después, con calma’." },
       { id: "b", text: "negar toda devolución para siempre, sin ofrecer compensación." },
-      { id: "c", text: "tramitar la compensación del saldo a favor contra la deuda exigibles y devolver, si cabe, el excedente, según competencia y procedimiento." },
-      { id: "d", text: "pedir al contribuyente que pague en efectivo en la ventanilla del Analista." },
+      {
+        id: "c",
+        text: "tramitar la compensación del saldo a favor contra la deuda exigibles y devolver, si cabe, el excedente, según competencia y procedimiento.",
+      },
+      {
+        id: "d",
+        text: "pedir al contribuyente que pague en efectivo en la ventanilla del Analista.",
+      },
     ],
     correct: "c",
     explanation:
@@ -237,7 +285,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El Analista debe",
     choices: [
       { id: "a", text: "recibir el dinero, firmar un papel y consignar al día siguiente." },
-      { id: "b", text: "orientarlo a pagar únicamente en las Entidades Autorizadas para Recaudar y dejar constancia de la orientación." },
+      {
+        id: "b",
+        text: "orientarlo a pagar únicamente en las Entidades Autorizadas para Recaudar y dejar constancia de la orientación.",
+      },
       { id: "c", text: "aceptar solo si el contribuyente es conocido de la seccional." },
       { id: "d", text: "descontar una ‘comisión de trámite’ y consignar el resto." },
     ],
@@ -255,7 +306,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Las Entidades Autorizadas para Recaudar (EAR) son, en lo esencial,",
     choices: [
       { id: "a", text: "los juzgados administrativos." },
-      { id: "b", text: "bancos y demás entidades habilitadas para recibir el pago de tributos nacionales." },
+      {
+        id: "b",
+        text: "bancos y demás entidades habilitadas para recibir el pago de tributos nacionales.",
+      },
       { id: "c", text: "las personadurías municipales." },
       { id: "d", text: "los notarios, de forma exclusiva." },
     ],
@@ -273,7 +327,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El emplazamiento para declarar, en el procedimiento tributario, es",
     choices: [
       { id: "a", text: "una sentencia judicial." },
-      { id: "b", text: "un acto de trámite que insta al omiso a presentar la declaración, previo a sanciones y, si persiste, a la liquidación de aforo." },
+      {
+        id: "b",
+        text: "un acto de trámite que insta al omiso a presentar la declaración, previo a sanciones y, si persiste, a la liquidación de aforo.",
+      },
       { id: "c", text: "el mandamiento de pago." },
       { id: "d", text: "una medida cautelar." },
     ],
@@ -292,8 +349,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "En una campaña de omisos, un declarante pide al Analista II que le ‘adelante’ si le van a practicar aforo y que le arme la declaración para que quede baja.",
     stem: "Lo correcto es",
     choices: [
-      { id: "a", text: "armar la declaración en el computador institucional, porque orientación al usuario lo permite." },
-      { id: "b", text: "explicar los pasos institucionales del emplazamiento y los canales de presentación, sin anticipar el sentido de un acto ni elaborar la declaración." },
+      {
+        id: "a",
+        text: "armar la declaración en el computador institucional, porque orientación al usuario lo permite.",
+      },
+      {
+        id: "b",
+        text: "explicar los pasos institucionales del emplazamiento y los canales de presentación, sin anticipar el sentido de un acto ni elaborar la declaración.",
+      },
       { id: "c", text: "decirle que ignore el emplazamiento, que ‘casi nunca aforan’." },
       { id: "d", text: "cobrarle una asesoría por fuera de la jornada." },
     ],
@@ -312,8 +375,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "El Analista tiene un cobro coactivo en etapa de embargo. Le notifican que el deudor societario fue admitido en reorganización empresarial (Ley 1116 de 2006).",
     stem: "La decisión alineada con la competencia de procesos concursales es",
     choices: [
-      { id: "a", text: "seguir el remate al día siguiente, porque el fisco no se somete a concursos." },
-      { id: "b", text: "reportar, hacer parte la acreencia fiscal en el concurso y ajustar el cobro a los efectos legales de la admisión." },
+      {
+        id: "a",
+        text: "seguir el remate al día siguiente, porque el fisco no se somete a concursos.",
+      },
+      {
+        id: "b",
+        text: "reportar, hacer parte la acreencia fiscal en el concurso y ajustar el cobro a los efectos legales de la admisión.",
+      },
       { id: "c", text: "condonar la deuda por ‘dificultad económica’." },
       { id: "d", text: "borrar el título del sistema para no complicarse." },
     ],
@@ -369,8 +438,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "En primera instancia, al servidor que recepciona le corresponde",
     choices: [
       { id: "a", text: "rechazarla de plano porque toda petición anónima es improcedente." },
-      { id: "b", text: "radicarla y darle el trámite de petición, si el contenido permite responder sin necesidad de identificar al peticionario." },
-      { id: "c", text: "publicarla en la cartelera con el nombre del servidor acusado, para ‘transparencia’." },
+      {
+        id: "b",
+        text: "radicarla y darle el trámite de petición, si el contenido permite responder sin necesidad de identificar al peticionario.",
+      },
+      {
+        id: "c",
+        text: "publicarla en la cartelera con el nombre del servidor acusado, para ‘transparencia’.",
+      },
       { id: "d", text: "guardarla en un cajón hasta que alguien pregunte." },
     ],
     correct: "b",
@@ -423,7 +498,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El artículo 338 de la Constitución consagra, en esencia, el principio de",
     choices: [
       { id: "a", text: "progresividad del gasto público." },
-      { id: "b", text: "legalidad tributaria: en tiempo de paz, la ley debe fijar los sujetos, el hecho, la base y la tarifa." },
+      {
+        id: "b",
+        text: "legalidad tributaria: en tiempo de paz, la ley debe fijar los sujetos, el hecho, la base y la tarifa.",
+      },
       { id: "c", text: "reserva de la información tributaria." },
       { id: "d", text: "carrera administrativa." },
     ],
@@ -441,7 +519,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El artículo 209 de la Constitución dispone que la función administrativa se desarrolla con fundamento en los principios de",
     choices: [
       { id: "a", text: "equidad, eficiencia y progresividad." },
-      { id: "b", text: "igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad." },
+      {
+        id: "b",
+        text: "igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad.",
+      },
       { id: "c", text: "oralidad, inmediación y contradicción." },
       { id: "d", text: "tipicidad, antijuridicidad y culpabilidad." },
     ],
@@ -459,7 +540,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La diferencia esencial entre impuesto y tasa es que",
     choices: [
       { id: "a", text: "la tasa no la puede cobrar el Estado." },
-      { id: "b", text: "el impuesto no tiene contraprestación directa e individualizada, mientras que la tasa retribuye un servicio divisible." },
+      {
+        id: "b",
+        text: "el impuesto no tiene contraprestación directa e individualizada, mientras que la tasa retribuye un servicio divisible.",
+      },
       { id: "c", text: "el IVA es una tasa y el peaje es un impuesto." },
       { id: "d", text: "no existe diferencia jurídica: son sinónimos." },
     ],
@@ -514,8 +598,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Llega a la dependencia un oficio ciudadano sobre un expediente de cobro. El Analista está con la meta del día y piensa ‘luego lo radico’.",
     stem: "La práctica correcta de gestión documental es",
     choices: [
-      { id: "a", text: "radicar de inmediato según el procedimiento, clasificar y asignar, y solo entonces gestionar de fondo." },
-      { id: "b", text: "guardar el original en el bolso y radicar cuando haya tiempo, para no perder el papel." },
+      {
+        id: "a",
+        text: "radicar de inmediato según el procedimiento, clasificar y asignar, y solo entonces gestionar de fondo.",
+      },
+      {
+        id: "b",
+        text: "guardar el original en el bolso y radicar cuando haya tiempo, para no perder el papel.",
+      },
       { id: "c", text: "responder por WhatsApp personal y no dejar rastro, que es más ágil." },
       { id: "d", text: "entregarlo a un compañero sin registro, porque ‘aquí confiamos’." },
     ],
@@ -535,7 +625,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La primera conducta de orientación al ciudadano es",
     choices: [
       { id: "a", text: "responderle en el mismo tono y amenazarlo con un embargo inmediato." },
-      { id: "b", text: "escuchar, mantener el trato respetuoso, explicar el estado del expediente y los recursos o excepciones que procedan, y registrar la atención." },
+      {
+        id: "b",
+        text: "escuchar, mantener el trato respetuoso, explicar el estado del expediente y los recursos o excepciones que procedan, y registrar la atención.",
+      },
       { id: "c", text: "decirle que ‘tiene razón’ y borrar la deuda para que se calme." },
       { id: "d", text: "ignorar a la persona y seguir digitando." },
     ],
@@ -626,9 +719,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "El deudor, ya notificado del mandamiento, interpone ‘recurso de reposición’ en los términos del CPACA, sin formular las excepciones del 831, y pide que se revoque el mandamiento porque ‘el cobro le parece excesivo’.",
     stem: "El Analista, al proyectar la actuación, debe tener presente que",
     choices: [
-      { id: "a", text: "el mandamiento se impugna por las excepciones taxativas del 831, no por el catálogo ordinario de recursos del CPACA." },
+      {
+        id: "a",
+        text: "el mandamiento se impugna por las excepciones taxativas del 831, no por el catálogo ordinario de recursos del CPACA.",
+      },
       { id: "b", text: "el CPACA deroga el Estatuto Tributario en cobro coactivo." },
-      { id: "c", text: "cualquier escrito, aunque no cite el 831, suspende el remate para siempre." },
+      {
+        id: "c",
+        text: "cualquier escrito, aunque no cite el 831, suspende el remate para siempre.",
+      },
       { id: "d", text: "se debe archivar el cobro por respeto al derecho de contradicción." },
     ],
     correct: "a",
@@ -645,7 +744,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Para el deudor solidario, además de las excepciones generales del 831, proceden:",
     choices: [
       { id: "a", text: "la recusación del Congreso." },
-      { id: "b", text: "la calidad de deudor solidario y la indebida tasación del monto de la deuda." },
+      {
+        id: "b",
+        text: "la calidad de deudor solidario y la indebida tasación del monto de la deuda.",
+      },
       { id: "c", text: "únicamente la tutela." },
       { id: "d", text: "ninguna: el solidario no puede defenderse." },
     ],
@@ -662,7 +764,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "La prescripción de la acción de cobro, respecto de una declaración presentada oportunamente, se cuenta desde",
     choices: [
-      { id: "a", text: "la fecha de vencimiento del término para declarar, fijado por el Gobierno Nacional." },
+      {
+        id: "a",
+        text: "la fecha de vencimiento del término para declarar, fijado por el Gobierno Nacional.",
+      },
       { id: "b", text: "el día en que el Analista abre el expediente." },
       { id: "c", text: "la fecha del primer llamado persuasivo." },
       { id: "d", text: "el día del remate." },
@@ -682,7 +787,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "En cobro persuasivo, un compañero sugiere ‘embargar ya la cuenta, total el 837 dice previa al mandamiento’ para que el deudor se asuste.",
     stem: "La lectura correcta de la norma es",
     choices: [
-      { id: "a", text: "el 837 autoriza cautelares previa o simultáneamente con el mandamiento, es decir, en el escenario del cobro coactivo, no como sustituto del persuasivo." },
+      {
+        id: "a",
+        text: "el 837 autoriza cautelares previa o simultáneamente con el mandamiento, es decir, en el escenario del cobro coactivo, no como sustituto del persuasivo.",
+      },
       { id: "b", text: "cualquier servidor puede embargar en persuasivo si la meta apremia." },
       { id: "c", text: "el embargo preventivo no requiere acto escrito." },
       { id: "d", text: "el 837 solo aplica en aduanas." },
@@ -721,7 +829,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Lo procedente es",
     choices: [
       { id: "a", text: "girar para no quedar mal con el término, y fiscalizar después." },
-      { id: "b", text: "aplicar el procedimiento de control, y rechazar o modificar la devolución de forma motivada si la inconsistencia lo exige, sin saltarse la verificación." },
+      {
+        id: "b",
+        text: "aplicar el procedimiento de control, y rechazar o modificar la devolución de forma motivada si la inconsistencia lo exige, sin saltarse la verificación.",
+      },
       { id: "c", text: "pedir al contribuyente un regalo para agilizar." },
       { id: "d", text: "borrar la inconsistencia del cruce para que el sistema deje pasar." },
     ],
@@ -741,7 +852,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El Analista II, según sus funciones 3 a 5, debe",
     choices: [
       { id: "a", text: "librar mandamientos masivos el mismo día, sin depurar." },
-      { id: "b", text: "tramitar la corrección de inconsistencias de recibos y el reproceso de saldos, conciliando con la EAR." },
+      {
+        id: "b",
+        text: "tramitar la corrección de inconsistencias de recibos y el reproceso de saldos, conciliando con la EAR.",
+      },
       { id: "c", text: "avisar solo a los contribuyentes amigos para que reclamen." },
       { id: "d", text: "dejar el lote así, porque ‘el banco es el responsable y ya’." },
     ],
@@ -760,7 +874,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     choices: [
       { id: "a", text: "el slogan de la campaña de recaudo." },
       { id: "b", text: "sujetos activo y pasivo, hecho generador, base gravable y tarifa." },
-      { id: "c", text: "únicamente la tarifa, el resto lo define un decreto reglamentario sin ley." },
+      {
+        id: "c",
+        text: "únicamente la tarifa, el resto lo define un decreto reglamentario sin ley.",
+      },
       { id: "d", text: "el nombre del Analista competente." },
     ],
     correct: "b",
@@ -813,7 +930,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La revocación directa de un acto administrativo (arts. 93 a 97 CPACA) procede, entre otras, cuando",
     choices: [
       { id: "a", text: "el interesado es amigo del jefe." },
-      { id: "b", text: "el acto es manifiestamente contrario a la Constitución o a la ley, o no está conforme con el interés público o social." },
+      {
+        id: "b",
+        text: "el acto es manifiestamente contrario a la Constitución o a la ley, o no está conforme con el interés público o social.",
+      },
       { id: "c", text: "el Analista cambió de opinión personal." },
       { id: "d", text: "faltan cinco días para que prescriba el cobro." },
     ],
@@ -868,10 +988,16 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Un jefe de otra área pide al Analista II que, ‘como sabe de sistemas’, rediseñe él solo la política nacional de recaudo y la publique en la intranet.",
     stem: "Según el propósito del empleo, el Analista II",
     choices: [
-      { id: "a", text: "ejecuta labores técnicas según políticas y directrices de nivel central; no adopta la política nacional." },
+      {
+        id: "a",
+        text: "ejecuta labores técnicas según políticas y directrices de nivel central; no adopta la política nacional.",
+      },
       { id: "b", text: "puede sustituir al Director General en materia de recaudo." },
       { id: "c", text: "debe publicar cualquier idea propia como si fuera acto administrativo." },
-      { id: "d", text: "no tiene nada que ver con sistemas de cartera, aunque la función 9 lo mencione." },
+      {
+        id: "d",
+        text: "no tiene nada que ver con sistemas de cartera, aunque la función 9 lo mencione.",
+      },
     ],
     correct: "a",
     explanation:
@@ -889,7 +1015,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La priorización más coherente con el art. 817 y las funciones de la ficha es",
     choices: [
       { id: "a", text: "trabajar solo el lote (iii), porque es más fácil de llamar." },
-      { id: "b", text: "priorizar el lote (i), en riesgo de prescripción, sin abandonar la gestión técnica de los otros según el procedimiento de clasificación." },
+      {
+        id: "b",
+        text: "priorizar el lote (i), en riesgo de prescripción, sin abandonar la gestión técnica de los otros según el procedimiento de clasificación.",
+      },
       { id: "c", text: "ignorar el (i) porque ‘ya casi prescriben, mejor ni tocarlos’." },
       { id: "d", text: "borrar el (iii) sin acto, para limpiar la meta." },
     ],
@@ -925,7 +1054,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La Ley 1116 de 2006 regula, principalmente,",
     choices: [
       { id: "a", text: "el derecho de petición." },
-      { id: "b", text: "el régimen de insolvencia empresarial (reorganización y liquidación judicial)." },
+      {
+        id: "b",
+        text: "el régimen de insolvencia empresarial (reorganización y liquidación judicial).",
+      },
       { id: "c", text: "el Código de Integridad." },
       { id: "d", text: "el MIPG." },
     ],
@@ -943,7 +1075,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Prestan mérito ejecutivo las garantías y cauciones prestadas a favor de la Nación, a partir de",
     choices: [
       { id: "a", text: "la sola firma del pagaré, sin acto alguno." },
-      { id: "b", text: "la ejecutoria del acto que declare el incumplimiento o la exigibilidad de las obligaciones garantizadas." },
+      {
+        id: "b",
+        text: "la ejecutoria del acto que declare el incumplimiento o la exigibilidad de las obligaciones garantizadas.",
+      },
       { id: "c", text: "el día en que el Analista lo decide en un chat." },
       { id: "d", text: "la admisión de una tutela." },
     ],
@@ -966,8 +1101,7 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       { id: "d", text: "cuarenta y cinco (45) días." },
     ],
     correct: "c",
-    explanation:
-      "Consultas: 30 días. Documentos: 10. Peticiones generales: 15.",
+    explanation: "Consultas: 30 días. Documentos: 10. Peticiones generales: 15.",
     source: "Ley 1755 de 2015 / CPACA",
     difficulty: 1,
   },
@@ -979,7 +1113,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La DIAN, en la estructura del Estado, es",
     choices: [
       { id: "a", text: "una rama autónoma al lado de la legislativa." },
-      { id: "b", text: "una Unidad Administrativa Especial del orden nacional, adscrita al Ministerio de Hacienda y Crédito Público." },
+      {
+        id: "b",
+        text: "una Unidad Administrativa Especial del orden nacional, adscrita al Ministerio de Hacienda y Crédito Público.",
+      },
       { id: "c", text: "un ente territorial." },
       { id: "d", text: "una superintendencia privada." },
     ],
@@ -1015,7 +1152,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Durante la etapa de cobro persuasivo, la DIAN",
     choices: [
       { id: "a", text: "puede decretar embargos y secuestros como regla general." },
-      { id: "b", text: "no decreta medidas cautelares; invita al pago, a la facilidad o a la depuración." },
+      {
+        id: "b",
+        text: "no decreta medidas cautelares; invita al pago, a la facilidad o a la depuración.",
+      },
       { id: "c", text: "remata bienes de forma verbal." },
       { id: "d", text: "pierde competencia para cobrar después." },
     ],
@@ -1053,7 +1193,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La diligencia correcta es",
     choices: [
       { id: "a", text: "dejar prescribir para ‘aliviar’ al contribuyente, sin acto de remisión." },
-      { id: "b", text: "impulsar de inmediato el cobro coactivo competente (mandamiento y su notificación), que es una causal de interrupción de la prescripción." },
+      {
+        id: "b",
+        text: "impulsar de inmediato el cobro coactivo competente (mandamiento y su notificación), que es una causal de interrupción de la prescripción.",
+      },
       { id: "c", text: "embargar sin mandamiento ni competencia." },
       { id: "d", text: "esperar a que el deudor prescriba y luego cobrarle ‘en equidad’." },
     ],
@@ -1072,9 +1215,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
       "Un acto de trámite de cobro (un oficio de impulso) es ‘apelado’ por el deudor, que pide al Analista suspender todo el expediente.",
     stem: "Conforme al CPACA, por regla",
     choices: [
-      { id: "a", text: "los actos de trámite no son susceptibles de recursos, salvo que la ley lo disponga o que impidan continuar la actuación." },
+      {
+        id: "a",
+        text: "los actos de trámite no son susceptibles de recursos, salvo que la ley lo disponga o que impidan continuar la actuación.",
+      },
       { id: "b", text: "todos los oficios internos son apelables ante el Consejo de Estado." },
-      { id: "c", text: "el Analista debe conceder siempre la apelación, aunque el acto sea de trámite." },
+      {
+        id: "c",
+        text: "el Analista debe conceder siempre la apelación, aunque el acto sea de trámite.",
+      },
       { id: "d", text: "el oficio de impulso equivale a una sentencia." },
     ],
     correct: "a",
@@ -1111,7 +1260,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La conducta correcta es",
     choices: [
       { id: "a", text: "compartir la clave, porque trabajo en equipo nivel 2 lo exige." },
-      { id: "b", text: "negar el préstamo de credenciales y orientarlo al procedimiento de desbloqueo institucional." },
+      {
+        id: "b",
+        text: "negar el préstamo de credenciales y orientarlo al procedimiento de desbloqueo institucional.",
+      },
       { id: "c", text: "escribírsela en un post-it visible en el monitor." },
       { id: "d", text: "enviar la clave por el grupo de WhatsApp de la seccional." },
     ],
@@ -1128,7 +1280,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "La compensación y la devolución de saldos a favor se distinguen porque",
     choices: [
-      { id: "a", text: "la compensación imputa el saldo a deudas; la devolución restituye recursos al contribuyente." },
+      {
+        id: "a",
+        text: "la compensación imputa el saldo a deudas; la devolución restituye recursos al contribuyente.",
+      },
       { id: "b", text: "son exactamente el mismo acto con otro nombre." },
       { id: "c", text: "la devolución solo existe en aduanas." },
       { id: "d", text: "la compensación la hace siempre un juez penal." },
@@ -1165,7 +1320,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La falta de ejecutoria del título, como excepción del 831, significa en sustancia que",
     choices: [
       { id: "a", text: "el deudor no quiere pagar." },
-      { id: "b", text: "el acto que sirve de título aún no está en firme, de modo que no puede cobrarse coactivamente." },
+      {
+        id: "b",
+        text: "el acto que sirve de título aún no está en firme, de modo que no puede cobrarse coactivamente.",
+      },
       { id: "c", text: "el Analista no tiene computador." },
       { id: "d", text: "la deuda es inembargable por ser salarial, únicamente." },
     ],
@@ -1200,7 +1358,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "El registro del embargo de un inmueble (art. 839-1 E.T.) busca, en lo esencial,",
     choices: [
-      { id: "a", text: "hacer oponible la medida frente a terceros y evitar la enajenación libre del bien." },
+      {
+        id: "a",
+        text: "hacer oponible la medida frente a terceros y evitar la enajenación libre del bien.",
+      },
       { id: "b", text: "sustituir el mandamiento de pago." },
       { id: "c", text: "notificar al Congreso." },
       { id: "d", text: "convertir el impuesto en una tasa." },
@@ -1257,7 +1418,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "La línea de actuación es",
     choices: [
       { id: "a", text: "archivar para siempre, porque ‘muerto el deudor, muerta la deuda’." },
-      { id: "b", text: "intervenir el crédito fiscal en la sucesión y notificar a herederos según el E.T., sin inventar una condonación." },
+      {
+        id: "b",
+        text: "intervenir el crédito fiscal en la sucesión y notificar a herederos según el E.T., sin inventar una condonación.",
+      },
       { id: "c", text: "embargar la casa de un vecino homónimo." },
       { id: "d", text: "exigir el pago al Analista que tenía el expediente." },
     ],
@@ -1277,7 +1441,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El Analista II debe",
     choices: [
       { id: "a", text: "entregar la carpeta completa, invocando la Ley 1712 sin reservas." },
-      { id: "b", text: "negar la información tributaria reservada y orientar el derecho de petición al canal competente, con la reserva de ley." },
+      {
+        id: "b",
+        text: "negar la información tributaria reservada y orientar el derecho de petición al canal competente, con la reserva de ley.",
+      },
       { id: "c", text: "filtrar extraoficialmente a cambio de que no mencionen a la seccional." },
       { id: "d", text: "publicar el expediente en redes de la entidad." },
     ],
@@ -1328,13 +1495,26 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "razonamiento-matematico",
     kind: "sjt",
-    caseText: "Un deudor realiza un abono de $10.000.000 a una obligación fiscal en cobro que tiene los siguientes conceptos pendientes: Sanciones: $3.000.000; Intereses moratorios: $4.000.000; Capital de impuesto: $8.000.000.",
+    caseText:
+      "Un deudor realiza un abono de $10.000.000 a una obligación fiscal en cobro que tiene los siguientes conceptos pendientes: Sanciones: $3.000.000; Intereses moratorios: $4.000.000; Capital de impuesto: $8.000.000.",
     stem: "De acuerdo con la regla obligatoria de imputación de pagos del artículo 804 del Estatuto Tributario, ¿cómo debe distribuirse dicho abono y cuál es el saldo remanente de capital?",
     choices: [
-      { id: "a", text: "Se abonan $8.000.000 a capital primero, $2.000.000 a intereses y queda debiendo $3.000.000 de sanciones." },
-      { id: "b", text: "Se cubren $3.000.000 de sanciones, $4.000.000 de intereses y $3.000.000 a capital, quedando un saldo de capital pendiente de $5.000.000." },
-      { id: "c", text: "Se prorratea en partes iguales de 33.3% para cada concepto sin orden de prelación." },
-      { id: "d", text: "Se abonan $4.000.000 a intereses primero, $6.000.000 a capital y las sanciones se condonan automáticamente." },
+      {
+        id: "a",
+        text: "Se abonan $8.000.000 a capital primero, $2.000.000 a intereses y queda debiendo $3.000.000 de sanciones.",
+      },
+      {
+        id: "b",
+        text: "Se cubren $3.000.000 de sanciones, $4.000.000 de intereses y $3.000.000 a capital, quedando un saldo de capital pendiente de $5.000.000.",
+      },
+      {
+        id: "c",
+        text: "Se prorratea en partes iguales de 33.3% para cada concepto sin orden de prelación.",
+      },
+      {
+        id: "d",
+        text: "Se abonan $4.000.000 a intereses primero, $6.000.000 a capital y las sanciones se condonan automáticamente.",
+      },
     ],
     correct: "b",
     explanation:
@@ -1365,11 +1545,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "razonamiento-matematico",
     kind: "sjt",
-    caseText: "En una división de cobranzas se evalúan 4 lotes de cartera: Lote A: 120 obligaciones con vencimiento promedio de 4.8 años; Lote B: 45 obligaciones de cuantía alta con vencimiento de 1 año; Lote C: 300 obligaciones menores con 2 años; Lote D: 80 obligaciones con cobro persuasivo iniciado hace 15 días.",
+    caseText:
+      "En una división de cobranzas se evalúan 4 lotes de cartera: Lote A: 120 obligaciones con vencimiento promedio de 4.8 años; Lote B: 45 obligaciones de cuantía alta con vencimiento de 1 año; Lote C: 300 obligaciones menores con 2 años; Lote D: 80 obligaciones con cobro persuasivo iniciado hace 15 días.",
     stem: "Al clasificar por riesgo inminente de extinción de la acción de cobro por prescripción (art. 817 E.T., 5 años), el Analista II debe priorizar de inmediato:",
     choices: [
       { id: "a", text: "El Lote B, porque tiene mayor cuantía por obligación." },
-      { id: "b", text: "El Lote A, porque está a solo 0.2 años (aprox. 73 días) del término fatal de 5 años de prescripción sin mandamiento." },
+      {
+        id: "b",
+        text: "El Lote A, porque está a solo 0.2 años (aprox. 73 días) del término fatal de 5 años de prescripción sin mandamiento.",
+      },
       { id: "c", text: "El Lote C, porque tiene mayor volumen de expedientes." },
       { id: "d", text: "El Lote D, porque ya tiene gestión persuasiva abierta." },
     ],
@@ -1386,10 +1570,22 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "Respecto a la liquidación de intereses moratorios tributarios bajo el artículo 635 del Estatuto Tributario, es correcto afirmar que:",
     choices: [
-      { id: "a", text: "Los intereses se liquidan mensualmente y generan anatocismo capitalizándose al saldo adeudado cada 30 días." },
-      { id: "b", text: "Se liquidan diariamente sobre el capital insoluto a la tasa certificada, sin que los intereses causados generen nuevos intereses (sin anatocismo)." },
-      { id: "c", text: "La tasa de interés moratorio es fija del 10% anual para todas las deudas sin importar la certificación bancaria." },
-      { id: "d", text: "Los intereses moratorios solo se causan a partir de la sentencia judicial de remate de bienes." },
+      {
+        id: "a",
+        text: "Los intereses se liquidan mensualmente y generan anatocismo capitalizándose al saldo adeudado cada 30 días.",
+      },
+      {
+        id: "b",
+        text: "Se liquidan diariamente sobre el capital insoluto a la tasa certificada, sin que los intereses causados generen nuevos intereses (sin anatocismo).",
+      },
+      {
+        id: "c",
+        text: "La tasa de interés moratorio es fija del 10% anual para todas las deudas sin importar la certificación bancaria.",
+      },
+      {
+        id: "d",
+        text: "Los intereses moratorios solo se causan a partir de la sentencia judicial de remate de bienes.",
+      },
     ],
     correct: "b",
     explanation:
@@ -1438,11 +1634,18 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "razonamiento-matematico",
     kind: "sjt",
-    caseText: "Un contribuyente tiene un saldo a favor en IVA de $15.000.000 y solicita devolución. En cuenta corriente presenta una deuda líquida y exigible en renta por $9.000.000 de capital y $1.000.000 de intereses moratorios.",
+    caseText:
+      "Un contribuyente tiene un saldo a favor en IVA de $15.000.000 y solicita devolución. En cuenta corriente presenta una deuda líquida y exigible en renta por $9.000.000 de capital y $1.000.000 de intereses moratorios.",
     stem: "Al resolver el trámite aplicando la compensación oficiosa para unificar la realidad fiscal (función 7 de la ficha), la administración debe:",
     choices: [
-      { id: "a", text: "Devolver los $15.000.000 completos y cobrar la renta por cuerda separada." },
-      { id: "b", text: "Compensar $10.000.000 para extinguir la deuda de renta y girar el remanente de $5.000.000 al contribuyente." },
+      {
+        id: "a",
+        text: "Devolver los $15.000.000 completos y cobrar la renta por cuerda separada.",
+      },
+      {
+        id: "b",
+        text: "Compensar $10.000.000 para extinguir la deuda de renta y girar el remanente de $5.000.000 al contribuyente.",
+      },
       { id: "c", text: "Negar la devolución y archivar el saldo a favor sin compensar." },
       { id: "d", text: "Compensar solo el capital de $9.000.000 y perdonar los intereses." },
     ],
@@ -1496,7 +1699,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "De acuerdo con el artículo 21-1 del Estatuto Tributario, la base contable para la determinación del impuesto sobre la renta y complementarios en Colombia para obligados a llevar contabilidad es:",
     choices: [
       { id: "a", text: "El sistema de caja exclusivamente en el momento del pago." },
-      { id: "b", text: "El sistema de devengo o acumulación bajo los marcos normativos contables vigentes (NIIF), aplicando las excepciones expresas consagradas en la ley tributaria." },
+      {
+        id: "b",
+        text: "El sistema de devengo o acumulación bajo los marcos normativos contables vigentes (NIIF), aplicando las excepciones expresas consagradas en la ley tributaria.",
+      },
       { id: "c", text: "Únicamente los extractos bancarios sin importar la contabilidad." },
       { id: "d", text: "El Decreto 2649 de 1993 de forma inalterable." },
     ],
@@ -1514,7 +1720,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Respecto a los ingresos reconocidos contablemente al valor razonable (fair value), el artículo 28 del Estatuto Tributario establece que para efectos fiscales:",
     choices: [
       { id: "a", text: "Son gravados inmediatamente en el periodo contable en que se registran." },
-      { id: "b", text: "No tienen efectos en el impuesto sobre la renta sino hasta el momento de su enajenación, venta o liquidación definitiva." },
+      {
+        id: "b",
+        text: "No tienen efectos en el impuesto sobre la renta sino hasta el momento de su enajenación, venta o liquidación definitiva.",
+      },
       { id: "c", text: "Están exentos perpetuamente del impuesto sobre la renta." },
       { id: "d", text: "Constituyen renta presuntiva gravable al 50%." },
     ],
@@ -1532,7 +1741,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El reporte de Conciliación Fiscal consagrado en el artículo 772-1 del Estatuto Tributario (Formato 2516) tiene como función principal:",
     choices: [
       { id: "a", text: "Sustituir formalmente la presentación de la declaración de renta." },
-      { id: "b", text: "Constituir un sistema de control que evidencie las diferencias entre la aplicación de los marcos contables normativos (NIIF) y las disposiciones del Estatuto Tributario." },
+      {
+        id: "b",
+        text: "Constituir un sistema de control que evidencie las diferencias entre la aplicación de los marcos contables normativos (NIIF) y las disposiciones del Estatuto Tributario.",
+      },
       { id: "c", text: "Autorizar el no pago de sanciones tributarias por un año." },
       { id: "d", text: "Liquidar el salario de los contadores públicos de la empresa." },
     ],
@@ -1547,11 +1759,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "principios-contables-financieros",
     kind: "sjt",
-    caseText: "En un proceso de cobro coactivo, el Analista II revisa el Estado de Situación Financiera remitido por una sociedad deudora para identificar activos con vocación cautelar.",
+    caseText:
+      "En un proceso de cobro coactivo, el Analista II revisa el Estado de Situación Financiera remitido por una sociedad deudora para identificar activos con vocación cautelar.",
     stem: "Al examinar la estructura patrimonial, los rubros que representan bienes directamente embargables para asegurar el crédito fiscal son:",
     choices: [
       { id: "a", text: "Las cuentas de pasivo corriente frente a proveedores externos." },
-      { id: "b", text: "Las cuentas del activo: saldos disponibles en bancos, inversiones financieras, cuentas por cobrar comerciales e inmuebles registrados." },
+      {
+        id: "b",
+        text: "Las cuentas del activo: saldos disponibles en bancos, inversiones financieras, cuentas por cobrar comerciales e inmuebles registrados.",
+      },
       { id: "c", text: "El capital suscrito no pagado por los accionistas." },
       { id: "d", text: "Las pérdidas acumuladas de ejercicios anteriores." },
     ],
@@ -1569,7 +1785,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "En materia de deducción por provisión de deudas de dudoso o difícil cobro en el impuesto sobre la renta (art. 145 E.T. y Decreto 1625 de 2016), la provisión individual permite deducir anualmente hasta el:",
     choices: [
       { id: "a", text: "10% de cualquier cartera sin vencimiento." },
-      { id: "b", text: "33% como cuota de provisión individual para deudas manifiestamente vencidas con más de un (1) año de antigüedad." },
+      {
+        id: "b",
+        text: "33% como cuota de provisión individual para deudas manifiestamente vencidas con más de un (1) año de antigüedad.",
+      },
       { id: "c", text: "100% en el primer mes de mora de la factura." },
       { id: "d", text: "50% de las deudas entre partes vinculadas económicamente." },
     ],
@@ -1587,7 +1806,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El registro contable de una retención en la fuente practicada a un proveedor por valor de $800.000 se clasifica en el Pasivo porque:",
     choices: [
       { id: "a", text: "Representa una ganancia extraordinaria de la empresa retenedora." },
-      { id: "b", text: "Constituye una obligación legal con la DIAN de consignar dichos dineros recaudados a favor del fisco nacional." },
+      {
+        id: "b",
+        text: "Constituye una obligación legal con la DIAN de consignar dichos dineros recaudados a favor del fisco nacional.",
+      },
       { id: "c", text: "Es un gasto de administración no deducible en renta." },
       { id: "d", text: "Es un préstamo concedido al proveedor por tiempo indefinido." },
     ],
@@ -1604,9 +1826,18 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "El principio fundamental de partida doble en contabilidad asegura que:",
     choices: [
-      { id: "a", text: "Cada transacción económica debe generar débitos y créditos equivalentes, manteniendo la igualdad de la ecuación patrimonial (Activo = Pasivo + Patrimonio)." },
-      { id: "b", text: "Las declaraciones tributarias deben presentarse en dos seccionales al mismo tiempo." },
-      { id: "c", text: "Los ingresos se dividen obligatoriamente a la mitad para efectos de auditoría." },
+      {
+        id: "a",
+        text: "Cada transacción económica debe generar débitos y créditos equivalentes, manteniendo la igualdad de la ecuación patrimonial (Activo = Pasivo + Patrimonio).",
+      },
+      {
+        id: "b",
+        text: "Las declaraciones tributarias deben presentarse en dos seccionales al mismo tiempo.",
+      },
+      {
+        id: "c",
+        text: "Los ingresos se dividen obligatoriamente a la mitad para efectos de auditoría.",
+      },
       { id: "d", text: "La DIAN puede cobrar dos veces una misma obligación tributaria." },
     ],
     correct: "a",
@@ -1622,8 +1853,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "Si una empresa registra contablemente un gasto por provisión de una contingencia judicial incierta (litigio en curso sin sentencia), para efectos del impuesto de renta (art. 59 E.T.), este gasto:",
     choices: [
-      { id: "a", text: "Es deducible en renta en el año en que se causó contablemente la estimación." },
-      { id: "b", text: "No es deducible fiscalmente sino hasta cuando se consolide el pago o exista sentencia judicial ejecutoriada con pasivo cierto." },
+      {
+        id: "a",
+        text: "Es deducible en renta en el año en que se causó contablemente la estimación.",
+      },
+      {
+        id: "b",
+        text: "No es deducible fiscalmente sino hasta cuando se consolide el pago o exista sentencia judicial ejecutoriada con pasivo cierto.",
+      },
       { id: "c", text: "Se compensa automáticamente con el IVA generado en ventas." },
       { id: "d", text: "Se transforma en un saldo a favor en cuenta corriente." },
     ],
@@ -1640,7 +1877,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "Conforme al artículo 772 del Estatuto Tributario, los libros de contabilidad del contribuyente hacen prueba en su favor frente a la DIAN siempre que:",
     choices: [
-      { id: "a", text: "Se lleven en debida forma, reflejen fidedignamente los hechos económicos y se respalden con comprobantes internos y externos verificables." },
+      {
+        id: "a",
+        text: "Se lleven en debida forma, reflejen fidedignamente los hechos económicos y se respalden con comprobantes internos y externos verificables.",
+      },
       { id: "b", text: "No sean presentados a requerimiento de la administración tributaria." },
       { id: "c", text: "Estén registrados exclusivamente en la Cámara de Comercio de otro país." },
       { id: "d", text: "Solo contengan transacciones realizadas en dinero en efectivo." },
@@ -1658,8 +1898,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "El impuesto diferido reflejado en los estados financieros de una entidad comercial representa:",
     choices: [
-      { id: "a", text: "Un título ejecutivo de cobro coactivo exigible por la DIAN en cualquier momento." },
-      { id: "b", text: "El efecto contable de las diferencias temporales entre la base contable y fiscal que se revertirán en vigencias futuras, sin constituir deuda tributaria actual." },
+      {
+        id: "a",
+        text: "Un título ejecutivo de cobro coactivo exigible por la DIAN en cualquier momento.",
+      },
+      {
+        id: "b",
+        text: "El efecto contable de las diferencias temporales entre la base contable y fiscal que se revertirán en vigencias futuras, sin constituir deuda tributaria actual.",
+      },
       { id: "c", text: "Una sanción por extemporaneidad en la presentación del RUT." },
       { id: "d", text: "Un subsidio otorgado por el Ministerio de Hacienda." },
     ],
@@ -1677,8 +1923,14 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "Conforme a los Decretos 1742 de 2020 y 412 de 2024, la Unidad Administrativa Especial Dirección de Impuestos y Aduanas Nacionales (DIAN) se define legalmente como:",
     choices: [
       { id: "a", text: "Un organismo judicial adscrito a la Corte Suprema de Justicia." },
-      { id: "b", text: "Una Unidad Administrativa Especial del orden nacional, adscrita al Ministerio de Hacienda y Crédito Público, con personería jurídica, autonomía administrativa y presupuestal, y patrimonio propio." },
-      { id: "c", text: "Una empresa industrial y comercial del Estado descentralizada territorialmente." },
+      {
+        id: "b",
+        text: "Una Unidad Administrativa Especial del orden nacional, adscrita al Ministerio de Hacienda y Crédito Público, con personería jurídica, autonomía administrativa y presupuestal, y patrimonio propio.",
+      },
+      {
+        id: "c",
+        text: "Una empresa industrial y comercial del Estado descentralizada territorialmente.",
+      },
       { id: "d", text: "Una corporación autónoma regional de carácter ambiental." },
     ],
     correct: "b",
@@ -1712,7 +1964,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "La administración, control, fiscalización y cobro coactivo sobre los contribuyentes calificados formalmente como 'Grandes Contribuyentes' corresponde a:",
     choices: [
-      { id: "a", text: "La Dirección Seccional de Impuestos de Grandes Contribuyentes, con jurisdicción en todo el territorio nacional sobre dichos sujetos." },
+      {
+        id: "a",
+        text: "La Dirección Seccional de Impuestos de Grandes Contribuyentes, con jurisdicción en todo el territorio nacional sobre dichos sujetos.",
+      },
       { id: "b", text: "Cualquier Seccional Delegada municipal sin importar el NIT." },
       { id: "c", text: "Exclusivamente a los bancos privados autorizados para recaudar." },
       { id: "d", text: "La Defensoría del Pueblo." },
@@ -1764,11 +2019,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "estructura-dian",
     kind: "sjt",
-    caseText: "Un Analista II de cobranzas proyecta un mandamiento de pago contra un deudor. El jefe de grupo se encuentra incapacitado y un compañero le sugiere que el Analista firme el acto directamente 'para no frenar el indicador'.",
+    caseText:
+      "Un Analista II de cobranzas proyecta un mandamiento de pago contra un deudor. El jefe de grupo se encuentra incapacitado y un compañero le sugiere que el Analista firme el acto directamente 'para no frenar el indicador'.",
     stem: "Frente a las normas de competencia funcional de la DIAN (art. 824 E.T. y Resolución 0067/2024), el Analista II debe:",
     choices: [
       { id: "a", text: "Firmar el mandamiento de pago para no atrasar la meta de recaudo." },
-      { id: "b", text: "Rechazar firmar el acto y elevar el proyecto al funcionario encargado o superior que ostente la competencia delegada legal para suscribir mandamientos de pago." },
+      {
+        id: "b",
+        text: "Rechazar firmar el acto y elevar el proyecto al funcionario encargado o superior que ostente la competencia delegada legal para suscribir mandamientos de pago.",
+      },
       { id: "c", text: "Firmar a nombre del jefe poniendo 'por orden superior' verbal." },
       { id: "d", text: "Archivar el expediente definitivamente por falta de firma." },
     ],
@@ -1803,7 +2062,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "La competencia territorial de las Direcciones Seccionales de la DIAN para gestionar cobro y fiscalización tributaria se rige principalmente por:",
     choices: [
-      { id: "a", text: "El domicilio fiscal del contribuyente registrado formalmente en el RUT (art. 563 E.T.)." },
+      {
+        id: "a",
+        text: "El domicilio fiscal del contribuyente registrado formalmente en el RUT (art. 563 E.T.).",
+      },
       { id: "b", text: "La ciudad donde nació el representante legal de la empresa." },
       { id: "c", text: "El lugar de fabricación de los bienes importados." },
       { id: "d", text: "La ciudad donde reside el revisor fiscal." },
@@ -1855,10 +2117,13 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "ofimatica-dian",
     kind: "knowledge",
-    stem: "La función condicional de Excel `=SI(Y(A2>0; B2<5); \"Prioritario\"; \"Ordinario\")` asignará la categoría 'Prioritario' únicamente cuando:",
+    stem: 'La función condicional de Excel `=SI(Y(A2>0; B2<5); "Prioritario"; "Ordinario")` asignará la categoría \'Prioritario\' únicamente cuando:',
     choices: [
       { id: "a", text: "Se cumpla cualquiera de las dos condiciones de manera indistinta." },
-      { id: "b", text: "Se cumplan simultáneamente ambas condiciones lógicas: A2 mayor a 0 y B2 menor a 5." },
+      {
+        id: "b",
+        text: "Se cumplan simultáneamente ambas condiciones lógicas: A2 mayor a 0 y B2 menor a 5.",
+      },
       { id: "c", text: "Ambas condiciones sean falsas." },
       { id: "d", text: "El texto contenga errores ortográficos." },
     ],
@@ -1873,12 +2138,22 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "ofimatica-dian",
     kind: "sjt",
-    caseText: "Un servidor de nivel técnico debe proyectar un oficio de cobro persuasivo dirigido a 200 contribuyentes morosos.",
+    caseText:
+      "Un servidor de nivel técnico debe proyectar un oficio de cobro persuasivo dirigido a 200 contribuyentes morosos.",
     stem: "Siguiendo los lineamientos de correspondencia y gestión documental institucional, el servidor debe:",
     choices: [
-      { id: "a", text: "Crear un diseño libre en Word con tipografías artísticas y membretes inventados." },
-      { id: "b", text: "Utilizar la plantilla estandarizada oficial del Sistema de Gestión Integrado (SGI), respetando código de formato, tipografía institucional y combinación de correspondencia con radicación consecutiva." },
-      { id: "c", text: "Enviar mensajes desde su cuenta personal de WhatsApp sin número de radicado." },
+      {
+        id: "a",
+        text: "Crear un diseño libre en Word con tipografías artísticas y membretes inventados.",
+      },
+      {
+        id: "b",
+        text: "Utilizar la plantilla estandarizada oficial del Sistema de Gestión Integrado (SGI), respetando código de formato, tipografía institucional y combinación de correspondencia con radicación consecutiva.",
+      },
+      {
+        id: "c",
+        text: "Enviar mensajes desde su cuenta personal de WhatsApp sin número de radicado.",
+      },
       { id: "d", text: "Dejar el documento sin fecha ni datos del expediente." },
     ],
     correct: "b",
@@ -1892,11 +2167,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "ofimatica-dian",
     kind: "sjt",
-    caseText: "Un compañero de trabajo te solicita tu usuario y contraseña de Muisca manifestando que tiene una urgencia y su clave expiró.",
+    caseText:
+      "Un compañero de trabajo te solicita tu usuario y contraseña de Muisca manifestando que tiene una urgencia y su clave expiró.",
     stem: "Conforme a las políticas de seguridad de la información (ISO 27001) y el Código de Integridad de la DIAN, tu actuación correcta es:",
     choices: [
       { id: "a", text: "Suministrarle la contraseña para apoyar el trabajo en equipo." },
-      { id: "b", text: "Rehusarte a entregar las credenciales, recordándole que los accesos son personales e intransferibles y orientarlo a restablecer su contraseña mediante la mesa de ayuda institucional." },
+      {
+        id: "b",
+        text: "Rehusarte a entregar las credenciales, recordándole que los accesos son personales e intransferibles y orientarlo a restablecer su contraseña mediante la mesa de ayuda institucional.",
+      },
       { id: "c", text: "Anotarle la clave en una hoja adhesiva a la vista de todos." },
       { id: "d", text: "Permitirle usar tu computador sin cerrar sesión mientras vas a almorzar." },
     ],
@@ -1913,7 +2192,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "La plataforma informática corporativa Muisca de la DIAN está destinada a:",
     choices: [
-      { id: "a", text: "La administración del RUT, recepción de declaraciones tributarias electrónicas, cuenta corriente, trámite de devoluciones y servicios aduaneros." },
+      {
+        id: "a",
+        text: "La administración del RUT, recepción de declaraciones tributarias electrónicas, cuenta corriente, trámite de devoluciones y servicios aduaneros.",
+      },
       { id: "b", text: "El control del tráfico automotor municipal." },
       { id: "c", text: "La transmisión de televisión pública nacional." },
       { id: "d", text: "La venta de pasajes aéreos internacionales." },
@@ -1929,11 +2211,15 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "ofimatica-dian",
     kind: "sjt",
-    caseText: "Para adelantar trabajo en su hogar durante el fin de semana, un servidor decide copiar una base de datos con información financiera y declaraciones de renta de 10.000 contribuyentes en una memoria USB personal.",
+    caseText:
+      "Para adelantar trabajo en su hogar durante el fin de semana, un servidor decide copiar una base de datos con información financiera y declaraciones de renta de 10.000 contribuyentes en una memoria USB personal.",
     stem: "Frente a las normas de reserva tributaria (art. 583 E.T.) y protección de datos (Ley 1581 de 2012), esta conducta:",
     choices: [
       { id: "a", text: "Es una muestra loable de compromiso y diligencia sin reparos." },
-      { id: "b", text: "Constituye una violación gravísima de la reserva tributaria y las políticas de seguridad digital, prohibida por la ley y sancionable disciplinaria y penalmente." },
+      {
+        id: "b",
+        text: "Constituye una violación gravísima de la reserva tributaria y las políticas de seguridad digital, prohibida por la ley y sancionable disciplinaria y penalmente.",
+      },
       { id: "c", text: "Está permitida siempre que la USB tenga clave numérica sencilla." },
       { id: "d", text: "Solo requiere avisar por chat al coordinador del grupo." },
     ],
@@ -1969,7 +2255,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "El término legal para solicitar la devolución o compensación de pagos en exceso o pagos de lo no debido por concepto de tributos aduaneros (Decreto 1165 de 2019 art. 690) ante la DIAN es de:",
     choices: [
       { id: "a", text: "Cinco (5) años como en cobro coactivo." },
-      { id: "b", text: "Seis (6) meses siguientes a la fecha en que se efectuó el pago o a la ejecutoria del acto que determinó el pago en exceso." },
+      {
+        id: "b",
+        text: "Seis (6) meses siguientes a la fecha en que se efectuó el pago o a la ejecutoria del acto que determinó el pago en exceso.",
+      },
       { id: "c", text: "Quince (15) días hábiles improrrogables." },
       { id: "d", text: "Diez (10) años contados desde la llegada del buque." },
     ],
@@ -1986,7 +2275,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     kind: "knowledge",
     stem: "En el régimen de aduanas (Decreto 1165 de 2019), cuando una mercancía permanece en depósito habilitado sin obtener levante ni prórroga dentro del término legal de almacenamiento, opera:",
     choices: [
-      { id: "a", text: "El abandono legal de las mercancías a favor de la Nación, extinguiendo la obligación tributaria aduanera sobre las mismas." },
+      {
+        id: "a",
+        text: "El abandono legal de las mercancías a favor de la Nación, extinguiendo la obligación tributaria aduanera sobre las mismas.",
+      },
       { id: "b", text: "La entrega forzosa al transportador internacional sin trámites." },
       { id: "c", text: "La nacionalización gratuita automática de la carga." },
       { id: "d", text: "El remate inmediato en vía pública sin acto administrativo." },
@@ -2005,7 +2297,10 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     stem: "En el régimen sancionatorio cambiario de competencia de la DIAN (Decreto Ley 2245 de 2011), la facultad de la administración para imponer sanciones prescribe en el término de:",
     choices: [
       { id: "a", text: "Veinte (20) años." },
-      { id: "b", text: "Cinco (5) años contados a partir de la ocurrencia de los hechos constitutivos de la infracción cambiaria." },
+      {
+        id: "b",
+        text: "Cinco (5) años contados a partir de la ocurrencia de los hechos constitutivos de la infracción cambiaria.",
+      },
       { id: "c", text: "Seis (6) meses únicamente." },
       { id: "d", text: "Tres (3) días hábiles." },
     ],
@@ -2020,12 +2315,19 @@ export const QUESTIONS_FUNCIONALES: Question[] = [
     track: "funcional",
     moduleId: "devoluciones-compensaciones",
     kind: "sjt",
-    caseText: "Un importador consignó dos veces por error el valor del arancel correspondiente a una misma declaración aduanera de importación.",
+    caseText:
+      "Un importador consignó dos veces por error el valor del arancel correspondiente a una misma declaración aduanera de importación.",
     stem: "Para recuperar el segundo valor cancelado indebidamente, el importador debe presentar ante la Seccional de Aduanas competente:",
     choices: [
       { id: "a", text: "Una denuncia penal por enriquecimiento ilícito contra la DIAN." },
-      { id: "b", text: "Una solicitud formal de devolución por pago de lo no debido acreditando los dos recibos de pago y la declaración aduanera, dentro de los 6 meses siguientes al pago." },
-      { id: "c", text: "Un derecho de petición pidiendo dinero en efectivo en ventanilla de caja menor." },
+      {
+        id: "b",
+        text: "Una solicitud formal de devolución por pago de lo no debido acreditando los dos recibos de pago y la declaración aduanera, dentro de los 6 meses siguientes al pago.",
+      },
+      {
+        id: "c",
+        text: "Un derecho de petición pidiendo dinero en efectivo en ventanilla de caja menor.",
+      },
       { id: "d", text: "Una solicitud de compensación sin aportar recibos bancarios." },
     ],
     correct: "b",

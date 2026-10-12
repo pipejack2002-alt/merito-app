@@ -9,11 +9,7 @@ import { useProgress } from "@/lib/progress-store";
 import { TRACKS } from "@/data/types";
 import { FailDiagnosis } from "@/components/fail-diagnosis";
 import { useCargo } from "@/lib/use-cargo";
-import {
-  clearPracticeSession,
-  loadPracticeSession,
-  savePracticeSession,
-} from "@/lib/quiz-session";
+import { clearPracticeSession, loadPracticeSession, savePracticeSession } from "@/lib/quiz-session";
 
 type Mode = "practice" | "exam";
 
@@ -125,16 +121,12 @@ export function QuizEngine({
   }
 
   if (done) {
-    const score = result.total
-      ? Math.round((result.correct / result.total) * 100)
-      : 0;
+    const score = result.total ? Math.round((result.correct / result.total) * 100) : 0;
     const missedQs = questions.filter((item) => result.missed.includes(item.id));
     return (
       <div className="space-y-6">
         <header className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-muted">
-            Resultado
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.16em] text-muted">Resultado</p>
           <h1 className="font-display text-3xl font-semibold">{title}</h1>
         </header>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -151,10 +143,7 @@ export function QuizEngine({
             const p = v.total ? Math.round((v.correct / v.total) * 100) : 0;
             const meta = TRACKS[track as keyof typeof TRACKS];
             return (
-              <li
-                key={track}
-                className="rounded-lg border border-border bg-surface p-4"
-              >
+              <li key={track} className="rounded-lg border border-border bg-surface p-4">
                 <div className="mb-2 flex items-center justify-between gap-3">
                   <span className="text-sm font-medium">{meta?.label ?? track}</span>
                   <span className="tabular-nums text-sm text-muted">
@@ -168,13 +157,10 @@ export function QuizEngine({
         </ul>
         {mode === "exam" && result.byTrack.funcional ? (
           <p className="rounded-lg border border-border bg-paper px-4 py-3 text-sm text-muted">
-            La funcional es eliminatoria. Referencia de corte: 70/100. Tu bloque
-            funcional:{" "}
+            La funcional es eliminatoria. Referencia de corte: 70/100. Tu bloque funcional:{" "}
             <strong className="text-ink">
               {Math.round(
-                (result.byTrack.funcional.correct /
-                  result.byTrack.funcional.total) *
-                  100,
+                (result.byTrack.funcional.correct / result.byTrack.funcional.total) * 100,
               )}
               %
             </strong>
@@ -203,23 +189,17 @@ export function QuizEngine({
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <Badge variant="paper">{TRACKS[q.track].short}</Badge>
           <Badge variant="outline">{labelKind(q.kind)}</Badge>
-          {q.source ? (
-            <span className="text-[11px] text-subtle">{q.source}</span>
-          ) : null}
+          {q.source ? <span className="text-[11px] text-subtle">{q.source}</span> : null}
         </div>
 
         {q.caseText ? (
           <div className="mb-4 rounded-md border-l-2 border-rule bg-paper px-4 py-3">
-            <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-muted">
-              Caso
-            </p>
+            <p className="mb-1 text-[11px] uppercase tracking-[0.14em] text-muted">Caso</p>
             <p className="text-sm leading-relaxed text-ink">{q.caseText}</p>
           </div>
         ) : null}
 
-        <h2 className="font-display text-xl font-semibold leading-snug text-balance">
-          {q.stem}
-        </h2>
+        <h2 className="font-display text-xl font-semibold leading-snug text-balance">{q.stem}</h2>
 
         <ul className={cn("mt-5 grid gap-2", isLikert && "sm:grid-cols-2")}>
           {q.choices.map((c, idx) => {
@@ -288,10 +268,7 @@ export function QuizEngine({
 
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs tabular-nums text-subtle">Respondidas {answeredCount}</p>
-        <Button
-          onClick={next}
-          disabled={mode === "practice" ? !revealed : !picked}
-        >
+        <Button onClick={next} disabled={mode === "practice" ? !revealed : !picked}>
           {index + 1 >= total ? (
             <>
               <Flag className="size-4" />
@@ -309,15 +286,7 @@ export function QuizEngine({
   );
 }
 
-function Stat({
-  label,
-  value,
-  tone,
-}: {
-  label: string;
-  value: string;
-  tone?: "ok" | "bad";
-}) {
+function Stat({ label, value, tone }: { label: string; value: string; tone?: "ok" | "bad" }) {
   return (
     <div className="rounded-xl border border-border bg-surface p-4">
       <p className="text-[11px] uppercase tracking-[0.14em] text-muted">{label}</p>

@@ -83,10 +83,7 @@ export const CARGO_MODULES: Module[] = [
       "Cadena de omiso: emplazamiento para declarar → aforo.",
       "El Gestor de fiscalización decide y proyecta el acto; el Analista arma el expediente y los cruces; el Inspector visita y acta.",
     ],
-    sources: [
-      "Estatuto Tributario arts. 684, 702 a 720",
-      "Decreto 1625 de 2016 (procedimientos)",
-    ],
+    sources: ["Estatuto Tributario arts. 684, 702 a 720", "Decreto 1625 de 2016 (procedimientos)"],
   },
   {
     id: "inspeccion-visitas",

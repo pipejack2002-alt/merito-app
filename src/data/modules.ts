@@ -619,10 +619,7 @@ export const MODULES: Module[] = [
       "Nivel 2 no exige que ‘inspires a la dirección’. Exige que entregues, informes y te ajustes.",
       "Si el caso enfrenta meta vs. debido proceso, gana el debido proceso (y el ético de nivel 4).",
     ],
-    sources: [
-      "Diccionario de Competencias Laborales Conductuales DIAN",
-      "Ficha FT-TAH-1824",
-    ],
+    sources: ["Diccionario de Competencias Laborales Conductuales DIAN", "Ficha FT-TAH-1824"],
   },
   {
     id: "codigo-integridad",

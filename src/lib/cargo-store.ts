@@ -19,16 +19,12 @@ export const useCargoStore = create<CargoState>()(
       select: (id) => set({ selectedId: id }),
       addCustom: (cargo) =>
         set({
-          customCargos: [
-            cargo,
-            ...get().customCargos.filter((c) => c.id !== cargo.id),
-          ].slice(0, 8),
+          customCargos: [cargo, ...get().customCargos.filter((c) => c.id !== cargo.id)].slice(0, 8),
           selectedId: cargo.id,
         }),
       removeCustom: (id) => {
         const next = get().customCargos.filter((c) => c.id !== id);
-        const selectedId =
-          get().selectedId === id ? DEFAULT_CARGO_ID : get().selectedId;
+        const selectedId = get().selectedId === id ? DEFAULT_CARGO_ID : get().selectedId;
         set({ customCargos: next, selectedId });
       },
     }),
@@ -36,15 +32,8 @@ export const useCargoStore = create<CargoState>()(
   ),
 );
 
-export function resolveCargo(
-  selectedId: string,
-  customCargos: CargoProfile[],
-): CargoProfile {
-  return (
-    catalogCargo(selectedId) ??
-    customCargos.find((c) => c.id === selectedId) ??
-    CATALOG[0]
-  );
+export function resolveCargo(selectedId: string, customCargos: CargoProfile[]): CargoProfile {
+  return catalogCargo(selectedId) ?? customCargos.find((c) => c.id === selectedId) ?? CATALOG[0];
 }
 
 export function allCargos(customCargos: CargoProfile[]): CargoProfile[] {

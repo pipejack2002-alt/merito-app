@@ -14,9 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { fetchAreandinaIndicators } from "@/lib/areandina-client";
-import {
-  REGISTROS_OFICIALES_AREANDINA,
-} from "@/data/areandina-indicadores";
+import { REGISTROS_OFICIALES_AREANDINA } from "@/data/areandina-indicadores";
 import type { AreandinaRecord } from "@/data/types";
 import { useCargoStore } from "@/lib/cargo-store";
 import { CATALOG } from "@/data/cargos";
@@ -28,16 +26,76 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/indicadores")({ component: IndicadoresPage });
 
 const CARGOS_RAPIDOS = [
-  { id: "analista-ii-cartera", label: "Analista II Cartera (Andrés Bernal)", opec: "236831", inscr: "1266766504", nivel: "Técnico" },
-  { id: "analista-i-apoyo", label: "Analista I Apoyo Técnico", opec: "236829", inscr: "1266741020", nivel: "Técnico" },
-  { id: "analista-ii-fiscalizacion", label: "Analista II Fiscalización", opec: "236835", inscr: "1266752011", nivel: "Técnico" },
-  { id: "gestor-i-cartera", label: "Gestor I Cartera", opec: "236840", inscr: "1266781203", nivel: "Profesional" },
-  { id: "gestor-i-aduanas", label: "Gestor I Aduanas", opec: "236845", inscr: "1266795412", nivel: "Profesional" },
-  { id: "gestor-ii-fiscalizacion", label: "Gestor II Fiscalización", opec: "236850", inscr: "1266779834", nivel: "Profesional" },
-  { id: "gestor-ii-juridico", label: "Gestor II Jurídica", opec: "236855", inscr: "1266734190", nivel: "Profesional" },
-  { id: "inspector-ii-fiscalizacion", label: "Inspector II Fiscalización y Visitas", opec: "236860", inscr: "1266712399", nivel: "Profesional" },
-  { id: "facilitador-iii-servicio", label: "Facilitador III Servicio y PQRSF", opec: "236815", inscr: "1266708912", nivel: "Asistencial" },
-  { id: "facilitador-ii-operativo", label: "Facilitador II Operativo y Archivo", opec: "236810", inscr: "1266701234", nivel: "Asistencial" },
+  {
+    id: "analista-ii-cartera",
+    label: "Analista II Cartera (Andrés Bernal)",
+    opec: "236831",
+    inscr: "1266766504",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-i-apoyo",
+    label: "Analista I Apoyo Técnico",
+    opec: "236829",
+    inscr: "1266741020",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-ii-fiscalizacion",
+    label: "Analista II Fiscalización",
+    opec: "236835",
+    inscr: "1266752011",
+    nivel: "Técnico",
+  },
+  {
+    id: "gestor-i-cartera",
+    label: "Gestor I Cartera",
+    opec: "236840",
+    inscr: "1266781203",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-i-aduanas",
+    label: "Gestor I Aduanas",
+    opec: "236845",
+    inscr: "1266795412",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-ii-fiscalizacion",
+    label: "Gestor II Fiscalización",
+    opec: "236850",
+    inscr: "1266779834",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-ii-juridico",
+    label: "Gestor II Jurídica",
+    opec: "236855",
+    inscr: "1266734190",
+    nivel: "Profesional",
+  },
+  {
+    id: "inspector-ii-fiscalizacion",
+    label: "Inspector II Fiscalización y Visitas",
+    opec: "236860",
+    inscr: "1266712399",
+    nivel: "Profesional",
+  },
+  {
+    id: "facilitador-iii-servicio",
+    label: "Facilitador III Servicio y PQRSF",
+    opec: "236815",
+    inscr: "1266708912",
+    nivel: "Asistencial",
+  },
+  {
+    id: "facilitador-ii-operativo",
+    label: "Facilitador II Operativo y Archivo",
+    opec: "236810",
+    inscr: "1266701234",
+    nivel: "Asistencial",
+  },
 ];
 
 function IndicadoresPage() {
@@ -49,7 +107,9 @@ function IndicadoresPage() {
   );
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"inscr" | "cargos">("inscr");
-  const [filterType, setFilterType] = useState<"todos" | "funcional" | "comportamental" | "integridad">("todos");
+  const [filterType, setFilterType] = useState<
+    "todos" | "funcional" | "comportamental" | "integridad"
+  >("todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -75,7 +135,8 @@ function IndicadoresPage() {
       }
     } catch {
       // Fallback local
-      const local = REGISTROS_OFICIALES_AREANDINA[num] || REGISTROS_OFICIALES_AREANDINA["1266766504"];
+      const local =
+        REGISTROS_OFICIALES_AREANDINA[num] || REGISTROS_OFICIALES_AREANDINA["1266766504"];
       setRecord(local);
       setFeedback("✅ Mostrando indicadores oficiales verificados para este empleo.");
     } finally {
@@ -93,7 +154,9 @@ function IndicadoresPage() {
     const matching = CATALOG.find(
       (c) =>
         c.ficha.codigo === record.codigo &&
-        c.ficha.denominacion.toLowerCase().includes(record.denominacion.toLowerCase().split(" ")[0]),
+        c.ficha.denominacion
+          .toLowerCase()
+          .includes(record.denominacion.toLowerCase().split(" ")[0]),
     );
     if (matching) {
       selectCargo(matching.id);
@@ -124,10 +187,15 @@ function IndicadoresPage() {
         <div className="absolute inset-y-0 left-0 w-2 bg-accent" />
 
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className="text-[11px] uppercase tracking-[0.14em] font-mono bg-accent/10 border-accent/40 text-accent font-semibold">
+          <Badge
+            variant="outline"
+            className="text-[11px] uppercase tracking-[0.14em] font-mono bg-accent/10 border-accent/40 text-accent font-semibold"
+          >
             Bot Oficial Areandina · DIAN 2676
           </Badge>
-          <span className="text-xs text-muted">Operador Oficial: Fundación Universitaria del Área Andina</span>
+          <span className="text-xs text-muted">
+            Operador Oficial: Fundación Universitaria del Área Andina
+          </span>
         </div>
 
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
@@ -135,8 +203,10 @@ function IndicadoresPage() {
         </h1>
 
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
-          Ingresa tu número de inscripción o selecciona cualquier empleo de la DIAN. El bot conecta con el sistema oficial de Areandina, 
-          desglosa los <strong>24 indicadores a evaluar</strong> y calibra la plataforma para que tu entrenamiento sea 100% real.
+          Ingresa tu número de inscripción o selecciona cualquier empleo de la DIAN. El bot conecta
+          con el sistema oficial de Areandina, desglosa los{" "}
+          <strong>24 indicadores a evaluar</strong> y calibra la plataforma para que tu
+          entrenamiento sea 100% real.
         </p>
 
         {/* ── Fechas Clave ── */}
@@ -144,7 +214,9 @@ function IndicadoresPage() {
           <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-paper/60 p-3">
             <Calendar className="size-5 text-accent shrink-0" />
             <div>
-              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">Requisitos Mínimos (VRM)</p>
+              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">
+                Requisitos Mínimos (VRM)
+              </p>
               <p className="text-xs font-bold text-ink">Miércoles, 14 de octubre de 2026</p>
             </div>
           </div>
@@ -152,7 +224,9 @@ function IndicadoresPage() {
           <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-paper/60 p-3">
             <Award className="size-5 text-ok shrink-0" />
             <div>
-              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">Pruebas Escritas</p>
+              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">
+                Pruebas Escritas
+              </p>
               <p className="text-xs font-bold text-ink">Domingo, 8 de noviembre de 2026</p>
             </div>
           </div>
@@ -160,7 +234,9 @@ function IndicadoresPage() {
           <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-paper/60 p-3">
             <ShieldCheck className="size-5 text-accent shrink-0" />
             <div>
-              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">Cobertura en la App</p>
+              <p className="text-[10px] uppercase tracking-wider text-muted font-medium">
+                Cobertura en la App
+              </p>
               <p className="text-xs font-bold text-ok">100% de los 24 Indicadores</p>
             </div>
           </div>
@@ -220,11 +296,7 @@ function IndicadoresPage() {
                 />
               </div>
 
-              <Button
-                onClick={() => handleConsultar()}
-                disabled={loading}
-                className="shrink-0"
-              >
+              <Button onClick={() => handleConsultar()} disabled={loading} className="shrink-0">
                 {loading ? (
                   <>
                     <LoaderCircle className="size-4 animate-spin" />
@@ -286,7 +358,8 @@ function IndicadoresPage() {
         ) : (
           <div className="mt-5 space-y-3">
             <p className="text-xs text-muted">
-              Haz clic en cualquier cargo para cargar de inmediato sus 24 indicadores oficiales y simular su prueba escrita:
+              Haz clic en cualquier cargo para cargar de inmediato sus 24 indicadores oficiales y
+              simular su prueba escrita:
             </p>
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
               {CARGOS_RAPIDOS.map((c) => (
@@ -339,7 +412,9 @@ function IndicadoresPage() {
 
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">OPEC / Empleo</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  OPEC / Empleo
+                </span>
                 <p className="text-sm font-bold text-accent font-mono">{record.opec}</p>
               </div>
 
@@ -349,12 +424,18 @@ function IndicadoresPage() {
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">Nivel / Grado</span>
-                <p className="text-sm font-bold text-ink">{record.nivel} · Grado {record.grado}</p>
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  Nivel / Grado
+                </span>
+                <p className="text-sm font-bold text-ink">
+                  {record.nivel} · Grado {record.grado}
+                </p>
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">N° Inscripción</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  N° Inscripción
+                </span>
                 <p className="text-sm font-bold text-ink font-mono">{record.inscripcion}</p>
               </div>
 
@@ -364,7 +445,9 @@ function IndicadoresPage() {
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">Examen Escrito</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  Examen Escrito
+                </span>
                 <p className="text-xs font-bold text-ink">8 Nov 2026</p>
               </div>
             </div>
@@ -376,9 +459,7 @@ function IndicadoresPage() {
               <span className="text-xs uppercase tracking-wider text-muted font-semibold">
                 Cobertura en la Plataforma
               </span>
-              <Badge className="bg-ok text-ok-fg text-xs font-bold">
-                100% COMPLETO
-              </Badge>
+              <Badge className="bg-ok text-ok-fg text-xs font-bold">100% COMPLETO</Badge>
             </div>
 
             <div className="space-y-1.5">
@@ -429,7 +510,8 @@ function IndicadoresPage() {
               Matriz de Indicadores a Evaluar ({record.indicadores.length})
             </h3>
             <p className="text-xs text-muted">
-              Listado oficial publicado por la Universidad del Área Andina para la OPEC {record.opec}.
+              Listado oficial publicado por la Universidad del Área Andina para la OPEC{" "}
+              {record.opec}.
             </p>
           </div>
 
@@ -528,13 +610,9 @@ function IndicadoresPage() {
                   </span>
                 </div>
 
-                <h4 className="mt-2 text-sm font-bold text-ink leading-snug">
-                  {ind.nombre}
-                </h4>
+                <h4 className="mt-2 text-sm font-bold text-ink leading-snug">{ind.nombre}</h4>
 
-                <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                  {ind.descripcion}
-                </p>
+                <p className="mt-1.5 text-xs text-muted leading-relaxed">{ind.descripcion}</p>
 
                 <div className="mt-2.5 rounded-lg border border-border/60 bg-paper/50 p-2 text-[11px] text-muted">
                   <strong className="text-ink">Tip de examen:</strong> {ind.tips}

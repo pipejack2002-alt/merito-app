@@ -30,8 +30,7 @@ function read<T>(key: string): T | null {
   if (typeof window === "undefined") return null;
   try {
     const raw =
-      localStorage.getItem(key) ??
-      (key === EXAM_KEY ? sessionStorage.getItem(key) : null);
+      localStorage.getItem(key) ?? (key === EXAM_KEY ? sessionStorage.getItem(key) : null);
     if (!raw) return null;
     return JSON.parse(raw) as T;
   } catch {

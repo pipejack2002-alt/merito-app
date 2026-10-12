@@ -26,7 +26,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
   },
   {
     id: "ind-03",
-    nombre: "EXTINCION DE LAS OBLIGACIONES TRIBUTARIAS ADUANERAS Y CAMBIARIAS DE COMPETENCIA DE LA DIAN",
+    nombre:
+      "EXTINCION DE LAS OBLIGACIONES TRIBUTARIAS ADUANERAS Y CAMBIARIAS DE COMPETENCIA DE LA DIAN",
     tipo: "funcional",
     moduleId: "cobro-coactivo",
     estado: "cubierto",
@@ -111,7 +112,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Acepta los cambios en directrices, normas y prioridades de trabajo sin resistencia pasiva.",
+    descripcion:
+      "Acepta los cambios en directrices, normas y prioridades de trabajo sin resistencia pasiva.",
     tips: "Frente a una nueva directriz de recaudo, ajusta su plan de trabajo de inmediato.",
   },
   {
@@ -122,7 +124,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Propone ajustes operativos y responde ágilmente ante contingencias imprevistas del área.",
+    descripcion:
+      "Propone ajustes operativos y responde ágilmente ante contingencias imprevistas del área.",
     tips: "Redistribuye expedientes o tareas ante ausencias de compañeros manteniendo el debido proceso.",
   },
   {
@@ -133,7 +136,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comportamiento-etico",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Cumple las normas y deberes de la función pública y respeta el principio de legalidad.",
+    descripcion:
+      "Cumple las normas y deberes de la función pública y respeta el principio de legalidad.",
     tips: "Rechaza cualquier insinuación de trato preferencial y actúa con imparcialidad.",
   },
   {
@@ -144,7 +148,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comportamiento-etico",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Máxima coherencia ética: modela integridad, denuncia presiones indebidas y custodia la reserva tributaria.",
+    descripcion:
+      "Máxima coherencia ética: modela integridad, denuncia presiones indebidas y custodia la reserva tributaria.",
     tips: "En escala Likert del examen, la respuesta correcta es la opción de máxima firmeza e intolerancia con la corrupción.",
   },
   {
@@ -155,7 +160,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Transmite información clara, precisa y oportuna en sus comunicaciones orales y escritas.",
+    descripcion:
+      "Transmite información clara, precisa y oportuna en sus comunicaciones orales y escritas.",
     tips: "Usa lenguaje claro institucional sin ambigüedades técnicas que confundan al deudor.",
   },
   {
@@ -166,7 +172,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Escucha activamente, valida la comprensión del interlocutor y gestiona objeciones con serenidad.",
+    descripcion:
+      "Escucha activamente, valida la comprensión del interlocutor y gestiona objeciones con serenidad.",
     tips: "Atiende reclamos explicando con calma el fundamento legal del requerimiento.",
   },
   {
@@ -177,7 +184,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Cumple las metas asignadas con oportunidad, calidad técnica y riguroso control de términos.",
+    descripcion:
+      "Cumple las metas asignadas con oportunidad, calidad técnica y riguroso control de términos.",
     tips: "Monitorea constantemente las fechas de vencimiento de las obligaciones de cartera.",
   },
   {
@@ -188,7 +196,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "servicio-pqrsf",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Brinda atención respetuosa, oportuna y empática orientada a facilitar el cumplimiento fiscal.",
+    descripcion:
+      "Brinda atención respetuosa, oportuna y empática orientada a facilitar el cumplimiento fiscal.",
     tips: "El servidor de la DIAN orienta con cordialidad sin dar asesorías privadas de elusión.",
   },
   {
@@ -199,7 +208,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Colabora activamente con compañeros y superiores para alcanzar los objetivos de la dependencia.",
+    descripcion:
+      "Colabora activamente con compañeros y superiores para alcanzar los objetivos de la dependencia.",
     tips: "Comparte información relevante del expediente y apoya a su equipo ante sobrecargas.",
   },
   {
@@ -210,7 +220,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "comunicacion-equipo",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Articula esfuerzos interdependientes, resuelve discrepancias constructivamente y fomenta clima de confianza.",
+    descripcion:
+      "Articula esfuerzos interdependientes, resuelve discrepancias constructivamente y fomenta clima de confianza.",
     tips: "Facilita la coordinación entre el área técnica de cartera y fiscalización.",
   },
 
@@ -222,7 +233,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "codigo-integridad",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Soy consciente de la importancia de mi rol como servidor público y estoy en constante disposición para comprender y resolver las necesidades de las personas con las que me relaciono en mis labores cotidianas.",
+    descripcion:
+      "Soy consciente de la importancia de mi rol como servidor público y estoy en constante disposición para comprender y resolver las necesidades de las personas con las que me relaciono en mis labores cotidianas.",
     tips: "Asume las funciones con sentido de pertenencia y compromiso con los recursos públicos de la Nación.",
   },
   {
@@ -232,7 +244,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "valores-cinco",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Cumplo con los deberes, funciones y responsabilidades asignadas a mi cargo de la mejor manera posible, con atención, prontitud, destreza y eficiencia.",
+    descripcion:
+      "Cumplo con los deberes, funciones y responsabilidades asignadas a mi cargo de la mejor manera posible, con atención, prontitud, destreza y eficiencia.",
     tips: "No pospone trámites, cuida los expedientes y no deja prescribir los créditos del Estado.",
   },
   {
@@ -242,7 +255,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "valores-cinco",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Actúo siempre con fundamento en la verdad, cumpliendo mis deberes con transparencia y rectitud, y favoreciendo el interés general sobre el particular.",
+    descripcion:
+      "Actúo siempre con fundamento en la verdad, cumpliendo mis deberes con transparencia y rectitud, y favoreciendo el interés general sobre el particular.",
     tips: "Rechaza cualquier soborno, regalo, beneficio o conflicto de intereses de manera categórica.",
   },
   {
@@ -252,7 +266,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "valores-cinco",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Actúo con imparcialidad garantizando los derechos de las personas, con equidad, igualdad y sin discriminación alguna.",
+    descripcion:
+      "Actúo con imparcialidad garantizando los derechos de las personas, con equidad, igualdad y sin discriminación alguna.",
     tips: "Aplica la misma rigurosidad técnica al pequeño contribuyente que al gran deudor económico.",
   },
   {
@@ -262,7 +277,8 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
     moduleId: "valores-cinco",
     estado: "cubierto",
     porcentaje: 100,
-    descripcion: "Reconozco, valoro y trato de manera digna a todas las personas, con sus virtudes y defectos, sin importar su labor, procedencia, títulos o cualquier otra condición.",
+    descripcion:
+      "Reconozco, valoro y trato de manera digna a todas las personas, con sus virtudes y defectos, sin importar su labor, procedencia, títulos o cualquier otra condición.",
     tips: "Mantiene un trato digno, empático y constructivo incluso ante usuarios molestos o alterados.",
   },
 ];
@@ -294,9 +310,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "SISTEMAS CORPORATIVOS Y REGISTRO UNICO TRIBUTARIO (RUT)" };
-      if (ind.id === "ind-08") return { ...ind, nombre: "PROCEDIMIENTOS ADMINISTRATIVOS BASICOS Y DERECHO DE PETICION" };
+      if (ind.id === "ind-01")
+        return { ...ind, nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS" };
+      if (ind.id === "ind-02")
+        return { ...ind, nombre: "SISTEMAS CORPORATIVOS Y REGISTRO UNICO TRIBUTARIO (RUT)" };
+      if (ind.id === "ind-08")
+        return { ...ind, nombre: "PROCEDIMIENTOS ADMINISTRATIVOS BASICOS Y DERECHO DE PETICION" };
       return ind;
     }),
     coberturaGlobal: 100,
@@ -313,9 +332,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "CRUCES DE INFORMACION EXOGENA Y PAPELES DE TRABAJO", moduleId: "control-extensivo" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "CONTROL EXTENSIVO DE OMISOS E INEXACTOS", moduleId: "control-extensivo" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "APOYO TECNICO A LA DETERMINACION OFICIAL", moduleId: "fiscalizacion-determinacion" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "CRUCES DE INFORMACION EXOGENA Y PAPELES DE TRABAJO",
+          moduleId: "control-extensivo",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "CONTROL EXTENSIVO DE OMISOS E INEXACTOS",
+          moduleId: "control-extensivo",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "APOYO TECNICO A LA DETERMINACION OFICIAL",
+          moduleId: "fiscalizacion-determinacion",
+        };
       return ind;
     }),
     coberturaGlobal: 100,
@@ -352,9 +386,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "REGIMEN ADUANERO (D. 1165/2019 Y D. 659/2024)", moduleId: "sistema-tributario" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "INSPECCION FISICA Y DOCUMENTAL DE MERCANCIAS", moduleId: "inspeccion-visitas" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "CLASIFICACION ARANCELARIA, ORIGEN Y VALORACION", moduleId: "sistema-tributario" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "REGIMEN ADUANERO (D. 1165/2019 Y D. 659/2024)",
+          moduleId: "sistema-tributario",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "INSPECCION FISICA Y DOCUMENTAL DE MERCANCIAS",
+          moduleId: "inspeccion-visitas",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "CLASIFICACION ARANCELARIA, ORIGEN Y VALORACION",
+          moduleId: "sistema-tributario",
+        };
       if (ind.id === "ind-14") return { ...ind, nivel: "Nivel 3" };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
@@ -373,9 +422,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "DETERMINACION OFICIAL: REQUERIMIENTO ESPECIAL Y REVISION", moduleId: "fiscalizacion-determinacion" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "LIQUIDACIONES DE AFORO Y SANCIONES TRIBUTARIAS", moduleId: "fiscalizacion-determinacion" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "PROGRAMAS DE FISCALIZACION Y DEBIDO PROCESO PROBATORIO", moduleId: "inspeccion-visitas" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "DETERMINACION OFICIAL: REQUERIMIENTO ESPECIAL Y REVISION",
+          moduleId: "fiscalizacion-determinacion",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "LIQUIDACIONES DE AFORO Y SANCIONES TRIBUTARIAS",
+          moduleId: "fiscalizacion-determinacion",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "PROGRAMAS DE FISCALIZACION Y DEBIDO PROCESO PROBATORIO",
+          moduleId: "inspeccion-visitas",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
     }),
@@ -393,9 +457,20 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "RECURSO DE RECONSIDERACION (ART. 720 E.T.)", moduleId: "cpaca" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "EXCEPCIONES EN COBRO COACTIVO (ART. 831 E.T.)", moduleId: "cobro-coactivo" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "MEDIOS DE CONTROL CONTENCIOSO ADMINISTRATIVO (CPACA)", moduleId: "cpaca" };
+      if (ind.id === "ind-01")
+        return { ...ind, nombre: "RECURSO DE RECONSIDERACION (ART. 720 E.T.)", moduleId: "cpaca" };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "EXCEPCIONES EN COBRO COACTIVO (ART. 831 E.T.)",
+          moduleId: "cobro-coactivo",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "MEDIOS DE CONTROL CONTENCIOSO ADMINISTRATIVO (CPACA)",
+          moduleId: "cpaca",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
     }),
@@ -413,9 +488,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "VISITAS E INSPECCIONES TRIBUTARIAS (ARTS. 684 Y 779 E.T.)", moduleId: "inspeccion-visitas" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "ACTAS DE DILIGENCIA Y VALOR PROBATORIO", moduleId: "inspeccion-visitas" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "CADENA DE CUSTODIA Y RESERVA TRIBUTARIA (ART. 583 E.T.)", moduleId: "ofimatica-dian" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "VISITAS E INSPECCIONES TRIBUTARIAS (ARTS. 684 Y 779 E.T.)",
+          moduleId: "inspeccion-visitas",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "ACTAS DE DILIGENCIA Y VALOR PROBATORIO",
+          moduleId: "inspeccion-visitas",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "CADENA DE CUSTODIA Y RESERVA TRIBUTARIA (ART. 583 E.T.)",
+          moduleId: "ofimatica-dian",
+        };
       return ind;
     }),
     coberturaGlobal: 100,
@@ -432,9 +522,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "3",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "ATENCION AL CIUDADANO Y ATRIBUTOS DEL SERVICIO PUBLICO", moduleId: "servicio-pqrsf" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "RECEPCION, RADICACION Y GESTION DE PQRSF", moduleId: "servicio-pqrsf" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "DERECHO DE PETICION Y TERMINOS DE LEY (CPACA)", moduleId: "servicio-pqrsf" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "ATENCION AL CIUDADANO Y ATRIBUTOS DEL SERVICIO PUBLICO",
+          moduleId: "servicio-pqrsf",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "RECEPCION, RADICACION Y GESTION DE PQRSF",
+          moduleId: "servicio-pqrsf",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "DERECHO DE PETICION Y TERMINOS DE LEY (CPACA)",
+          moduleId: "servicio-pqrsf",
+        };
       if (ind.id === "ind-10") return { ...ind, nivel: "Nivel 1" };
       if (ind.id === "ind-14") return { ...ind, nivel: "Nivel 1" };
       if (ind.id === "ind-17") return { ...ind, nivel: "Nivel 2" };
@@ -454,9 +559,24 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
-      if (ind.id === "ind-01") return { ...ind, nombre: "DIGITACION Y REGISTRO EN HERRAMIENTAS OFIMATICAS", moduleId: "ofimatica-dian" };
-      if (ind.id === "ind-02") return { ...ind, nombre: "FOLIACION Y TABLAS DE RETENCION DOCUMENTAL (TRD)", moduleId: "mipg-archivo" };
-      if (ind.id === "ind-03") return { ...ind, nombre: "ORGANIZACION Y CUSTODIA DE EXPEDIENTES", moduleId: "mipg-archivo" };
+      if (ind.id === "ind-01")
+        return {
+          ...ind,
+          nombre: "DIGITACION Y REGISTRO EN HERRAMIENTAS OFIMATICAS",
+          moduleId: "ofimatica-dian",
+        };
+      if (ind.id === "ind-02")
+        return {
+          ...ind,
+          nombre: "FOLIACION Y TABLAS DE RETENCION DOCUMENTAL (TRD)",
+          moduleId: "mipg-archivo",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "ORGANIZACION Y CUSTODIA DE EXPEDIENTES",
+          moduleId: "mipg-archivo",
+        };
       return ind;
     }),
     coberturaGlobal: 100,

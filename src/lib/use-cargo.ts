@@ -1,10 +1,6 @@
 import { resolveCargo } from "@/lib/cargo-store";
 import { useCargoStore } from "@/lib/cargo-store";
-import {
-  flashcardsForCargo,
-  modulesForCargo,
-  questionsForCargo,
-} from "@/lib/cargo-content";
+import { flashcardsForCargo, modulesForCargo, questionsForCargo } from "@/lib/cargo-content";
 import { DEFAULT_CARGO_ID, catalogCargo } from "@/data/cargos";
 
 export function useCargo() {

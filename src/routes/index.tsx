@@ -33,9 +33,7 @@ function Home() {
   const readCount = modules.filter((m) => readModules[m.id]).length;
   const ids = new Set(questions.map((q) => q.id));
   const answered = Object.keys(answers).filter((id) => ids.has(id)).length;
-  const correct = Object.entries(answers).filter(
-    ([id, a]) => ids.has(id) && a.correct,
-  ).length;
+  const correct = Object.entries(answers).filter(([id, a]) => ids.has(id) && a.correct).length;
   const acc = answered ? Math.round((correct / answered) * 100) : 0;
 
   const nextModule = modules.find((m) => !readModules[m.id]) ?? modules[0];
@@ -45,11 +43,14 @@ function Home() {
       {/* ── Hero Principal Integral ── */}
       <section className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8 lg:p-10 shadow-xs">
         <div className="absolute inset-y-0 left-0 w-2 bg-rule" />
-        
+
         <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="outline" className="text-[11px] uppercase tracking-[0.14em] font-mono">
+              <Badge
+                variant="outline"
+                className="text-[11px] uppercase tracking-[0.14em] font-mono"
+              >
                 Proceso de Selección CNSC · DIAN 2676
               </Badge>
               <span className="text-xs text-muted">Acuerdo 21 de 2025</span>
@@ -60,8 +61,9 @@ function Home() {
             </h1>
 
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-              Sistema especializado de entrenamiento para las pruebas escritas de ingreso y ascenso a la DIAN. 
-              Alineado al Modelo de Estructura de Roles y Funciones (MERF), el Estatuto Tributario, el CPACA y el Código de Integridad.
+              Sistema especializado de entrenamiento para las pruebas escritas de ingreso y ascenso
+              a la DIAN. Alineado al Modelo de Estructura de Roles y Funciones (MERF), el Estatuto
+              Tributario, el CPACA y el Código de Integridad.
             </p>
           </div>
 
@@ -89,7 +91,8 @@ function Home() {
                 Consulta tus 24 Indicadores Oficiales por Número de Inscripción o Cargo
               </h3>
               <p className="text-xs text-muted max-w-xl">
-                Conecta directamente con el sistema de Areandina (Operador DIAN 2676), verifica tu cobertura temática y simula tu prueba escrita para cualquier empleo.
+                Conecta directamente con el sistema de Areandina (Operador DIAN 2676), verifica tu
+                cobertura temática y simula tu prueba escrita para cualquier empleo.
               </p>
             </div>
 
@@ -123,7 +126,8 @@ function Home() {
                 {ficha.codigo !== "—" ? ` · Cód. ${ficha.codigo} Grado ${ficha.grado}` : ""}
               </h2>
               <p className="text-xs text-muted max-w-xl">
-                {cargo.processLabel} · {isCustom ? "Manual personalizado cargado por el usuario" : cargo.blurb}
+                {cargo.processLabel} ·{" "}
+                {isCustom ? "Manual personalizado cargado por el usuario" : cargo.blurb}
               </p>
             </div>
 
@@ -163,7 +167,8 @@ function Home() {
                 <span className="text-xs font-bold font-display text-ink">1. Frontera de Rol</span>
               </div>
               <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                El Analista ejecuta la técnica; el Gestor decide y firma. Nunca usurpes funciones de otro grado.
+                El Analista ejecuta la técnica; el Gestor decide y firma. Nunca usurpes funciones de
+                otro grado.
               </p>
               <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-accent group-hover:underline">
                 Ver límites del rol →
@@ -180,7 +185,8 @@ function Home() {
                 <span className="text-xs font-bold font-display text-ink">2. Umbral Mín. 70</span>
               </div>
               <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                La prueba Funcional es eliminatoria. Si no alcanzas 70,00 pts, quedas fuera de inmediato.
+                La prueba Funcional es eliminatoria. Si no alcanzas 70,00 pts, quedas fuera de
+                inmediato.
               </p>
               <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-bad group-hover:underline">
                 Entrenar funcional →
@@ -196,7 +202,8 @@ function Home() {
                 <span className="text-xs font-bold font-display text-ink">3. Debido Proceso</span>
               </div>
               <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                El Estatuto Tributario y la norma escrita priman siempre sobre atajos o el &quot;sentido común&quot;.
+                El Estatuto Tributario y la norma escrita priman siempre sobre atajos o el
+                &quot;sentido común&quot;.
               </p>
               <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-warn group-hover:underline">
                 Estudiar normas →
@@ -212,7 +219,8 @@ function Home() {
                 <span className="text-xs font-bold font-display text-ink">4. Integridad v3</span>
               </div>
               <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                5 Valores: Honestidad, Respeto, Compromiso, Diligencia y Justicia. Cero conflicto de interés.
+                5 Valores: Honestidad, Respeto, Compromiso, Diligencia y Justicia. Cero conflicto de
+                interés.
               </p>
               <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-ok group-hover:underline">
                 Repasar tarjetas →
@@ -230,7 +238,8 @@ function Home() {
               Catálogo de empleos y niveles
             </h2>
             <p className="text-xs sm:text-sm text-muted">
-              Selecciona tu perfil de postulación o carga la OPEC de tu empleo para adaptar las preguntas y guías.
+              Selecciona tu perfil de postulación o carga la OPEC de tu empleo para adaptar las
+              preguntas y guías.
             </p>
           </div>
           <Link
@@ -270,9 +279,7 @@ function Home() {
                   <h3 className="mt-1 font-display text-base font-semibold text-ink">
                     {c.ficha.denominacion}
                   </h3>
-                  <p className="mt-1 text-xs text-muted line-clamp-2">
-                    {c.processLabel}
-                  </p>
+                  <p className="mt-1 text-xs text-muted line-clamp-2">{c.processLabel}</p>
                 </div>
                 <span className="mt-3 text-[11px] text-accent font-medium inline-flex items-center gap-1">
                   {active ? "Perfil configurado" : "Seleccionar empleo →"}
@@ -290,7 +297,8 @@ function Home() {
             Estructura de las Pruebas Escritas
           </h2>
           <p className="text-xs sm:text-sm text-muted">
-            Tres evaluaciones aplicadas en una sola jornada según los lineamientos de la CNSC y el operador evaluador.
+            Tres evaluaciones aplicadas en una sola jornada según los lineamientos de la CNSC y el
+            operador evaluador.
           </p>
         </div>
 
@@ -324,12 +332,8 @@ function Home() {
                   </Badge>
                 </div>
 
-                <h3 className="mt-4 font-display text-lg font-semibold text-ink">
-                  {meta.label}
-                </h3>
-                <p className="mt-1 text-xs text-muted leading-relaxed">
-                  {meta.blurb}
-                </p>
+                <h3 className="mt-4 font-display text-lg font-semibold text-ink">{meta.label}</h3>
+                <p className="mt-1 text-xs text-muted leading-relaxed">{meta.blurb}</p>
 
                 <div className="mt-5 border-t border-border/80 pt-3">
                   <div className="mb-1.5 flex justify-between text-xs text-muted">
@@ -407,9 +411,11 @@ function Home() {
       {/* ── Nota Legal Institucional ── */}
       <footer className="rounded-xl border border-border/80 bg-paper/60 p-4 text-xs leading-relaxed text-subtle">
         <p>
-          <strong>Aviso institucional:</strong> Material de preparación independiente estructurado a partir de normas públicas: 
-          Acuerdo CNSC 21 de 2025, Estatuto Tributario Nacional, Ley 1437 de 2011 (CPACA), Ley 1755 de 2015, Decreto Ley 927 de 2023 y 
-          el Código de Integridad del Servicio Público (Ley 2016 de 2020). No constituye cuestionario oficial bajo reserva (Ley 909 de 2004, art. 31).
+          <strong>Aviso institucional:</strong> Material de preparación independiente estructurado a
+          partir de normas públicas: Acuerdo CNSC 21 de 2025, Estatuto Tributario Nacional, Ley 1437
+          de 2011 (CPACA), Ley 1755 de 2015, Decreto Ley 927 de 2023 y el Código de Integridad del
+          Servicio Público (Ley 2016 de 2020). No constituye cuestionario oficial bajo reserva (Ley
+          909 de 2004, art. 31).
         </p>
       </footer>
     </div>

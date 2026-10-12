@@ -11,17 +11,9 @@ export interface ParseManualInput {
   data: string;
 }
 
-export type ParseManualResult =
-  | { ok: true; cargo: CargoProfile }
-  | { ok: false; error: string };
+export type ParseManualResult = { ok: true; cargo: CargoProfile } | { ok: false; error: string };
 
-const FAMILY: CargoFamily[] = [
-  "analista",
-  "gestor",
-  "inspector",
-  "facilitador",
-  "otro",
-];
+const FAMILY: CargoFamily[] = ["analista", "gestor", "inspector", "facilitador", "otro"];
 
 function asFamily(v: unknown): CargoFamily {
   return FAMILY.includes(v as CargoFamily) ? (v as CargoFamily) : "otro";
@@ -68,18 +60,13 @@ function parseQuestions(raw: unknown, cargoId: string): Question[] {
     if (choices.length < 2) return;
     const correct = str(q.correct, choices[0].id);
     const moduleHint = str(q.moduleHint, "ficha-empleo");
-    const moduleId = ALLOWED_MODULE_IDS.includes(moduleHint)
-      ? moduleHint
-      : "ficha-empleo";
+    const moduleId = ALLOWED_MODULE_IDS.includes(moduleHint) ? moduleHint : "ficha-empleo";
     const kind = str(q.kind, "sjt");
     out.push({
       id: `c-${cargoId}-${i + 1}`,
       track: "funcional",
       moduleId,
-      kind:
-        kind === "knowledge" || kind === "likert" || kind === "dilemma"
-          ? kind
-          : "sjt",
+      kind: kind === "knowledge" || kind === "likert" || kind === "dilemma" ? kind : "sjt",
       caseText: str(q.caseText) || undefined,
       stem: str(q.stem, "Según el manual de funciones, lo correcto es"),
       choices,
@@ -99,21 +86,24 @@ function toCargo(parsed: Record<string, unknown>, filename: string): CargoProfil
       : parsed;
   const family = asFamily(parsed.family);
   const denominacion = str(fichaRaw.denominacion, "Empleo según manual");
-  const shortLabel = str(
-    parsed.shortLabel,
-    denominacion.split("·")[0]?.trim() || denominacion,
-  );
+  const shortLabel = str(parsed.shortLabel, denominacion.split("·")[0]?.trim() || denominacion);
   const id = `custom-${Date.now().toString(36)}`;
-  const moduleIds = strs(parsed.moduleIds).filter((m) =>
-    ALLOWED_MODULE_IDS.includes(m),
-  );
+  const moduleIds = strs(parsed.moduleIds).filter((m) => ALLOWED_MODULE_IDS.includes(m));
   const fallbackModules = [
     "ficha-empleo",
-    ...["cpaca", "constitucion-funcion", "sistema-tributario", "mipg-archivo", "servicio-pqrsf", "comportamiento-etico", "comunicacion-equipo", "codigo-integridad", "valores-cinco"],
+    ...[
+      "cpaca",
+      "constitucion-funcion",
+      "sistema-tributario",
+      "mipg-archivo",
+      "servicio-pqrsf",
+      "comportamiento-etico",
+      "comunicacion-equipo",
+      "codigo-integridad",
+      "valores-cinco",
+    ],
   ];
-  const guidesRaw = Array.isArray(parsed.functionGuides)
-    ? parsed.functionGuides
-    : [];
+  const guidesRaw = Array.isArray(parsed.functionGuides) ? parsed.functionGuides : [];
   const rol =
     parsed.rolBoundary && typeof parsed.rolBoundary === "object"
       ? (parsed.rolBoundary as Record<string, unknown>)
@@ -147,10 +137,7 @@ function toCargo(parsed: Record<string, unknown>, filename: string): CargoProfil
       denominacion,
       codigo: str(fichaRaw.codigo, "—"),
       grado: str(fichaRaw.grado, "—"),
-      nivel: str(
-        fichaRaw.nivel,
-        family === "analista" ? "Nivel Técnico" : "Nivel Profesional",
-      ),
+      nivel: str(fichaRaw.nivel, family === "analista" ? "Nivel Técnico" : "Nivel Profesional"),
       tipoEmpleo: str(fichaRaw.tipoEmpleo, "Carrera Administrativa"),
       codigoFicha: str(fichaRaw.codigoFicha) || undefined,
       proceso: str(fichaRaw.proceso, "Proceso misional DIAN"),
@@ -168,32 +155,18 @@ function toCargo(parsed: Record<string, unknown>, filename: string): CargoProfil
     rolBoundary: {
       youDo: strs(rol.youDo).slice(0, 8),
       youDont: strs(rol.youDont).slice(0, 8),
-      vsOthers: str(
-        rol.vsOthers,
-        "Actúa solo en el grado de responsabilidad de tu ficha.",
-      ),
+      vsOthers: str(rol.vsOthers, "Actúa solo en el grado de responsabilidad de tu ficha."),
     },
     examFocus: strs(parsed.examFocus).slice(0, 8),
     functionGuides: guidesRaw.slice(0, 10).map((g, i) => {
       const row = g && typeof g === "object" ? (g as Record<string, unknown>) : {};
-      const related = strs(row.relatedModuleIds).filter((m) =>
-        ALLOWED_MODULE_IDS.includes(m),
-      );
+      const related = strs(row.relatedModuleIds).filter((m) => ALLOWED_MODULE_IDS.includes(m));
       return {
         functionTitle: str(row.functionTitle, `Función ${i + 1}`),
-        howToResolve: str(
-          row.howToResolve,
-          "Sigue el procedimiento escrito y tu competencia.",
-        ),
+        howToResolve: str(row.howToResolve, "Sigue el procedimiento escrito y tu competencia."),
         steps: strs(row.steps).slice(0, 6),
-        typicalFail: str(
-          row.typicalFail,
-          "Actuar como otro empleo o saltarse el procedimiento.",
-        ),
-        correctMove: str(
-          row.correctMove,
-          "Procedimiento + competencia + rastro institucional.",
-        ),
+        typicalFail: str(row.typicalFail, "Actuar como otro empleo o saltarse el procedimiento."),
+        correctMove: str(row.correctMove, "Procedimiento + competencia + rastro institucional."),
         source: str(row.source, filename),
         relatedModuleIds: related.length ? related : ["ficha-empleo"],
         roleNote: str(row.roleNote) || undefined,
@@ -256,10 +229,7 @@ Reglas:
 async function chatJson(
   userContent:
     | string
-    | Array<
-        | { type: "text"; text: string }
-        | { type: "image_url"; image_url: { url: string } }
-      >,
+    | Array<{ type: "text"; text: string } | { type: "image_url"; image_url: { url: string } }>,
   timeoutMs = 14000,
 ): Promise<Record<string, unknown> | null> {
   const apiKey = process.env.XAI_API_KEY;
@@ -330,8 +300,7 @@ export const parseManual = createServerFn({ method: "POST" })
         if (!process.env.XAI_API_KEY) {
           return {
             ok: false,
-            error:
-              "No pude leer esa foto. Sube el PDF de la ficha o pega el texto.",
+            error: "No pude leer esa foto. Sube el PDF de la ficha o pega el texto.",
           };
         }
         const url = data.data.startsWith("data:")
@@ -355,8 +324,7 @@ export const parseManual = createServerFn({ method: "POST" })
         }
         return {
           ok: false,
-          error:
-            "No pude leer esa foto con nitidez. Sube el PDF o pega propósito y funciones.",
+          error: "No pude leer esa foto con nitidez. Sube el PDF o pega propósito y funciones.",
         };
       }
 

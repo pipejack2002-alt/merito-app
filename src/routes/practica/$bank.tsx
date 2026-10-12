@@ -20,8 +20,7 @@ function PracticaBank() {
   const { questions, title } = useMemo(() => {
     const byTrack = (t: TrackId) => all.filter((q) => q.track === t);
     const saved = loadPracticeSession();
-    const restore =
-      saved && saved.cargoId === cargo.id && saved.bank === bank ? saved : null;
+    const restore = saved && saved.cargoId === cargo.id && saved.bank === bank ? saved : null;
 
     const build = () => {
       if (bank === "funcional" || bank === "comportamental" || bank === "integridad") {
@@ -80,12 +79,7 @@ function PracticaBank() {
         <ArrowLeft className="size-4" />
         Bancos
       </Link>
-      <QuizEngine
-        questions={questions}
-        mode="practice"
-        title={title}
-        bank={bank}
-      />
+      <QuizEngine questions={questions} mode="practice" title={title} bank={bank} />
     </div>
   );
 }

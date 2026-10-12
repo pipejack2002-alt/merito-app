@@ -57,7 +57,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "La conducta de nivel 4 es",
     choices: [
       { id: "a", text: "obedecer y no dejar rastro, porque la jerarquía manda." },
-      { id: "b", text: "aplicar el procedimiento de clasificación, dejar trazabilidad y, si la instrucción es indebida, elevarla por el canal competente." },
+      {
+        id: "b",
+        text: "aplicar el procedimiento de clasificación, dejar trazabilidad y, si la instrucción es indebida, elevarla por el canal competente.",
+      },
       { id: "c", text: "filtrar el caso a la prensa para ‘escarmiento’." },
       { id: "d", text: "priorizar el NIT y, en compensación, borrar otra deuda pequeña." },
     ],
@@ -102,8 +105,14 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
       "Un compañero nuevo no entiende el reproceso de saldos. Usted domina el aplicativo. La meta del mes está apretada.",
     stem: "La conducta de trabajo en equipo nivel 2 es",
     choices: [
-      { id: "a", text: "dejarlo solo, para que ‘aprenda como aprendí yo’, y así no perder minutos." },
-      { id: "b", text: "compartir el procedimiento y acompañar un caso real, sin hacerle el trabajo a escondidas ni prestarle la clave." },
+      {
+        id: "a",
+        text: "dejarlo solo, para que ‘aprenda como aprendí yo’, y así no perder minutos.",
+      },
+      {
+        id: "b",
+        text: "compartir el procedimiento y acompañar un caso real, sin hacerle el trabajo a escondidas ni prestarle la clave.",
+      },
       { id: "c", text: "hacerle todos los casos a su nombre, para que el grupo luzca." },
       { id: "d", text: "burlarse en el chat del piso porque ‘no da’." },
     ],
@@ -149,7 +158,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "La respuesta de adaptabilidad nivel 2 es",
     choices: [
       { id: "a", text: "ignorar el cambio y aplicar el criterio viejo, que ‘funcionaba’." },
-      { id: "b", text: "aplicar la nueva directriz, registrar dudas por el canal y, si hay riesgo jurídico concreto, elevarlo con fundamento." },
+      {
+        id: "b",
+        text: "aplicar la nueva directriz, registrar dudas por el canal y, si hay riesgo jurídico concreto, elevarlo con fundamento.",
+      },
       { id: "c", text: "quejarse en redes contra la entidad." },
       { id: "d", text: "parar toda la operación hasta que le den la razón." },
     ],
@@ -195,7 +207,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Lo alineado con las competencias del empleo es",
     choices: [
       { id: "a", text: "aceptar, porque trabajo en equipo es hacer lo que sea por la meta." },
-      { id: "b", text: "cumplir la jornada y el procedimiento, rechazar el subregistro y no firmar actuaciones ajenas." },
+      {
+        id: "b",
+        text: "cumplir la jornada y el procedimiento, rechazar el subregistro y no firmar actuaciones ajenas.",
+      },
       { id: "c", text: "denunciar en redes esa misma noche." },
       { id: "d", text: "exigir una parte del bono en efectivo para participar." },
     ],
@@ -241,8 +256,14 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Orientación al usuario, bien entendida, es",
     choices: [
       { id: "a", text: "entrar con su usuario y declararle, para no ser ‘insensible’." },
-      { id: "b", text: "explicar canales, requisitos y, si existe, el apoyo presencial o de un tercero autorizado, sin usar su usuario para actuar en nombre del ciudadano." },
-      { id: "c", text: "decirle que vuelva con un nieto o que no hay nada que hacer, en tono seco." },
+      {
+        id: "b",
+        text: "explicar canales, requisitos y, si existe, el apoyo presencial o de un tercero autorizado, sin usar su usuario para actuar en nombre del ciudadano.",
+      },
+      {
+        id: "c",
+        text: "decirle que vuelva con un nieto o que no hay nada que hacer, en tono seco.",
+      },
       { id: "d", text: "cobrarle por fuera por armarle la declaración." },
     ],
     correct: "b",
@@ -274,9 +295,15 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "La conducta ética es",
     choices: [
       { id: "a", text: "dejarlo, total está en papel reciclable." },
-      { id: "b", text: "recuperarlo, destruirlo según el protocolo de información reservada y reportar la fuga.", },
+      {
+        id: "b",
+        text: "recuperarlo, destruirlo según el protocolo de información reservada y reportar la fuga.",
+      },
       { id: "c", text: "llevárselo a casa para ‘estudiar casos’." },
-      { id: "d", text: "fotografiarlo y mandarlo al grupo de WhatsApp ‘para que alguien lo reclame’." },
+      {
+        id: "d",
+        text: "fotografiarlo y mandarlo al grupo de WhatsApp ‘para que alguien lo reclame’.",
+      },
     ],
     correct: "b",
     explanation:
@@ -333,7 +360,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "lo reenvía, para no quedar por fuera del humor del equipo." },
-      { id: "b", text: "no participa, pide que se borre y, si persiste, lo reporta: el respeto no es opcional." },
+      {
+        id: "b",
+        text: "no participa, pide que se borre y, si persiste, lo reporta: el respeto no es opcional.",
+      },
       { id: "c", text: "sube otro meme más fuerte." },
       { id: "d", text: "lo imprime y lo pega en la cocina." },
     ],
@@ -392,7 +422,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Lo más competente es",
     choices: [
       { id: "a", text: "atender igual que la semana pasada, total ‘casi nadie se da cuenta’." },
-      { id: "b", text: "revisar lo vigente antes de resolver de fondo, consultar lo dudoso y no inventar el criterio en ventanilla." },
+      {
+        id: "b",
+        text: "revisar lo vigente antes de resolver de fondo, consultar lo dudoso y no inventar el criterio en ventanilla.",
+      },
       { id: "c", text: "cerrar la ventanilla todo el día sin avisar." },
       { id: "d", text: "pedirle al ciudadano que él le explique la norma nueva." },
     ],
@@ -438,7 +471,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "elige al jefe más cercano y calla el otro correo." },
-      { id: "b", text: "expone los hechos en el canal institucional, con la cuenta corriente y la norma, para que se decida con trazabilidad." },
+      {
+        id: "b",
+        text: "expone los hechos en el canal institucional, con la cuenta corriente y la norma, para que se decida con trazabilidad.",
+      },
       { id: "c", text: "congela el expediente sin avisar a nadie." },
       { id: "d", text: "le cuenta al deudor la pelea interna para que él presione." },
     ],
@@ -456,8 +492,7 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Si me presionan para firmar un acto que no revisé, me niego y pido el tiempo o la información que el debido proceso exige.",
     choices: LIKERT,
     correct: "ta",
-    explanation:
-      "Nivel 4: no se presta la firma. Diligencia no es velocidad ciega.",
+    explanation: "Nivel 4: no se presta la firma. Diligencia no es velocidad ciega.",
     source: "Comportamiento ético nivel 4",
     difficulty: 1,
   },
@@ -482,8 +517,7 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Acepto la retroalimentación sobre mis oficios de cobro y ajusto el tono cuando es ambiguo para el ciudadano.",
     choices: LIKERT,
     correct: "ta",
-    explanation:
-      "Adaptabilidad y comunicación: la crítica de calidad no es un ataque personal.",
+    explanation: "Adaptabilidad y comunicación: la crítica de calidad no es un ataque personal.",
     source: "Adaptabilidad; comunicación efectiva",
     difficulty: 1,
   },
@@ -497,7 +531,10 @@ export const QUESTIONS_COMPORTAMENTALES: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "le adelanta la fecha, total se va a notificar igual." },
-      { id: "b", text: "no entrega información del expediente; le indica que la actuación se conoce por la notificación legal, y reporta el contacto si configura presión indebida." },
+      {
+        id: "b",
+        text: "no entrega información del expediente; le indica que la actuación se conoce por la notificación legal, y reporta el contacto si configura presión indebida.",
+      },
       { id: "c", text: "le manda el PDF por WhatsApp ‘en confianza’." },
       { id: "d", text: "le cobra una consulta." },
     ],

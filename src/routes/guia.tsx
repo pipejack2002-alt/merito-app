@@ -22,13 +22,9 @@ function GuiaPage() {
         </h1>
         <p className="mt-2 text-sm text-muted">
           {cargo.processLabel}
-          {ficha.codigo !== "—"
-            ? ` · código ${ficha.codigo} grado ${ficha.grado}`
-            : null}
+          {ficha.codigo !== "—" ? ` · código ${ficha.codigo} grado ${ficha.grado}` : null}
         </p>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink">
-          {ficha.proposito}
-        </p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink">{ficha.proposito}</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Button asChild>
             <Link to="/estudio">
@@ -85,12 +81,10 @@ function GuiaPage() {
 
       <section className="space-y-4">
         <div>
-          <h2 className="font-display text-xl font-semibold">
-            Cómo se resuelven las cosas
-          </h2>
+          <h2 className="font-display text-xl font-semibold">Cómo se resuelven las cosas</h2>
           <p className="mt-1 text-sm text-muted">
-            Cada función con el procedimiento, el fallo típico y la jugada
-            correcta para {cargo.shortLabel}.
+            Cada función con el procedimiento, el fallo típico y la jugada correcta para{" "}
+            {cargo.shortLabel}.
           </p>
         </div>
         <ol className="space-y-3">
@@ -99,12 +93,8 @@ function GuiaPage() {
               key={`${g.functionTitle}-${i}`}
               className="rounded-xl border border-border bg-surface p-5"
             >
-              <p className="font-mono text-[11px] text-subtle">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-1 font-display text-lg font-semibold">
-                {g.functionTitle}
-              </h3>
+              <p className="font-mono text-[11px] text-subtle">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="mt-1 font-display text-lg font-semibold">{g.functionTitle}</h3>
               <p className="mt-2 text-sm leading-relaxed">{g.howToResolve}</p>
               {g.roleNote ? (
                 <p className="mt-2 rounded-md bg-paper px-3 py-2 text-sm leading-relaxed">
@@ -123,15 +113,11 @@ function GuiaPage() {
               ) : null}
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-lg bg-bad-soft px-3 py-2.5">
-                  <p className="text-[11px] uppercase tracking-[0.12em] text-bad">
-                    Fallo típico
-                  </p>
+                  <p className="text-[11px] uppercase tracking-[0.12em] text-bad">Fallo típico</p>
                   <p className="mt-1 text-sm leading-relaxed">{g.typicalFail}</p>
                 </div>
                 <div className="rounded-lg bg-ok-soft px-3 py-2.5">
-                  <p className="text-[11px] uppercase tracking-[0.12em] text-ok">
-                    Jugada correcta
-                  </p>
+                  <p className="text-[11px] uppercase tracking-[0.12em] text-ok">Jugada correcta</p>
                   <p className="mt-1 text-sm leading-relaxed">{g.correctMove}</p>
                 </div>
               </div>

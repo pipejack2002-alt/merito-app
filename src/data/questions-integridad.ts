@@ -86,8 +86,7 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "El interés general de la DIAN está por encima de mi comodidad: si me toca un lote difícil de cartera, lo asumo. Eso es Compromiso.",
     choices: LIKERT,
     correct: "ta",
-    explanation:
-      "Compromiso: el interés general prima. Elegir solo lo fácil es lo contrario.",
+    explanation: "Compromiso: el interés general prima. Elegir solo lo fácil es lo contrario.",
     source: "Valor Compromiso",
     difficulty: 1,
   },
@@ -101,7 +100,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Según Honestidad e integridad pública, usted",
     choices: [
       { id: "a", text: "la reparte, total es para todos y no pidió nada a cambio." },
-      { id: "b", text: "la rechaza, la registra si el protocolo lo pide y no deja que el trámite se vincule a un regalo." },
+      {
+        id: "b",
+        text: "la rechaza, la registra si el protocolo lo pide y no deja que el trámite se vincule a un regalo.",
+      },
       { id: "c", text: "la guarda en su casa para ‘no incómodar’ al contribuyente." },
       { id: "d", text: "la rifa entre los compañeros que más recaudo tengan." },
     ],
@@ -121,7 +123,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Lo que el Código exige es",
     choices: [
       { id: "a", text: "seguir, porque su expertise protege a la entidad." },
-      { id: "b", text: "declarar el conflicto, apartarse del conocimiento del caso y dejar que lo asuma otro servidor competente." },
+      {
+        id: "b",
+        text: "declarar el conflicto, apartarse del conocimiento del caso y dejar que lo asuma otro servidor competente.",
+      },
       { id: "c", text: "seguir, pero ser ‘más duro’ para demostrar imparcialidad." },
       { id: "d", text: "avisarle al hermano, extraoficialmente, que se aparte él de la empresa." },
     ],
@@ -139,7 +144,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "‘Lo que no hago’ del valor Honestidad incluye",
     choices: [
       { id: "a", text: "decir la verdad sobre un error propio." },
-      { id: "b", text: "usar los recursos públicos o la información del cargo para beneficio particular." },
+      {
+        id: "b",
+        text: "usar los recursos públicos o la información del cargo para beneficio particular.",
+      },
       { id: "c", text: "denunciar un soborno." },
       { id: "d", text: "cumplir lo que prometí institucionalmente." },
     ],
@@ -157,7 +165,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "El valor Diligencia se evidencia, en un Analista II de cartera, sobre todo cuando",
     choices: [
       { id: "a", text: "deja prescribir deudas para aliviar la carga." },
-      { id: "b", text: "impulsa términos, actualiza la cuenta corriente y no posterga el mandamiento sin causa." },
+      {
+        id: "b",
+        text: "impulsa términos, actualiza la cuenta corriente y no posterga el mandamiento sin causa.",
+      },
       { id: "c", text: "atiende primero a quien le cae bien." },
       { id: "d", text: "firma sin leer para salir más temprano." },
     ],
@@ -203,7 +214,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "entra ‘solo a mirar’, sin imprimir." },
-      { id: "b", text: "se niega: no hay competencia funcional ni petición en regla, y además hay conflicto." },
+      {
+        id: "b",
+        text: "se niega: no hay competencia funcional ni petición en regla, y además hay conflicto.",
+      },
       { id: "c", text: "entra y le dicta cómo ajustar cifras para maximizar el saldo." },
       { id: "d", text: "le cobra barato, por fuera de la jornada." },
     ],
@@ -221,7 +235,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "El valor Justicia, aplicado al cobro, implica",
     choices: [
       { id: "a", text: "perdonar al más vulnerable sin acto de remisión." },
-      { id: "b", text: "aplicar el mismo procedimiento y la misma norma, con motivación, al deudor grande y al pequeño." },
+      {
+        id: "b",
+        text: "aplicar el mismo procedimiento y la misma norma, con motivación, al deudor grande y al pequeño.",
+      },
       { id: "c", text: "embargar más al que reclamó en ventanilla, para educar." },
       { id: "d", text: "priorizar al amigo del jefe." },
     ],
@@ -253,8 +270,14 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
       "Hay dos peticiones iguales de devolución, presentadas el mismo día. Una es de un contribuyente mediático; la otra, de un comerciante anónimo. El jefe sugiere ‘desatascar primero la mediática’.",
     stem: "Justicia y Compromiso indican",
     choices: [
-      { id: "a", text: "obedecer el criterio mediático: el interés reputacional es el interés general." },
-      { id: "b", text: "tramitar según el procedimiento de turno, riesgo y competencia, no según el titular de prensa." },
+      {
+        id: "a",
+        text: "obedecer el criterio mediático: el interés reputacional es el interés general.",
+      },
+      {
+        id: "b",
+        text: "tramitar según el procedimiento de turno, riesgo y competencia, no según el titular de prensa.",
+      },
       { id: "c", text: "archivar las dos para no complicarse." },
       { id: "d", text: "pedirle una nota positiva al periodista a cambio de agilidad." },
     ],
@@ -305,7 +328,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "guarda el secreto: trabajo en equipo es no ‘echar al otro’." },
-      { id: "b", text: "reporta por el canal de integridad / control interno: hay uso de información pública para lucro privado." },
+      {
+        id: "b",
+        text: "reporta por el canal de integridad / control interno: hay uso de información pública para lucro privado.",
+      },
       { id: "c", text: "le pide un porcentaje para no hablar." },
       { id: "d", text: "le recomienda que suba las tarifas." },
     ],
@@ -322,7 +348,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     kind: "knowledge",
     stem: "‘Lo que hago’ del valor Respeto incluye",
     choices: [
-      { id: "a", text: "reconocer la dignidad del otro sin importar su cargo, procedencia o condición." },
+      {
+        id: "a",
+        text: "reconocer la dignidad del otro sin importar su cargo, procedencia o condición.",
+      },
       { id: "b", text: "usar apodos en el expediente para identificar más rápido." },
       { id: "c", text: "atender antes a quien viste de terno." },
       { id: "d", text: "comentar la declaración ajena en la cafetería, en voz baja." },
@@ -369,7 +398,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Respeto, nivel de integridad, exige",
     choices: [
       { id: "a", text: "reírse un poco, para no tensar al grupo, y luego seguir." },
-      { id: "b", text: "intervenir, garantizar un trato adecuado (incluido apoyo de comunicación) y reportar la conducta." },
+      {
+        id: "b",
+        text: "intervenir, garantizar un trato adecuado (incluido apoyo de comunicación) y reportar la conducta.",
+      },
       { id: "c", text: "filmar y subir el video a redes de la entidad." },
       { id: "d", text: "decirle al ciudadano que vuelva otro día con un intérprete propio, y ya." },
     ],
@@ -420,9 +452,15 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Diligencia + Honestidad indican",
     choices: [
       { id: "a", text: "no hacer nada: ‘si el sistema falló, no es mi problema’." },
-      { id: "b", text: "impulsar por el canal de contingencia, con registro y reporte de la falla, para proteger el crédito fiscal sin falsear el aplicativo." },
+      {
+        id: "b",
+        text: "impulsar por el canal de contingencia, con registro y reporte de la falla, para proteger el crédito fiscal sin falsear el aplicativo.",
+      },
       { id: "c", text: "inventar en el sistema fechas anteriores a la falla." },
-      { id: "d", text: "avisar extraoficialmente a los tres deudores para que esperen la prescripción." },
+      {
+        id: "d",
+        text: "avisar extraoficialmente a los tres deudores para que esperen la prescripción.",
+      },
     ],
     correct: "b",
     explanation:
@@ -443,8 +481,7 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
       { id: "d", text: "priorizo el interés general." },
     ],
     correct: "b",
-    explanation:
-      "A, c y d son lo que hago. El abandono selectivo es el no-hago de Compromiso.",
+    explanation: "A, c y d son lo que hago. El abandono selectivo es el no-hago de Compromiso.",
     source: "Código de Integridad — Compromiso",
     difficulty: 1,
   },
@@ -471,7 +508,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Justicia y Diligencia piden",
     choices: [
       { id: "a", text: "negar la excepción y seguir, ‘que lo discuta en tutela’." },
-      { id: "b", text: "proyectar lo que la norma ordena (prescripción de oficio o a petición, art. 817) y no maquillar el título." },
+      {
+        id: "b",
+        text: "proyectar lo que la norma ordena (prescripción de oficio o a petición, art. 817) y no maquillar el título.",
+      },
       { id: "c", text: "pedirle al deudor dinero por debajo para reconocérsela." },
       { id: "d", text: "perder el expediente." },
     ],
@@ -489,8 +529,7 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Declarar un conflicto de interés es una señal de debilidad profesional; el servidor íntegro ‘puede con todo’ sin apartarse.",
     choices: LIKERT,
     correct: "te",
-    explanation:
-      "Apartarse es la conducta fuerte, no la débil. El Código lo pide expresamente.",
+    explanation: "Apartarse es la conducta fuerte, no la débil. El Código lo pide expresamente.",
     source: "Conflicto de interés; CG-TAH-0002 v3",
     difficulty: 1,
   },
@@ -502,8 +541,7 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Explicar con claridad los cinco valores a un compañero nuevo, con ejemplos de cartera, es una forma de Compromiso con la entidad.",
     choices: LIKERT,
     correct: "ta",
-    explanation:
-      "El Código se vive y se transmite. No es un afiche de pasillo.",
+    explanation: "El Código se vive y se transmite. No es un afiche de pasillo.",
     source: "Compromiso; cultura de integridad",
     difficulty: 1,
   },
@@ -535,13 +573,15 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "Usted",
     choices: [
       { id: "a", text: "negocia cuáles tres, para que el daño sea menor." },
-      { id: "b", text: "rechaza, deja constancia y reporta el ofrecimiento: es un soborno de cargo." },
+      {
+        id: "b",
+        text: "rechaza, deja constancia y reporta el ofrecimiento: es un soborno de cargo.",
+      },
       { id: "c", text: "pide el traslado por escrito y luego vemos." },
       { id: "d", text: "suaviza primero y exige el traslado después." },
     ],
     correct: "b",
-    explanation:
-      "Tráfico de influencias / soborno. No hay dosis menor. Se rechaza y se denuncia.",
+    explanation: "Tráfico de influencias / soborno. No hay dosis menor. Se rechaza y se denuncia.",
     source: "Honestidad; Ley 1474",
     difficulty: 2,
   },
@@ -553,8 +593,7 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "La reserva de la información tributaria cede si el dato ‘ya se sabe en el pueblo’.",
     choices: LIKERT,
     correct: "te",
-    explanation:
-      "El rumor social no levanta la reserva legal. El servidor no confirma ni amplía.",
+    explanation: "El rumor social no levanta la reserva legal. El servidor no confirma ni amplía.",
     source: "Reserva tributaria",
     difficulty: 2,
   },
@@ -566,7 +605,10 @@ export const QUESTIONS_INTEGRIDAD: Question[] = [
     stem: "La metodología más usada en la prueba de integridad DIAN (Areandina / 2676) es",
     choices: [
       { id: "a", text: "ensayo a mano alzada de cinco páginas." },
-      { id: "b", text: "afirmaciones y dilemas, típicamente en escala Likert o de juicio situacional." },
+      {
+        id: "b",
+        text: "afirmaciones y dilemas, típicamente en escala Likert o de juicio situacional.",
+      },
       { id: "c", text: "entrevista con polígrafo." },
       { id: "d", text: "examen oral ante el Director General." },
     ],

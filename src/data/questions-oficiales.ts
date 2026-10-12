@@ -10,7 +10,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Según el Anexo técnico del Proceso de Selección DIAN 2676, la Prueba sobre Competencias Funcionales evalúa",
     choices: [
       { id: "a", text: "solo la velocidad de digitación en MUISCA." },
-      { id: "b", text: "los conocimientos teóricos, profesionales y/o técnicos, específicos y necesarios para la actividad laboral, conforme el MERF de la DIAN (D.L. 927 de 2023, art. 58)." },
+      {
+        id: "b",
+        text: "los conocimientos teóricos, profesionales y/o técnicos, específicos y necesarios para la actividad laboral, conforme el MERF de la DIAN (D.L. 927 de 2023, art. 58).",
+      },
       { id: "c", text: "únicamente la antigüedad en el sector privado." },
       { id: "d", text: "el coeficiente intelectual, sin relación con el empleo." },
     ],
@@ -28,7 +31,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La Prueba sobre Competencias Comportamentales del 2676 se rige, según el Anexo, por",
     choices: [
       { id: "a", text: "el Código Penal, título de peculado." },
-      { id: "b", text: "el Diccionario de Competencias de la DIAN (D.L. 927 de 2023, art. 59): capacidades y habilidades ante situaciones laborales y de relacionamiento." },
+      {
+        id: "b",
+        text: "el Diccionario de Competencias de la DIAN (D.L. 927 de 2023, art. 59): capacidades y habilidades ante situaciones laborales y de relacionamiento.",
+      },
       { id: "c", text: "un test de personalidad comercial de una empresa privada." },
       { id: "d", text: "la entrevista con el Director General." },
     ],
@@ -46,7 +52,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La Prueba de Integridad, en el Anexo del 2676, evalúa",
     choices: [
       { id: "a", text: "cuántos idiomas habla el aspirante." },
-      { id: "b", text: "características estables de la persona: coherencia entre su sistema de creencias y su forma de actuar frente al bien común en situaciones cotidianas." },
+      {
+        id: "b",
+        text: "características estables de la persona: coherencia entre su sistema de creencias y su forma de actuar frente al bien común en situaciones cotidianas.",
+      },
       { id: "c", text: "solo si tiene antecedentes disciplinarios en SIMO." },
       { id: "d", text: "la fuerza física para visitas de inspección." },
     ],
@@ -64,7 +73,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Las pruebas escritas del 2676 se califican, según el Anexo, en una escala de",
     choices: [
       { id: "a", text: "1 a 5, como la EDL." },
-      { id: "b", text: "cero (0) a cien (100) puntos, con parte entera y dos decimales truncados, comparando al aspirante con el grupo admitido al mismo empleo." },
+      {
+        id: "b",
+        text: "cero (0) a cien (100) puntos, con parte entera y dos decimales truncados, comparando al aspirante con el grupo admitido al mismo empleo.",
+      },
       { id: "c", text: "aprobado / reprobado, sin puntaje numérico." },
       { id: "d", text: "percentil mundial de PISA." },
     ],
@@ -82,7 +94,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Quien no obtenga el puntaje mínimo aprobatorio en las pruebas eliminatorias del 2676",
     choices: [
       { id: "a", text: "pasa igual a Valoración de Antecedentes, con menor puntaje." },
-      { id: "b", text: "queda excluido del proceso; además, los resultados de las clasificatorias solo se publican a quienes superaron las eliminatorias." },
+      {
+        id: "b",
+        text: "queda excluido del proceso; además, los resultados de las clasificatorias solo se publican a quienes superaron las eliminatorias.",
+      },
       { id: "c", text: "puede repetir el mismo sábado." },
       { id: "d", text: "pasa a lista de elegibles en condición de reserva." },
     ],
@@ -100,7 +115,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Según el ABC oficial de la CNSC para el 2676, un aspirante puede inscribirse a",
     choices: [
       { id: "a", text: "todos los empleos que pague." },
-      { id: "b", text: "un (1) solo empleo y una sola modalidad (ascenso o ingreso, con o sin reserva de discapacidad)." },
+      {
+        id: "b",
+        text: "un (1) solo empleo y una sola modalidad (ascenso o ingreso, con o sin reserva de discapacidad).",
+      },
       { id: "c", text: "tres OPEC de la misma seccional." },
       { id: "d", text: "ingreso y ascenso al mismo tiempo, si paga dos veces." },
     ],
@@ -118,7 +136,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Las equivalencias del MERF, en el 2676, se aplican",
     choices: [
       { id: "a", text: "en Valoración de Antecedentes, para sumar puntos extra." },
-      { id: "b", text: "solo en la Verificación de Requisitos Mínimos (VRM). En VA, educación y experiencia adicionales se puntúan como factores, no como equivalencia." },
+      {
+        id: "b",
+        text: "solo en la Verificación de Requisitos Mínimos (VRM). En VA, educación y experiencia adicionales se puntúan como factores, no como equivalencia.",
+      },
       { id: "c", text: "únicamente si el jefe de la seccional lo autoriza." },
       { id: "d", text: "nunca: el 2676 prohibió las equivalencias." },
     ],
@@ -154,7 +175,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Notificado el mandamiento de pago, la prescripción de la acción de cobro",
     choices: [
       { id: "a", text: "sigue corriendo igual, porque el mandamiento ‘no es demanda’." },
-      { id: "b", text: "se interrumpe (art. 818) y empieza a correr un nuevo término de cinco años." },
+      {
+        id: "b",
+        text: "se interrumpe (art. 818) y empieza a correr un nuevo término de cinco años.",
+      },
       { id: "c", text: "se extingue de inmediato la obligación." },
       { id: "d", text: "solo se interrumpe si hay embargo." },
     ],
@@ -189,7 +213,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     kind: "knowledge",
     stem: "Las facilidades de pago de obligaciones fiscales están previstas, como regla, en",
     choices: [
-      { id: "a", text: "el art. 814 del E.T. y normas que lo desarrollan (p. ej. Ley 1066 de 2006)." },
+      {
+        id: "a",
+        text: "el art. 814 del E.T. y normas que lo desarrollan (p. ej. Ley 1066 de 2006).",
+      },
       { id: "b", text: "un WhatsApp del jefe de recaudo." },
       { id: "c", text: "el Código Penal, título de concierto." },
       { id: "d", text: "el art. 338 de la Constitución, que ya fija las cuotas." },
@@ -244,7 +271,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La información tributaria de los contribuyentes, como regla, es",
     choices: [
       { id: "a", text: "pública, por la Ley 1712 de transparencia, sin reserva." },
-      { id: "b", text: "reservada (art. 583 E.T.): solo se usa para las funciones de la administración y cesiones de ley." },
+      {
+        id: "b",
+        text: "reservada (art. 583 E.T.): solo se usa para las funciones de la administración y cesiones de ley.",
+      },
       { id: "c", text: "propiedad del Analista que la digitó, para estudiarla en casa." },
       { id: "d", text: "publicable en redes de la seccional para ‘dar ejemplo’." },
     ],
@@ -280,7 +310,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Una petición anónima, en el CPACA / Ley 1755",
     choices: [
       { id: "a", text: "se archiva siempre, porque no hay nombre." },
-      { id: "b", text: "se tramita si el contenido lo permite; el anonimato no es, por sí solo, causal de rechazo." },
+      {
+        id: "b",
+        text: "se tramita si el contenido lo permite; el anonimato no es, por sí solo, causal de rechazo.",
+      },
       { id: "c", text: "solo procede si la firma un abogado." },
       { id: "d", text: "se responde al periodista que la filtró." },
     ],
@@ -298,7 +331,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "El artículo 95.9 de la Constitución consagra el deber de",
     choices: [
       { id: "a", text: "votar en todas las elecciones." },
-      { id: "b", text: "contribuir al financiamiento de los gastos e inversiones del Estado dentro de conceptos de justicia y equidad." },
+      {
+        id: "b",
+        text: "contribuir al financiamiento de los gastos e inversiones del Estado dentro de conceptos de justicia y equidad.",
+      },
       { id: "c", text: "afiliarse a un partido." },
       { id: "d", text: "prestar servicio militar obligatorio en la DIAN." },
     ],
@@ -316,7 +352,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "El ingreso a los cargos de carrera, según el artículo 125 de la Constitución, se hace",
     choices: [
       { id: "a", text: "por recomendación política del alcalde." },
-      { id: "b", text: "por concurso público, con base en el mérito, salvo las excepciones de ley." },
+      {
+        id: "b",
+        text: "por concurso público, con base en el mérito, salvo las excepciones de ley.",
+      },
       { id: "c", text: "por antigüedad en un contrato de prestación de servicios." },
       { id: "d", text: "por sorteo entre los inscritos en SIMO." },
     ],
@@ -352,7 +391,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La Ley 594 de 2000 (Ley General de Archivo) obliga, en esencia, a",
     choices: [
       { id: "a", text: "guardar los expedientes en el correo personal del servidor." },
-      { id: "b", text: "producir, organizar, conservar y disponer los documentos según tablas de retención y el ciclo vital, en el archivo institucional." },
+      {
+        id: "b",
+        text: "producir, organizar, conservar y disponer los documentos según tablas de retención y el ciclo vital, en el archivo institucional.",
+      },
       { id: "c", text: "destruir al día siguiente todo papel para ‘ser papel cero’." },
       { id: "d", text: "llevarse el expediente a casa si hay prescripción cerca." },
     ],
@@ -372,7 +414,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "Lo primero, conforme los arts. 815 y 850 E.T., es",
     choices: [
       { id: "a", text: "girar la devolución completa ‘para no violar el derecho al saldo’." },
-      { id: "b", text: "depurar la cuenta corriente y, si procede, compensar de oficio el saldo con la deuda exigible; devolver solo el remanente." },
+      {
+        id: "b",
+        text: "depurar la cuenta corriente y, si procede, compensar de oficio el saldo con la deuda exigible; devolver solo el remanente.",
+      },
       { id: "c", text: "pedir una caja menor y pagar en efectivo al apoderado." },
       { id: "d", text: "archivar ambos, porque ‘se cruzan solos’." },
     ],
@@ -408,7 +453,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La Ley 2016 de 2020 adoptó como Código de Integridad del Servicio Público Colombiano el de",
     choices: [
       { id: "a", text: "la OCDE, en inglés, sin adaptación." },
-      { id: "b", text: "el Departamento Administrativo de la Función Pública, con los valores Honestidad, Respeto, Compromiso, Diligencia y Justicia." },
+      {
+        id: "b",
+        text: "el Departamento Administrativo de la Función Pública, con los valores Honestidad, Respeto, Compromiso, Diligencia y Justicia.",
+      },
       { id: "c", text: "un código privado de una firma de auditoría." },
       { id: "d", text: "el reglamento de SIMO." },
     ],
@@ -428,7 +476,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La conducta alineada con reserva (583 E.T.) y Honestidad es",
     choices: [
       { id: "a", text: "dictarle el saldo, total ‘está en el sistema’ y él es abogado." },
-      { id: "b", text: "negar la consulta informal, explicar la reserva y el canal (petición / poder en regla / expediente) y no entregar dato de un NIT ajeno." },
+      {
+        id: "b",
+        text: "negar la consulta informal, explicar la reserva y el canal (petición / poder en regla / expediente) y no entregar dato de un NIT ajeno.",
+      },
       { id: "c", text: "cobrarle una consulta por fuera de la jornada." },
       { id: "d", text: "enviarle captura de pantalla por WhatsApp, con marca de agua." },
     ],
@@ -448,7 +499,10 @@ export const QUESTIONS_OFICIALES: Question[] = [
     stem: "La conducta de nivel 4 es",
     choices: [
       { id: "a", text: "obedecer: el indicador institucional vale más que el CPACA." },
-      { id: "b", text: "radicar en el sistema, dejar rastro del término legal y, si la instrucción es indebida, elevarla por el canal competente." },
+      {
+        id: "b",
+        text: "radicar en el sistema, dejar rastro del término legal y, si la instrucción es indebida, elevarla por el canal competente.",
+      },
       { id: "c", text: "publicar la petición en redes para presionar al jefe." },
       { id: "d", text: "perder el escrito y decir que nunca llegó." },
     ],

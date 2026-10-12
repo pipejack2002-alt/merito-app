@@ -1,14 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import {
-  BookOpen,
-  Briefcase,
-  ClipboardCheck,
-  Flag,
-  Home,
-  Layers,
-  Sparkles,
-} from "lucide-react";
+import { BookOpen, Briefcase, ClipboardCheck, Flag, Home, Layers, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/lib/progress-store";
 import { useCargoStore } from "@/lib/cargo-store";
@@ -39,158 +31,149 @@ export function AppShell({ children }: { children: ReactNode }) {
       {examMode ? (
         <header className="sticky top-0 z-30 border-b border-border/80 bg-bg/90 backdrop-blur-md">
           <div className="mx-auto flex h-12 max-w-3xl items-center justify-between px-4">
-            <p className="font-display text-sm font-semibold">
-              Pruebas escritas · DIAN 2676
-            </p>
-            <Link
-              to="/simulacro"
-              className="text-xs text-muted hover:text-ink"
-            >
+            <p className="font-display text-sm font-semibold">Pruebas escritas · DIAN 2676</p>
+            <Link to="/simulacro" className="text-xs text-muted hover:text-ink">
               Salir
             </Link>
           </div>
         </header>
       ) : (
         <header className="sticky top-0 z-30 border-b border-border/80 bg-bg/90 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 lg:h-16 lg:px-6">
-          <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-lg border border-accent/40 bg-surface shadow-2xs">
-              <span className="font-display text-[15px] font-bold tracking-tight text-accent">
-                M
+          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 lg:h-16 lg:px-6">
+            <Link to="/" className="flex min-w-0 items-center gap-2.5">
+              <span className="flex size-8 items-center justify-center rounded-lg border border-accent/40 bg-surface shadow-2xs">
+                <span className="font-display text-[15px] font-bold tracking-tight text-accent">
+                  M
+                </span>
               </span>
-            </span>
-            <span className="min-w-0">
-              <span className="block font-display text-[16px] font-bold leading-none tracking-tight text-ink">
-                Mérito
+              <span className="min-w-0">
+                <span className="block font-display text-[16px] font-bold leading-none tracking-tight text-ink">
+                  Mérito
+                </span>
+                <span className="mt-0.5 block truncate text-[11px] uppercase tracking-[0.12em] text-muted">
+                  by TributoApp · Concurso DIAN
+                </span>
               </span>
-              <span className="mt-0.5 block truncate text-[11px] uppercase tracking-[0.12em] text-muted">
-                by TributoApp · Concurso DIAN
-              </span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/indicadores"
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-colors font-semibold",
-                pathname.startsWith("/indicadores") && "bg-accent text-accent-fg border-accent",
-              )}
-            >
-              <Sparkles className="size-3.5" />
-              <span>Bot Areandina</span>
             </Link>
-            <Link
-              to="/fuentes"
-              className={cn(
-                "hidden items-center rounded-md px-3 py-1.5 text-sm text-muted hover:bg-paper hover:text-ink sm:inline-flex",
-                pathname.startsWith("/fuentes") && "bg-paper text-ink",
-              )}
-            >
-              Fuentes
-            </Link>
-            <Link
-              to="/cargo"
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface px-3 py-1.5 text-xs text-ink hover:bg-paper hover:border-accent/40 transition-colors",
-                (pathname.startsWith("/cargo") ||
-                  pathname.startsWith("/guia") ||
-                  pathname.startsWith("/ficha")) &&
-                  "border-accent bg-paper font-semibold",
-              )}
-            >
-              <Briefcase className="size-3.5 text-accent" />
-              <span>{cargo.shortLabel}</span>
-              <span className="hidden text-subtle md:inline">· Cambiar</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/indicadores"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-colors font-semibold",
+                  pathname.startsWith("/indicadores") && "bg-accent text-accent-fg border-accent",
+                )}
+              >
+                <Sparkles className="size-3.5" />
+                <span>Bot Areandina</span>
+              </Link>
+              <Link
+                to="/fuentes"
+                className={cn(
+                  "hidden items-center rounded-md px-3 py-1.5 text-sm text-muted hover:bg-paper hover:text-ink sm:inline-flex",
+                  pathname.startsWith("/fuentes") && "bg-paper text-ink",
+                )}
+              >
+                Fuentes
+              </Link>
+              <Link
+                to="/cargo"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface px-3 py-1.5 text-xs text-ink hover:bg-paper hover:border-accent/40 transition-colors",
+                  (pathname.startsWith("/cargo") ||
+                    pathname.startsWith("/guia") ||
+                    pathname.startsWith("/ficha")) &&
+                    "border-accent bg-paper font-semibold",
+                )}
+              >
+                <Briefcase className="size-3.5 text-accent" />
+                <span>{cargo.shortLabel}</span>
+                <span className="hidden text-subtle md:inline">· Cambiar</span>
+              </Link>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
       )}
 
       {examMode ? (
         <main className="mx-auto max-w-3xl px-4 pb-8 pt-4">{children}</main>
       ) : (
         <>
-      <div className="mx-auto flex max-w-6xl gap-0 lg:px-6">
-        <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] w-52 shrink-0 py-8 pr-6 lg:block">
-          <nav className="flex flex-col gap-1">
-            {NAV.map((item) => {
-              const active =
-                item.to === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.to);
-              const Icon = item.icon;
-              return (
+          <div className="mx-auto flex max-w-6xl gap-0 lg:px-6">
+            <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] w-52 shrink-0 py-8 pr-6 lg:block">
+              <nav className="flex flex-col gap-1">
+                {NAV.map((item) => {
+                  const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={cn(
+                        "flex h-11 items-center gap-2.5 rounded-md px-3 text-sm transition-colors",
+                        active
+                          ? "bg-accent text-accent-fg"
+                          : "text-muted hover:bg-paper hover:text-ink",
+                      )}
+                    >
+                      <Icon className="size-4" />
+                      {item.label}
+                    </Link>
+                  );
+                })}
                 <Link
-                  key={item.to}
-                  to={item.to}
+                  to="/guia"
                   className={cn(
                     "flex h-11 items-center gap-2.5 rounded-md px-3 text-sm transition-colors",
-                    active
+                    pathname.startsWith("/guia")
                       ? "bg-accent text-accent-fg"
                       : "text-muted hover:bg-paper hover:text-ink",
                   )}
                 >
-                  <Icon className="size-4" />
-                  {item.label}
+                  <BookOpen className="size-4" />
+                  Guía del cargo
                 </Link>
-              );
-            })}
-            <Link
-              to="/guia"
-              className={cn(
-                "flex h-11 items-center gap-2.5 rounded-md px-3 text-sm transition-colors",
-                pathname.startsWith("/guia")
-                  ? "bg-accent text-accent-fg"
-                  : "text-muted hover:bg-paper hover:text-ink",
-              )}
-            >
-              <BookOpen className="size-4" />
-              Guía del cargo
-            </Link>
-            <Link
-              to="/cargo"
-              className={cn(
-                "flex h-11 items-center gap-2.5 rounded-md px-3 text-sm transition-colors",
-                pathname.startsWith("/cargo")
-                  ? "bg-accent text-accent-fg"
-                  : "text-muted hover:bg-paper hover:text-ink",
-              )}
-            >
-              <Briefcase className="size-4" />
-              Cambiar cargo
-            </Link>
-          </nav>
-        </aside>
-
-        <main className="min-w-0 flex-1 px-4 pb-28 pt-6 lg:px-0 lg:pb-16 lg:pt-8">
-          {children}
-        </main>
-      </div>
-
-      <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 backdrop-blur-md lg:hidden">
-        <ul className="mx-auto grid max-w-lg grid-cols-6 px-1 pb-[env(safe-area-inset-bottom)]">
-          {NAV.map((item) => {
-            const active =
-              item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
-            const Icon = item.icon;
-            return (
-              <li key={item.to}>
                 <Link
-                  to={item.to}
+                  to="/cargo"
                   className={cn(
-                    "flex h-14 flex-col items-center justify-center gap-0.5 text-[10px] font-medium",
-                    active ? "text-accent" : "text-muted",
+                    "flex h-11 items-center gap-2.5 rounded-md px-3 text-sm transition-colors",
+                    pathname.startsWith("/cargo")
+                      ? "bg-accent text-accent-fg"
+                      : "text-muted hover:bg-paper hover:text-ink",
                   )}
                 >
-                  <Icon className={cn("size-5", active && "text-accent")} />
-                  {item.label}
+                  <Briefcase className="size-4" />
+                  Cambiar cargo
                 </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+              </nav>
+            </aside>
+
+            <main className="min-w-0 flex-1 px-4 pb-28 pt-6 lg:px-0 lg:pb-16 lg:pt-8">
+              {children}
+            </main>
+          </div>
+
+          <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 backdrop-blur-md lg:hidden">
+            <ul className="mx-auto grid max-w-lg grid-cols-6 px-1 pb-[env(safe-area-inset-bottom)]">
+              {NAV.map((item) => {
+                const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
+                const Icon = item.icon;
+                return (
+                  <li key={item.to}>
+                    <Link
+                      to={item.to}
+                      className={cn(
+                        "flex h-14 flex-col items-center justify-center gap-0.5 text-[10px] font-medium",
+                        active ? "text-accent" : "text-muted",
+                      )}
+                    >
+                      <Icon className={cn("size-5", active && "text-accent")} />
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </>
       )}
     </div>

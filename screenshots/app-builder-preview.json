@@ -28,9 +28,7 @@
       "bodyTextHash": "1301e202fd60206d92e8c8e6042abd5ad4589cec552af3738a8edf8837ddfb74",
       "bodyTextPrefix": "26 Cuaderno 2676 ANALISTA II · CARTERA, RECAUDO Y DEVOLUCIONES C",
       "horizontalOverflow": false,
-      "consoleErrors": [
-        "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin"
-      ],
+      "consoleErrors": ["Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin"],
       "pageErrors": [],
       "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
     }

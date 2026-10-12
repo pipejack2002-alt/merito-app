@@ -11,7 +11,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "La conducta más alineada con tu empleo es",
     choices: [
       { id: "a", text: "diligenciar tú las 40 citaciones para cumplir la meta personal." },
-      { id: "b", text: "priorizar el lote, asignar al Analista, revisar calidad del expediente y controlar el término de prescripción con rastro en el sistema." },
+      {
+        id: "b",
+        text: "priorizar el lote, asignar al Analista, revisar calidad del expediente y controlar el término de prescripción con rastro en el sistema.",
+      },
       { id: "c", text: "archivar los de menor cuantía para no complicarse." },
       { id: "d", text: "firmar mandamientos en blanco ‘por si acaso se vencen hoy’." },
     ],
@@ -32,7 +35,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     choices: [
       { id: "a", text: "firmarlo tú, porque ‘alguien tiene que hacerlo’." },
       { id: "b", text: "dejarlo en el cajón hasta que vuelva el jefe, aunque prescriba." },
-      { id: "c", text: "revisar el expediente y elevarlo a quien sí tiene competencia, dejando constancia del riesgo de prescripción." },
+      {
+        id: "c",
+        text: "revisar el expediente y elevarlo a quien sí tiene competencia, dejando constancia del riesgo de prescripción.",
+      },
       { id: "d", text: "pedirle al Analista que lo firme con tu visto bueno verbal." },
     ],
     correct: "c",
@@ -49,7 +55,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "En el concurso 2676, la diferencia típica de grado entre Analista II y Gestor I es",
     choices: [
       { id: "a", text: "el Analista es nivel profesional y el Gestor es técnico." },
-      { id: "b", text: "el Analista es nivel técnico (ejecuta labores técnicas) y el Gestor es nivel profesional (coordina, proyecta y decide según competencia)." },
+      {
+        id: "b",
+        text: "el Analista es nivel técnico (ejecuta labores técnicas) y el Gestor es nivel profesional (coordina, proyecta y decide según competencia).",
+      },
       { id: "c", text: "no hay diferencia de funciones, solo de salario." },
       { id: "d", text: "el Gestor no presenta prueba funcional." },
     ],
@@ -69,7 +78,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "Como Gestor, lo correcto es",
     choices: [
       { id: "a", text: "firmar igual para no perder el indicador de ‘actos proferidos’." },
-      { id: "b", text: "devolver el expediente para conciliar con la EAR y depurar el título antes del acto." },
+      {
+        id: "b",
+        text: "devolver el expediente para conciliar con la EAR y depurar el título antes del acto.",
+      },
       { id: "c", text: "descontar de palabra el valor alegado, sin soporte." },
       { id: "d", text: "embargar preventivo mientras ‘se aclara’." },
     ],
@@ -89,7 +101,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "Tu decisión",
     choices: [
       { id: "a", text: "llamar al deudor una vez más ‘para no ser agresivos’." },
-      { id: "b", text: "reorientar a coactivo, verificar título y competencia, y impulsar el mandamiento con prioridad de prescripción." },
+      {
+        id: "b",
+        text: "reorientar a coactivo, verificar título y competencia, y impulsar el mandamiento con prioridad de prescripción.",
+      },
       { id: "c", text: "sancionar al Analista en redes internas antes de tocar el expediente." },
       { id: "d", text: "esperar a que prescriba y luego pedir remisión masiva." },
     ],
@@ -162,8 +177,14 @@ export const QUESTIONS_CARGOS: Question[] = [
       "Eres Gestor II de fiscalización. El Analista armó un expediente de inexactitud en renta. Te pide ‘liquidar ya’ porque el término de fiscalización apremia y ‘el requerimiento especial demora’.",
     stem: "Debes",
     choices: [
-      { id: "a", text: "proferir la liquidación de revisión sin requerimiento, para no perder el término." },
-      { id: "b", text: "proferir el requerimiento especial con hechos, pruebas y glosas, y controlar el término legal." },
+      {
+        id: "a",
+        text: "proferir la liquidación de revisión sin requerimiento, para no perder el término.",
+      },
+      {
+        id: "b",
+        text: "proferir el requerimiento especial con hechos, pruebas y glosas, y controlar el término legal.",
+      },
       { id: "c", text: "llamar al contribuyente y pactar una corrección de palabra." },
       { id: "d", text: "pasar el caso a cobro coactivo aunque no hay acto de determinación." },
     ],
@@ -183,7 +204,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "La respuesta correcta del empleo es",
     choices: [
       { id: "a", text: "explicarle extraoficialmente cómo minimizar el aforo." },
-      { id: "b", text: "orientarlo por el canal institucional sobre el emplazamiento y el deber de declarar, sin adelantar el acto ni diseñar su estrategia." },
+      {
+        id: "b",
+        text: "orientarlo por el canal institucional sobre el emplazamiento y el deber de declarar, sin adelantar el acto ni diseñar su estrategia.",
+      },
       { id: "c", text: "decirle que ignore el emplazamiento." },
       { id: "d", text: "cobrarle una suma para ‘acelerar’ la respuesta." },
     ],
@@ -203,7 +227,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "Debes",
     choices: [
       { id: "a", text: "aceptar el almuerzo para no tensar la visita y omitir la caja." },
-      { id: "b", text: "rechazar la dádiva, dejar constancia de los hechos en el acta y trasladar el hallazgo al expediente." },
+      {
+        id: "b",
+        text: "rechazar la dádiva, dejar constancia de los hechos en el acta y trasladar el hallazgo al expediente.",
+      },
       { id: "c", text: "liquidar el IVA en el predio a cambio de no reportar." },
       { id: "d", text: "guardar silencio y contarlo solo en un grupo de WhatsApp del equipo." },
     ],
@@ -242,7 +269,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     choices: [
       { id: "a", text: "ampliar de hecho el objeto y llevarte toda la renta, sin nuevo acto." },
       { id: "b", text: "ignorar el hallazgo porque ‘no es IVA’." },
-      { id: "c", text: "dejar constancia, no exceder el objeto de esta visita, e informar al competente para que, si procede, ordene la actuación de renta." },
+      {
+        id: "c",
+        text: "dejar constancia, no exceder el objeto de esta visita, e informar al competente para que, si procede, ordene la actuación de renta.",
+      },
       { id: "d", text: "avisar al contribuyente que esconda esa carpeta." },
     ],
     correct: "c",
@@ -256,12 +286,14 @@ export const QUESTIONS_CARGOS: Question[] = [
     track: "funcional",
     moduleId: "inspeccion-visitas",
     kind: "sjt",
-    caseText:
-      "El visitado se niega a firmar el acta y dice que ‘sin firma no vale’.",
+    caseText: "El visitado se niega a firmar el acta y dice que ‘sin firma no vale’.",
     stem: "Debes",
     choices: [
       { id: "a", text: "romper el acta y volverte otro día." },
-      { id: "b", text: "dejar constancia de la renuencia, firmar tú y los testigos que procedan, y conservar el acta." },
+      {
+        id: "b",
+        text: "dejar constancia de la renuencia, firmar tú y los testigos que procedan, y conservar el acta.",
+      },
       { id: "c", text: "amenazar con embargo inmediato." },
       { id: "d", text: "aceptar que el acta no existe." },
     ],
@@ -279,7 +311,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "El emplazamiento para corregir (art. 705 E.T.) es",
     choices: [
       { id: "a", text: "una liquidación oficial ejecutoriada." },
-      { id: "b", text: "un acto de trámite que invita a corregir, no la liquidación ni el requerimiento especial." },
+      {
+        id: "b",
+        text: "un acto de trámite que invita a corregir, no la liquidación ni el requerimiento especial.",
+      },
       { id: "c", text: "un mandamiento de pago." },
       { id: "d", text: "una sentencia." },
     ],
@@ -299,7 +334,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "Como Gestor",
     choices: [
       { id: "a", text: "reordenas el lote a su favor y pides reserva al Analista." },
-      { id: "b", text: "mantienes el criterio objetivo (prescripción, cuantía, riesgo), dejas rastro de la gestión y no aceptas trato preferente." },
+      {
+        id: "b",
+        text: "mantienes el criterio objetivo (prescripción, cuantía, riesgo), dejas rastro de la gestión y no aceptas trato preferente.",
+      },
       { id: "c", text: "le pides al Analista que ‘desaparezca’ el expediente una semana." },
       { id: "d", text: "cierras el cobro por ‘razones de imagen institucional’." },
     ],
@@ -320,7 +358,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "En ejercicio de tus funciones técnicas de recepción y verificación preliminar, debes",
     choices: [
       { id: "a", text: "firmar tú en el espacio del declarante para no perjudicar al ciudadano." },
-      { id: "b", text: "informar de inmediato al contribuyente que la omisión de la firma es causal para tenerla como no presentada (art. 580 E.T.) e invitarlo a suscribirla antes de radicar." },
+      {
+        id: "b",
+        text: "informar de inmediato al contribuyente que la omisión de la firma es causal para tenerla como no presentada (art. 580 E.T.) e invitarlo a suscribirla antes de radicar.",
+      },
       { id: "c", text: "radicarla en silencio y proyectar una sanción penal de inmediato." },
       { id: "d", text: "destruir el formulario y pedirle que regrese al día siguiente." },
     ],
@@ -340,7 +381,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "La herramienta y procedimiento ofimático idóneo para ejecutar esta tarea técnica es",
     choices: [
       { id: "a", text: "revisar uno a uno los 500 registros en papel con resaltador." },
-      { id: "b", text: "estandarizar el formato de texto y número de la columna NIT, y aplicar la función BUSCARX o BUSCARV/COINCIDIR para automatizar el cruce." },
+      {
+        id: "b",
+        text: "estandarizar el formato de texto y número de la columna NIT, y aplicar la función BUSCARX o BUSCARV/COINCIDIR para automatizar el cruce.",
+      },
       { id: "c", text: "borrar los registros que no coincidan a primera vista." },
       { id: "d", text: "redactar un oficio en Word pidiendo que el banco vuelva a enviar todo." },
     ],
@@ -358,7 +402,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "Al organizar un expediente físico de apoyo documental, la foliación técnica que debe realizar el Analista I conforme a las directrices del Archivo General de la Nación consiste en:",
     choices: [
       { id: "a", text: "Numerar únicamente las páginas impares con tinta roja." },
-      { id: "b", text: "Escribir el número correlativo y consecutivo en la esquina superior derecha de cada hoja útil, con lápiz de mina negra, en el orden cronológico en que se incorporaron." },
+      {
+        id: "b",
+        text: "Escribir el número correlativo y consecutivo en la esquina superior derecha de cada hoja útil, con lápiz de mina negra, en el orden cronológico en que se incorporaron.",
+      },
       { id: "c", text: "Poner números aleatorios en el pie de página." },
       { id: "d", text: "Foliar de atrás hacia adelante en orden inverso." },
     ],
@@ -379,10 +426,19 @@ export const QUESTIONS_CARGOS: Question[] = [
       "Un ciudadano llega muy ofuscado a la ventanilla de atención presencial de la DIAN alegando que el sistema Muisca le bloqueó la firma electrónica y que hoy se le vence el plazo para declarar. Grita exigiendo que el Facilitador III le solucione ya.",
     stem: "La conducta asistencial correcta y alineada con los atributos del servicio al ciudadano es",
     choices: [
-      { id: "a", text: "responderle con igual tono de voz y advertirle que si sigue gritando llamará a la policía para expulsarlo." },
-      { id: "b", text: "escucharlo con serenidad y empatía, validar su situación en el sistema, orientarlo en la recuperación de la contraseña o radicar su contingencia técnica para amparar su término legal." },
+      {
+        id: "a",
+        text: "responderle con igual tono de voz y advertirle que si sigue gritando llamará a la policía para expulsarlo.",
+      },
+      {
+        id: "b",
+        text: "escucharlo con serenidad y empatía, validar su situación en el sistema, orientarlo en la recuperación de la contraseña o radicar su contingencia técnica para amparar su término legal.",
+      },
       { id: "c", text: "decirle que eso no es su problema y que contrate a un contador privado." },
-      { id: "d", text: "darle su número de celular personal para que le transfiera dinero por agilizarle el trámite." },
+      {
+        id: "d",
+        text: "darle su número de celular personal para que le transfiera dinero por agilizarle el trámite.",
+      },
     ],
     correct: "b",
     explanation:
@@ -417,8 +473,14 @@ export const QUESTIONS_CARGOS: Question[] = [
       "Un usuario se acerca al punto de contacto de la DIAN y entrega un derecho de petición incompleto, pues no anexó la fotocopia de su cédula. El Facilitador III está en la ventanilla de radicación.",
     stem: "Conforme al artículo 15 del CPACA sobre radicación de peticiones, el Facilitador debe",
     choices: [
-      { id: "a", text: "rechazar de plano la petición y negarse a radicarla hasta que traiga la copia." },
-      { id: "b", text: "recibirla y radicarla obligatoriamente, advirtiéndole al peticionario en el acto sobre los documentos faltantes y dejando constancia en la copia que le entrega." },
+      {
+        id: "a",
+        text: "rechazar de plano la petición y negarse a radicarla hasta que traiga la copia.",
+      },
+      {
+        id: "b",
+        text: "recibirla y radicarla obligatoriamente, advirtiéndole al peticionario en el acto sobre los documentos faltantes y dejando constancia en la copia que le entrega.",
+      },
       { id: "c", text: "romper el documento frente al usuario." },
       { id: "d", text: "cobrarle una tarifa especial de radicación extemporánea." },
     ],
@@ -437,8 +499,14 @@ export const QUESTIONS_CARGOS: Question[] = [
       "Al finalizar la jornada de atención presencial, un tramitador le ofrece al Facilitador III una propina en efectivo de $50.000 como 'agradecimiento' por haber radicado rápidamente los turnos de sus clientes.",
     stem: "La actuación que exige el Código de Integridad y el régimen disciplinario es",
     choices: [
-      { id: "a", text: "recibir el dinero, pues fue una donación voluntaria posterior al servicio." },
-      { id: "b", text: "rechazar tajantemente el dinero, explicarle que todos los trámites en la DIAN son gratuitos y reportar el intento de dádiva a su superior inmediato." },
+      {
+        id: "a",
+        text: "recibir el dinero, pues fue una donación voluntaria posterior al servicio.",
+      },
+      {
+        id: "b",
+        text: "rechazar tajantemente el dinero, explicarle que todos los trámites en la DIAN son gratuitos y reportar el intento de dádiva a su superior inmediato.",
+      },
       { id: "c", text: "guardar el dinero en la caja menor de la entidad." },
       { id: "d", text: "repartir la propina con los vigilantes de la entrada." },
     ],
@@ -459,8 +527,14 @@ export const QUESTIONS_CARGOS: Question[] = [
       "En el archivo central de la seccional, un funcionario de otra dependencia solicita llevarse a su oficina tres expedientes originales de cobro coactivo sin diligenciar la boleta o formato de préstamo institucional.",
     stem: "Como Facilitador II encargado de la custodia y entrega de expedientes, debes",
     choices: [
-      { id: "a", text: "entregarle los expedientes porque es un compañero de trabajo de confianza." },
-      { id: "b", text: "exigir el diligenciamiento formal del formato de control y préstamo de archivo antes de permitir la salida de los expedientes, garantizando la cadena de custodia documental." },
+      {
+        id: "a",
+        text: "entregarle los expedientes porque es un compañero de trabajo de confianza.",
+      },
+      {
+        id: "b",
+        text: "exigir el diligenciamiento formal del formato de control y préstamo de archivo antes de permitir la salida de los expedientes, garantizando la cadena de custodia documental.",
+      },
       { id: "c", text: "esconder los expedientes y fingir que se perdieron." },
       { id: "d", text: "prestarle solo uno y quedarse con los otros dos." },
     ],
@@ -480,8 +554,14 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "La conducta adecuada es",
     choices: [
       { id: "a", text: "dejar el error para no perder el tiempo de digitación." },
-      { id: "b", text: "corregir de inmediato el registro en el sistema con base en el soporte físico para evitar vicios en las notificaciones del área." },
-      { id: "c", text: "modificar el documento físico a mano con tachones para que cuadre con lo digitado." },
+      {
+        id: "b",
+        text: "corregir de inmediato el registro en el sistema con base en el soporte físico para evitar vicios en las notificaciones del área.",
+      },
+      {
+        id: "c",
+        text: "modificar el documento físico a mano con tachones para que cuadre con lo digitado.",
+      },
       { id: "d", text: "borrar toda la base de datos de la semana." },
     ],
     correct: "b",
@@ -501,8 +581,14 @@ export const QUESTIONS_CARGOS: Question[] = [
       "En una inspección aduanera física en puerto, el Gestor I Aduanas detecta que un contenedor declarado como 'juguetes plásticos' contiene en realidad 500 teléfonos celulares de alta gama no declarados ni amparados en los documentos de transporte.",
     stem: "Conforme al Decreto 1165 de 2019 y Decreto 659 de 2024, la medida administrativa que procede inmediatamente es",
     choices: [
-      { id: "a", text: "autorizar el levante y pedirle al declarante que pague después lo que quiera." },
-      { id: "b", text: "proferir acta de aprehensión de las mercancías no declaradas y trasladarlas al depósito habilitado para iniciar el proceso de decomiso." },
+      {
+        id: "a",
+        text: "autorizar el levante y pedirle al declarante que pague después lo que quiera.",
+      },
+      {
+        id: "b",
+        text: "proferir acta de aprehensión de las mercancías no declaradas y trasladarlas al depósito habilitado para iniciar el proceso de decomiso.",
+      },
       { id: "c", text: "vender los celulares en el puerto entre los funcionarios presentes." },
       { id: "d", text: "devolver el buque inmediatamente a su país de origen sin levantar acta." },
     ],
@@ -540,7 +626,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "El Gestor I de Aduanas debe",
     choices: [
       { id: "a", text: "recibir los obsequios si son de bajo valor comercial." },
-      { id: "b", text: "rechazar enfáticamente los obsequios, verificar minuciosamente el certificado de origen conforme a la normativa y reportar el intento de cohecho." },
+      {
+        id: "b",
+        text: "rechazar enfáticamente los obsequios, verificar minuciosamente el certificado de origen conforme a la normativa y reportar el intento de cohecho.",
+      },
       { id: "c", text: "aprobar el certificado sin leerlo para evitar congestión en el puerto." },
       { id: "d", text: "cobrar una tarifa personal de agilización aduanera." },
     ],
@@ -578,7 +667,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "La DIAN cuenta con un término máximo para fallar el Recurso de Reconsideración de un (1) año contado a partir de su interposición en debida forma (art. 732 E.T.). Si la administración no profiere ni notifica el fallo dentro de dicho plazo, opera:",
     choices: [
       { id: "a", text: "El silencio administrativo negativo que confirma la liquidación oficial." },
-      { id: "b", text: "El silencio administrativo positivo, entendiéndose fallado el recurso a favor del contribuyente (art. 734 E.T.)." },
+      {
+        id: "b",
+        text: "El silencio administrativo positivo, entendiéndose fallado el recurso a favor del contribuyente (art. 734 E.T.).",
+      },
       { id: "c", text: "La prescripción de oficio de la cédula del contribuyente." },
       { id: "d", text: "La prórroga automática por dos años más." },
     ],
@@ -597,9 +689,18 @@ export const QUESTIONS_CARGOS: Question[] = [
       "Un ejecutado formula excepciones contra el mandamiento de pago alegando 'Prescripción de la acción de cobro' y demuestra que la liquidación oficial quedó en firme hace 6 años sin que la DIAN notificara mandamiento de pago alguno.",
     stem: "Al proyectar la decisión de las excepciones (art. 831 num. 6 y art. 832 E.T.), el Gestor II Jurídico debe",
     choices: [
-      { id: "a", text: "rechazar la excepción porque las deudas con la DIAN son imprescriptibles." },
-      { id: "b", text: "declarar probada la excepción de prescripción, ordenar el levantamiento de las medidas cautelares y el archivo del expediente coactivo." },
-      { id: "c", text: "ordenar el remate urgente de los bienes antes de que quede en firme la decisión." },
+      {
+        id: "a",
+        text: "rechazar la excepción porque las deudas con la DIAN son imprescriptibles.",
+      },
+      {
+        id: "b",
+        text: "declarar probada la excepción de prescripción, ordenar el levantamiento de las medidas cautelares y el archivo del expediente coactivo.",
+      },
+      {
+        id: "c",
+        text: "ordenar el remate urgente de los bienes antes de que quede en firme la decisión.",
+      },
       { id: "d", text: "exigirle al deudor el pago de una sanción para perdonarle el tiempo." },
     ],
     correct: "b",
@@ -620,7 +721,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "El procedimiento técnico y probatorio que debe adelantar el Inspector es",
     choices: [
       { id: "a", text: "creer en la palabra del contribuyente y archivar la visita." },
-      { id: "b", text: "consignar detalladamente en el acta la no exhibición de los libros de contabilidad, otorgar el plazo legal probatorio si procede o remitir el informe para la imposición de la sanción por no exhibir libros (art. 654 y 655 E.T.)." },
+      {
+        id: "b",
+        text: "consignar detalladamente en el acta la no exhibición de los libros de contabilidad, otorgar el plazo legal probatorio si procede o remitir el informe para la imposición de la sanción por no exhibir libros (art. 654 y 655 E.T.).",
+      },
       { id: "c", text: "llevarse los computadores personales de los comensales presentes." },
       { id: "d", text: "clausurar el restaurante inmediatamente sin orden escrita." },
     ],
@@ -638,7 +742,10 @@ export const QUESTIONS_CARGOS: Question[] = [
     stem: "En desarrollo de las facultades de fiscalización e investigación del artículo 684 del Estatuto Tributario, los funcionarios de la DIAN comisionados tienen atribución legal para:",
     choices: [
       { id: "a", text: "Modificar las declaraciones privadas sin notificar requerimiento alguno." },
-      { id: "b", text: "Verificar la exactitud de las declaraciones, ordenar la exhibición de libros, documentos y correspondencia comercial, y practicar inspecciones tributarias y contables." },
+      {
+        id: "b",
+        text: "Verificar la exactitud de las declaraciones, ordenar la exhibición de libros, documentos y correspondencia comercial, y practicar inspecciones tributarias y contables.",
+      },
       { id: "c", text: "Decretar la privación de la libertad de los representantes legales." },
       { id: "d", text: "Fijar tributos territoriales como el impuesto predial." },
     ],
@@ -649,4 +756,3 @@ export const QUESTIONS_CARGOS: Question[] = [
     difficulty: 1,
   },
 ];
-

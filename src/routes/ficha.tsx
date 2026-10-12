@@ -15,12 +15,9 @@ function FichaPage() {
           {ficha.formato ? `${ficha.formato} · ` : null}
           {cargo.custom ? "Manual cargado" : "Ficha de estudio"}
         </p>
-        <h1 className="font-display text-3xl font-semibold">
-          {ficha.denominacion}
-        </h1>
+        <h1 className="font-display text-3xl font-semibold">{ficha.denominacion}</h1>
         <p className="text-sm text-muted">
-          Código {ficha.codigo} · Grado {ficha.grado} · {ficha.nivel} ·{" "}
-          {ficha.tipoEmpleo}
+          Código {ficha.codigo} · Grado {ficha.grado} · {ficha.nivel} · {ficha.tipoEmpleo}
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           {ficha.codigoFicha ? <Badge variant="paper">{ficha.codigoFicha}</Badge> : null}
@@ -71,9 +68,7 @@ function FichaPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-display text-xl font-semibold">
-          Competencias funcionales
-        </h2>
+        <h2 className="font-display text-xl font-semibold">Competencias funcionales</h2>
         <ul className="flex flex-wrap gap-2">
           {ficha.competenciasFuncionales.map((c) => (
             <li key={c}>
@@ -84,9 +79,7 @@ function FichaPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-display text-xl font-semibold">
-          Competencias comportamentales
-        </h2>
+        <h2 className="font-display text-xl font-semibold">Competencias comportamentales</h2>
         <ul className="grid gap-2 sm:grid-cols-2">
           {ficha.competenciasComportamentales.map((c) => (
             <li
@@ -115,9 +108,7 @@ function FichaPage() {
 
       {ficha.competenciasBasicas && ficha.competenciasBasicas.length > 0 ? (
         <section className="space-y-3">
-          <h2 className="font-display text-xl font-semibold">
-            Competencias básicas de la ficha
-          </h2>
+          <h2 className="font-display text-xl font-semibold">Competencias básicas de la ficha</h2>
           <ol className="space-y-1 text-sm text-ink">
             {ficha.competenciasBasicas.map((c, i) => (
               <li key={c} className="flex gap-3">
@@ -132,10 +123,9 @@ function FichaPage() {
       ) : null}
 
       <p className="text-xs text-subtle">
-        Fuente de estudio: Manual Específico de Requisitos y Funciones DIAN
-        (Resolución 0067 de 2024) y, si cargaste un archivo, tu documento.
-        Equivalencias: {ficha.equivalencias ? "sí" : "no o no constan"}. Verifica
-        la OPEC en SIMO.
+        Fuente de estudio: Manual Específico de Requisitos y Funciones DIAN (Resolución 0067 de
+        2024) y, si cargaste un archivo, tu documento. Equivalencias:{" "}
+        {ficha.equivalencias ? "sí" : "no o no constan"}. Verifica la OPEC en SIMO.
       </p>
     </div>
   );

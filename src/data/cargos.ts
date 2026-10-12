@@ -33,10 +33,7 @@ const CARTERA_MODULE_IDS = [
   ...SHARED_MODULE_IDS,
 ] as const;
 
-function guidesFromTopics(
-  moduleIds: string[],
-  roleNotes: Record<string, string>,
-): FunctionGuide[] {
+function guidesFromTopics(moduleIds: string[], roleNotes: Record<string, string>): FunctionGuide[] {
   return moduleIds
     .map((id) => TOPICS.find((t) => t.moduleId === id))
     .filter((t): t is (typeof TOPICS)[number] => Boolean(t))
@@ -56,20 +53,16 @@ function guidesFromTopics(
 const analistaCarteraNotes: Record<string, string> = {
   "ficha-empleo":
     "Eres Analista II, nivel técnico: ejecutas labores técnicas. No diseñas la política ni firmas como Gestor.",
-  "cobro-persuasivo":
-    "Tú clasificas, contactas y registras. No decretas cautelares ni ‘perdonas’.",
+  "cobro-persuasivo": "Tú clasificas, contactas y registras. No decretas cautelares ni ‘perdonas’.",
   "cobro-coactivo":
     "Verificas expediente y proyectas. El mandamiento lo libra quien tenga competencia; tú impulsas el trámite.",
   "medidas-cautelares":
     "Apoyas la investigación de bienes y el registro. No ‘negocias’ el alzamiento.",
   "devoluciones-compensaciones":
     "Apoyas el trámite y la cuenta corriente. No giras por fuera del procedimiento.",
-  "recaudo-ear":
-    "Concilias reportes y corriges recibos. Nunca recibes efectivo.",
-  "control-extensivo":
-    "Orientas frente al requerimiento de campaña. No adelantas el acto.",
-  "procesos-concursales":
-    "Detectas el concurso y reportas. No sigues el remate como si nada.",
+  "recaudo-ear": "Concilias reportes y corriges recibos. Nunca recibes efectivo.",
+  "control-extensivo": "Orientas frente al requerimiento de campaña. No adelantas el acto.",
+  "procesos-concursales": "Detectas el concurso y reportas. No sigues el remate como si nada.",
   "razonamiento-matematico":
     "Cálculos exactos sin calculadora: sanciones, intereses moratorios, retenciones y lectura analítica de tablas de recaudo.",
   "principios-contables-financieros":
@@ -91,12 +84,10 @@ const gestorCarteraNotes: Record<string, string> = {
     "Decides, según competencia, el embargo preventivo simultáneo o previo al mandamiento. No en persuasivo.",
   "devoluciones-compensaciones":
     "Resuelves o proyectas el acto de devolución/rechazo/compensación. Primero depurar.",
-  "recaudo-ear":
-    "Exiges conciliación antes de firmar un cobro con pago alegado.",
+  "recaudo-ear": "Exiges conciliación antes de firmar un cobro con pago alegado.",
   "control-extensivo":
     "Diriges la campaña y el criterio único de orientación. No asesorías privadas.",
-  "procesos-concursales":
-    "Reorientas el cobro y presentas la acreencia. No condonas.",
+  "procesos-concursales": "Reorientas el cobro y presentas la acreencia. No condonas.",
   "rol-gestor":
     "Asigna, revisa, deja instrucción escrita. No firmes sin competencia ni hagas el oficio del Analista para lucirte.",
 };
@@ -106,10 +97,8 @@ const analistaFiscalNotes: Record<string, string> = {
     "Analista II de fiscalización: armas el expediente, cruces y proyectos. No profieres la liquidación.",
   "fiscalizacion-determinacion":
     "Preparas hechos, pruebas y glosas del requerimiento. El Gestor decide el acto.",
-  "control-extensivo":
-    "Ejecutas cruces masivos y emplazamientos de campaña, con el mismo mensaje.",
-  "inspeccion-visitas":
-    "Si te asignan apoyo de visita, registras. No determinas en el predio.",
+  "control-extensivo": "Ejecutas cruces masivos y emplazamientos de campaña, con el mismo mensaje.",
+  "inspeccion-visitas": "Si te asignan apoyo de visita, registras. No determinas en el predio.",
 };
 
 const gestorFiscalNotes: Record<string, string> = {
@@ -117,21 +106,16 @@ const gestorFiscalNotes: Record<string, string> = {
     "Gestor de fiscalización: decides el programa del expediente y proyectas o suscribes el requerimiento y la liquidación según competencia.",
   "fiscalizacion-determinacion":
     "No saltes el requerimiento especial. Controla el término de respuesta (3 meses) y el de liquidar.",
-  "control-extensivo":
-    "El emplazamiento 705 no te ahorra el 703 cuando va revisión.",
-  "rol-gestor":
-    "Calidad del expediente antes del acto. El Analista arma; tú glosas y decides.",
+  "control-extensivo": "El emplazamiento 705 no te ahorra el 703 cuando va revisión.",
+  "rol-gestor": "Calidad del expediente antes del acto. El Analista arma; tú glosas y decides.",
 };
 
 const inspectorNotes: Record<string, string> = {
-  "ficha-empleo":
-    "Inspector: pruebas y hechos. No liquidas ni cobras en la visita.",
+  "ficha-empleo": "Inspector: pruebas y hechos. No liquidas ni cobras en la visita.",
   "inspeccion-visitas":
     "Identifícate, respeta el objeto, acta los hechos, rechaza dádivas, traslada.",
-  "fiscalizacion-determinacion":
-    "Tu acta alimenta el requerimiento. No adelantes la liquidación.",
-  "control-extensivo":
-    "Si la visita nace de un programa masivo, no improvises un objeto distinto.",
+  "fiscalizacion-determinacion": "Tu acta alimenta el requerimiento. No adelantes la liquidación.",
+  "control-extensivo": "Si la visita nace de un programa masivo, no improvises un objeto distinto.",
 };
 
 export const DEFAULT_CARGO_ID = "analista-ii-cartera";
@@ -275,10 +259,7 @@ export const CATALOG: CargoProfile[] = [
       "Mismos saberes de cobro que el Analista, con verbo de decisión.",
       "Ético 4 + logro y comunicación en 3.",
     ],
-    functionGuides: guidesFromTopics(
-      [...CARTERA_MODULE_IDS, "rol-gestor"],
-      gestorCarteraNotes,
-    ),
+    functionGuides: guidesFromTopics([...CARTERA_MODULE_IDS, "rol-gestor"], gestorCarteraNotes),
     moduleIds: [...CARTERA_MODULE_IDS, "rol-gestor"],
   },
   {
@@ -358,10 +339,7 @@ export const CATALOG: CargoProfile[] = [
       "Concurso (Ley 1116) y reorientación del cobro.",
       "Justicia: mismo procedimiento al grande y al pequeño.",
     ],
-    functionGuides: guidesFromTopics(
-      [...CARTERA_MODULE_IDS, "rol-gestor"],
-      gestorCarteraNotes,
-    ),
+    functionGuides: guidesFromTopics([...CARTERA_MODULE_IDS, "rol-gestor"], gestorCarteraNotes),
     moduleIds: [...CARTERA_MODULE_IDS, "rol-gestor"],
   },
   {
@@ -562,8 +540,7 @@ export const CATALOG: CargoProfile[] = [
     family: "inspector",
     shortLabel: "Inspector II",
     processLabel: "Fiscalización tributaria",
-    blurb:
-      "Practica visitas, recoge pruebas y deja actas. No determina el tributo en el predio.",
+    blurb: "Practica visitas, recoge pruebas y deja actas. No determina el tributo en el predio.",
     ficha: {
       denominacion: "Inspector II",
       codigo: "302",
@@ -678,7 +655,8 @@ export const CATALOG: CargoProfile[] = [
         "Participar en el archivo y custodia de documentos de cobro y fiscalización.",
         "Las funciones comunes de planta.",
       ],
-      estudios: "Título de formación técnica profesional o aprobación de estudios tecnológicos afines.",
+      estudios:
+        "Título de formación técnica profesional o aprobación de estudios tecnológicos afines.",
       nbc: ["Administración", "Contaduría Pública", "Economía", "Ingeniería de Sistemas"],
       experiencia: "Seis (6) meses de experiencia laboral o según OPEC.",
       equivalencias: true,
@@ -716,10 +694,7 @@ export const CATALOG: CargoProfile[] = [
       "Misionalidad y estructura orgánica de la DIAN.",
       "Código de Integridad y conducta ética nivel 4.",
     ],
-    functionGuides: guidesFromTopics(
-      ["ficha-empleo", ...SHARED_MODULE_IDS],
-      analistaCarteraNotes,
-    ),
+    functionGuides: guidesFromTopics(["ficha-empleo", ...SHARED_MODULE_IDS], analistaCarteraNotes),
     moduleIds: ["ficha-empleo", ...SHARED_MODULE_IDS],
   },
   {
@@ -799,8 +774,10 @@ export const CATALOG: CargoProfile[] = [
         "valores-cinco",
       ],
       {
-        "ficha-empleo": "Facilitador III: nivel asistencial. Radicas, atiendes y custodias. No decides de fondo.",
-        "servicio-pqrsf": "Atención empática, cumplimiento estricto de términos de ley y cero asesoría privada.",
+        "ficha-empleo":
+          "Facilitador III: nivel asistencial. Radicas, atiendes y custodias. No decides de fondo.",
+        "servicio-pqrsf":
+          "Atención empática, cumplimiento estricto de términos de ley y cero asesoría privada.",
         "mipg-archivo": "Radicación rigurosa y foliación técnica de cada expediente recibido.",
         "ofimatica-dian": "Registro ágil en aplicativos de ventanilla y correspondencia.",
       },
@@ -933,7 +910,8 @@ export const CATALOG: CargoProfile[] = [
         "Resolver controversias de valor y liquidar tributos aduaneros y rescates según competencia.",
         "Las funciones comunes de planta.",
       ],
-      estudios: "Título profesional en Comercio Exterior, Derecho, Administración, Economía o afines.",
+      estudios:
+        "Título profesional en Comercio Exterior, Derecho, Administración, Economía o afines.",
       nbc: ["Administración", "Derecho y afines", "Economía", "Ingeniería Industrial y afines"],
       experiencia: "Sin experiencia o la que señale la OPEC.",
       equivalencias: true,
@@ -1022,7 +1000,8 @@ export const CATALOG: CargoProfile[] = [
         "Garantizar la unificación de doctrina jurídica institucional en los fallos proyectados.",
         "Las funciones comunes de planta.",
       ],
-      estudios: "Título profesional en Derecho y título de posgrado en Derecho Tributario, Administrativo o afín.",
+      estudios:
+        "Título profesional en Derecho y título de posgrado en Derecho Tributario, Administrativo o afín.",
       nbc: ["Derecho y afines"],
       experiencia: "Dos (2) años de experiencia profesional relacionada o según OPEC.",
       equivalencias: true,
@@ -1071,7 +1050,7 @@ export const CATALOG: CargoProfile[] = [
       ],
       {
         "ficha-empleo": "Gestor II Jurídico: control de legalidad, recursos y excepciones.",
-        "cpaca": "CPACA: debido proceso, recursos y caducidad de acciones contenciosas.",
+        cpaca: "CPACA: debido proceso, recursos y caducidad de acciones contenciosas.",
         "cobro-coactivo": "Resolución de excepciones taxativas del 831 y control de prescripción.",
       },
     ),

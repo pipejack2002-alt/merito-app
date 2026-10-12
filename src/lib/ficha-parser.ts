@@ -1,11 +1,6 @@
 import { ALLOWED_MODULE_IDS, SHARED_MODULE_IDS } from "@/data/cargos";
 import { TOPICS } from "@/data/topics";
-import type {
-  CargoFamily,
-  CargoProfile,
-  FunctionGuide,
-  Question,
-} from "@/data/types";
+import type { CargoFamily, CargoProfile, FunctionGuide, Question } from "@/data/types";
 
 const FUNCTION_START =
   /^(Brindar|Apoyar|Asistir|Aplicar|Tramitar|Adelantar|Prestar|Orientar|Ejecutar|Dirigir|Coordinar|Liderar|Realizar|Verificar|Proyectar|Suscribir|Controlar|Gestionar|Analizar|Identificar|Participar|Supervisar|Revisar|Formular|Adoptar|Impartir|Evaluar|Hacer|Elaborar|Expedir|Notificar|Liquidar|Determinar|Practicar|Inspeccionar|Visitar|Promover|Implementar|Contribuir|Las se[nñ]aladas|Las dem[aá]s)\b/i;
@@ -52,7 +47,10 @@ const KNOWN_COMPS = [
 ];
 
 function clean(s: string) {
-  return s.replace(/\s+/g, " ").replace(/\s+([.,;:])/g, "$1").trim();
+  return s
+    .replace(/\s+/g, " ")
+    .replace(/\s+([.,;:])/g, "$1")
+    .trim();
 }
 
 function clip(s: string, n: number) {
@@ -85,9 +83,7 @@ function extractDenominacion(text: string): string {
     /empleo:\s*([A-ZÁÉÍÓÚÑÜ][A-Za-zÁÉÍÓÚÑÜü0-9. ]{2,48}?)(?:\s+C[oó]d|\s+C[oó]digo|\s+Grado)/i,
   );
   if (a?.[1]) return clean(a[1]);
-  const b = text.match(
-    /Denominaci[oó]n(?:\s+del\s+empleo)?[:\s]+([A-ZÁÉÍÓÚÑÜ][^\n]{2,48})/i,
-  );
+  const b = text.match(/Denominaci[oó]n(?:\s+del\s+empleo)?[:\s]+([A-ZÁÉÍÓÚÑÜ][^\n]{2,48})/i);
   if (b?.[1]) return clean(b[1].replace(/\s+C[oó]d.*$/i, ""));
   const c = text.match(
     /\b(Analista(?:\s+[IVX]+)?|Gestor(?:\s+[IVX]+)?|Inspector(?:\s+[IVX]+)?|Facilitador(?:\s+[IVX]+)?)\b/i,
@@ -96,9 +92,7 @@ function extractDenominacion(text: string): string {
 }
 
 function extractCodigoGrado(text: string): { codigo: string; grado: string } {
-  const labeled = text.match(
-    /C[oó]d(?:igo)?[:\s]*(\d{2,4})[^\d]{0,12}Grado[:\s]*(\d{1,2})/i,
-  );
+  const labeled = text.match(/C[oó]d(?:igo)?[:\s]*(\d{2,4})[^\d]{0,12}Grado[:\s]*(\d{1,2})/i);
   if (labeled) {
     return { codigo: labeled[1], grado: labeled[2].padStart(2, "0") };
   }
@@ -116,8 +110,7 @@ function extractNivel(text: string): string {
 
 function extractProposito(text: string): string {
   const idx = text.search(/Prop[oó]sito principal/i);
-  const slice =
-    idx >= 0 ? text.slice(idx).replace(/Prop[oó]sito principal/i, "") : text;
+  const slice = idx >= 0 ? text.slice(idx).replace(/Prop[oó]sito principal/i, "") : text;
   const m = slice.match(
     /\s*((?:Ejecutar|Dirigir|Realizar|Coordinar|Liderar|Adelantar|Apoyar)[\s\S]{50,500}?\.)/,
   );
@@ -129,10 +122,7 @@ function extractFunctions(text: string): string[] {
   const end = text.search(
     /Requisitos del empleo|N[uú]cleos B[aá]sicos|Competencias Funcionales\b/i,
   );
-  const chunk =
-    start >= 0
-      ? text.slice(start, end > start ? end : undefined)
-      : text;
+  const chunk = start >= 0 ? text.slice(start, end > start ? end : undefined) : text;
   const lines = chunk
     .replace(/\r/g, "")
     .split("\n")
@@ -140,11 +130,7 @@ function extractFunctions(text: string): string[] {
     .filter(Boolean);
   const merged: string[] = [];
   for (const line of lines) {
-    if (
-      merged.length &&
-      !FUNCTION_START.test(line) &&
-      !SKIP_HEADERS.test(line)
-    ) {
+    if (merged.length && !FUNCTION_START.test(line) && !SKIP_HEADERS.test(line)) {
       merged[merged.length - 1] = `${merged[merged.length - 1]} ${line}`;
     } else {
       merged.push(line);
@@ -179,7 +165,9 @@ function extractFuncionales(text: string): string[] {
     "Fiscalización y determinación",
     "Inspección y visitas",
   ];
-  const found = known.filter((k) => new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text));
+  const found = known.filter((k) =>
+    new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text),
+  );
   if (found.length) return found;
 
   const block = text.match(
@@ -204,10 +192,7 @@ function extractFuncionales(text: string): string[] {
 function extractComportamentales(text: string): { nombre: string; nivel: number }[] {
   const found: { nombre: string; nivel: number }[] = [];
   for (const nombre of KNOWN_COMPS) {
-    const re = new RegExp(
-      nombre.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+([1-4])",
-      "i",
-    );
+    const re = new RegExp(nombre.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+([1-4])", "i");
     const m = text.match(re);
     if (m) found.push({ nombre, nivel: Number(m[1]) });
   }
@@ -237,9 +222,7 @@ function extractEstudios(text: string): string {
 }
 
 function extractExperiencia(text: string): string {
-  const m = text.match(
-    /(?:Tipo de experiencia[^\n]*:\s*)?([^\n]{8,90}experiencia[^\n.]{0,40})/i,
-  );
+  const m = text.match(/(?:Tipo de experiencia[^\n]*:\s*)?([^\n]{8,90}experiencia[^\n.]{0,40})/i);
   return m ? clean(m[1]) : "";
 }
 
@@ -327,9 +310,7 @@ function examFocus(family: CargoFamily, moduleIds: string[]): string[] {
     "Integridad: canal institucional, reserva tributaria, cero dádivas.",
   ];
   if (moduleIds.includes("cobro-coactivo")) {
-    out.push(
-      "Mandamiento (826), títulos 828, excepciones 15 días, prescripción 5 años.",
-    );
+    out.push("Mandamiento (826), títulos 828, excepciones 15 días, prescripción 5 años.");
   }
   if (moduleIds.includes("medidas-cautelares")) {
     out.push("Cautelares previa o simultáneas al mandamiento; nunca en persuasivo.");
@@ -374,9 +355,7 @@ function guidesFromFunctions(
   const used = new Set<string>();
   const fromFn = funciones.slice(0, 10).map((fn) => {
     const related = matchModules(fn).filter((id) => id !== "ficha-empleo");
-    const topic = TOPICS.find(
-      (t) => related.includes(t.moduleId) && !used.has(t.moduleId),
-    );
+    const topic = TOPICS.find((t) => related.includes(t.moduleId) && !used.has(t.moduleId));
     if (topic) used.add(topic.moduleId);
     const title = clip(fn.replace(/\s+de acuerdo con[\s\S]+$/i, ""), 120);
     return {
@@ -391,10 +370,8 @@ function guidesFromFunctions(
         "Escala por escrito lo que exceda tu competencia.",
       ],
       typicalFail:
-        topic?.trap ??
-        "Actuar como otro empleo o saltarse el procedimiento para ‘agilizar’.",
-      correctMove:
-        topic?.correctMove ?? "Procedimiento + competencia + rastro institucional.",
+        topic?.trap ?? "Actuar como otro empleo o saltarse el procedimiento para ‘agilizar’.",
+      correctMove: topic?.correctMove ?? "Procedimiento + competencia + rastro institucional.",
       source: filename,
       relatedModuleIds: related.length ? related.slice(0, 3) : ["ficha-empleo"],
       roleNote: roleNote(family, related[0]),
@@ -409,9 +386,7 @@ function questionsFromManual(
   shortLabel: string,
   funciones: string[],
 ): Question[] {
-  const first = funciones[0]
-    ? clip(funciones[0], 180)
-    : "la función esencial de tu ficha";
+  const first = funciones[0] ? clip(funciones[0], 180) : "la función esencial de tu ficha";
   const roleCorrect =
     family === "gestor"
       ? "Priorizar, revisar calidad y proyectar o suscribir según competencia, con instrucción escrita."
@@ -545,11 +520,8 @@ export function isUsefulCargo(cargo: CargoProfile): boolean {
   return named && (f.funciones.length >= 2 || f.proposito.length > 50);
 }
 
-export function buildCargoFromText(
-  raw: string,
-  filename = "manual.pdf",
-): CargoProfile | null {
-  const text = raw.replace(/\u0000/g, " ").replace(/\r/g, "");
+export function buildCargoFromText(raw: string, filename = "manual.pdf"): CargoProfile | null {
+  const text = raw.replaceAll("\0", " ").replaceAll("\r", "");
   if (text.replace(/\s/g, "").length < 40) return null;
 
   const denominacion = extractDenominacion(text) || "Empleo según manual";
@@ -564,20 +536,14 @@ export function buildCargoFromText(
   const estudios = extractEstudios(text);
   const experiencia = extractExperiencia(text);
   const codigoFicha = text.match(/CT-[A-Z]{2}-\d{3,5}/)?.[0];
-  const procesoMatch = text.match(
-    /MISIONAL:\s*([^\n]+?)(?:\s+Aplicaci[oó]n|$)/i,
-  );
+  const procesoMatch = text.match(/MISIONAL:\s*([^\n]+?)(?:\s+Aplicaci[oó]n|$)/i);
   const proceso = procesoMatch
     ? `MISIONAL: ${clean(procesoMatch[1].replace(/\s+Aplicaci[oó]n[\s\S]*$/i, ""))}`
     : "Proceso misional DIAN";
-  const subMatch = text.match(
-    /Aplicaci[oó]n de la Ficha[^\n]*\n([A-ZÁÉÍÓÚÑa-záéíóúñ][^\n]{8,90})/,
-  );
+  const subMatch = text.match(/Aplicaci[oó]n de la Ficha[^\n]*\n([A-ZÁÉÍÓÚÑa-záéíóúñ][^\n]{8,90})/);
   const subproceso = subMatch
     ? clean(subMatch[1])
-    : clean(
-        text.match(/Administraci[oó]n de cartera[^\n]*/i)?.[0] ?? "Según manual",
-      );
+    : clean(text.match(/Administraci[oó]n de cartera[^\n]*/i)?.[0] ?? "Según manual");
   const aplicacion = /Niveles Central y Seccional/i.test(text)
     ? "Niveles Central y Seccional"
     : "Según ficha";
@@ -585,13 +551,9 @@ export function buildCargoFromText(
     ? "Carrera Administrativa"
     : "Carrera Administrativa";
 
-  const blob = [
-    denominacion,
-    proposito,
-    funciones.join(" "),
-    funcionales.join(" "),
-    text,
-  ].join("\n");
+  const blob = [denominacion, proposito, funciones.join(" "), funcionales.join(" "), text].join(
+    "\n",
+  );
   let moduleIds = matchModules(blob);
   if (family === "gestor" && ALLOWED_MODULE_IDS.includes("rol-gestor")) {
     moduleIds = [...new Set([...moduleIds, "rol-gestor"])];

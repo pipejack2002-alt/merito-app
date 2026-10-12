@@ -1,13 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useRef, useState, type DragEvent } from "react";
-import {
-  Briefcase,
-  FileUp,
-  LoaderCircle,
-  Trash2,
-  Check,
-  Sparkles,
-} from "lucide-react";
+import { Briefcase, FileUp, LoaderCircle, Trash2, Check, Sparkles } from "lucide-react";
 import { CATALOG } from "@/data/cargos";
 import { CARGO_FAMILIES, type CargoFamily, type CargoProfile } from "@/data/types";
 import { useCargoStore } from "@/lib/cargo-store";
@@ -61,9 +54,7 @@ function CargoPage() {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const catalog = CATALOG.filter(
-    (c) => filter === "todos" || c.family === filter,
-  );
+  const catalog = CATALOG.filter((c) => filter === "todos" || c.family === filter);
 
   function pick(id: string) {
     select(id);
@@ -101,8 +92,7 @@ function CargoPage() {
       return;
     }
     const mime = file.type || "application/octet-stream";
-    const isPdf =
-      mime === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+    const isPdf = mime === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
     const isImage = mime.startsWith("image/");
     if (!isPdf && !isImage) {
       setError("Sube un PDF, una foto de la ficha, o pega el texto del manual.");
@@ -163,15 +153,12 @@ function CargoPage() {
   return (
     <div className="space-y-10">
       <header className="space-y-2">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-muted">
-          Concurso 2676
-        </p>
+        <p className="text-[11px] uppercase tracking-[0.16em] text-muted">Concurso 2676</p>
         <h1 className="font-display text-3xl font-semibold">Elige tu cargo</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          Analista, Gestor o Inspector no se estudian igual: cambia el verbo, la
-          competencia y lo que el examen premia. Escoge el empleo o sube tu
-          manual de funciones y te armo la guía, con cómo se resuelven los
-          casos y en qué sueles fallar.
+          Analista, Gestor o Inspector no se estudian igual: cambia el verbo, la competencia y lo
+          que el examen premia. Escoge el empleo o sube tu manual de funciones y te armo la guía,
+          con cómo se resuelven los casos y en qué sueles fallar.
         </p>
       </header>
 
@@ -189,7 +176,8 @@ function CargoPage() {
               ¿Tienes tu Número de Inscripción SIMO?
             </h3>
             <p className="text-xs text-muted max-w-xl">
-              Carga al instante tus 24 indicadores evaluados por Areandina y calibra la plataforma para tu prueba específica.
+              Carga al instante tus 24 indicadores evaluados por Areandina y calibra la plataforma
+              para tu prueba específica.
             </p>
           </div>
 
@@ -206,12 +194,10 @@ function CargoPage() {
         <div className="flex items-start gap-3">
           <FileUp className="mt-0.5 size-5 shrink-0 text-accent" />
           <div className="min-w-0 flex-1">
-            <h2 className="font-display text-lg font-semibold">
-              Sube tu manual de funciones
-            </h2>
+            <h2 className="font-display text-lg font-semibold">Sube tu manual de funciones</h2>
             <p className="mt-1 text-sm text-muted">
-              PDF de la ficha (FT-TAH), foto nítida o el texto. Se lee aquí y
-              se guarda en este dispositivo.
+              PDF de la ficha (FT-TAH), foto nítida o el texto. Se lee aquí y se guarda en este
+              dispositivo.
             </p>
             <label
               onDragEnter={(e) => {
@@ -246,14 +232,10 @@ function CargoPage() {
               ) : (
                 <>
                   <span className="text-sm font-medium">
-                    {dragOver
-                      ? "Suelta el PDF aquí"
-                      : "Toca o arrastra el PDF o la foto"}
+                    {dragOver ? "Suelta el PDF aquí" : "Toca o arrastra el PDF o la foto"}
                   </span>
                   <span className="mt-1 text-xs text-subtle">
-                    {fileName
-                      ? fileName
-                      : "Máximo 8 MB · ficha o manual"}
+                    {fileName ? fileName : "Máximo 8 MB · ficha o manual"}
                   </span>
                 </>
               )}
@@ -279,9 +261,7 @@ function CargoPage() {
               </Button>
             </details>
             {error ? (
-              <p className="mt-3 rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">
-                {error}
-              </p>
+              <p className="mt-3 rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">{error}</p>
             ) : null}
           </div>
         </div>
@@ -306,9 +286,7 @@ function CargoPage() {
 
       <section className="space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <h2 className="font-display text-xl font-semibold">
-            Cargos del 2676
-          </h2>
+          <h2 className="font-display text-xl font-semibold">Cargos del 2676</h2>
           <div className="flex flex-wrap gap-1">
             {FILTERS.map((f) => (
               <button
@@ -317,9 +295,7 @@ function CargoPage() {
                 onClick={() => setFilter(f.id)}
                 className={cn(
                   "h-9 rounded-md px-3 text-sm",
-                  filter === f.id
-                    ? "bg-accent text-accent-fg"
-                    : "text-muted hover:bg-paper",
+                  filter === f.id ? "bg-accent text-accent-fg" : "text-muted hover:bg-paper",
                 )}
               >
                 {f.label}
@@ -338,9 +314,9 @@ function CargoPage() {
           ))}
         </ul>
         <p className="text-xs leading-relaxed text-subtle">
-          Las fichas de catálogo reconstruyen empleos típicos del Manual
-          Específico (Res. 0067 de 2024) y del Acuerdo 21 de 2025. Verifica
-          código OPEC y grado en SIMO. Si tu empleo no está, sube el manual.
+          Las fichas de catálogo reconstruyen empleos típicos del Manual Específico (Res. 0067 de
+          2024) y del Acuerdo 21 de 2025. Verifica código OPEC y grado en SIMO. Si tu empleo no
+          está, sube el manual.
         </p>
       </section>
     </div>
@@ -380,9 +356,7 @@ function CargoCard({
           {cargo.ficha.denominacion}
         </h3>
         <p className="mt-1 text-sm text-muted">{cargo.processLabel}</p>
-        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink">
-          {cargo.blurb}
-        </p>
+        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink">{cargo.blurb}</p>
         <p className="mt-3 font-mono text-[11px] text-subtle">
           {cargo.ficha.codigo !== "—"
             ? `Código ${cargo.ficha.codigo} · Grado ${cargo.ficha.grado}`
@@ -399,12 +373,7 @@ function CargoCard({
             </Button>
           ) : null}
           {onRemove ? (
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={onRemove}
-              aria-label="Quitar manual"
-            >
+            <Button size="sm" variant="ghost" onClick={onRemove} aria-label="Quitar manual">
               <Trash2 className="size-4" />
             </Button>
           ) : null}

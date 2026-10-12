@@ -5,19 +5,14 @@ import { useProgress, trackAccuracy } from "@/lib/progress-store";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useCargo } from "@/lib/use-cargo";
-import {
-  clearPracticeSession,
-  loadPracticeSession,
-} from "@/lib/quiz-session";
+import { clearPracticeSession, loadPracticeSession } from "@/lib/quiz-session";
 
 export const Route = createFileRoute("/practica/")({ component: PracticaIndex });
 
 function PracticaIndex() {
   const answers = useProgress((s) => s.answers);
   const { cargo, modules, questions, flashcards } = useCargo();
-  const [pending, setPending] = useState<ReturnType<typeof loadPracticeSession>>(
-    null,
-  );
+  const [pending, setPending] = useState<ReturnType<typeof loadPracticeSession>>(null);
   useEffect(() => {
     const s = loadPracticeSession();
     setPending(s && s.cargoId === cargo.id ? s : null);
@@ -35,20 +30,17 @@ function PracticaIndex() {
         </p>
         <h1 className="font-display text-3xl font-semibold">Practicar</h1>
         <p className="max-w-2xl text-sm text-muted">
-          Juicio situacional y conocimiento para la funcional; Likert y dilemas
-          para comportamental e integridad. Cada ítem trae clave, y al fallar
-          ves cómo se resuelve en tu cargo.
+          Juicio situacional y conocimiento para la funcional; Likert y dilemas para comportamental
+          e integridad. Cada ítem trae clave, y al fallar ves cómo se resuelve en tu cargo.
         </p>
       </header>
 
       {pending ? (
         <div className="rounded-xl border border-accent/40 bg-paper px-5 py-4">
-          <p className="text-sm font-medium">
-            Cuestionario a medias: {pending.title}
-          </p>
+          <p className="text-sm font-medium">Cuestionario a medias: {pending.title}</p>
           <p className="mt-1 text-sm text-muted">
-            Pregunta {pending.index + 1} de {pending.ids.length}. Si cierras y
-            vuelves, retomas aquí.
+            Pregunta {pending.index + 1} de {pending.ids.length}. Si cierras y vuelves, retomas
+            aquí.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button asChild size="sm">
@@ -115,8 +107,8 @@ function PracticaIndex() {
         >
           <h2 className="font-display text-lg font-semibold">Repasar fallos</h2>
           <p className="mt-1 text-sm text-muted">
-            {missed.length} preguntas de este cargo que has fallado. El banco se
-            vacía cuando las aciertas.
+            {missed.length} preguntas de este cargo que has fallado. El banco se vacía cuando las
+            aciertas.
           </p>
         </Link>
       </div>
@@ -140,9 +132,7 @@ function PracticaIndex() {
                   className="flex items-center justify-between gap-3 px-4 py-3.5 hover:bg-paper"
                 >
                   <span className="text-sm">
-                    <span className="font-mono text-[11px] text-subtle mr-2">
-                      {m.number}
-                    </span>
+                    <span className="font-mono text-[11px] text-subtle mr-2">{m.number}</span>
                     {m.title}
                   </span>
                   <span className="tabular-nums text-xs text-muted">{qs.length}</span>

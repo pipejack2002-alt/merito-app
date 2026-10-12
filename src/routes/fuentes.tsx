@@ -127,14 +127,12 @@ function FuentesPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-muted">
-          Marco normativo
-        </p>
+        <p className="text-[11px] uppercase tracking-[0.16em] text-muted">Marco normativo</p>
         <h1 className="font-display text-3xl font-semibold">Fuentes oficiales</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          El cuaderno se arma sobre estos textos, el Anexo técnico del 2676 y la
-          ficha de tu empleo. Las preguntas son de entrenamiento: la CNSC
-          reserva el cuestionario real (Ley 909 de 2004, art. 31 num. 3).
+          El cuaderno se arma sobre estos textos, el Anexo técnico del 2676 y la ficha de tu empleo.
+          Las preguntas son de entrenamiento: la CNSC reserva el cuestionario real (Ley 909 de 2004,
+          art. 31 num. 3).
         </p>
       </header>
 
@@ -143,10 +141,7 @@ function FuentesPage() {
           <h2 className="font-display text-xl font-semibold">{g.title}</h2>
           <ul className="space-y-2">
             {g.items.map((item) => (
-              <li
-                key={item.href}
-                className="rounded-xl border border-border bg-surface p-4"
-              >
+              <li key={item.href} className="rounded-xl border border-border bg-surface p-4">
                 <a
                   href={item.href}
                   target="_blank"
@@ -155,9 +150,7 @@ function FuentesPage() {
                 >
                   {item.name}
                 </a>
-                <p className="mt-1 text-sm leading-relaxed text-muted">
-                  {item.use}
-                </p>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{item.use}</p>
               </li>
             ))}
           </ul>
@@ -165,10 +158,9 @@ function FuentesPage() {
       ))}
 
       <p className="text-xs leading-relaxed text-subtle">
-        Si un enlace de la CNSC cambia de carpeta, entra por la convocatoria
-        DIAN 2676 y baja el Acuerdo 21 y el Anexo desde allá. El artículo 17
-        del Acuerdo fija el carácter (eliminatoria / clasificatoria) y el
-        puntaje mínimo de cada prueba; el Anexo describe qué evalúa cada una.
+        Si un enlace de la CNSC cambia de carpeta, entra por la convocatoria DIAN 2676 y baja el
+        Acuerdo 21 y el Anexo desde allá. El artículo 17 del Acuerdo fija el carácter (eliminatoria
+        / clasificatoria) y el puntaje mínimo de cada prueba; el Anexo describe qué evalúa cada una.
       </p>
     </div>
   );

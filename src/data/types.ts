@@ -4,12 +4,7 @@ export type QuestionKind = "sjt" | "knowledge" | "likert" | "dilemma";
 
 export type Difficulty = 1 | 2 | 3;
 
-export type CargoFamily =
-  | "analista"
-  | "gestor"
-  | "inspector"
-  | "facilitador"
-  | "otro";
+export type CargoFamily = "analista" | "gestor" | "inspector" | "facilitador" | "otro";
 
 export interface Choice {
   id: string;
@@ -127,30 +122,24 @@ export const TRACKS: Record<
   funcional: {
     label: "Prueba funcional",
     short: "Funcional",
-    blurb:
-      "Conocimientos del MERF de tu empleo (D.L. 927 art. 58). Eliminatoria.",
+    blurb: "Conocimientos del MERF de tu empleo (D.L. 927 art. 58). Eliminatoria.",
     nature: "Eliminatoria · conocimientos y juicio situacional",
   },
   comportamental: {
     label: "Prueba comportamental",
     short: "Comportamental",
-    blurb:
-      "Diccionario de competencias DIAN (D.L. 927 art. 59). Clasificatoria.",
+    blurb: "Diccionario de competencias DIAN (D.L. 927 art. 59). Clasificatoria.",
     nature: "Clasificatoria · Likert y situaciones",
   },
   integridad: {
     label: "Prueba de integridad",
     short: "Integridad",
-    blurb:
-      "Coherencia de creencias y actuación por el bien común (Anexo 2676). Clasificatoria.",
+    blurb: "Coherencia de creencias y actuación por el bien común (Anexo 2676). Clasificatoria.",
     nature: "Clasificatoria · dilemas y valores",
   },
 };
 
-export const CARGO_FAMILIES: Record<
-  CargoFamily,
-  { label: string; levelHint: string }
-> = {
+export const CARGO_FAMILIES: Record<CargoFamily, { label: string; levelHint: string }> = {
   analista: {
     label: "Analista",
     levelHint: "Nivel técnico · ejecuta y verifica",
@@ -195,4 +184,3 @@ export interface AreandinaRecord {
   indicadores: AreandinaIndicator[];
   coberturaGlobal: number;
 }
-

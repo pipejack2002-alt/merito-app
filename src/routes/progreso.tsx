@@ -65,16 +65,10 @@ function importBackup(file: File, onDone: () => void) {
         return;
       }
       if (payload.progress) {
-        localStorage.setItem(
-          "cuaderno-2676-progress",
-          JSON.stringify(payload.progress),
-        );
+        localStorage.setItem("cuaderno-2676-progress", JSON.stringify(payload.progress));
       }
       if (payload.cargo) {
-        localStorage.setItem(
-          "cuaderno-2676-cargo",
-          JSON.stringify(payload.cargo),
-        );
+        localStorage.setItem("cuaderno-2676-cargo", JSON.stringify(payload.cargo));
       }
       onDone();
     } catch {
@@ -95,9 +89,7 @@ function ProgresoPage() {
 
   const ids = new Set(questions.map((q) => q.id));
   const answered = Object.keys(answers).filter((id) => ids.has(id)).length;
-  const correct = Object.entries(answers).filter(
-    ([id, a]) => ids.has(id) && a.correct,
-  ).length;
+  const correct = Object.entries(answers).filter(([id, a]) => ids.has(id) && a.correct).length;
   const missed = questions.filter((q) => answers[q.id] && !answers[q.id].correct);
 
   function handleImport(e: ChangeEvent<HTMLInputElement>) {
@@ -175,9 +167,7 @@ function ProgresoPage() {
           <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
             {sims.map((s) => (
               <li key={s.id} className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-muted">
-                  {new Date(s.at).toLocaleString("es-CO")}
-                </span>
+                <span className="text-muted">{new Date(s.at).toLocaleString("es-CO")}</span>
                 <span className="tabular-nums">
                   {s.total}% {s.passed ? "· umbral funcional ok" : "· funcional bajo 70"}
                 </span>
@@ -191,15 +181,11 @@ function ProgresoPage() {
       <section className="space-y-3">
         <h2 className="font-display text-xl font-semibold">Copia de seguridad</h2>
         <p className="text-sm text-muted">
-          Exporta tu avance, respuestas y simulacros a un archivo JSON para
-          recuperarlos si cambias de navegador o dispositivo.
+          Exporta tu avance, respuestas y simulacros a un archivo JSON para recuperarlos si cambias
+          de navegador o dispositivo.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Button
-            variant="secondary"
-            onClick={exportBackup}
-            id="btn-exportar-backup"
-          >
+          <Button variant="secondary" onClick={exportBackup} id="btn-exportar-backup">
             <Download className="size-4" />
             Exportar backup
           </Button>
@@ -220,8 +206,8 @@ function ProgresoPage() {
           />
         </div>
         <p className="text-xs text-subtle">
-          Al importar, el avance actual se reemplazará por el del archivo. La
-          página se recargará automáticamente.
+          Al importar, el avance actual se reemplazará por el del archivo. La página se recargará
+          automáticamente.
         </p>
       </section>
 

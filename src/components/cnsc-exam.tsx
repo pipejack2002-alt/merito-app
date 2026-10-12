@@ -1,13 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Clock,
-  Flag,
-  LayoutGrid,
-  X,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Clock, Flag, LayoutGrid, X } from "lucide-react";
 import type { Question, TrackId } from "@/data/types";
 import { TRACKS } from "@/data/types";
 import { Button } from "@/components/ui/button";
@@ -23,8 +16,6 @@ import {
   saveExamSession,
   type ExamSession,
 } from "@/lib/quiz-session";
-
-export { loadExamSession, clearExamSession };
 
 export interface ExamFinish {
   funcional: number;
@@ -48,10 +39,7 @@ function scoreTracks(questions: Question[], answers: Record<string, string>) {
     else missed.push(q.id);
   }
   const funcional = trunc100(by.funcional.correct, by.funcional.total);
-  const comportamental = trunc100(
-    by.comportamental.correct,
-    by.comportamental.total,
-  );
+  const comportamental = trunc100(by.comportamental.correct, by.comportamental.total);
   const integridad = trunc100(by.integridad.correct, by.integridad.total);
   const total = trunc100(
     Object.values(by).reduce((a, b) => a + b.correct, 0),
@@ -105,15 +93,11 @@ export function CnscExam({
   const [index, setIndex] = useState(initial.index);
   const [answers, setAnswers] = useState<Record<string, string>>(initial.answers);
   const [flagged, setFlagged] = useState<string[]>(initial.flagged);
-  const [remainingMs, setRemainingMs] = useState<number | null>(
-    initial.remainingMs ?? null,
-  );
+  const [remainingMs, setRemainingMs] = useState<number | null>(initial.remainingMs ?? null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [done, setDone] = useState(false);
-  const [result, setResult] = useState<ReturnType<typeof scoreTracks> | null>(
-    null,
-  );
+  const [result, setResult] = useState<ReturnType<typeof scoreTracks> | null>(null);
 
   useEffect(() => {
     saveExamSession({
@@ -257,14 +241,11 @@ export function CnscExam({
             Resultados · pruebas escritas
           </p>
           <h1 className="font-display text-3xl font-semibold">
-            {result.passed
-              ? "Superó la eliminatoria"
-              : "No alcanza el mínimo de la funcional"}
+            {result.passed ? "Superó la eliminatoria" : "No alcanza el mínimo de la funcional"}
           </h1>
           <p className="text-sm leading-relaxed text-muted">
-            Escala 0,00 a 100,00, dos decimales truncados (Anexo técnico 2676).
-            El ponderado oficial lo fija el artículo 17 del Acuerdo 21; aquí se
-            reporta cada prueba por separado.
+            Escala 0,00 a 100,00, dos decimales truncados (Anexo técnico 2676). El ponderado oficial
+            lo fija el artículo 17 del Acuerdo 21; aquí se reporta cada prueba por separado.
           </p>
         </header>
 
@@ -313,9 +294,9 @@ export function CnscExam({
         </ul>
 
         <p className="text-xs leading-relaxed text-subtle">
-          Solo se publicarían las clasificatorias si superó las eliminatorias
-          (Anexo, numeral 5). El 70 es el corte de entrenamiento; el mínimo
-          oficial está en el Acuerdo 21, artículo 17, y SIMO.
+          Solo se publicarían las clasificatorias si superó las eliminatorias (Anexo, numeral 5). El
+          70 es el corte de entrenamiento; el mínimo oficial está en el Acuerdo 21, artículo 17, y
+          SIMO.
         </p>
 
         <FailDiagnosis missed={missedQs} cargo={cargo} />
@@ -351,9 +332,7 @@ export function CnscExam({
               className={cn(
                 "flex items-center gap-1.5 font-mono text-sm tabular-nums",
                 remainingMs <= 5 * 60_000 && "text-bad",
-                remainingMs > 5 * 60_000 &&
-                  remainingMs <= 15 * 60_000 &&
-                  "text-accent",
+                remainingMs > 5 * 60_000 && remainingMs <= 15 * 60_000 && "text-accent",
               )}
             >
               <Clock className="size-3.5" />
@@ -382,9 +361,7 @@ export function CnscExam({
             <p className="text-sm leading-relaxed">{q.caseText}</p>
           </div>
         ) : null}
-        <h2 className="mt-4 font-display text-xl font-semibold leading-snug">
-          {q.stem}
-        </h2>
+        <h2 className="mt-4 font-display text-xl font-semibold leading-snug">{q.stem}</h2>
         <ul className="mt-5 grid gap-2">
           {q.choices.map((c, i) => {
             const on = selected === c.id;
@@ -392,9 +369,7 @@ export function CnscExam({
               <li key={c.id}>
                 <button
                   type="button"
-                  onClick={() =>
-                    setAnswers((prev) => ({ ...prev, [q.id]: c.id }))
-                  }
+                  onClick={() => setAnswers((prev) => ({ ...prev, [q.id]: c.id }))}
                   className={cn(
                     "flex min-h-12 w-full items-start gap-3 rounded-lg border px-4 py-3.5 text-left text-sm",
                     on
@@ -405,9 +380,7 @@ export function CnscExam({
                   <span
                     className={cn(
                       "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold",
-                      on
-                        ? "border-accent text-accent"
-                        : "border-border text-muted",
+                      on ? "border-accent text-accent" : "border-border text-muted",
                     )}
                   >
                     {letterOf(i)}
@@ -419,9 +392,25 @@ export function CnscExam({
           })}
         </ul>
         <p className="mt-4 text-[11px] tabular-nums text-subtle">
-          Teclado: <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">1</kbd>–<kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">4</kbd>{" "}
-          selecciona opción · <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">←</kbd><kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">→</kbd>{" "}
-          navega · <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">F</kbd>{" "}
+          Teclado:{" "}
+          <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">
+            1
+          </kbd>
+          –
+          <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">
+            4
+          </kbd>{" "}
+          selecciona opción ·{" "}
+          <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">
+            ←
+          </kbd>
+          <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">
+            →
+          </kbd>{" "}
+          navega ·{" "}
+          <kbd className="rounded border border-border bg-paper px-1 py-0.5 font-mono text-[10px]">
+            F
+          </kbd>{" "}
           bandera
         </p>
       </article>
@@ -441,9 +430,7 @@ export function CnscExam({
             variant="ghost"
             size="sm"
             onClick={() =>
-              setFlagged((f) =>
-                f.includes(q.id) ? f.filter((id) => id !== q.id) : [...f, q.id],
-              )
+              setFlagged((f) => (f.includes(q.id) ? f.filter((id) => id !== q.id) : [...f, q.id]))
             }
           >
             <Flag className={cn("size-4", isFlagged && "text-accent")} />
@@ -462,8 +449,8 @@ export function CnscExam({
       <p className="text-xs tabular-nums text-subtle">
         Respondidas {answeredN}/{total}
         {blank ? ` · en blanco ${blank}` : ""}
-        {flagged.length ? ` · marcadas ${flagged.length}` : ""}
-        . Si cierras, al volver retomas esta pregunta.
+        {flagged.length ? ` · marcadas ${flagged.length}` : ""}. Si cierras, al volver retomas esta
+        pregunta.
       </p>
 
       {sheetOpen ? (
@@ -521,9 +508,7 @@ function ScoreCard({
 }) {
   return (
     <div className="rounded-xl border border-border bg-surface p-4">
-      <p className="text-[11px] uppercase tracking-[0.14em] text-muted">
-        {label}
-      </p>
+      <p className="text-[11px] uppercase tracking-[0.14em] text-muted">{label}</p>
       <p
         className={cn(
           "mt-1 font-display text-3xl font-semibold tabular-nums",
@@ -559,52 +544,46 @@ function Sheet({
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-0 sm:items-center sm:p-6">
       <div className="max-h-[90dvh] w-full max-w-lg overflow-auto rounded-t-xl border border-border bg-bg p-5 sm:rounded-xl">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold">
-            Hoja de respuestas
-          </h2>
+          <h2 className="font-display text-lg font-semibold">Hoja de respuestas</h2>
           <button type="button" onClick={onClose} className="text-muted">
             <X className="size-5" />
           </button>
         </div>
-        {(["funcional", "comportamental", "integridad"] as TrackId[]).map(
-          (track) => {
-            const items = booklet
-              .map((q, i) => ({ q, i }))
-              .filter((x) => x.q.track === track);
-            if (!items.length) return null;
-            return (
-              <section key={track} className="mb-4">
-                <p className="mb-2 text-[11px] uppercase tracking-[0.14em] text-muted">
-                  {TRACKS[track].short}
-                </p>
-                <div className="grid grid-cols-8 gap-1.5">
-                  {items.map(({ q, i }) => {
-                    const filled = Boolean(answers[q.id]);
-                    const mark = flagged.includes(q.id);
-                    const current = i === index;
-                    return (
-                      <button
-                        key={q.id}
-                        type="button"
-                        onClick={() => onJump(i)}
-                        className={cn(
-                          "flex h-9 items-center justify-center rounded-md border text-xs tabular-nums",
-                          current && "ring-2 ring-accent",
-                          filled
-                            ? "border-accent bg-accent text-accent-fg"
-                            : "border-border bg-surface",
-                          mark && !filled && "border-accent bg-paper",
-                        )}
-                      >
-                        {i + 1}
-                      </button>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          },
-        )}
+        {(["funcional", "comportamental", "integridad"] as TrackId[]).map((track) => {
+          const items = booklet.map((q, i) => ({ q, i })).filter((x) => x.q.track === track);
+          if (!items.length) return null;
+          return (
+            <section key={track} className="mb-4">
+              <p className="mb-2 text-[11px] uppercase tracking-[0.14em] text-muted">
+                {TRACKS[track].short}
+              </p>
+              <div className="grid grid-cols-8 gap-1.5">
+                {items.map(({ q, i }) => {
+                  const filled = Boolean(answers[q.id]);
+                  const mark = flagged.includes(q.id);
+                  const current = i === index;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => onJump(i)}
+                      className={cn(
+                        "flex h-9 items-center justify-center rounded-md border text-xs tabular-nums",
+                        current && "ring-2 ring-accent",
+                        filled
+                          ? "border-accent bg-accent text-accent-fg"
+                          : "border-border bg-surface",
+                        mark && !filled && "border-accent bg-paper",
+                      )}
+                    >
+                      {i + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
         <Button className="mt-2 w-full" onClick={onFinish}>
           Finalizar prueba
         </Button>
@@ -629,15 +608,12 @@ function Confirm({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
       <div className="w-full max-w-md rounded-xl border border-border bg-bg p-6">
-        <h2 className="font-display text-xl font-semibold">
-          Entregar hoja de respuestas
-        </h2>
+        <h2 className="font-display text-xl font-semibold">Entregar hoja de respuestas</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           {blank
             ? `Tiene ${blank} de ${total} en blanco. En la CNSC esas se califican como incorrectas.`
             : `Las ${total} preguntas tienen respuesta.`}
-          {flagged ? ` ${flagged} marcadas para revisar.` : ""} No podrá volver
-          atrás.
+          {flagged ? ` ${flagged} marcadas para revisar.` : ""} No podrá volver atrás.
         </p>
         <div className="mt-5 flex justify-end gap-2">
           <Button variant="outline" onClick={onCancel}>

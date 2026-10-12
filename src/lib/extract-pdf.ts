@@ -18,9 +18,7 @@ export async function extractPdfFromFile(file: File): Promise<string | null> {
     const work = extractPdfText(bytes);
     const text = await Promise.race([
       work,
-      new Promise<string>((_, reject) =>
-        setTimeout(() => reject(new Error("timeout")), 10000),
-      ),
+      new Promise<string>((_, reject) => setTimeout(() => reject(new Error("timeout")), 10000)),
     ]);
     return text.replace(/\s/g, "").length >= 40 ? text : null;
   } catch {

@@ -30,8 +30,7 @@ export const TOPICS: TopicGuide[] = [
       "Si no paga ni acuerda y hay título ejecutivo, pasa el caso al coactivo competente.",
     ],
     trap: "Decretar embargo ‘para presionar’ o archivar porque el deudor no contestó.",
-    correctMove:
-      "Persuadir, documentar y depurar. El silencio del deudor no extingue el crédito.",
+    correctMove: "Persuadir, documentar y depurar. El silencio del deudor no extingue el crédito.",
     source: "E.T. art. 814 y práctica de recaudo · Ley 1066 de 2006",
   },
   {
@@ -173,7 +172,8 @@ export const TOPICS: TopicGuide[] = [
       "Sitúa el caso en tributario interno, aduanero o cambiario.",
     ],
     trap: "Llamar tasa al IVA o evasión a un artificio elusivo.",
-    correctMove: "IVA es impuesto. Elusión se combate con normas antiabuso, no con el tipo penal de evasión.",
+    correctMove:
+      "IVA es impuesto. Elusión se combate con normas antiabuso, no con el tipo penal de evasión.",
     source: "C.P. 338 y 363 · E.T. · Ley 1712 y 1762",
   },
   {
@@ -203,7 +203,8 @@ export const TOPICS: TopicGuide[] = [
       "Registra. No adelantes el sentido del acto ni improvises un beneficio.",
     ],
     trap: "Asesorar en privado o ‘castigar’ el trámite de quien reclamó.",
-    correctMove: "La mejor respuesta de examen combina respeto, procedimiento y rastro institucional.",
+    correctMove:
+      "La mejor respuesta de examen combina respeto, procedimiento y rastro institucional.",
     source: "Política de servicio DIAN · CPACA",
   },
   {

@@ -22,9 +22,7 @@ function TarjetasPage() {
     return (
       <div className="mx-auto max-w-xl space-y-3">
         <h1 className="font-display text-2xl font-semibold">Tarjetas</h1>
-        <p className="text-sm text-muted">
-          No hay tarjetas para {cargo.shortLabel} todavía.
-        </p>
+        <p className="text-sm text-muted">No hay tarjetas para {cargo.shortLabel} todavía.</p>
       </div>
     );
   }

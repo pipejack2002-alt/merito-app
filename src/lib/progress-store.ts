@@ -51,9 +51,7 @@ export const useProgress = create<ProgressState>()(
       toggleBookmark: (id) => {
         const has = get().bookmarks.includes(id);
         set({
-          bookmarks: has
-            ? get().bookmarks.filter((b) => b !== id)
-            : [...get().bookmarks, id],
+          bookmarks: has ? get().bookmarks.filter((b) => b !== id) : [...get().bookmarks, id],
         });
       },
       addSimulacro: (row) =>
@@ -67,17 +65,13 @@ export const useProgress = create<ProgressState>()(
             ...get().simulacros,
           ].slice(0, 12),
         }),
-      reset: () =>
-        set({ answers: {}, readModules: {}, bookmarks: [], simulacros: [] }),
+      reset: () => set({ answers: {}, readModules: {}, bookmarks: [], simulacros: [] }),
     }),
     { name: "cuaderno-2676-progress", skipHydration: true },
   ),
 );
 
-export function trackAccuracy(
-  answers: Record<string, AnswerRecord>,
-  ids: string[],
-) {
+export function trackAccuracy(answers: Record<string, AnswerRecord>, ids: string[]) {
   const subset = ids.filter((id) => answers[id]);
   if (subset.length === 0) return { answered: 0, correct: 0, pct: 0 };
   const correct = subset.filter((id) => answers[id].correct).length;
@@ -96,8 +90,4 @@ export function examCountdown() {
   return { days, targetLabel: "noviembre 2026" };
 }
 
-export const TRACK_ORDER: TrackId[] = [
-  "funcional",
-  "comportamental",
-  "integridad",
-];
+export const TRACK_ORDER: TrackId[] = ["funcional", "comportamental", "integridad"];

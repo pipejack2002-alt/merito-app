@@ -48,9 +48,7 @@ function overlayFichaModule(base: Module, cargo: CargoProfile): Module {
     ],
     examTips: cargo.examFocus,
     sources: [
-      f.codigoFicha
-        ? `Ficha ${f.codigoFicha}`
-        : "Manual específico de funciones DIAN",
+      f.codigoFicha ? `Ficha ${f.codigoFicha}` : "Manual específico de funciones DIAN",
       "Acuerdo CNSC 21 de 2025 (Proceso DIAN 2676)",
       "Anexo técnico DIAN 2676, numeral 5",
     ],

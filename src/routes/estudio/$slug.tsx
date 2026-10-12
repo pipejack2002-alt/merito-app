@@ -27,8 +27,7 @@ function ModulePage() {
       <div className="space-y-3">
         <h1 className="font-display text-2xl font-semibold">Módulo no encontrado</h1>
         <p className="text-sm text-muted">
-          Este tema no entra en {cargo.shortLabel}. Cambia de cargo o vuelve a la
-          biblioteca.
+          Este tema no entra en {cargo.shortLabel}. Cambia de cargo o vuelve a la biblioteca.
         </p>
         <Link to="/estudio" className="text-sm text-accent">
           Volver a la biblioteca
@@ -42,9 +41,7 @@ function ModulePage() {
   const next = modules[idx + 1];
   const nQ = questions.filter((q) => q.moduleId === mod.id).length;
   const topic = topicForModule(mod.id);
-  const guide = cargo.functionGuides.find((g) =>
-    g.relatedModuleIds.includes(mod.id),
-  );
+  const guide = cargo.functionGuides.find((g) => g.relatedModuleIds.includes(mod.id));
 
   return (
     <article className="mx-auto max-w-2xl space-y-8">

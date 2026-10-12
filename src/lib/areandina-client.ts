@@ -99,26 +99,42 @@ export const fetchAreandinaIndicators = createServerFn({ method: "POST" })
       if (live.ok && live.html) {
         // Parse the live HTML
         const opecMatch = live.html.match(/Información del empleo:\s*(\d+)/i);
-        const denominacionMatch = live.html.match(/DENOMINACION<\/b><\/td>\s*<td[^>]*><b>([^<]+)<\/b>/i);
-        const nivelMatch = live.html.match(/NIVEL DEL CARGO<\/b><\/td>\s*<td[^>]*><b>([^<]+)<\/b>/i);
-        
+        const denominacionMatch = live.html.match(
+          /DENOMINACION<\/b><\/td>\s*<td[^>]*><b>([^<]+)<\/b>/i,
+        );
+        const nivelMatch = live.html.match(
+          /NIVEL DEL CARGO<\/b><\/td>\s*<td[^>]*><b>([^<]+)<\/b>/i,
+        );
+
         // Extract indicators
-        const indicatorMatches = [...live.html.matchAll(/class=['"]td-transparent['"]>([^<]+)<\/td>/gi)]
+        const indicatorMatches = [
+          ...live.html.matchAll(/class=['"]td-transparent['"]>([^<]+)<\/td>/gi),
+        ]
           .map((m) => m[1].trim())
-          .filter((t) => t.length > 3 && !t.includes("Información") && !t.includes("Técnico") && !t.includes("ANALISTA"));
+          .filter(
+            (t) =>
+              t.length > 3 &&
+              !t.includes("Información") &&
+              !t.includes("Técnico") &&
+              !t.includes("ANALISTA"),
+          );
 
         const fallback = getAreandinaRecord(clean) || getAreandinaRecord("1266766504")!;
-        
-        const mappedIndicators = indicatorMatches.length > 0
-          ? fallback.indicadores.map((ind, idx) => {
-              const liveName = indicatorMatches[idx];
-              return liveName ? { ...ind, nombre: liveName } : ind;
-            })
-          : fallback.indicadores;
+
+        const mappedIndicators =
+          indicatorMatches.length > 0
+            ? fallback.indicadores.map((ind, idx) => {
+                const liveName = indicatorMatches[idx];
+                return liveName ? { ...ind, nombre: liveName } : ind;
+              })
+            : fallback.indicadores;
 
         const record: AreandinaRecord = {
           inscripcion: clean,
-          aspirante: clean === "1266766504" ? "ANDRÉS FELIPE BERNAL OSORIO" : `ASPIRANTE REGISTRADO (${clean})`,
+          aspirante:
+            clean === "1266766504"
+              ? "ANDRÉS FELIPE BERNAL OSORIO"
+              : `ASPIRANTE REGISTRADO (${clean})`,
           documento: clean === "1266766504" ? "1001880133" : "Identificación verificada",
           opec: opecMatch ? opecMatch[1] : fallback.opec,
           denominacion: denominacionMatch ? denominacionMatch[1].trim() : fallback.denominacion,
@@ -145,6 +161,7 @@ export const fetchAreandinaIndicators = createServerFn({ method: "POST" })
     return {
       ok: false,
       source: "simulated",
-      error: "No se encontró el registro en Areandina. Puedes seleccionar tu cargo en la pestaña de exploración.",
+      error:
+        "No se encontró el registro en Areandina. Puedes seleccionar tu cargo en la pestaña de exploración.",
     };
   });
