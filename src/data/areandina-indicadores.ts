@@ -293,7 +293,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "201",
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind, i) => {
+    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
       if (ind.id === "ind-01") return { ...ind, nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS" };
       if (ind.id === "ind-02") return { ...ind, nombre: "SISTEMAS CORPORATIVOS Y REGISTRO UNICO TRIBUTARIO (RUT)" };
       if (ind.id === "ind-08") return { ...ind, nombre: "PROCEDIMIENTOS ADMINISTRATIVOS BASICOS Y DERECHO DE PETICION" };

@@ -9,9 +9,8 @@ import {
   Flag,
   Scale,
   Sparkles,
-  UserCheck,
 } from "lucide-react";
-import { TRACKS, type TrackId, CARGO_FAMILIES, type CargoFamily } from "@/data/types";
+import { TRACKS, type TrackId, CARGO_FAMILIES } from "@/data/types";
 import { CATALOG } from "@/data/cargos";
 import { examCountdown, useProgress, trackAccuracy } from "@/lib/progress-store";
 import { useCargoStore } from "@/lib/cargo-store";
@@ -24,7 +23,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  const { days, targetLabel } = examCountdown();
+  const { days } = examCountdown();
   const answers = useProgress((s) => s.answers);
   const readModules = useProgress((s) => s.readModules);
   const { cargo, ficha, modules, questions, isCustom } = useCargo();
@@ -351,11 +350,16 @@ function Home() {
       <section className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-xl border border-border bg-surface p-5 flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2">
-              <BookOpen className="size-4 text-accent" />
-              <p className="text-[11px] uppercase tracking-[0.16em] text-muted font-medium">
-                Módulo sugerido
-              </p>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <BookOpen className="size-4 text-accent" />
+                <p className="text-[11px] uppercase tracking-[0.16em] text-muted font-medium">
+                  Módulo sugerido
+                </p>
+              </div>
+              <span className="text-xs font-mono text-subtle">
+                {readCount} de {modules.length} completados
+              </span>
             </div>
             <h3 className="mt-2 font-display text-xl font-semibold text-ink">
               {nextModule?.title}

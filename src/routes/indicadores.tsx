@@ -1,28 +1,23 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, useTransition } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ArrowRight,
   Award,
   BookOpen,
-  Briefcase,
   Calendar,
   CheckCircle2,
   ExternalLink,
-  Layers,
   LoaderCircle,
   Play,
-  RotateCcw,
   Search,
   ShieldCheck,
-  Sparkles,
   Zap,
 } from "lucide-react";
 import { fetchAreandinaIndicators } from "@/lib/areandina-client";
 import {
-  INDICADORES_ANDRES_BERNAL,
   REGISTROS_OFICIALES_AREANDINA,
 } from "@/data/areandina-indicadores";
-import type { AreandinaIndicator, AreandinaRecord } from "@/data/types";
+import type { AreandinaRecord } from "@/data/types";
 import { useCargoStore } from "@/lib/cargo-store";
 import { CATALOG } from "@/data/cargos";
 import { Button } from "@/components/ui/button";
@@ -46,9 +41,7 @@ const CARGOS_RAPIDOS = [
 ];
 
 function IndicadoresPage() {
-  const navigate = useNavigate();
   const selectCargo = useCargoStore((s) => s.select);
-  const selectedCargoId = useCargoStore((s) => s.selectedId);
 
   const [inputNum, setInputNum] = useState("1266766504");
   const [record, setRecord] = useState<AreandinaRecord>(
@@ -502,7 +495,7 @@ function IndicadoresPage() {
 
         {/* Lista de indicadores */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {indicadoresFiltrados.map((ind, idx) => (
+          {indicadoresFiltrados.map((ind) => (
             <div
               key={ind.id}
               className="flex flex-col justify-between rounded-xl border border-border/80 bg-surface p-4 shadow-2xs hover:border-accent/40 transition-all"
