@@ -3,12 +3,14 @@ import { QUESTIONS_FUNCIONALES } from "./questions-funcionales";
 import { QUESTIONS_COMPORTAMENTALES } from "./questions-comportamentales";
 import { QUESTIONS_INTEGRIDAD } from "./questions-integridad";
 import { QUESTIONS_OFICIALES } from "./questions-oficiales";
+import { QUESTIONS_CARGOS } from "./questions-cargos";
 
 export const QUESTIONS: Question[] = [
   ...QUESTIONS_FUNCIONALES,
   ...QUESTIONS_COMPORTAMENTALES,
   ...QUESTIONS_INTEGRIDAD,
   ...QUESTIONS_OFICIALES,
+  ...QUESTIONS_CARGOS,
 ];
 
 export function questionsByTrack(track: TrackId) {

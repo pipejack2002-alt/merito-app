@@ -6,6 +6,7 @@ import {
   LoaderCircle,
   Trash2,
   Check,
+  Sparkles,
 } from "lucide-react";
 import { CATALOG } from "@/data/cargos";
 import { CARGO_FAMILIES, type CargoFamily, type CargoProfile } from "@/data/types";
@@ -23,6 +24,7 @@ const FILTERS: { id: "todos" | CargoFamily; label: string }[] = [
   { id: "analista", label: "Analista" },
   { id: "gestor", label: "Gestor" },
   { id: "inspector", label: "Inspector" },
+  { id: "facilitador", label: "Facilitador" },
 ];
 
 const MAX_BYTES = 8_000_000;
@@ -172,6 +174,33 @@ function CargoPage() {
           casos y en qué sueles fallar.
         </p>
       </header>
+
+      {/* ── Banner Bot Consultor Areandina ── */}
+      <div className="rounded-xl border border-accent/40 bg-accent/5 p-4 sm:p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Badge className="bg-accent text-accent-fg text-[10px] font-bold uppercase tracking-wider">
+                Bot Oficial Areandina
+              </Badge>
+              <span className="text-xs text-muted">Consulta directa por inscripción</span>
+            </div>
+            <h3 className="font-display text-base font-bold text-ink">
+              ¿Tienes tu Número de Inscripción SIMO?
+            </h3>
+            <p className="text-xs text-muted max-w-xl">
+              Carga al instante tus 24 indicadores evaluados por Areandina y calibra la plataforma para tu prueba específica.
+            </p>
+          </div>
+
+          <Button asChild size="sm" className="shrink-0">
+            <Link to="/indicadores">
+              <Sparkles className="size-4" />
+              Consultar mis 24 Indicadores
+            </Link>
+          </Button>
+        </div>
+      </div>
 
       <section className="rounded-xl border border-border bg-surface p-5 sm:p-6">
         <div className="flex items-start gap-3">

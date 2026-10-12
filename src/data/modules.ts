@@ -119,15 +119,22 @@ export const MODULES: Module[] = [
         title: "Acumulación y terminación",
         body: "Art. 825: se pueden acumular varios procesos del mismo deudor. El proceso termina por pago, compensación, prescripción decretada, remisión, revocación del título, o porque prosperan excepciones. El remate es la fase final sobre bienes embargados y secuestrados.",
       },
+      {
+        title: "Extinción de obligaciones aduaneras y cambiarias",
+        body: "En materia aduanera (Decreto 1165 de 2019), la obligación tributaria aduanera se extingue por: pago, compensación, abandono (legal o voluntario), decomiso y destrucción autorizada de la mercancía. En materia cambiaria (Decreto Ley 2245 de 2011), las obligaciones por sanciones cambiarias de competencia de la DIAN se extinguen por pago efectivo, compensación o prescripción de la facultad sancionatoria (5 años desde la infracción) y de la acción de cobro (5 años desde la ejecutoria del acto administrativo sancionatorio).",
+      },
     ],
     examTips: [
       "No confundas recurso de reposición (CPACA) con excepciones al mandamiento (art. 831). En cobro coactivo rige el E.T.",
       "El mandamiento no se notifica ‘en estrados’ ni ‘por aviso’ como primera opción: citación 10 días y, si no hay comparecencia, correo.",
       "Una declaración privada impagada sí es título, desde el vencimiento para pagar, no desde que la DIAN la ‘aprueba’.",
       "Demandar el acto de determinación es excepción, pero no paraliza automáticamente todo si no hay suspensión. Lee el caso.",
+      "En aduanas: el abandono y el decomiso extinguen la obligación de tributos aduaneros respecto de la mercancía afectada.",
     ],
     sources: [
       "Estatuto Tributario arts. 817, 818, 823 a 847",
+      "Decreto 1165 de 2019 arts. 18 y concordantes (obligación aduanera)",
+      "Decreto Ley 2245 de 2011 (régimen sancionatorio cambiario)",
       "Ley 1066 de 2006",
       "Ficha FT-TAH-1824, competencia Cobro coactivo",
     ],
@@ -203,15 +210,21 @@ export const MODULES: Module[] = [
         title: "Relación con el cobro",
         body: "Un saldo a favor no ‘borra’ solo una deuda de otro concepto si no se tramita compensación. Tampoco se devuelve si hay título ejecutivo impago, salvo que se compense. El caso de examen suele mezclar ambas caras.",
       },
+      {
+        title: "Devolución de tributos aduaneros",
+        body: "En materia aduanera (Decreto 1165 de 2019 arts. 689 y ss., y Decreto 659 de 2024), procede la devolución de pagos en exceso o pagos de lo no debido de gravámenes arancelarios e IVA a la importación. La solicitud debe presentarse ante la Dirección Seccional con jurisdicción aduanera dentro de los seis (6) meses siguientes al pago o a la ejecutoria del acto administrativo que lo ordene. Requiere verificar liquidación oficial, recibos oficiales de pago en bancos y no estar prescrito.",
+      },
     ],
     examTips: [
       "No devuelvas si hay inconsistencia abierta: primero depurar.",
       "Compensación oficiosa es correcta cuando hay deuda exigibles vs. saldo a favor verificable.",
       "El ciudadano no ‘tiene derecho a que le giren mañana’: hay término legal y control.",
+      "En aduanas: término de solicitud de pago de lo no debido o en exceso es 6 meses.",
     ],
     sources: [
       "Estatuto Tributario arts. 815, 850 a 857",
       "Decreto 1625 de 2016 (procedimientos de devolución)",
+      "Decreto 1165 de 2019 arts. 689 a 697 y Decreto 659 de 2024",
       "Ficha FT-TAH-1824, funciones 2, 4, 5 y 7",
     ],
   },
@@ -689,8 +702,173 @@ export const MODULES: Module[] = [
       "Diligencia no justifica atropellar debido proceso: eso sería injusticia.",
     ],
     sources: [
-      "Código de Integridad del Servicio Público (DAFP)",
-      "Código de Integridad DIAN v3",
+      "Código de Integridad del Servicio Público Colombiano v3 (Función Pública)",
+      "Resolución DIAN adopción Código de Integridad",
+    ],
+  },
+  {
+    id: "razonamiento-matematico",
+    track: "funcional",
+    number: "18",
+    title: "Razonamiento matemático y análisis de datos",
+    minutes: 22,
+    summary:
+      "Eje temático oficial evaluado por Areandina en el nivel técnico y asistencial. Desarrolla la destreza cuantitativa en proporcionalidad, cálculo de porcentajes y tarifas, liquidación de intereses moratorios y sanciones tributarias, e interpretación de información estadística y de cartera.",
+    why: "Areandina evalúa problemas situacionales donde debes calcular cifras exactas (retención, IVA, mora, sanciones) o interpretar gráficos y tablas de recaudo para tomar decisiones técnicas sin calculadora.",
+    points: [
+      {
+        title: "Proporcionalidad y regla de tres aplicada",
+        body: "Regla de tres directa e inversa en liquidaciones, distribución proporcional de pagos recibidos entre capital, sanciones e intereses, y prorrateo de costos o ingresos compartidos en expedientes fiscales.",
+      },
+      {
+        title: "Porcentajes, tarifas y bases gravables",
+        body: "Conversión de tasas, cálculo de IVA (19%, 5%, exentos, excluidos), tarifas de retención en la fuente (2.5%, 3.5%, 4%, etc.), descuentos comerciales vs. condicionados y determinación de la base neta gravable.",
+      },
+      {
+        title: "Intereses moratorios tributarios (Art. 635 E.T.)",
+        body: "Fórmula del interés moratorio diario de la DIAN: tasa efectiva anual certificada por la Superfinanciera (usura menos 2 puntos), liquidación diaria sin anatocismo (los intereses devengados no generan intereses), aplicados a obligaciones vencidas.",
+      },
+      {
+        title: "Sanciones cuantitativas del Estatuto Tributario",
+        body: "Sanción por extemporaneidad (5% por mes o fracción de mes de retraso sobre impuesto a cargo, art. 641; o 10% si hay emplazamiento, art. 642), sanción por corrección (10% o 20%, art. 644), y la regla de oro: la Sanción Mínima legal (Art. 639 E.T., equivalente a 10 UVT).",
+      },
+      {
+        title: "Interpretación de tablas y gráficas estadísticas",
+        body: "Lectura de histogramas de recaudo, tablas de antigüedad de cartera por edades (0-30, 31-90, 91-180, 181-360, >360 días), variaciones porcentuales de cumplimiento de metas y análisis de dispersión en expedientes masivos.",
+      },
+    ],
+    examTips: [
+      "Sanción mínima (Art. 639 E.T.): Ninguna sanción tributaria liquidada puede ser inferior a 10 UVT, salvo intereses moratorios o sanciones específicas exceptuadas.",
+      "Mes o fracción de mes: En extemporaneidad, pasar 1 solo día al siguiente mes calendario computa como un mes completo adicional del 5%.",
+      "Imputación de pagos (Art. 804 E.T.): Los pagos que efectúen los contribuyentes se imputarán en primer lugar a sanciones, luego a intereses y finalmente a capital.",
+      "En problemas de porcentajes sucesivos: nunca sumes porcentajes de aumento o descuento de forma aritmética directa; aplícalos sucesivamente sobre la base acumulada.",
+    ],
+    sources: [
+      "Estatuto Tributario Nacional arts. 634, 635, 639, 641, 642, 644 y 804",
+      "Guía de Orientación al Aspirante DIAN 2676 (Areandina / CNSC)",
+    ],
+  },
+  {
+    id: "principios-contables-financieros",
+    track: "funcional",
+    number: "19",
+    title: "Principios financieros y contables en la gestión tributaria",
+    minutes: 20,
+    summary:
+      "Marco contable y financiero aplicable a las determinaciones y cobros de la DIAN. Trata la articulación entre las Normas de Información Financiera (NIIF) y el Estatuto Tributario: principio de devengo vs. realización, partida doble, estados financieros, conciliación fiscal y deterioro de cartera.",
+    why: "Para clasificar cartera, auditar declaraciones o revisar solicitudes de devolución, el Analista debe interpretar balances, registros contables y el Reporte de Conciliación Fiscal (Formato 2516).",
+    points: [
+      {
+        title: "Devengo contable vs. Realización fiscal (Arts. 21-1 y 28 E.T.)",
+        body: "La Ley 1819 de 2016 integró el marco NIIF al impuesto sobre la renta con excepciones expresas. Los ingresos devengados contablemente se realizan fiscalmente, salvo cuando no hay flujo de recursos o la ley fiscal fija una regla especial (p. ej., valor razonable, dividendos, venta de inmuebles).",
+      },
+      {
+        title: "Partida doble, cuentas y dinámica contable",
+        body: "Ecuación contable fundamental (Activo = Pasivo + Patrimonio). Cuentas de balance (1, 2, 3) y cuentas de resultado (Ingresos 4, Gastos 5, Costos 6). Asientos contables de causación y pago de tributos (retención en la fuente, IVA por pagar, anticipos y saldos a favor).",
+      },
+      {
+        title: "Estados Financieros Básicos para fiscalización y cobranza",
+        body: "Estado de Situación Financiera (balance general) para investigar solvencia y bienes embargables; Estado de Resultados Integral para contrastar ingresos brutos, costos deducibles y utilidad neta contra la declaración de renta.",
+      },
+      {
+        title: "Conciliación Contable y Fiscal (Art. 772-1 E.T.)",
+        body: "Sistema de control de diferencias entre el resultado contable y la renta líquida fiscal. Obligados a llevar contabilidad deben conservar y presentar el formato de conciliación fiscal cuando la DIAN lo exija. Su omisión se sanciona como irregularidad en la contabilidad (Art. 655 E.T.).",
+      },
+      {
+        title: "Cuentas por cobrar y deterioro de cartera (Art. 145 E.T.)",
+        body: "En lo contable (NIIF 9) opera el modelo de pérdida crediticia esperada. En lo fiscal, solo se admite la deducción de deudas manifiestamente pérdidas o sin valor, o la provisión individual (hasta el 33% anual para carteras vencidas con más de un año) o la provisión general reglamentaria (5%, 10%, 15% según antigüedad).",
+      },
+    ],
+    examTips: [
+      "El valor razonable contable NO tiene efectos fiscales en renta hasta el momento de la enajenación o liquidación definitiva del activo (Art. 28 num. 5 E.T.).",
+      "El impuesto diferido es un concepto netamente contable que refleja diferencias temporales; no es una deuda exigible de cobro coactivo.",
+      "La contabilidad debidamente llevada constituye plena prueba en favor del contribuyente (Art. 772 E.T.), pero la falta de libros o soportes invierte la carga probatoria en su contra.",
+    ],
+    sources: [
+      "Estatuto Tributario Nacional arts. 21-1, 28, 59, 145, 772, 772-1",
+      "Decreto Único Reglamentario 1625 de 2016 y Decreto 1998 de 2017",
+      "Marco Conceptual de Información Financiera (NIIF para Pymes y NIIF Plenas)",
+    ],
+  },
+  {
+    id: "estructura-dian",
+    track: "funcional",
+    number: "20",
+    title: "Estructura organizacional y competencias de la DIAN",
+    minutes: 16,
+    summary:
+      "Organización administrativa, dependencias y distribución de competencias de la Unidad Administrativa Especial DIAN, reglamentada por los Decretos 1742 de 2020 y 412 de 2024. Delimita las funciones de la Dirección General, Direcciones de Gestión y Direcciones Seccionales.",
+    why: "En juicio situacional, cada acto administrativo debe provenir de la autoridad legalmente competente. Conocer la estructura evita errores de incompetencia funcional y territorial.",
+    points: [
+      {
+        title: "Naturaleza y personería de la DIAN",
+        body: "Unidad Administrativa Especial del orden nacional, adscrita al Ministerio de Hacienda y Crédito Público, con personería jurídica, autonomía administrativa y presupuestal, y patrimonio propio (Decreto 4048 de 2008 y reformas).",
+      },
+      {
+        title: "Dirección General y Nivel Directivo",
+        body: "Máxima autoridad técnica y administrativa. Encabezada por el Director General. Cuenta con Consejo Directivo, Defensor del Contribuyente y del Usuario Aduanero, Dirección de Gestión Estratégica y Dirección de Gestión Corporativa.",
+      },
+      {
+        title: "Direcciones de Gestión Misionales (Nivel Central)",
+        body: "Dirección de Gestión de Impuestos, Dirección de Gestión de Aduanas, Dirección de Gestión de Fiscalización, Dirección de Gestión de Cobranzas y Recaudo, y Dirección de Gestión Jurídica. Fijan directrices técnicas, doctrinas y políticas de control a nivel nacional.",
+      },
+      {
+        title: "Nivel Desconcentrado (Direcciones Seccionales)",
+        body: "Estructura territorial donde opera la gestión diaria: Dirección Seccional de Impuestos de Grandes Contribuyentes (competencia nacional por NIT calificado), Direcciones Seccionales de Impuestos, Direcciones Seccionales de Aduanas, Direcciones Seccionales de Impuestos y Aduanas (mixtas), y Direcciones Seccionales Delegadas.",
+      },
+      {
+        title: "Distribución de competencias territoriales y funcionales",
+        body: "La competencia para fiscalizar y cobrar se rige por el domicilio fiscal del contribuyente o el lugar de ocurrencia del hecho aduanero (Art. 563 y 824 E.T.). Los funcionarios de nivel técnico apoyan y verifican; los Gestores proyectan y coordinan; los Jefes de División o Directores Seccionales suscriben los actos resolutivos y decisorios.",
+      },
+    ],
+    examTips: [
+      "Las Direcciones de Gestión del nivel central trazan directrices y resuelven consultas doctrinales; las Direcciones Seccionales ejecutan los procedimientos particulares de cobro, fiscalización y devoluciones.",
+      "Los Grandes Contribuyentes están centralizados bajo la Dirección Seccional de Impuestos de Grandes Contribuyentes, independientemente de la ciudad donde tengan su sede física.",
+      "La Policía Fiscal y Aduanera (POLFA) actúa en coordinación operativa con la Dirección de Gestión de Aduanas y la Dirección de Fiscalización, pero respetando la competencia de la DIAN.",
+    ],
+    sources: [
+      "Decreto 1742 de 2020 (Estructura de la UAE DIAN)",
+      "Decreto 412 de 2024 (Modificación y modernización de la estructura DIAN)",
+      "Decreto Ley 927 de 2023 (Régimen de personal DIAN)",
+      "Resolución 0067 de 2024 (Manual de funciones DIAN)",
+    ],
+  },
+  {
+    id: "ofimatica-dian",
+    track: "funcional",
+    number: "21",
+    title: "Herramientas ofimáticas y sistemas corporativos",
+    minutes: 16,
+    summary:
+      "Aplicación práctica de herramientas ofimáticas (Excel, Word, gestión de correos) y sistemas informáticos institucionales de la DIAN (Muisca, SYGA, RUT). Manejo de datos, cruces masivos, protección de la información y cumplimiento de políticas de seguridad digital.",
+    why: "En los empleos técnicos de la DIAN, gran parte del trabajo consiste en procesar reportes en hojas de cálculo, redactar proyectos de oficios institucionales y operar los aplicativos corporativos.",
+    points: [
+      {
+        title: "Hojas de cálculo en la gestión técnica (Excel)",
+        body: "Manejo de funciones de búsqueda (BUSCARV, BUSCARX, COINCIDIR), fórmulas lógicas condicionales (SI, SI.CONJUNTO, CONTAR.SI, SUMAR.SI), ordenamiento, filtros avanzados y creación de Tablas Dinámicas para clasificar cartera y verificar consistencia de pagos.",
+      },
+      {
+        title: "Elaboración de documentos y correspondencia (Word)",
+        body: "Redacción de oficios de cobro persuasivo, autos de trámite, actas de recibo y citaciones utilizando plantillas estandarizadas del Sistema de Gestión Integrado (SGI), control de cambios y combinación de correspondencia para envíos masivos.",
+      },
+      {
+        title: "Sistemas de información corporativos de la DIAN",
+        body: "Plataforma Muisca (administración del Registro Único Tributario, presentación electrónica de declaraciones, cuenta corriente, trámite de devoluciones), Sistema de Gestión Aduanera (SYGA) y sistemas de seguimiento de cartera.",
+      },
+      {
+        title: "Seguridad de la información y reserva digital",
+        body: "Aplicación de la norma ISO 27001 en la DIAN. Confidencialidad de contraseñas de red y token digital; prohibición de compartir accesos institucionales o extraer bases de datos sensibles en memorias USB personales; salvaguarda de la reserva tributaria (Art. 583 E.T.) y de datos personales (Ley 1581 de 2012).",
+      },
+    ],
+    examTips: [
+      "En Excel, para conciliar dos listas con diferente orden por NIT, la función indicada es BUSCARX o BUSCARV/COINCIDIR, no la revisión manual celda por celda.",
+      "La reserva tributaria del Art. 583 E.T. aplica con igual rigor a los archivos electrónicos, correos institucionales y consultas en la base de datos Muisca.",
+      "Cualquier reporte con inconsistencia debe corregirse dentro del sistema corporativo con el soporte documental correspondiente, nunca modificando el saldo 'a mano' sin trazabilidad.",
+    ],
+    sources: [
+      "Políticas de Seguridad de la Información y Transformación Digital DIAN",
+      "Manual de Operación de Sistemas Corporativos Muisca",
+      "Ley 1581 de 2012 (Protección de datos personales) y Art. 583 E.T. (Reserva tributaria)",
     ],
   },
 ];

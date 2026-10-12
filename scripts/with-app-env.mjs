@@ -111,7 +111,14 @@ function main(argv) {
     process.exit(2);
   }
   const env = mergeAppEnv(readAppEnv(projectRoot()), process.env);
-  const child = spawn(command, args, {
+  let cmd = command;
+  let cmdArgs = args;
+  if (process.platform === "win32" && command === "vite") {
+    cmd = "node";
+    const vitePath = join(projectRoot(), "node_modules", "vite", "bin", "vite.js");
+    cmdArgs = [`"${vitePath}"`, ...args];
+  }
+  const child = spawn(cmd, cmdArgs, {
     stdio: "inherit",
     env,
     shell: process.platform === "win32",

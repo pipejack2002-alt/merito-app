@@ -315,6 +315,70 @@ export const TOPICS: TopicGuide[] = [
       "Hechos en el acta, reserva de la información, informe al competente. La determinación no se firma en el predio.",
     source: "E.T. arts. 684, 779 y ss. · procedimiento de visita DIAN",
   },
+  {
+    id: "razonamiento-matematico",
+    moduleId: "razonamiento-matematico",
+    title: "Razonamiento matemático y análisis de datos",
+    how: "Aplica proporcionalidad, fórmulas exactas de sanciones y liquidación de intereses sin calculadora. Revisa la base, la tasa y el factor temporal antes de operar.",
+    steps: [
+      "Identifica qué pide el caso: base gravable, saldo a pagar, sanción o interés diario.",
+      "Aplica la tasa correspondiente (IVA, retención, sanción por extemporaneidad o mora).",
+      "Verifica topes y reglas especiales: sanción mínima de 10 UVT (art. 639) y no anatocismo.",
+      "Interpreta gráficos y tablas por filas y columnas clave, descartando distractores.",
+    ],
+    trap: "Sumar porcentajes de descuentos o aumentos sucesivos aritméticamente, u olvidar la sanción mínima legal.",
+    correctMove:
+      "Aplica aumentos y descuentos de forma acumulativa y verifica siempre si el resultado es inferior a 10 UVT.",
+    source: "E.T. arts. 634, 635, 639, 641 y 804",
+  },
+  {
+    id: "principios-contables-financieros",
+    moduleId: "principios-contables-financieros",
+    title: "Principios financieros y contables en la gestión tributaria",
+    how: "Contrasta el registro contable bajo NIIF (devengo) con la regla fiscal expresa del Estatuto Tributario. La conciliación fiscal (772-1) explica las diferencias.",
+    steps: [
+      "Identifica el hecho económico, su causación contable y la regla fiscal aplicable.",
+      "Distingue entre diferencias permanentes y temporales (impuesto diferido).",
+      "Revisa soportes contables, libros de comercio y el Reporte de Conciliación Fiscal (Formato 2516).",
+      "En cartera, aplica el límite de deducción fiscal por provisión frente al deterioro contable NIIF 9.",
+    ],
+    trap: "Otorgar efectos fiscales automáticos al valor razonable o estimaciones contables no realizadas.",
+    correctMove:
+      "Aplica el principio de devengo con las excepciones expresas del Estatuto Tributario (Art. 21-1 y 28 E.T.).",
+    source: "E.T. arts. 21-1, 28, 145 y 772-1 · Decreto 1998 de 2017",
+  },
+  {
+    id: "estructura-dian",
+    moduleId: "estructura-dian",
+    title: "Estructura organizacional y competencias de la DIAN",
+    how: "Ubica la dependencia competente según territorio y función. El nivel central traza doctrina; las seccionales profieren los actos particulares.",
+    steps: [
+      "Determina si el asunto es tributario, aduanero o cambiario.",
+      "Verifica si el contribuyente es calificado como Gran Contribuyente (jurisdicción centralizada).",
+      "Ubica la Dirección Seccional competente por domicilio o lugar de los hechos.",
+      "Verifica qué empleo tiene la facultad legal o delegada para suscribir el acto.",
+    ],
+    trap: "Asumir que cualquier dependencia puede proferir liquidaciones o resolver recursos.",
+    correctMove:
+      "Respeta la distribución territorial y funcional del Decreto 1742 de 2020 y Decreto 412 de 2024.",
+    source: "Decretos 1742 de 2020 y 412 de 2024 · E.T. art. 824",
+  },
+  {
+    id: "ofimatica-dian",
+    moduleId: "ofimatica-dian",
+    title: "Herramientas ofimáticas y sistemas corporativos",
+    how: "Utiliza funciones analíticas de hoja de cálculo y sistemas institucionales asegurando trazabilidad, exactitud y reserva de la información.",
+    steps: [
+      "Selecciona la herramienta idónea: cruce con BUSCARX/BUSCARV o consolidación en tabla dinámica.",
+      "Verifica la integridad de las bases de datos de cartera antes de generar requerimientos masivos.",
+      "Aplica plantillas oficiales del Sistema de Gestión Integrado para correspondencia oficial.",
+      "Protege credenciales, claves y respeta la reserva tributaria de los datos consultados en Muisca.",
+    ],
+    trap: "Modificar saldos 'a mano' sin soporte o extraer datos reservados en dispositivos personales.",
+    correctMove:
+      "Opera dentro de los aplicativos corporativos con registro de auditoría y aplicando funciones de validación.",
+    source: "Políticas de Seguridad Digital DIAN · Manual Muisca · Ley 1581 de 2012",
+  },
 ];
 
 export const TOPIC_BY_MODULE: Record<string, TopicGuide> = Object.fromEntries(

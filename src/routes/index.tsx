@@ -76,8 +76,38 @@ function Home() {
           </div>
         </div>
 
+        {/* ── Banner Bot Consultor Areandina ── */}
+        <div className="mt-6 rounded-xl border border-accent/40 bg-accent/5 p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Badge className="bg-accent text-accent-fg text-[10px] font-bold uppercase tracking-wider">
+                  Nuevo · Bot Oficial Areandina
+                </Badge>
+                <span className="text-xs text-muted">24 Indicadores Evaluados</span>
+              </div>
+              <h3 className="font-display text-base sm:text-lg font-bold text-ink">
+                Consulta tus 24 Indicadores Oficiales por Número de Inscripción o Cargo
+              </h3>
+              <p className="text-xs text-muted max-w-xl">
+                Conecta directamente con el sistema de Areandina (Operador DIAN 2676), verifica tu cobertura temática y simula tu prueba escrita para cualquier empleo.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <Button asChild size="sm">
+                <Link to="/indicadores">
+                  <Sparkles className="size-4" />
+                  Abrir Bot Consultor
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/* ── Tarjeta de Cargo Activo ── */}
-        <div className="mt-6 rounded-xl border border-border/90 bg-paper/70 p-4 sm:p-5">
+        <div className="mt-4 rounded-xl border border-border/90 bg-paper/70 p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <div className="flex items-center gap-2">

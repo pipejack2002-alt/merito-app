@@ -35,4 +35,10 @@ export const FLASHCARDS: Flashcard[] = [
   { id: "fc32", moduleId: "ficha-empleo", track: "funcional", front: "Escala de calificación de las pruebas escritas 2676", back: "0 a 100, dos decimales truncados, comparado con el grupo admitido al mismo empleo." },
   { id: "fc33", moduleId: "sistema-tributario", track: "funcional", front: "Art. 583 E.T.", back: "Reserva de la información tributaria. No se dicta un NIT por el pasillo ni por WhatsApp." },
   { id: "fc34", moduleId: "codigo-integridad", track: "integridad", front: "Ley 2016 de 2020", back: "Adopta el Código de Integridad DAFP: Honestidad, Respeto, Compromiso, Diligencia y Justicia." },
-]
+  { id: "fc35", moduleId: "razonamiento-matematico", track: "funcional", front: "Art. 639 E.T. — Sanción mínima legal", back: "10 UVT. Ninguna sanción liquidada por el contribuyente o la DIAN puede ser inferior a este monto." },
+  { id: "fc36", moduleId: "razonamiento-matematico", track: "funcional", front: "Art. 804 E.T. — Orden de imputación de pagos", back: "1° Sanciones, 2° Intereses moratorios, y 3° Capital de la obligación tributaria." },
+  { id: "fc37", moduleId: "principios-contables-financieros", track: "funcional", front: "Art. 21-1 y 28 E.T. — Devengo NIIF vs. Realización fiscal", back: "La regla general es el devengo contable NIIF, pero el valor razonable y estimaciones no tienen efectos en renta hasta su realización o enajenación." },
+  { id: "fc38", moduleId: "principios-contables-financieros", track: "funcional", front: "Art. 772-1 E.T. — Conciliación fiscal", back: "Sistema de control de diferencias entre el resultado contable y la renta líquida. Obligatorio para obligados a llevar contabilidad (Formato 2516)." },
+  { id: "fc39", moduleId: "estructura-dian", track: "funcional", front: "Estructura DIAN (D. 1742/2020 y D. 412/2024)", back: "UAE adscrita al Minhacienda. Nivel Central: Dirección General y Direcciones de Gestión (Impuestos, Aduanas, Fiscalización, Cobranzas, Jurídica). Nivel Desconcentrado: Seccionales." },
+  { id: "fc40", moduleId: "ofimatica-dian", track: "funcional", front: "Fórmulas clave en Excel para cruces técnicos", back: "BUSCARX o BUSCARV(..., 0) para coincidencias exactas por NIT; Tablas Dinámicas para consolidar cartera; SI(Y(...)) para priorización condicional." },
+];

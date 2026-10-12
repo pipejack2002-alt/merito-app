@@ -14,6 +14,7 @@ import { Route as CargoRouteImport } from './routes/cargo'
 import { Route as FichaRouteImport } from './routes/ficha'
 import { Route as FuentesRouteImport } from './routes/fuentes'
 import { Route as GuiaRouteImport } from './routes/guia'
+import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ProgresoRouteImport } from './routes/progreso'
 import { Route as TarjetasRouteImport } from './routes/tarjetas'
 import { Route as EstudioIndexRouteImport } from './routes/estudio/index'
@@ -46,6 +47,11 @@ const FuentesRoute = FuentesRouteImport.update({
 const GuiaRoute = GuiaRouteImport.update({
   id: '/guia',
   path: '/guia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndicadoresRoute = IndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgresoRoute = ProgresoRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/ficha': typeof FichaRoute
   '/fuentes': typeof FuentesRoute
   '/guia': typeof GuiaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/ficha': typeof FichaRoute
   '/fuentes': typeof FuentesRoute
   '/guia': typeof GuiaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/ficha': typeof FichaRoute
   '/fuentes': typeof FuentesRoute
   '/guia': typeof GuiaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/ficha'
     | '/fuentes'
     | '/guia'
+    | '/indicadores'
     | '/progreso'
     | '/tarjetas'
     | '/estudio/$slug'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/ficha'
     | '/fuentes'
     | '/guia'
+    | '/indicadores'
     | '/progreso'
     | '/tarjetas'
     | '/estudio/$slug'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/ficha'
     | '/fuentes'
     | '/guia'
+    | '/indicadores'
     | '/progreso'
     | '/tarjetas'
     | '/estudio/$slug'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   FichaRoute: typeof FichaRoute
   FuentesRoute: typeof FuentesRoute
   GuiaRoute: typeof GuiaRoute
+  IndicadoresRoute: typeof IndicadoresRoute
   ProgresoRoute: typeof ProgresoRoute
   TarjetasRoute: typeof TarjetasRoute
   EstudioSlugRoute: typeof EstudioSlugRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/guia'
       fullPath: '/guia'
       preLoaderRoute: typeof GuiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indicadores': {
+      id: '/indicadores'
+      path: '/indicadores'
+      fullPath: '/indicadores'
+      preLoaderRoute: typeof IndicadoresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/progreso': {
@@ -301,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   FichaRoute: FichaRoute,
   FuentesRoute: FuentesRoute,
   GuiaRoute: GuiaRoute,
+  IndicadoresRoute: IndicadoresRoute,
   ProgresoRoute: ProgresoRoute,
   TarjetasRoute: TarjetasRoute,
   EstudioSlugRoute: EstudioSlugRoute,

@@ -7,6 +7,7 @@ import {
   Flag,
   Home,
   Layers,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/lib/progress-store";
@@ -15,6 +16,7 @@ import { useCargo } from "@/lib/use-cargo";
 
 const NAV = [
   { to: "/", label: "Inicio", icon: Home },
+  { to: "/indicadores", label: "Ejes Areandina", icon: Sparkles },
   { to: "/estudio", label: "Estudiar", icon: BookOpen },
   { to: "/practica", label: "Practicar", icon: ClipboardCheck },
   { to: "/simulacro", label: "Simulacro", icon: Flag },
@@ -67,6 +69,16 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
           </Link>
           <div className="flex items-center gap-2">
+            <Link
+              to="/indicadores"
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-colors font-semibold",
+                pathname.startsWith("/indicadores") && "bg-accent text-accent-fg border-accent",
+              )}
+            >
+              <Sparkles className="size-3.5" />
+              <span>Bot Areandina</span>
+            </Link>
             <Link
               to="/fuentes"
               className={cn(
@@ -157,7 +169,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 backdrop-blur-md lg:hidden">
-        <ul className="mx-auto grid max-w-lg grid-cols-5 px-1 pb-[env(safe-area-inset-bottom)]">
+        <ul className="mx-auto grid max-w-lg grid-cols-6 px-1 pb-[env(safe-area-inset-bottom)]">
           {NAV.map((item) => {
             const active =
               item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);

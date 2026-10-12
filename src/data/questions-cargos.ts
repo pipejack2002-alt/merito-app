@@ -309,4 +309,344 @@ export const QUESTIONS_CARGOS: Question[] = [
     source: "Art. 209 C.P. · Justicia · rol profesional",
     difficulty: 2,
   },
+  // ── ANALISTA I (CÓDIGO 201 - NIVEL TÉCNICO) ──
+  {
+    id: "an01",
+    track: "funcional",
+    moduleId: "ficha-empleo",
+    kind: "sjt",
+    caseText:
+      "Eres Analista I en una Dirección Seccional. Llega a tu ventanilla una declaración tributaria presentada físicamente por un contribuyente no obligado a presentarla de manera virtual, pero el documento carece de la firma del declarante.",
+    stem: "En ejercicio de tus funciones técnicas de recepción y verificación preliminar, debes",
+    choices: [
+      { id: "a", text: "firmar tú en el espacio del declarante para no perjudicar al ciudadano." },
+      { id: "b", text: "informar de inmediato al contribuyente que la omisión de la firma es causal para tenerla como no presentada (art. 580 E.T.) e invitarlo a suscribirla antes de radicar." },
+      { id: "c", text: "radicarla en silencio y proyectar una sanción penal de inmediato." },
+      { id: "d", text: "destruir el formulario y pedirle que regrese al día siguiente." },
+    ],
+    correct: "b",
+    explanation:
+      "El Analista I apoya y verifica el cumplimiento de requisitos formales. La falta de firma es causal de dar por no presentada la declaración (art. 580 E.T.). El deber técnico es advertirlo y permitir la firma oportuna.",
+    source: "Estatuto Tributario art. 580 · Funciones Analista I",
+    difficulty: 1,
+  },
+  {
+    id: "an02",
+    track: "funcional",
+    moduleId: "ofimatica-dian",
+    kind: "sjt",
+    caseText:
+      "Tu supervisor te asigna consolidar una base de datos con 500 registros de pagos bancarios para cotejarlos contra el listado de obligaciones pendientes. El archivo está desordenado y con formatos inconsistentes.",
+    stem: "La herramienta y procedimiento ofimático idóneo para ejecutar esta tarea técnica es",
+    choices: [
+      { id: "a", text: "revisar uno a uno los 500 registros en papel con resaltador." },
+      { id: "b", text: "estandarizar el formato de texto y número de la columna NIT, y aplicar la función BUSCARX o BUSCARV/COINCIDIR para automatizar el cruce." },
+      { id: "c", text: "borrar los registros que no coincidan a primera vista." },
+      { id: "d", text: "redactar un oficio en Word pidiendo que el banco vuelva a enviar todo." },
+    ],
+    correct: "b",
+    explanation:
+      "El manejo técnico de Excel requiere estandarización de claves (NIT/identificación) y aplicación de funciones de búsqueda masiva, garantizando eficiencia y exactitud.",
+    source: "Manual de Ofimática DIAN · Funciones de Hoja de Cálculo",
+    difficulty: 1,
+  },
+  {
+    id: "an03",
+    track: "funcional",
+    moduleId: "mipg-archivo",
+    kind: "knowledge",
+    stem: "Al organizar un expediente físico de apoyo documental, la foliación técnica que debe realizar el Analista I conforme a las directrices del Archivo General de la Nación consiste en:",
+    choices: [
+      { id: "a", text: "Numerar únicamente las páginas impares con tinta roja." },
+      { id: "b", text: "Escribir el número correlativo y consecutivo en la esquina superior derecha de cada hoja útil, con lápiz de mina negra, en el orden cronológico en que se incorporaron." },
+      { id: "c", text: "Poner números aleatorios en el pie de página." },
+      { id: "d", text: "Foliar de atrás hacia adelante en orden inverso." },
+    ],
+    correct: "b",
+    explanation:
+      "La foliación técnica exige numeración consecutiva en la esquina superior derecha, con lápiz grafito suave para no deteriorar el documento, respetando el orden cronológico del trámite.",
+    source: "Acuerdo 002 de 2014 AGN · Ley 594 de 2000",
+    difficulty: 1,
+  },
+
+  // ── FACILITADOR III (CÓDIGO 103 - NIVEL ASISTENCIAL - SERVICIO Y PQRSF) ──
+  {
+    id: "fa01",
+    track: "funcional",
+    moduleId: "servicio-pqrsf",
+    kind: "sjt",
+    caseText:
+      "Un ciudadano llega muy ofuscado a la ventanilla de atención presencial de la DIAN alegando que el sistema Muisca le bloqueó la firma electrónica y que hoy se le vence el plazo para declarar. Grita exigiendo que el Facilitador III le solucione ya.",
+    stem: "La conducta asistencial correcta y alineada con los atributos del servicio al ciudadano es",
+    choices: [
+      { id: "a", text: "responderle con igual tono de voz y advertirle que si sigue gritando llamará a la policía para expulsarlo." },
+      { id: "b", text: "escucharlo con serenidad y empatía, validar su situación en el sistema, orientarlo en la recuperación de la contraseña o radicar su contingencia técnica para amparar su término legal." },
+      { id: "c", text: "decirle que eso no es su problema y que contrate a un contador privado." },
+      { id: "d", text: "darle su número de celular personal para que le transfiera dinero por agilizarle el trámite." },
+    ],
+    correct: "b",
+    explanation:
+      "Atributos del servicio: empatía, autocontrol, escucha activa y solución institucional. Si hay falla técnica en el sistema, la radicación del ticket ampara la contingencia del art. 579-2 E.T.",
+    source: "Protocolo de Servicio al Ciudadano DIAN · CPACA",
+    difficulty: 1,
+  },
+  {
+    id: "fa02",
+    track: "funcional",
+    moduleId: "servicio-pqrsf",
+    kind: "knowledge",
+    stem: "En la ventanilla única de radicación, un ciudadano presenta una petición solicitando copias de documentos públicos que no tienen reserva legal. El término máximo perentorio que tiene la entidad para responder dicha solicitud (art. 14 CPACA) es de:",
+    choices: [
+      { id: "a", text: "Cinco (5) días hábiles." },
+      { id: "b", text: "Diez (10) días siguientes a su recepción." },
+      { id: "c", text: "Treinta (30) días calendario." },
+      { id: "d", text: "Dos (2) meses prorrogables." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 14 CPACA (sustituido por Ley 1755/2015): Las peticiones de información y consulta o expedición de copias deben resolverse dentro de los diez (10) días siguientes a su recepción. Las de interés general o particular tienen 15 días.",
+    source: "Ley 1437 de 2011 (CPACA) art. 14 · Ley 1755 de 2015",
+    difficulty: 1,
+  },
+  {
+    id: "fa03",
+    track: "funcional",
+    moduleId: "servicio-pqrsf",
+    kind: "sjt",
+    caseText:
+      "Un usuario se acerca al punto de contacto de la DIAN y entrega un derecho de petición incompleto, pues no anexó la fotocopia de su cédula. El Facilitador III está en la ventanilla de radicación.",
+    stem: "Conforme al artículo 15 del CPACA sobre radicación de peticiones, el Facilitador debe",
+    choices: [
+      { id: "a", text: "rechazar de plano la petición y negarse a radicarla hasta que traiga la copia." },
+      { id: "b", text: "recibirla y radicarla obligatoriamente, advirtiéndole al peticionario en el acto sobre los documentos faltantes y dejando constancia en la copia que le entrega." },
+      { id: "c", text: "romper el documento frente al usuario." },
+      { id: "d", text: "cobrarle una tarifa especial de radicación extemporánea." },
+    ],
+    correct: "b",
+    explanation:
+      "En ningún caso se podrán rechazar peticiones por motivos de falta de documentos o de requisitos de forma. Se radica dejando constancia del faltante y otorgándole 1 mes para subsanar (art. 17 CPACA).",
+    source: "CPACA art. 15 · Ley 1755 de 2015",
+    difficulty: 1,
+  },
+  {
+    id: "fa04",
+    track: "funcional",
+    moduleId: "mipg-archivo",
+    kind: "sjt",
+    caseText:
+      "Al finalizar la jornada de atención presencial, un tramitador le ofrece al Facilitador III una propina en efectivo de $50.000 como 'agradecimiento' por haber radicado rápidamente los turnos de sus clientes.",
+    stem: "La actuación que exige el Código de Integridad y el régimen disciplinario es",
+    choices: [
+      { id: "a", text: "recibir el dinero, pues fue una donación voluntaria posterior al servicio." },
+      { id: "b", text: "rechazar tajantemente el dinero, explicarle que todos los trámites en la DIAN son gratuitos y reportar el intento de dádiva a su superior inmediato." },
+      { id: "c", text: "guardar el dinero en la caja menor de la entidad." },
+      { id: "d", text: "repartir la propina con los vigilantes de la entrada." },
+    ],
+    correct: "b",
+    explanation:
+      "Valor Honestidad y Código de Integridad: El servidor público tiene prohibido solicitar o recibir dádivas, propinas o gratificaciones de cualquier índole. Los trámites son gratuitos.",
+    source: "Código de Integridad DIAN · Valor Honestidad · Ley 1952 de 2019",
+    difficulty: 1,
+  },
+
+  // ── FACILITADOR II (CÓDIGO 102 - NIVEL ASISTENCIAL - OPERATIVO Y ARCHIVO) ──
+  {
+    id: "fo01",
+    track: "funcional",
+    moduleId: "mipg-archivo",
+    kind: "sjt",
+    caseText:
+      "En el archivo central de la seccional, un funcionario de otra dependencia solicita llevarse a su oficina tres expedientes originales de cobro coactivo sin diligenciar la boleta o formato de préstamo institucional.",
+    stem: "Como Facilitador II encargado de la custodia y entrega de expedientes, debes",
+    choices: [
+      { id: "a", text: "entregarle los expedientes porque es un compañero de trabajo de confianza." },
+      { id: "b", text: "exigir el diligenciamiento formal del formato de control y préstamo de archivo antes de permitir la salida de los expedientes, garantizando la cadena de custodia documental." },
+      { id: "c", text: "esconder los expedientes y fingir que se perdieron." },
+      { id: "d", text: "prestarle solo uno y quedarse con los otros dos." },
+    ],
+    correct: "b",
+    explanation:
+      "La custodia documental prohíbe el retiro de expedientes sin registro y firma de préstamo. El Facilitador II responde por el inventario y la trazabilidad de los documentos institucionales.",
+    source: "Sistema de Gestión Documental DIAN · Tablas de Retención",
+    difficulty: 1,
+  },
+  {
+    id: "fo02",
+    track: "funcional",
+    moduleId: "ofimatica-dian",
+    kind: "sjt",
+    caseText:
+      "Al digitar una relación de 200 resoluciones en la planilla corporativa, el Facilitador II nota que en una fila digitó por error el NIT de una empresa diferente a la del soporte físico.",
+    stem: "La conducta adecuada es",
+    choices: [
+      { id: "a", text: "dejar el error para no perder el tiempo de digitación." },
+      { id: "b", text: "corregir de inmediato el registro en el sistema con base en el soporte físico para evitar vicios en las notificaciones del área." },
+      { id: "c", text: "modificar el documento físico a mano con tachones para que cuadre con lo digitado." },
+      { id: "d", text: "borrar toda la base de datos de la semana." },
+    ],
+    correct: "b",
+    explanation:
+      "La calidad del dato es esencial en la gestión técnica y operativa. Un NIT mal digitado genera notificaciones indebidas y nulidades procesales.",
+    source: "Políticas de Calidad del Dato DIAN",
+    difficulty: 1,
+  },
+
+  // ── GESTOR I ADUANAS (CÓDIGO 301 - NIVEL PROFESIONAL - OPERACIÓN ADUANERA) ──
+  {
+    id: "ad01",
+    track: "funcional",
+    moduleId: "sistema-tributario",
+    kind: "sjt",
+    caseText:
+      "En una inspección aduanera física en puerto, el Gestor I Aduanas detecta que un contenedor declarado como 'juguetes plásticos' contiene en realidad 500 teléfonos celulares de alta gama no declarados ni amparados en los documentos de transporte.",
+    stem: "Conforme al Decreto 1165 de 2019 y Decreto 659 de 2024, la medida administrativa que procede inmediatamente es",
+    choices: [
+      { id: "a", text: "autorizar el levante y pedirle al declarante que pague después lo que quiera." },
+      { id: "b", text: "proferir acta de aprehensión de las mercancías no declaradas y trasladarlas al depósito habilitado para iniciar el proceso de decomiso." },
+      { id: "c", text: "vender los celulares en el puerto entre los funcionarios presentes." },
+      { id: "d", text: "devolver el buque inmediatamente a su país de origen sin levantar acta." },
+    ],
+    correct: "b",
+    explanation:
+      "Mercancía no declarada ni amparada en los documentos de viaje constituye causal de aprehensión aduanera (art. 647 D. 1165/2019). El Gestor levanta acta de aprehensión e inicia el proceso de decomiso.",
+    source: "Decreto 1165 de 2019 arts. 647 y ss. · Régimen Aduanero",
+    difficulty: 2,
+  },
+  {
+    id: "ad02",
+    track: "funcional",
+    moduleId: "sistema-tributario",
+    kind: "knowledge",
+    stem: "El acto por el cual la autoridad aduanera permite a los declarantes la disposición y retiro de las mercancías de la zona primaria o del depósito habilitado, previo cumplimiento de los requisitos legales, se denomina formalmente:",
+    choices: [
+      { id: "a", text: "Aprehensión." },
+      { id: "b", text: "Levante de mercancías." },
+      { id: "c", text: "Decomiso ordinario." },
+      { id: "d", text: "Abandono legal." },
+    ],
+    correct: "b",
+    explanation:
+      "El 'levante' es la autorización aduanera que permite al importador disponer libremente de la mercancía, una vez cancelados los tributos aduaneros y verificados los requisitos legales.",
+    source: "Decreto 1165 de 2019 art. 3 · Glosario Aduanero",
+    difficulty: 1,
+  },
+  {
+    id: "ad03",
+    track: "funcional",
+    moduleId: "sistema-tributario",
+    kind: "sjt",
+    caseText:
+      "El representante de una agencia de aduanas le solicita al Gestor I de Aduanas que 'agilice' la inspección documental omitiendo la verificación del certificado de origen de un cargamento de confecciones, ofreciéndole obsequios de la marca importada.",
+    stem: "El Gestor I de Aduanas debe",
+    choices: [
+      { id: "a", text: "recibir los obsequios si son de bajo valor comercial." },
+      { id: "b", text: "rechazar enfáticamente los obsequios, verificar minuciosamente el certificado de origen conforme a la normativa y reportar el intento de cohecho." },
+      { id: "c", text: "aprobar el certificado sin leerlo para evitar congestión en el puerto." },
+      { id: "d", text: "cobrar una tarifa personal de agilización aduanera." },
+    ],
+    correct: "b",
+    explanation:
+      "La integridad en el control aduanero es crítica frente a riesgos de fraude y contrabando. No se aceptan obsequios y se garantiza la rigurosidad en origen y arancel.",
+    source: "Código de Integridad DIAN · Régimen Disciplinario",
+    difficulty: 2,
+  },
+
+  // ── GESTOR II JURÍDICA (CÓDIGO 302 - RECURSOS, EXCEPCIONES Y DEFENSA) ──
+  {
+    id: "ju01",
+    track: "funcional",
+    moduleId: "cpaca",
+    kind: "knowledge",
+    stem: "Contra las liquidaciones oficiales y las resoluciones que imponen sanciones proferidas por la DIAN procede el Recurso de Reconsideración (art. 720 E.T.), el cual debe interponerse dentro del término perentorio de:",
+    choices: [
+      { id: "a", text: "Diez (10) días hábiles." },
+      { id: "b", text: "Dos (2) meses siguientes a su notificación." },
+      { id: "c", text: "Seis (6) meses calendario." },
+      { id: "d", text: "Un (1) año siguiente al vencimiento." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 720 E.T.: El recurso de reconsideración debe interponerse ante la oficina competente dentro de los dos (2) meses siguientes a la notificación de la liquidación oficial o resolución sanción.",
+    source: "Estatuto Tributario art. 720",
+    difficulty: 2,
+  },
+  {
+    id: "ju02",
+    track: "funcional",
+    moduleId: "cpaca",
+    kind: "knowledge",
+    stem: "La DIAN cuenta con un término máximo para fallar el Recurso de Reconsideración de un (1) año contado a partir de su interposición en debida forma (art. 732 E.T.). Si la administración no profiere ni notifica el fallo dentro de dicho plazo, opera:",
+    choices: [
+      { id: "a", text: "El silencio administrativo negativo que confirma la liquidación oficial." },
+      { id: "b", text: "El silencio administrativo positivo, entendiéndose fallado el recurso a favor del contribuyente (art. 734 E.T.)." },
+      { id: "c", text: "La prescripción de oficio de la cédula del contribuyente." },
+      { id: "d", text: "La prórroga automática por dos años más." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 734 E.T.: Si transcurrido un año no se ha notificado la decisión del recurso de reconsideración, se configura el silencio administrativo positivo en favor del recurrente.",
+    source: "Estatuto Tributario arts. 732 y 734",
+    difficulty: 2,
+  },
+  {
+    id: "ju03",
+    track: "funcional",
+    moduleId: "cobro-coactivo",
+    kind: "sjt",
+    caseText:
+      "Un ejecutado formula excepciones contra el mandamiento de pago alegando 'Prescripción de la acción de cobro' y demuestra que la liquidación oficial quedó en firme hace 6 años sin que la DIAN notificara mandamiento de pago alguno.",
+    stem: "Al proyectar la decisión de las excepciones (art. 831 num. 6 y art. 832 E.T.), el Gestor II Jurídico debe",
+    choices: [
+      { id: "a", text: "rechazar la excepción porque las deudas con la DIAN son imprescriptibles." },
+      { id: "b", text: "declarar probada la excepción de prescripción, ordenar el levantamiento de las medidas cautelares y el archivo del expediente coactivo." },
+      { id: "c", text: "ordenar el remate urgente de los bienes antes de que quede en firme la decisión." },
+      { id: "d", text: "exigirle al deudor el pago de una sanción para perdonarle el tiempo." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 817 y 831 num. 6 E.T.: La prescripción de la acción de cobro opera a los 5 años. Probada la excepción, el funcionario competente debe levantar cautelares y archivar (art. 833 E.T.).",
+    source: "Estatuto Tributario arts. 817, 831 y 833",
+    difficulty: 2,
+  },
+
+  // ── INSPECTOR II (CÓDIGO 302 - FISCALIZACIÓN Y PRUEBAS) ──
+  {
+    id: "in05",
+    track: "funcional",
+    moduleId: "inspeccion-visitas",
+    kind: "sjt",
+    caseText:
+      "Durante una inspección tributaria a una cadena de restaurantes, el Inspector II solicita los libros de contabilidad registrados y el contribuyente manifiesta que 'se le extraviaron ayer' pero no exhibe denuncia penal ni soportes.",
+    stem: "El procedimiento técnico y probatorio que debe adelantar el Inspector es",
+    choices: [
+      { id: "a", text: "creer en la palabra del contribuyente y archivar la visita." },
+      { id: "b", text: "consignar detalladamente en el acta la no exhibición de los libros de contabilidad, otorgar el plazo legal probatorio si procede o remitir el informe para la imposición de la sanción por no exhibir libros (art. 654 y 655 E.T.)." },
+      { id: "c", text: "llevarse los computadores personales de los comensales presentes." },
+      { id: "d", text: "clausurar el restaurante inmediatamente sin orden escrita." },
+    ],
+    correct: "b",
+    explanation:
+      "La no exhibición de libros de contabilidad es causal de rechazo de deducciones y sanción por libros (art. 654 E.T.). El Inspector deja constancia en acta para que el área de determinación sancione.",
+    source: "Estatuto Tributario arts. 654, 655 y 779",
+    difficulty: 2,
+  },
+  {
+    id: "in06",
+    track: "funcional",
+    moduleId: "inspeccion-visitas",
+    kind: "knowledge",
+    stem: "En desarrollo de las facultades de fiscalización e investigación del artículo 684 del Estatuto Tributario, los funcionarios de la DIAN comisionados tienen atribución legal para:",
+    choices: [
+      { id: "a", text: "Modificar las declaraciones privadas sin notificar requerimiento alguno." },
+      { id: "b", text: "Verificar la exactitud de las declaraciones, ordenar la exhibición de libros, documentos y correspondencia comercial, y practicar inspecciones tributarias y contables." },
+      { id: "c", text: "Decretar la privación de la libertad de los representantes legales." },
+      { id: "d", text: "Fijar tributos territoriales como el impuesto predial." },
+    ],
+    correct: "b",
+    explanation:
+      "El art. 684 E.T. confiere amplias facultades de inspección, cruces, verificación de libros y obtención de pruebas documentales para constatar la realidad tributaria.",
+    source: "Estatuto Tributario art. 684",
+    difficulty: 1,
+  },
 ];
+

@@ -169,3 +169,30 @@ export const CARGO_FAMILIES: Record<
   },
   otro: { label: "Otro empleo", levelHint: "Según tu manual" },
 };
+
+export interface AreandinaIndicator {
+  id: string;
+  nombre: string;
+  tipo: "funcional" | "comportamental" | "integridad";
+  nivel?: string;
+  moduleId?: string;
+  estado: "cubierto" | "parcial" | "brecha";
+  porcentaje: number;
+  descripcion: string;
+  tips: string;
+}
+
+export interface AreandinaRecord {
+  inscripcion: string;
+  aspirante: string;
+  documento: string;
+  opec: string;
+  denominacion: string;
+  nivel: string;
+  codigo: string;
+  grado: string;
+  fechaExamen?: string;
+  indicadores: AreandinaIndicator[];
+  coberturaGlobal: number;
+}
+
