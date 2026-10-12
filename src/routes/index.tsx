@@ -71,7 +71,7 @@ function Home() {
             <img
               src="/hero-merito.jpg"
               alt="Mérito · Preparación Concurso DIAN 2676"
-              className="h-full w-full object-cover aspect-16/9 transition-transform duration-500 hover:scale-102"
+              className="h-full w-full object-cover aspect-video transition-transform duration-500 hover:scale-102"
               loading="eager"
             />
           </div>
