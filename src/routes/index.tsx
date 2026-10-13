@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -5,6 +6,7 @@ import {
   Briefcase,
   CheckCircle2,
   ClipboardCheck,
+  Compass,
   FileText,
   Flag,
   Scale,
@@ -18,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useCargo } from "@/lib/use-cargo";
+import { RoadmapModal } from "@/components/roadmap-modal";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -29,6 +32,7 @@ function Home() {
   const { cargo, ficha, modules, questions, isCustom } = useCargo();
   const selectCargo = useCargoStore((s) => s.select);
   const selectedId = useCargoStore((s) => s.selectedId);
+  const [isRoadmapOpen, setIsRoadmapOpen] = useState(false);
 
   const readCount = modules.filter((m) => readModules[m.id]).length;
   const ids = new Set(questions.map((q) => q.id));
@@ -40,11 +44,14 @@ function Home() {
 
   return (
     <div className="space-y-10">
+      {/* Modal interactivo de Onboarding / Ruta Paso a Paso */}
+      <RoadmapModal isOpen={isRoadmapOpen} onClose={() => setIsRoadmapOpen(false)} />
+
       {/* ── Hero Principal Integral ── */}
       <section className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8 lg:p-10 shadow-xs">
         <div className="absolute inset-y-0 left-0 w-2 bg-rule" />
 
-        <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Badge
@@ -65,15 +72,41 @@ function Home() {
               a la DIAN. Alineado al Modelo de Estructura de Roles y Funciones (MERF), el Estatuto
               Tributario, el CPACA y el Código de Integridad.
             </p>
+
+            <div className="mt-5 flex flex-wrap items-center gap-2.5">
+              <Button
+                onClick={() => setIsRoadmapOpen(true)}
+                size="sm"
+                className="gap-2 shadow-xs cursor-pointer"
+              >
+                <Compass className="size-4" />
+                Guía Paso a Paso: ¿Cómo empezar?
+              </Button>
+              <Button asChild variant="outline" size="sm" className="gap-1.5">
+                <Link to="/indicadores">
+                  <Sparkles className="size-3.5 text-accent" />
+                  Ver 24 Indicadores Areandina
+                </Link>
+              </Button>
+            </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl border border-border/80 bg-paper/50 shadow-2xs">
+          <div className="relative overflow-hidden rounded-xl border border-border/80 bg-paper/50 shadow-2xs group">
             <img
               src="/hero-merito.jpg"
               alt="Mérito · Preparación Concurso DIAN 2676"
-              className="h-full w-full object-cover aspect-video transition-transform duration-500 hover:scale-102"
+              className="h-full w-full object-cover aspect-video transition-transform duration-500 group-hover:scale-102"
               loading="eager"
             />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
+              <span className="rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-mono text-white backdrop-blur-md">
+                Pruebas: 8 Nov 2026
+              </span>
+              <span className="rounded-md bg-accent/90 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-md uppercase tracking-wider">
+                Oficial CNSC
+              </span>
+            </div>
           </div>
         </div>
 

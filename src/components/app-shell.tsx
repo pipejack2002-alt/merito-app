@@ -1,10 +1,10 @@
-import { useEffect, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   BookOpen,
-  Briefcase,
   CheckCircle2,
   ClipboardCheck,
+  Compass,
   Flag,
   Home,
   Layers,
@@ -14,22 +14,54 @@ import {
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/lib/progress-store";
 import { useCargoStore } from "@/lib/cargo-store";
-import { useCargo } from "@/lib/use-cargo";
 import { Badge } from "@/components/ui/badge";
+import { CargoDropdownSelector } from "@/components/cargo-dropdown";
+import { RoadmapModal } from "@/components/roadmap-modal";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: Home },
-  { to: "/indicadores", label: "Bot Areandina", icon: Sparkles, badge: "24 Ejes" },
-  { to: "/estudio", label: "Módulos de Estudio", icon: BookOpen },
-  { to: "/practica", label: "Banco de Práctica", icon: ClipboardCheck },
-  { to: "/simulacro", label: "Simulacro Oficial", icon: Flag },
-  { to: "/progreso", label: "Métricas y Análisis", icon: Layers },
+  {
+    to: "/",
+    label: "Inicio",
+    sub: "Resumen y estado de preparación",
+    icon: Home,
+  },
+  {
+    to: "/indicadores",
+    label: "24 Indicadores Oficiales",
+    sub: "Areandina · Matriz por OPEC",
+    icon: Sparkles,
+    badge: "24 Ejes",
+  },
+  {
+    to: "/estudio",
+    label: "Guías de Estudio",
+    sub: "Normas y resúmenes MERF",
+    icon: BookOpen,
+  },
+  {
+    to: "/practica",
+    label: "Entrenador de Preguntas",
+    sub: "Casos reales con feedback",
+    icon: ClipboardCheck,
+  },
+  {
+    to: "/simulacro",
+    label: "Simulador con Cronómetro",
+    sub: "Prueba oficial en tiempo real",
+    icon: Flag,
+  },
+  {
+    to: "/progreso",
+    label: "Mi Rendimiento y Fallos",
+    sub: "Diagnóstico y puntos a mejorar",
+    icon: Layers,
+  },
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const examMode = pathname.startsWith("/simulacro/examen");
-  const { cargo, ficha } = useCargo();
+  const [isRoadmapOpen, setIsRoadmapOpen] = useState(false);
 
   useEffect(() => {
     void useProgress.persist.rehydrate();
@@ -38,6 +70,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-bg text-ink flex flex-col selection:bg-accent/20">
+      {/* Modal interactivo de Onboarding / Ruta Paso a Paso */}
+      <RoadmapModal isOpen={isRoadmapOpen} onClose={() => setIsRoadmapOpen(false)} />
+
       {examMode ? (
         <header className="sticky top-0 z-40 border-b border-border/80 bg-surface/95 backdrop-blur-md">
           <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
@@ -82,11 +117,22 @@ export function AppShell({ children }: { children: ReactNode }) {
               </span>
             </Link>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              {/* Botón de Guía Paso a Paso */}
+              <button
+                type="button"
+                onClick={() => setIsRoadmapOpen(true)}
+                className="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-paper/60 px-2.5 py-1.5 text-xs text-ink hover:border-accent hover:bg-surface font-semibold shadow-2xs transition-all"
+              >
+                <Compass className="size-3.5 text-accent" />
+                <span>¿Cómo empezar?</span>
+              </button>
+
+              {/* Botón de Bot Areandina */}
               <Link
                 to="/indicadores"
                 className={cn(
-                  "hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-all font-semibold shadow-2xs",
+                  "hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-all font-semibold shadow-2xs",
                   pathname.startsWith("/indicadores") &&
                     "bg-accent text-white border-accent shadow-xs",
                 )}
@@ -98,26 +144,8 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </span>
               </Link>
 
-              <Link
-                to="/cargo"
-                className={cn(
-                  "inline-flex items-center gap-2 rounded-lg border border-border/90 bg-surface px-3 py-1.5 text-xs text-ink hover:border-accent/50 hover:bg-paper/50 transition-all shadow-2xs",
-                  (pathname.startsWith("/cargo") ||
-                    pathname.startsWith("/guia") ||
-                    pathname.startsWith("/ficha")) &&
-                    "border-accent ring-1 ring-accent/30 bg-paper/50 font-semibold",
-                )}
-              >
-                <Briefcase className="size-3.5 text-accent shrink-0" />
-                <div className="flex flex-col text-left">
-                  <span className="font-semibold text-xs leading-none truncate max-w-30 sm:max-w-40">
-                    {cargo.shortLabel}
-                  </span>
-                  <span className="text-[10px] text-muted leading-tight mt-0.5">
-                    {ficha.nivel || "Técnico"} · Cambiar
-                  </span>
-                </div>
-              </Link>
+              {/* Selector de Cargo Rápido Desplegable en el Header */}
+              <CargoDropdownSelector />
             </div>
           </div>
         </header>
@@ -127,11 +155,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main className="mx-auto max-w-4xl px-4 pb-12 pt-6 flex-1 w-full">{children}</main>
       ) : (
         <div className="mx-auto flex max-w-6xl w-full flex-1 gap-6 lg:px-6">
-          <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] w-60 shrink-0 py-6 pr-4 lg:flex lg:flex-col lg:justify-between">
-            <div className="space-y-6">
-              <div>
-                <p className="px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
-                  Navegación
+          {/* Barra Lateral Dinámica y Fluida */}
+          <aside className="sticky top-20 hidden h-[calc(100dvh-5.5rem)] w-64 shrink-0 py-3 pr-2 lg:flex lg:flex-col lg:justify-between overflow-y-auto">
+            <div className="space-y-4">
+              {/* Bloque de Navegación Principal con Subtítulos Amigables */}
+              <div className="rounded-2xl border border-border/70 bg-surface/80 p-3 shadow-2xs backdrop-blur-xs">
+                <p className="px-2 text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
+                  Menú de Estudio
                 </p>
                 <nav className="mt-2 flex flex-col gap-1">
                   {NAV.map((item) => {
@@ -143,25 +173,37 @@ export function AppShell({ children }: { children: ReactNode }) {
                         key={item.to}
                         to={item.to}
                         className={cn(
-                          "group flex h-10 items-center justify-between rounded-xl px-3 text-xs font-medium transition-all",
+                          "group flex items-center justify-between rounded-xl px-2.5 py-2 text-xs transition-all",
                           active
                             ? "bg-accent text-white font-semibold shadow-xs"
                             : "text-muted hover:bg-paper/80 hover:text-ink",
                         )}
                       >
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-2.5 min-w-0">
                           <Icon
                             className={cn(
-                              "size-4 transition-transform group-hover:scale-110",
+                              "size-4 shrink-0 transition-transform group-hover:scale-110",
                               active ? "text-white" : "text-subtle group-hover:text-ink",
                             )}
                           />
-                          <span>{item.label}</span>
+                          <div className="flex flex-col min-w-0">
+                            <span className="truncate leading-tight font-medium text-xs">
+                              {item.label}
+                            </span>
+                            <span
+                              className={cn(
+                                "text-[10px] leading-tight truncate mt-0.5",
+                                active ? "text-white/80" : "text-subtle",
+                              )}
+                            >
+                              {item.sub}
+                            </span>
+                          </div>
                         </div>
                         {"badge" in item ? (
                           <span
                             className={cn(
-                              "rounded px-1.5 py-0.5 text-[9px] font-bold",
+                              "rounded px-1.5 py-0.5 text-[9px] font-bold shrink-0 ml-1.5",
                               active
                                 ? "bg-white/20 text-white"
                                 : "bg-accent/10 text-accent group-hover:bg-accent/20",
@@ -176,52 +218,48 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </nav>
               </div>
 
-              <div>
-                <p className="px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
-                  Herramientas del Cargo
+              {/* Tarjeta de Guía Paso a Paso */}
+              <button
+                type="button"
+                onClick={() => setIsRoadmapOpen(true)}
+                className="w-full rounded-2xl border border-accent/30 bg-accent/5 p-3.5 text-left transition-all hover:bg-accent/10 hover:border-accent hover:shadow-xs group cursor-pointer"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
+                    <Compass className="size-3 text-accent" />
+                    Ruta de Éxito
+                  </span>
+                  <span className="text-[10px] text-accent font-semibold group-hover:translate-x-0.5 transition-transform">
+                    Ver 5 Pasos →
+                  </span>
+                </div>
+                <p className="mt-1 font-display font-bold text-xs text-ink">
+                  ¿Cómo usar la plataforma?
                 </p>
-                <nav className="mt-2 flex flex-col gap-1">
-                  <Link
-                    to="/guia"
-                    className={cn(
-                      "flex h-10 items-center gap-2.5 rounded-xl px-3 text-xs font-medium transition-all",
-                      pathname.startsWith("/guia")
-                        ? "bg-accent text-white font-semibold shadow-xs"
-                        : "text-muted hover:bg-paper/80 hover:text-ink",
-                    )}
-                  >
-                    <BookOpen className="size-4 text-subtle" />
-                    <span>Guía del Empleo</span>
-                  </Link>
-                  <Link
-                    to="/cargo"
-                    className={cn(
-                      "flex h-10 items-center gap-2.5 rounded-xl px-3 text-xs font-medium transition-all",
-                      pathname.startsWith("/cargo")
-                        ? "bg-accent text-white font-semibold shadow-xs"
-                        : "text-muted hover:bg-paper/80 hover:text-ink",
-                    )}
-                  >
-                    <Briefcase className="size-4 text-subtle" />
-                    <span>Catálogo de Cargos</span>
-                  </Link>
-                </nav>
-              </div>
+                <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                  Aprende la secuencia exacta para asegurar tu puntaje eliminatorio.
+                </p>
+              </button>
             </div>
 
-            {/* Tarjeta de Garantía Institucional */}
-            <div className="rounded-xl border border-border/80 bg-paper/50 p-3.5 space-y-2">
-              <div className="flex items-center gap-1.5 text-ink font-semibold text-xs">
-                <Shield className="size-3.5 text-ok" />
-                <span>Garantía de Contenido</span>
+            {/* Tarjeta Inferior de Garantía Institucional */}
+            <div className="rounded-2xl border border-border/80 bg-paper/50 p-3.5 space-y-2 mt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-ink font-semibold text-xs">
+                  <Shield className="size-3.5 text-ok" />
+                  <span>Garantía de Contenido</span>
+                </div>
+                <span className="text-[9px] font-mono text-muted uppercase">CNSC 2676</span>
               </div>
               <p className="text-[11px] leading-relaxed text-muted">
-                100% alineado al Acuerdo 21 de 2025 de la CNSC y los 24 indicadores oficiales del
-                operador Areandina.
+                100% calibrado al Acuerdo 21 de 2025 y los 24 indicadores del operador Areandina.
               </p>
-              <div className="pt-1 flex items-center gap-1 text-[10px] font-semibold text-ok">
-                <CheckCircle2 className="size-3" />
-                <span>Simulador Verificado</span>
+              <div className="pt-1 flex items-center justify-between border-t border-border/60 text-[10px] font-semibold text-ok">
+                <span className="flex items-center gap-1">
+                  <CheckCircle2 className="size-3" />
+                  Simulador Verificado
+                </span>
+                <span className="text-subtle font-normal">Examen: 8 Nov 2026</span>
               </div>
             </div>
           </aside>

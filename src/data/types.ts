@@ -63,6 +63,7 @@ export interface TopicGuide {
 }
 
 export interface CargoFicha {
+  opec?: string;
   formato?: string;
   denominacion: string;
   codigo: string;
