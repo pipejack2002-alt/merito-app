@@ -30,9 +30,9 @@ const NAV = [
   },
   {
     to: "/indicadores",
-    label: "Paso 1 · Temario Oficial",
-    shortLabel: "Temario",
-    sub: "24 indicadores de tu cargo",
+    label: "Paso 1 · Indicadores del Cargo",
+    shortLabel: "Indicadores",
+    sub: "Los 24 aspectos que te evaluará la DIAN",
     icon: Sparkles,
     badge: "24 Ejes",
   },
@@ -149,7 +149,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 )}
               >
                 <Sparkles className="size-3.5" />
-                <span>Bot Areandina</span>
+                <span>Indicadores Oficiales</span>
                 <span className="rounded bg-accent/20 px-1 py-0.5 text-[9px] font-bold uppercase">
                   24 Ejes
                 </span>

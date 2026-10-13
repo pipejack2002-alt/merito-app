@@ -188,22 +188,21 @@ function IndicadoresPage() {
             variant="outline"
             className="text-[11px] uppercase tracking-[0.14em] font-mono bg-accent/10 border-accent/40 text-accent font-semibold"
           >
-            Bot Oficial Areandina · DIAN 2676
+            Operador Académico · Universidad Areandina
           </Badge>
           <span className="text-xs text-muted">
-            Operador Oficial: Fundación Universitaria del Área Andina
+            Convocatoria CNSC · Proceso DIAN 2676
           </span>
         </div>
 
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-          Consultor y Simulador Oficial de Ejes Temáticos
+          Consulta Oficial de Indicadores de tu Cargo
         </h1>
 
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
-          Ingresa tu número de inscripción o selecciona cualquier empleo de la DIAN. El bot conecta
-          con el sistema oficial de Areandina, desglosa los{" "}
-          <strong>24 indicadores a evaluar</strong> y calibra la plataforma para que tu
-          entrenamiento sea 100% real.
+          Ingresa tu número de inscripción SIMO o selecciona tu empleo de la DIAN para identificar los{" "}
+          <strong>24 indicadores oficiales que te evaluarán en la prueba escrita</strong>. El sistema conecta
+          con la matriz del operador Areandina y calibra la plataforma para que tu entrenamiento sea 100% exacto.
         </p>
 
         {/* ── Fechas Clave ── */}

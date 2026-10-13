@@ -133,7 +133,7 @@ function Home() {
               <Button asChild size="sm">
                 <Link to="/indicadores">
                   <Sparkles className="size-4" />
-                  Abrir Bot Consultor
+                  Consultar Indicadores
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>

@@ -168,7 +168,7 @@ function CargoPage() {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <Badge className="bg-accent text-accent-fg text-[10px] font-bold uppercase tracking-wider">
-                Bot Oficial Areandina
+                Indicadores Oficiales Areandina
               </Badge>
               <span className="text-xs text-muted">Consulta directa por inscripción</span>
             </div>
