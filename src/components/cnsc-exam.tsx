@@ -1,6 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, Clock, Flag, LayoutGrid, X } from "lucide-react";
+import {
+  AlertCircle,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  FileText,
+  Flag,
+  LayoutGrid,
+  Maximize2,
+  Minimize2,
+  Square,
+  Volume2,
+  X,
+} from "lucide-react";
 import type { Question, TrackId } from "@/data/types";
 import { TRACKS } from "@/data/types";
 import { Button } from "@/components/ui/button";
@@ -10,6 +23,7 @@ import { useCargo } from "@/lib/use-cargo";
 import { useProgress } from "@/lib/progress-store";
 import { SIMULACRO } from "@/data/questions";
 import { formatPuntaje, trunc100 } from "@/lib/cnsc-score";
+import { DiagnosticReportModal } from "@/components/diagnostic-report-modal";
 import {
   clearExamSession,
   loadExamSession,
@@ -98,6 +112,82 @@ export function CnscExam({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [done, setDone] = useState(false);
   const [result, setResult] = useState<ReturnType<typeof scoreTracks> | null>(null);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [tabSwitches, setTabSwitches] = useState(0);
+
+  // Audio-Lectura con SpeechSynthesis nativo
+  const toggleSpeech = useCallback(() => {
+    if (!("speechSynthesis" in window)) {
+      alert("Tu navegador no soporta lectura de voz.");
+      return;
+    }
+    if (speaking) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const currQ = booklet[index];
+    const textToRead = [
+      currQ?.caseText ? `Caso situacional: ${currQ.caseText}` : "",
+      currQ?.stem ? `Pregunta: ${currQ.stem}` : "",
+    ]
+      .filter(Boolean)
+      .join(". ");
+
+    if (!textToRead) return;
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "es-CO";
+    utterance.rate = 1.0;
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    setSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  }, [speaking, booklet, index]);
+
+  // Cancelar audio al cambiar de pregunta
+  useEffect(() => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setSpeaking(false);
+  }, [index]);
+
+  // Modo Enfoque / Pantalla Completa
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      void document.documentElement
+        .requestFullscreen()
+        .then(() => setIsFullscreen(true))
+        .catch(() => {});
+    } else {
+      void document
+        .exitFullscreen()
+        .then(() => setIsFullscreen(false))
+        .catch(() => {});
+    }
+  };
+
+  useEffect(() => {
+    const handleFsChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener("fullscreenchange", handleFsChange);
+    return () => document.removeEventListener("fullscreenchange", handleFsChange);
+  }, []);
+
+  // Monitoreo de Distracciones (Cambio de pestaña)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && !done) {
+        setTabSwitches((n) => n + 1);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [done]);
 
   useEffect(() => {
     saveExamSession({
@@ -301,7 +391,7 @@ export function CnscExam({
 
         <FailDiagnosis missed={missedQs} cargo={cargo} />
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2 pt-2">
           <Button asChild>
             <Link to="/simulacro">Nueva jornada</Link>
           </Button>
@@ -310,7 +400,36 @@ export function CnscExam({
               Repasar fallos
             </Link>
           </Button>
+          <Button
+            variant="outline"
+            onClick={() => setShowReportModal(true)}
+            className="gap-1.5 border-accent/40 text-accent hover:bg-accent/10"
+          >
+            <FileText className="size-4" />
+            Descargar Informe Oficial PDF
+          </Button>
         </div>
+
+        {showReportModal && (
+          <DiagnosticReportModal
+            isOpen={showReportModal}
+            onClose={() => setShowReportModal(false)}
+            data={{
+              cargo,
+              funcionalScore: result.funcional,
+              comportamentalScore: result.comportamental,
+              integridadScore: result.integridad,
+              totalScore: result.total,
+              passed: result.passed,
+              answeredCount: total - blank,
+              correctCount:
+                result.by.funcional.correct +
+                result.by.comportamental.correct +
+                result.by.integridad.correct,
+              missedCount: result.missed.length,
+            }}
+          />
+        )}
       </div>
     );
   }
@@ -322,6 +441,17 @@ export function CnscExam({
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
+      {/* Alerta de distracción / cambio de ventana */}
+      {tabSwitches > 0 && !done && (
+        <div className="flex items-center gap-2 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-2 text-xs text-amber-700 dark:text-amber-300">
+          <AlertCircle className="size-4 shrink-0" />
+          <span>
+            <strong>Advertencia de Distracción:</strong> Has salido de la prueba {tabSwitches} vez(ces).
+            En la prueba oficial presencial esto motivaría exclusión o anulación.
+          </span>
+        </div>
+      )}
+
       <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-2.5">
         <p className="text-[11px] uppercase tracking-[0.14em] text-muted">
           {section.short} · {index + 1}/{total}
@@ -341,10 +471,30 @@ export function CnscExam({
           ) : (
             <p className="text-xs text-muted">Sin reloj</p>
           )}
+
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            className="inline-flex items-center gap-1 text-xs text-muted hover:text-ink cursor-pointer"
+            title="Pantalla Completa / Modo Enfoque"
+          >
+            {isFullscreen ? (
+              <>
+                <Minimize2 className="size-3.5" />
+                <span className="hidden sm:inline">Salir</span>
+              </>
+            ) : (
+              <>
+                <Maximize2 className="size-3.5" />
+                <span className="hidden sm:inline">Enfoque</span>
+              </>
+            )}
+          </button>
+
           <button
             type="button"
             onClick={() => setSheetOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink"
+            className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink cursor-pointer"
           >
             <LayoutGrid className="size-3.5" />
             Hoja
@@ -353,9 +503,36 @@ export function CnscExam({
       </div>
 
       <article className="rounded-xl border border-border bg-surface p-5 sm:p-6">
-        <p className="font-mono text-[11px] text-subtle">
-          Pregunta {index + 1} de {total} · {section.label}
-        </p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="font-mono text-[11px] text-subtle">
+            Pregunta {index + 1} de {total} · {section.label}
+          </p>
+
+          {/* Botón de Audio-Lectura */}
+          <button
+            type="button"
+            onClick={toggleSpeech}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer",
+              speaking
+                ? "border-accent bg-accent text-white shadow-xs animate-pulse"
+                : "border-border bg-paper text-muted hover:border-accent hover:text-ink",
+            )}
+            title="Escuchar caso y pregunta en voz alta"
+          >
+            {speaking ? (
+              <>
+                <Square className="size-3 fill-current" />
+                <span>Detener voz</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="size-3.5 text-accent" />
+                <span>Escuchar caso</span>
+              </>
+            )}
+          </button>
+        </div>
         {q.caseText ? (
           <div className="mt-3 rounded-md border-l-2 border-rule bg-paper px-4 py-3">
             <p className="text-sm leading-relaxed">{q.caseText}</p>

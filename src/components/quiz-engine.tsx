@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Check, ChevronRight, CircleHelp, Flag, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { Check, ChevronRight, CircleHelp, Flag, Square, Volume2, X } from "lucide-react";
 import type { Question } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -82,6 +82,44 @@ export function QuizEngine({
       revealed,
     });
   }, [mode, bank, cargo.id, title, questions, log, index, picked, revealed, done]);
+
+  const [speaking, setSpeaking] = useState(false);
+
+  const toggleSpeech = useCallback(() => {
+    if (!("speechSynthesis" in window)) {
+      alert("Tu navegador no soporta lectura de voz.");
+      return;
+    }
+    if (speaking) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const currQ = questions[index];
+    const textToRead = [
+      currQ?.caseText ? `Caso situacional: ${currQ.caseText}` : "",
+      currQ?.stem ? `Pregunta: ${currQ.stem}` : "",
+    ]
+      .filter(Boolean)
+      .join(". ");
+
+    if (!textToRead) return;
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "es-CO";
+    utterance.rate = 1.0;
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    setSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  }, [speaking, questions, index]);
+
+  useEffect(() => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setSpeaking(false);
+  }, [index]);
 
   const q = questions[index];
   const total = questions.length;
@@ -186,10 +224,36 @@ export function QuizEngine({
       <Progress value={pct} />
 
       <article className="rounded-xl border border-border bg-surface p-5 sm:p-6">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <Badge variant="paper">{TRACKS[q.track].short}</Badge>
-          <Badge variant="outline">{labelKind(q.kind)}</Badge>
-          {q.source ? <span className="text-[11px] text-subtle">{q.source}</span> : null}
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="paper">{TRACKS[q.track].short}</Badge>
+            <Badge variant="outline">{labelKind(q.kind)}</Badge>
+            {q.source ? <span className="text-[11px] text-subtle">{q.source}</span> : null}
+          </div>
+
+          <button
+            type="button"
+            onClick={toggleSpeech}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer",
+              speaking
+                ? "border-accent bg-accent text-white shadow-xs animate-pulse"
+                : "border-border bg-paper text-muted hover:border-accent hover:text-ink",
+            )}
+            title="Escuchar caso y pregunta en voz alta"
+          >
+            {speaking ? (
+              <>
+                <Square className="size-3 fill-current" />
+                <span>Detener voz</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="size-3.5 text-accent" />
+                <span>Escuchar</span>
+              </>
+            )}
+          </button>
         </div>
 
         {q.caseText ? (

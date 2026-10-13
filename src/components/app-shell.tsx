@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   ClipboardCheck,
   Compass,
+  Crown,
   Flag,
   Home,
   Layers,
@@ -17,6 +18,7 @@ import { useCargoStore } from "@/lib/cargo-store";
 import { Badge } from "@/components/ui/badge";
 import { CargoDropdownSelector } from "@/components/cargo-dropdown";
 import { RoadmapModal } from "@/components/roadmap-modal";
+import { PricingModal } from "@/components/pricing-modal";
 
 const NAV = [
   {
@@ -62,6 +64,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const examMode = pathname.startsWith("/simulacro/examen");
   const [isRoadmapOpen, setIsRoadmapOpen] = useState(false);
+  const [isPricingOpen, setIsPricingOpen] = useState(false);
 
   useEffect(() => {
     void useProgress.persist.rehydrate();
@@ -72,6 +75,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-dvh bg-bg text-ink flex flex-col selection:bg-accent/20">
       {/* Modal interactivo de Onboarding / Ruta Paso a Paso */}
       <RoadmapModal isOpen={isRoadmapOpen} onClose={() => setIsRoadmapOpen(false)} />
+      {/* Modal de Planes Comerciales */}
+      <PricingModal isOpen={isPricingOpen} onClose={() => setIsPricingOpen(false)} />
 
       {examMode ? (
         <header className="sticky top-0 z-40 border-b border-border/80 bg-surface/95 backdrop-blur-md">
@@ -143,6 +148,16 @@ export function AppShell({ children }: { children: ReactNode }) {
                   24 Ejes
                 </span>
               </Link>
+
+              {/* Botón de Planes Pro */}
+              <button
+                type="button"
+                onClick={() => setIsPricingOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-accent/60 bg-linear-to-r from-accent/15 to-accent/5 px-2.5 py-1.5 text-xs text-accent hover:bg-accent/25 transition-all font-bold shadow-2xs cursor-pointer"
+              >
+                <Crown className="size-3.5 text-accent" />
+                <span>Planes Pro</span>
+              </button>
 
               {/* Selector de Cargo Rápido Desplegable en el Header */}
               <CargoDropdownSelector />
@@ -238,6 +253,29 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </p>
                 <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
                   Aprende la secuencia exacta para asegurar tu puntaje eliminatorio.
+                </p>
+              </button>
+
+              {/* Banner de Planes Pro en Barra Lateral */}
+              <button
+                type="button"
+                onClick={() => setIsPricingOpen(true)}
+                className="w-full rounded-2xl border border-accent/40 bg-linear-to-br from-accent/10 via-surface to-accent/5 p-3.5 text-left transition-all hover:border-accent hover:shadow-xs group cursor-pointer"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
+                    <Crown className="size-3 text-accent" />
+                    Acceso Total
+                  </span>
+                  <span className="text-[10px] font-bold text-accent group-hover:scale-105 transition-transform">
+                    Desde $39k
+                  </span>
+                </div>
+                <p className="mt-1 font-display font-bold text-xs text-ink">
+                  Activar Plan Concurrente
+                </p>
+                <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                  Desbloquea simulacros ilimitados, audio y reportes PDF hasta el examen.
                 </p>
               </button>
             </div>
