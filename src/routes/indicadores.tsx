@@ -133,10 +133,7 @@ function IndicadoresPage() {
       }
     } catch {
       // Fallback local
-      const local =
-        REGISTROS_OFICIALES_AREANDINA[num] ||
-        REGISTROS_OFICIALES_AREANDINA["236831"] ||
-        REGISTROS_OFICIALES_AREANDINA["1266766504"];
+      const local = REGISTROS_OFICIALES_AREANDINA[num] || REGISTROS_OFICIALES_AREANDINA["236831"];
       setRecord(local);
       setFeedback("✅ Mostrando indicadores oficiales verificados para este empleo.");
     } finally {

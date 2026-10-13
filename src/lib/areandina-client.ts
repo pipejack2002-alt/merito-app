@@ -119,10 +119,7 @@ export const fetchAreandinaIndicators = createServerFn({ method: "POST" })
               !t.includes("ANALISTA"),
           );
 
-        const fallback =
-          getAreandinaRecord(clean) ||
-          getAreandinaRecord("236831") ||
-          getAreandinaRecord("1266766504")!;
+        const fallback = getAreandinaRecord(clean) || getAreandinaRecord("236831")!;
 
         const mappedIndicators =
           indicatorMatches.length > 0

@@ -298,24 +298,11 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     indicadores: INDICADORES_OFICIALES_BASE,
     coberturaGlobal: 100,
   },
-  "1266766504": {
-    inscripcion: "1266766504",
-    aspirante: "ASPIRANTE REGISTRADO · OPEC 236831",
-    documento: "REGISTRO SIMO VERIFICADO",
-    opec: "236831",
-    denominacion: "ANALISTA II",
-    nivel: "Técnico",
-    codigo: "202",
-    grado: "2",
-    fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_OFICIALES_BASE,
-    coberturaGlobal: 100,
-  },
   // Analista I - Apoyo Técnico
   "236829": {
-    inscripcion: "1266741020",
-    aspirante: "ASPIRANTE ANALISTA I (SIMULACIÓN OFICIAL)",
-    documento: "1020845112",
+    inscripcion: "236829",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236829",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236829",
     denominacion: "ANALISTA I",
     nivel: "Técnico",
@@ -335,9 +322,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Analista II - Fiscalización
   "236835": {
-    inscripcion: "1266752011",
-    aspirante: "ASPIRANTE FISCALIZACIÓN (SIMULACIÓN OFICIAL)",
-    documento: "1032891456",
+    inscripcion: "236835",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236835",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236835",
     denominacion: "ANALISTA II",
     nivel: "Técnico",
@@ -369,9 +356,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Gestor I - Cartera
   "236840": {
-    inscripcion: "1266781203",
-    aspirante: "ASPIRANTE GESTOR I (SIMULACIÓN OFICIAL)",
-    documento: "1015672349",
+    inscripcion: "236840",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236840",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236840",
     denominacion: "GESTOR I",
     nivel: "Profesional",
@@ -389,9 +376,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Gestor I - Aduanas
   "236845": {
-    inscripcion: "1266795412",
-    aspirante: "ASPIRANTE GESTOR ADUANAS (SIMULACIÓN OFICIAL)",
-    documento: "1098412763",
+    inscripcion: "236845",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236845",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236845",
     denominacion: "GESTOR I",
     nivel: "Profesional",
@@ -425,9 +412,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Gestor II - Fiscalización
   "236850": {
-    inscripcion: "1266779834",
-    aspirante: "ASPIRANTE GESTOR FISCALIZACIÓN (SIMULACIÓN OFICIAL)",
-    documento: "1047812903",
+    inscripcion: "236850",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236850",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236850",
     denominacion: "GESTOR II",
     nivel: "Profesional",
@@ -460,9 +447,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Gestor II - Jurídica
   "236855": {
-    inscripcion: "1266734190",
-    aspirante: "ASPIRANTE GESTOR JURÍDICO (SIMULACIÓN OFICIAL)",
-    documento: "1065987123",
+    inscripcion: "236855",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236855",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236855",
     denominacion: "GESTOR II",
     nivel: "Profesional",
@@ -491,9 +478,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Inspector II - Fiscalización
   "236860": {
-    inscripcion: "1266712399",
-    aspirante: "ASPIRANTE INSPECTOR II (SIMULACIÓN OFICIAL)",
-    documento: "1018745231",
+    inscripcion: "236860",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236860",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236860",
     denominacion: "INSPECTOR II",
     nivel: "Profesional",
@@ -525,9 +512,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Facilitador III - Servicio y PQRSF
   "236815": {
-    inscripcion: "1266708912",
-    aspirante: "ASPIRANTE FACILITADOR III (SIMULACIÓN OFICIAL)",
-    documento: "1072938450",
+    inscripcion: "236815",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236815",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236815",
     denominacion: "FACILITADOR III",
     nivel: "Asistencial",
@@ -562,9 +549,9 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
   },
   // Facilitador II - Operativo y Archivo
   "236810": {
-    inscripcion: "1266701234",
-    aspirante: "ASPIRANTE FACILITADOR II (SIMULACIÓN OFICIAL)",
-    documento: "1081928374",
+    inscripcion: "236810",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236810",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236810",
     denominacion: "FACILITADOR II",
     nivel: "Asistencial",
