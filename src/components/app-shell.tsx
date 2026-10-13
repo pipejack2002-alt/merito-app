@@ -93,7 +93,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               >
                 <Sparkles className="size-3.5" />
                 <span>Bot Areandina</span>
-                <span className="rounded bg-accent/20 px-1 py-0.2 text-[9px] font-bold uppercase">
+                <span className="rounded bg-accent/20 px-1 py-0.5 text-[9px] font-bold uppercase">
                   24 Ejes
                 </span>
               </Link>
