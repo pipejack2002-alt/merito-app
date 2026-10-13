@@ -32,7 +32,7 @@ const NAV = [
     to: "/indicadores",
     label: "Paso 1 · Indicadores del Cargo",
     shortLabel: "Indicadores",
-    sub: "Los 24 aspectos que te evaluará la DIAN",
+    sub: "Los 24 aspectos de tu OPEC",
     icon: Sparkles,
     badge: "24 Ejes",
   },
