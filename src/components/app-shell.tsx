@@ -59,7 +59,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-40 border-b border-border/80 bg-surface/90 backdrop-blur-md">
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 lg:px-6">
             <Link to="/" className="flex min-w-0 items-center gap-3 group">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-slate-900 to-accent text-accent-fg shadow-xs ring-1 ring-black/5 group-hover:scale-102 transition-transform">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-linear-to-br from-slate-900 to-accent text-accent-fg shadow-xs ring-1 ring-black/5 group-hover:scale-102 transition-transform">
                 <span className="font-display text-[16px] font-black tracking-tight text-white">
                   M
                 </span>
@@ -110,7 +110,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               >
                 <Briefcase className="size-3.5 text-accent shrink-0" />
                 <div className="flex flex-col text-left">
-                  <span className="font-semibold text-xs leading-none truncate max-w-[120px] sm:max-w-[160px]">
+                  <span className="font-semibold text-xs leading-none truncate max-w-30 sm:max-w-40">
                     {cargo.shortLabel}
                   </span>
                   <span className="text-[10px] text-muted leading-tight mt-0.5">
@@ -249,7 +249,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     )}
                   >
                     <Icon className={cn("size-5", active ? "text-accent" : "text-subtle")} />
-                    <span className="truncate max-w-[54px]">{item.label.split(" ")[0]}</span>
+                    <span className="truncate max-w-14">{item.label.split(" ")[0]}</span>
                   </Link>
                 </li>
               );
