@@ -23,39 +23,45 @@ import { PricingModal } from "@/components/pricing-modal";
 const NAV = [
   {
     to: "/",
-    label: "Inicio",
+    label: "Panel Principal",
+    shortLabel: "Inicio",
     sub: "Resumen y estado de preparación",
     icon: Home,
   },
   {
     to: "/indicadores",
-    label: "24 Indicadores Oficiales",
-    sub: "Areandina · Matriz por OPEC",
+    label: "Paso 1 · Temario Oficial",
+    shortLabel: "Temario",
+    sub: "24 indicadores de tu cargo",
     icon: Sparkles,
     badge: "24 Ejes",
   },
   {
     to: "/estudio",
-    label: "Guías de Estudio",
-    sub: "Normas y resúmenes MERF",
+    label: "Paso 2 · Material de Estudio",
+    shortLabel: "Estudio",
+    sub: "Normativa y guías de tu empleo",
     icon: BookOpen,
   },
   {
     to: "/practica",
-    label: "Entrenador de Preguntas",
-    sub: "Casos reales con feedback",
+    label: "Paso 3 · Entrenador de Casos",
+    shortLabel: "Entrenar",
+    sub: "Preguntas con explicación inmediata",
     icon: ClipboardCheck,
   },
   {
     to: "/simulacro",
-    label: "Simulador con Cronómetro",
-    sub: "Prueba oficial en tiempo real",
+    label: "Paso 4 · Simulador de Examen",
+    shortLabel: "Simulacro",
+    sub: "Prueba oficial con cronómetro",
     icon: Flag,
   },
   {
     to: "/progreso",
-    label: "Mi Rendimiento y Fallos",
-    sub: "Diagnóstico y puntos a mejorar",
+    label: "Paso 5 · Diagnóstico y Fallos",
+    shortLabel: "Diagnóstico",
+    sub: "Probabilidad de pase y reporte PDF",
     icon: Layers,
   },
 ] as const;
@@ -169,16 +175,21 @@ export function AppShell({ children }: { children: ReactNode }) {
       {examMode ? (
         <main className="mx-auto max-w-4xl px-4 pb-12 pt-6 flex-1 w-full">{children}</main>
       ) : (
-        <div className="mx-auto flex max-w-6xl w-full flex-1 gap-6 lg:px-6">
+        <div className="mx-auto flex max-w-7xl w-full flex-1 gap-6 lg:px-6">
           {/* Barra Lateral Dinámica y Fluida */}
-          <aside className="sticky top-20 hidden h-[calc(100dvh-5.5rem)] w-64 shrink-0 py-3 pr-2 lg:flex lg:flex-col lg:justify-between overflow-y-auto">
-            <div className="space-y-4">
-              {/* Bloque de Navegación Principal con Subtítulos Amigables */}
+          <aside className="sticky top-20 hidden h-[calc(100dvh-5.5rem)] w-72 shrink-0 py-3 pr-2 lg:flex lg:flex-col lg:justify-between overflow-y-auto">
+            <div className="space-y-3.5">
+              {/* Bloque de Navegación Principal con Secuencia Paso a Paso */}
               <div className="rounded-2xl border border-border/70 bg-surface/80 p-3 shadow-2xs backdrop-blur-xs">
-                <p className="px-2 text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
-                  Menú de Estudio
-                </p>
-                <nav className="mt-2 flex flex-col gap-1">
+                <div className="flex items-center justify-between px-2 pb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
+                    Ruta de Preparación
+                  </p>
+                  <span className="rounded bg-accent/10 px-1.5 py-0.5 text-[9px] font-bold text-accent font-mono uppercase">
+                    5 Pasos
+                  </span>
+                </div>
+                <nav className="mt-1.5 flex flex-col gap-1">
                   {NAV.map((item) => {
                     const active =
                       item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
@@ -202,12 +213,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                             )}
                           />
                           <div className="flex flex-col min-w-0">
-                            <span className="truncate leading-tight font-medium text-xs">
+                            <span className="leading-tight font-medium text-xs whitespace-nowrap">
                               {item.label}
                             </span>
                             <span
                               className={cn(
-                                "text-[10px] leading-tight truncate mt-0.5",
+                                "text-[10px] leading-tight truncate mt-0.5 max-w-44",
                                 active ? "text-white/80" : "text-subtle",
                               )}
                             >
@@ -325,7 +336,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     )}
                   >
                     <Icon className={cn("size-5", active ? "text-accent" : "text-subtle")} />
-                    <span className="truncate max-w-14">{item.label.split(" ")[0]}</span>
+                    <span className="truncate max-w-14">{item.shortLabel}</span>
                   </Link>
                 </li>
               );
