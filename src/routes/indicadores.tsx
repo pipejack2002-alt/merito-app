@@ -205,6 +205,17 @@ function IndicadoresPage() {
           con la matriz del operador Areandina y calibra la plataforma para que tu entrenamiento sea 100% exacto.
         </p>
 
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-accent/30 bg-accent/5 p-3.5 text-xs">
+          <p className="text-muted leading-relaxed">
+            📘 <strong>¿Cómo prepararte para estos 24 indicadores?</strong> Esta lista es el índice oficial de tu prueba. Cada indicador está desarrollado con sus normas, leyes y explicaciones en el <strong>Paso 2 · Material de Estudio</strong>.
+          </p>
+          <Button asChild size="sm" variant="outline" className="shrink-0 gap-1 text-accent border-accent/40 hover:bg-accent/10 cursor-pointer">
+            <Link to="/estudio">
+              Ir al Material de Estudio →
+            </Link>
+          </Button>
+        </div>
+
         {/* ── Fechas Clave ── */}
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div className="flex items-center gap-3 rounded-xl border border-border/80 bg-paper/60 p-3">
