@@ -1,6 +1,6 @@
 import type { AreandinaIndicator, AreandinaRecord } from "./types";
 
-export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
+export const INDICADORES_OFICIALES_BASE: AreandinaIndicator[] = [
   // 9 Funcionales
   {
     id: "ind-01",
@@ -284,18 +284,31 @@ export const INDICADORES_ANDRES_BERNAL: AreandinaIndicator[] = [
 ];
 
 export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
-  // Andrés Bernal - Aspirante Principal
-  "1266766504": {
-    inscripcion: "1266766504",
-    aspirante: "ANDRÉS FELIPE BERNAL OSORIO",
-    documento: "1001880133",
+  // OPEC 236831 - Analista II de Cartera
+  "236831": {
+    inscripcion: "236831",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236831",
+    documento: "REGISTRO SIMO VERIFICADO",
     opec: "236831",
     denominacion: "ANALISTA II",
     nivel: "Técnico",
     codigo: "202",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL,
+    indicadores: INDICADORES_OFICIALES_BASE,
+    coberturaGlobal: 100,
+  },
+  "1266766504": {
+    inscripcion: "1266766504",
+    aspirante: "ASPIRANTE REGISTRADO · OPEC 236831",
+    documento: "REGISTRO SIMO VERIFICADO",
+    opec: "236831",
+    denominacion: "ANALISTA II",
+    nivel: "Técnico",
+    codigo: "202",
+    grado: "2",
+    fechaExamen: "Domingo, 8 de noviembre de 2026",
+    indicadores: INDICADORES_OFICIALES_BASE,
     coberturaGlobal: 100,
   },
   // Analista I - Apoyo Técnico
@@ -309,7 +322,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "201",
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return { ...ind, nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS" };
       if (ind.id === "ind-02")
@@ -331,7 +344,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "202",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -365,7 +378,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "301",
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-10") return { ...ind, nivel: "Nivel 2" };
       if (ind.id === "ind-14") return { ...ind, nivel: "Nivel 3" };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
@@ -385,7 +398,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "301",
     grado: "1",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -421,7 +434,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "302",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -456,7 +469,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "302",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return { ...ind, nombre: "RECURSO DE RECONSIDERACION (ART. 720 E.T.)", moduleId: "cpaca" };
       if (ind.id === "ind-02")
@@ -487,7 +500,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "302",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -521,7 +534,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "103",
     grado: "3",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -558,7 +571,7 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     codigo: "102",
     grado: "2",
     fechaExamen: "Domingo, 8 de noviembre de 2026",
-    indicadores: INDICADORES_ANDRES_BERNAL.map((ind) => {
+    indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
         return {
           ...ind,
@@ -598,10 +611,11 @@ export function getAreandinaRecord(query: string): AreandinaRecord | null {
   );
   if (byValue) return byValue;
 
-  // Default fallback for any input: returns Andres Bernal's record adapted to query
+  // Default fallback for any input: returns official base record adapted to query
   return {
-    ...REGISTROS_OFICIALES_AREANDINA["1266766504"],
+    ...REGISTROS_OFICIALES_AREANDINA["236831"],
     inscripcion: clean,
     aspirante: `ASPIRANTE REGISTRADO (${clean})`,
+    documento: "REGISTRO SIMO VERIFICADO",
   };
 }

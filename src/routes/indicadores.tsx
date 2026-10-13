@@ -28,72 +28,72 @@ export const Route = createFileRoute("/indicadores")({ component: IndicadoresPag
 const CARGOS_RAPIDOS = [
   {
     id: "analista-ii-cartera",
-    label: "Analista II Cartera (Andrés Bernal)",
+    label: "Analista II Cartera",
     opec: "236831",
-    inscr: "1266766504",
+    inscr: "236831",
     nivel: "Técnico",
   },
   {
     id: "analista-i-apoyo",
     label: "Analista I Apoyo Técnico",
     opec: "236829",
-    inscr: "1266741020",
+    inscr: "236829",
     nivel: "Técnico",
   },
   {
     id: "analista-ii-fiscalizacion",
     label: "Analista II Fiscalización",
     opec: "236835",
-    inscr: "1266752011",
+    inscr: "236835",
     nivel: "Técnico",
   },
   {
     id: "gestor-i-cartera",
     label: "Gestor I Cartera",
     opec: "236840",
-    inscr: "1266781203",
+    inscr: "236840",
     nivel: "Profesional",
   },
   {
     id: "gestor-i-aduanas",
     label: "Gestor I Aduanas",
     opec: "236845",
-    inscr: "1266795412",
+    inscr: "236845",
     nivel: "Profesional",
   },
   {
     id: "gestor-ii-fiscalizacion",
     label: "Gestor II Fiscalización",
     opec: "236850",
-    inscr: "1266779834",
+    inscr: "236850",
     nivel: "Profesional",
   },
   {
     id: "gestor-ii-juridico",
     label: "Gestor II Jurídica",
     opec: "236855",
-    inscr: "1266734190",
+    inscr: "236855",
     nivel: "Profesional",
   },
   {
     id: "inspector-ii-fiscalizacion",
     label: "Inspector II Fiscalización y Visitas",
     opec: "236860",
-    inscr: "1266712399",
+    inscr: "236860",
     nivel: "Profesional",
   },
   {
     id: "facilitador-iii-servicio",
     label: "Facilitador III Servicio y PQRSF",
     opec: "236815",
-    inscr: "1266708912",
+    inscr: "236815",
     nivel: "Asistencial",
   },
   {
     id: "facilitador-ii-operativo",
     label: "Facilitador II Operativo y Archivo",
     opec: "236810",
-    inscr: "1266701234",
+    inscr: "236810",
     nivel: "Asistencial",
   },
 ];
@@ -101,10 +101,8 @@ const CARGOS_RAPIDOS = [
 function IndicadoresPage() {
   const selectCargo = useCargoStore((s) => s.select);
 
-  const [inputNum, setInputNum] = useState("1266766504");
-  const [record, setRecord] = useState<AreandinaRecord>(
-    REGISTROS_OFICIALES_AREANDINA["1266766504"],
-  );
+  const [inputNum, setInputNum] = useState("236831");
+  const [record, setRecord] = useState<AreandinaRecord>(REGISTROS_OFICIALES_AREANDINA["236831"]);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"inscr" | "cargos">("inscr");
   const [filterType, setFilterType] = useState<
@@ -136,7 +134,9 @@ function IndicadoresPage() {
     } catch {
       // Fallback local
       const local =
-        REGISTROS_OFICIALES_AREANDINA[num] || REGISTROS_OFICIALES_AREANDINA["1266766504"];
+        REGISTROS_OFICIALES_AREANDINA[num] ||
+        REGISTROS_OFICIALES_AREANDINA["236831"] ||
+        REGISTROS_OFICIALES_AREANDINA["1266766504"];
       setRecord(local);
       setFeedback("✅ Mostrando indicadores oficiales verificados para este empleo.");
     } finally {
@@ -291,7 +291,7 @@ function IndicadoresPage() {
                   type="text"
                   value={inputNum}
                   onChange={(e) => setInputNum(e.target.value)}
-                  placeholder="Ej: 1266766504 (Número de inscripción de 10 dígitos)"
+                  placeholder="Ej: 236831 (Código OPEC) o número de inscripción oficial"
                   className="w-full rounded-xl border border-border bg-paper py-2.5 pl-9 pr-4 text-sm text-ink placeholder:text-muted/60 focus:border-accent focus:outline-none"
                 />
               </div>
@@ -312,46 +312,46 @@ function IndicadoresPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs text-muted font-medium">Accesos rápidos:</span>
+              <span className="text-xs text-muted font-medium">Accesos rápidos por OPEC:</span>
               <button
                 type="button"
                 onClick={() => {
-                  setInputNum("1266766504");
-                  void handleConsultar("1266766504");
+                  setInputNum("236831");
+                  void handleConsultar("236831");
                 }}
                 className="rounded-md border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
               >
-                ⭐ 1266766504 (Andrés Felipe Bernal · Analista II Cartera)
+                ⭐ OPEC 236831 · Analista II Cartera
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setInputNum("1266741020");
-                  void handleConsultar("1266741020");
+                  setInputNum("236829");
+                  void handleConsultar("236829");
                 }}
                 className="rounded-md border border-border bg-paper px-2.5 py-1 text-xs text-muted hover:text-ink transition-colors"
               >
-                1266741020 (Analista I)
+                OPEC 236829 (Analista I)
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setInputNum("1266781203");
-                  void handleConsultar("1266781203");
+                  setInputNum("236840");
+                  void handleConsultar("236840");
                 }}
                 className="rounded-md border border-border bg-paper px-2.5 py-1 text-xs text-muted hover:text-ink transition-colors"
               >
-                1266781203 (Gestor I)
+                OPEC 236840 (Gestor I)
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setInputNum("1266708912");
-                  void handleConsultar("1266708912");
+                  setInputNum("236815");
+                  void handleConsultar("236815");
                 }}
                 className="rounded-md border border-border bg-paper px-2.5 py-1 text-xs text-muted hover:text-ink transition-colors"
               >
-                1266708912 (Facilitador III)
+                OPEC 236815 (Facilitador III)
               </button>
             </div>
           </div>
@@ -380,7 +380,7 @@ function IndicadoresPage() {
                     </Badge>
                   </div>
                   <span className="mt-1 text-[11px] text-muted font-mono">
-                    OPEC {c.opec} · Inscr: {c.inscr}
+                    OPEC {c.opec} · {c.nivel} Grado {c.opec === "236831" ? "02" : "01"}
                   </span>
                 </button>
               ))}
@@ -401,54 +401,65 @@ function IndicadoresPage() {
           <div>
             <div className="flex items-center gap-2">
               <span className="flex size-2 rounded-full bg-ok animate-pulse" />
-              <p className="text-[11px] uppercase tracking-[0.14em] text-muted font-semibold">
-                Datos Oficiales del Aspirante en Areandina
-              </p>
+              <Badge
+                variant="outline"
+                className="text-[10px] uppercase tracking-[0.12em] font-semibold border-ok/40 bg-ok/10 text-ok"
+              >
+                Ficha Oficial Areandina · DIAN 2676
+              </Badge>
+              <span className="text-xs text-muted">Aspirante Admitido a Pruebas Escritas</span>
             </div>
 
             <h2 className="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">
-              {record.aspirante}
+              {record.denominacion} · OPEC {record.opec}
             </h2>
+            <p className="mt-1 text-xs sm:text-sm text-muted">
+              Nivel {record.nivel} · Grado {record.grado} · Convocatoria Nacional DIAN 2676
+            </p>
 
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">
-                  OPEC / Empleo
-                </span>
+                <span className="text-[10px] uppercase tracking-wider text-muted">Código OPEC</span>
                 <p className="text-sm font-bold text-accent font-mono">{record.opec}</p>
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">Cargo</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  Denominación
+                </span>
                 <p className="text-sm font-bold text-ink">{record.denominacion}</p>
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
                 <span className="text-[10px] uppercase tracking-wider text-muted">
-                  Nivel / Grado
+                  Nivel Jerárquico
                 </span>
                 <p className="text-sm font-bold text-ink">
-                  {record.nivel} · Grado {record.grado}
+                  {record.nivel} (Grado {record.grado})
                 </p>
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
                 <span className="text-[10px] uppercase tracking-wider text-muted">
-                  N° Inscripción
+                  Código Empleo
                 </span>
-                <p className="text-sm font-bold text-ink font-mono">{record.inscripcion}</p>
-              </div>
-
-              <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted">Cédula</span>
-                <p className="text-sm font-bold text-ink font-mono">{record.documento}</p>
+                <p className="text-sm font-bold text-ink font-mono">Cód. {record.codigo}</p>
               </div>
 
               <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
                 <span className="text-[10px] uppercase tracking-wider text-muted">
-                  Examen Escrito
+                  Estado Convocatoria
                 </span>
-                <p className="text-xs font-bold text-ink">8 Nov 2026</p>
+                <p className="text-xs font-bold text-ok flex items-center gap-1 mt-0.5">
+                  <CheckCircle2 className="size-3.5" /> Admitido a Pruebas
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-border/80 bg-paper/60 p-2.5">
+                <span className="text-[10px] uppercase tracking-wider text-muted">
+                  Jornada de Examen
+                </span>
+                <p className="text-xs font-bold text-ink font-mono">8 Nov 2026</p>
               </div>
             </div>
           </div>

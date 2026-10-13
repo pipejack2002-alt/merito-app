@@ -77,7 +77,7 @@ export const FICHA = {
     "Teoría de la imposición",
   ],
   opec: "236831",
-  inscripcion: "1266766504",
+  inscripcion: "236831",
   indicadoresAreandina: [
     {
       id: "1",
