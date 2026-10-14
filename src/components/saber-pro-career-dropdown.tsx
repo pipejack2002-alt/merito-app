@@ -59,36 +59,36 @@ export function SaberProCareerDropdown() {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2 rounded-xl border-2 border-emerald-600/50 bg-emerald-500/15 px-2.5 py-1.5 text-xs transition-all hover:bg-emerald-500/25 hover:border-emerald-600 shadow-2xs group cursor-pointer",
-          isOpen && "ring-2 ring-emerald-500 border-emerald-600 bg-surface",
+          "flex items-center gap-2 rounded-xl border-2 border-emerald-600/70 bg-emerald-100/90 px-2.5 py-1.5 text-xs transition-all hover:bg-emerald-200/90 hover:border-emerald-700 shadow-2xs group cursor-pointer",
+          isOpen && "ring-2 ring-emerald-500 border-emerald-700 bg-white",
         )}
       >
-        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-bold group-hover:scale-105 transition-transform shadow-2xs">
+        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-700 text-white font-bold group-hover:scale-105 transition-transform shadow-2xs">
           <GraduationCap className="size-4 text-white" />
         </div>
 
         <div className="flex flex-col text-left">
           <div className="flex items-center gap-1.5">
-            <span className="font-black text-xs leading-none text-slate-950 dark:text-white truncate max-w-28 sm:max-w-36">
+            <span className="font-black text-xs leading-none text-slate-950 truncate max-w-28 sm:max-w-36">
               {currentCareer.name}
             </span>
             <Badge
               variant="outline"
-              className="px-1.5 py-0 text-[9px] font-black uppercase text-emerald-950 dark:text-emerald-100 border-emerald-600/60 bg-emerald-500/25 hidden sm:inline-flex"
+              className="px-1.5 py-0 text-[9px] font-black uppercase text-emerald-950 border border-emerald-700/60 bg-emerald-200 hidden sm:inline-flex"
             >
               Saber Pro
             </Badge>
           </div>
-          <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium leading-tight mt-0.5 flex items-center gap-1">
+          <span className="text-[10px] text-slate-700 font-semibold leading-tight mt-0.5 flex items-center gap-1">
             <span>Prueba Específica</span>
-            <span className="text-slate-500 font-normal">· Cambiar</span>
+            <span className="text-slate-600 font-normal">· Cambiar</span>
           </span>
         </div>
 
         <ChevronDown
           className={cn(
-            "size-3.5 text-slate-700 dark:text-slate-300 transition-transform duration-200 shrink-0 ml-0.5",
-            isOpen && "rotate-180 text-emerald-600",
+            "size-3.5 text-emerald-800 transition-transform duration-200 shrink-0 ml-0.5",
+            isOpen && "rotate-180 text-emerald-900",
           )}
         />
       </button>

@@ -159,10 +159,10 @@ export function SaberProPage() {
                   type="button"
                   onClick={() => selectCareer(career.id)}
                   className={cn(
-                    "rounded-xl border px-3 py-1.5 text-xs transition-all cursor-pointer",
+                    "rounded-xl border-2 px-3 py-1.5 text-xs transition-all cursor-pointer",
                     selectedCareerId === career.id
                       ? "border-emerald-600 bg-emerald-600 text-white shadow-xs font-black"
-                      : "border-border/90 bg-surface text-slate-800 dark:text-slate-200 font-bold hover:border-emerald-500 hover:text-emerald-950 hover:bg-emerald-50/50 shadow-2xs",
+                      : "border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:text-emerald-950 hover:bg-emerald-50 shadow-2xs",
                   )}
                 >
                   {career.name}
@@ -171,28 +171,28 @@ export function SaberProPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
+          <div className="rounded-xl border-2 border-emerald-600/40 bg-emerald-50/80 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+              <span className="text-[11px] font-black uppercase tracking-wider text-emerald-950 font-mono">
                 Sprint 4 Días
               </span>
-              <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-black text-emerald-900 dark:text-emerald-200">
+              <span className="rounded bg-emerald-200 border border-emerald-400 px-2 py-0.5 text-[10px] font-black text-emerald-950">
                 ICFES 0-300 pts
               </span>
             </div>
             <div className="space-y-1">
-              <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-emerald-600" />
+              <p className="text-xs font-black text-slate-950 flex items-center gap-1.5">
+                <Sparkles className="size-3.5 text-emerald-700" />
                 Objetivo Nivel 4 (Avanzado)
               </p>
-              <p className="text-[11px] text-muted leading-relaxed">
+              <p className="text-[11px] text-slate-700 leading-relaxed font-medium">
                 Prioriza las 4 fórmulas de Gestión Financiera y los 3 criterios de dictamen NIA
                 700/705 que más puntúan.
               </p>
             </div>
-            <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs">
-              <span className="text-muted">Carrera activa:</span>
-              <span className="font-semibold text-ink truncate max-w-36">
+            <div className="pt-2 border-t border-emerald-600/20 flex items-center justify-between text-xs">
+              <span className="text-slate-600 font-medium">Carrera activa:</span>
+              <span className="font-black text-slate-950 truncate max-w-36">
                 {selectedCareer.name}
               </span>
             </div>
@@ -208,11 +208,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "resumen"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Award className="size-4" />
+            <Award className={cn("size-4", activeTab === "resumen" ? "text-white" : "text-emerald-700")} />
             Panel Principal
           </Button>
 
@@ -223,11 +223,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "practica"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <BookOpen className="size-4" />
+            <BookOpen className={cn("size-4", activeTab === "practica" ? "text-white" : "text-emerald-700")} />
             Paso 1 · Entrenador de Preguntas
           </Button>
 
@@ -238,11 +238,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "simulacro"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Clock className="size-4" />
+            <Clock className={cn("size-4", activeTab === "simulacro" ? "text-white" : "text-emerald-700")} />
             Paso 2 · Simulador Cronometrado (0-300)
           </Button>
 
@@ -253,11 +253,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "chuleta"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Zap className={cn("size-4", activeTab === "chuleta" ? "text-white" : "text-emerald-600")} />
+            <Zap className={cn("size-4", activeTab === "chuleta" ? "text-white" : "text-emerald-700")} />
             Paso 3 · Chuleta de Fórmulas
           </Button>
 
@@ -268,11 +268,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "estructura"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Layers className="size-4" />
+            <Layers className={cn("size-4", activeTab === "estructura" ? "text-white" : "text-emerald-700")} />
             Paso 4 · Estructura ICFES
           </Button>
 
@@ -283,11 +283,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "diagnostico"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Shield className="size-4" />
+            <Shield className={cn("size-4", activeTab === "diagnostico" ? "text-white" : "text-emerald-700")} />
             Paso 5 · Diagnóstico y Fallos
           </Button>
 
@@ -298,11 +298,11 @@ export function SaberProPage() {
             className={cn(
               "gap-2 cursor-pointer transition-all",
               activeTab === "glosario"
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
-                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-sm ring-2 ring-emerald-500"
+                : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-950 shadow-xs",
             )}
           >
-            <Languages className="size-4" />
+            <Languages className={cn("size-4", activeTab === "glosario" ? "text-white" : "text-emerald-700")} />
             Paso 6 · Traductor de Jerga ICFES
           </Button>
         </div>
@@ -400,10 +400,10 @@ function SaberProOverviewTab({
 
         <div className="rounded-2xl border border-emerald-500/40 bg-surface p-5 space-y-2 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+            <span className="text-[10px] font-black uppercase tracking-wider text-emerald-950 font-mono">
               Puntaje Estimado
             </span>
-            <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-black text-emerald-900 dark:text-emerald-200 font-mono">
+            <span className="rounded bg-emerald-200 border border-emerald-400 px-2 py-0.5 text-[10px] font-black text-emerald-950 font-mono">
               Escala 0-300
             </span>
           </div>

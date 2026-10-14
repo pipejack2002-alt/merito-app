@@ -256,19 +256,19 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   isSaberPro
                     ? "bg-emerald-600 text-white border border-emerald-500 shadow-sm"
-                    : "border border-border/80 bg-paper/60 text-slate-800 hover:text-ink hover:border-accent hover:bg-surface",
+                    : "border-2 border-emerald-600/40 bg-emerald-50/70 text-slate-950 hover:border-emerald-600 hover:bg-emerald-100",
                 )}
               >
                 <GraduationCap
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-white" : "text-emerald-700 dark:text-emerald-300",
+                    isSaberPro ? "text-white" : "text-emerald-700",
                   )}
                 />
                 <span
                   className={cn(
-                    "font-extrabold tracking-tight",
-                    isSaberPro ? "text-white" : "text-slate-900 dark:text-white",
+                    "font-black tracking-tight",
+                    isSaberPro ? "text-white" : "text-slate-950",
                   )}
                 >
                   Saber Pro
@@ -278,7 +278,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     "rounded px-1.5 py-0.5 text-[9px] font-black uppercase font-mono tracking-wider",
                     isSaberPro
                       ? "bg-emerald-800 text-emerald-100 border border-emerald-400/40"
-                      : "bg-paper text-muted border border-border/70",
+                      : "bg-emerald-200/80 text-emerald-950 border border-emerald-400/60",
                   )}
                 >
                   18 Oct
@@ -292,12 +292,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   !isSaberPro
                     ? "bg-accent text-white shadow-xs border border-accent"
-                    : "border border-border/80 bg-paper/60 text-slate-800 hover:text-ink hover:border-emerald-500 hover:bg-surface",
+                    : "border-2 border-sky-600/40 bg-sky-50/70 text-slate-950 hover:border-accent hover:bg-sky-100",
                 )}
               >
-                <Briefcase className="size-3.5" />
-                <span className="hidden sm:inline">Concurso</span>
-                <span>DIAN 2676</span>
+                <Briefcase className={cn("size-3.5", !isSaberPro ? "text-white" : "text-accent")} />
+                <span className={cn("hidden sm:inline font-bold", !isSaberPro ? "text-white" : "text-slate-900")}>Concurso</span>
+                <span className={cn("font-black", !isSaberPro ? "text-white" : "text-slate-950")}>DIAN 2676</span>
               </Link>
 
               {/* 3. Botón de Guía Paso a Paso: ¿Cómo empezar? (Visible en ambos modos con alto contraste) */}
@@ -305,20 +305,20 @@ export function AppShell({ children }: { children: ReactNode }) {
                 type="button"
                 onClick={() => setIsRoadmapOpen(true)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-2xs transition-all cursor-pointer",
+                  "inline-flex items-center gap-1.5 rounded-xl border-2 px-2.5 py-1.5 text-xs font-black shadow-2xs transition-all cursor-pointer",
                   isSaberPro
-                    ? "border-2 border-emerald-600/60 bg-emerald-500/20 text-slate-950 dark:text-white hover:bg-emerald-500/30"
-                    : "border border-border/80 bg-paper/60 text-slate-900 dark:text-white hover:border-accent hover:bg-surface",
+                    ? "border-emerald-600/60 bg-emerald-100/90 text-slate-950 hover:bg-emerald-200/90 hover:border-emerald-700"
+                    : "border-sky-300 bg-sky-50 text-slate-950 hover:border-accent hover:bg-sky-100",
                 )}
               >
                 <Compass
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-emerald-700 dark:text-emerald-300" : "text-accent",
+                    isSaberPro ? "text-emerald-800" : "text-accent",
                   )}
                 />
-                <span className="hidden sm:inline">¿Cómo empezar?</span>
-                <span className="sm:hidden">Guía</span>
+                <span className="hidden sm:inline text-slate-950 font-black">¿Cómo empezar?</span>
+                <span className="sm:hidden text-slate-950 font-black">Guía</span>
               </button>
 
               {/* 4. Botón de Indicadores Oficiales (solo en DIAN) */}
@@ -326,14 +326,14 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   to="/indicadores"
                   className={cn(
-                    "hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent hover:bg-accent/20 transition-all font-semibold shadow-2xs",
+                    "hidden sm:inline-flex items-center gap-1.5 rounded-xl border-2 border-sky-300 bg-sky-50 px-3 py-1.5 text-xs text-slate-950 hover:bg-sky-100 transition-all font-black shadow-2xs",
                     pathname.startsWith("/indicadores") &&
                       "bg-accent text-white border-accent shadow-xs",
                   )}
                 >
-                  <Sparkles className="size-3.5" />
-                  <span>Indicadores Oficiales</span>
-                  <span className="rounded bg-accent/20 px-1 py-0.5 text-[9px] font-bold uppercase font-mono">
+                  <Sparkles className="size-3.5 text-accent" />
+                  <span className="text-slate-950 font-black">Indicadores Oficiales</span>
+                  <span className="rounded bg-sky-200 text-sky-950 px-1 py-0.5 text-[9px] font-black uppercase font-mono border border-sky-300">
                     24 Ejes
                   </span>
                 </Link>
@@ -344,19 +344,19 @@ export function AppShell({ children }: { children: ReactNode }) {
                 type="button"
                 onClick={() => setIsPricingOpen(true)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-2xs transition-all cursor-pointer",
+                  "inline-flex items-center gap-1.5 rounded-xl border-2 px-2.5 py-1.5 text-xs font-black shadow-2xs transition-all cursor-pointer",
                   isSaberPro
-                    ? "border-2 border-emerald-600/60 bg-emerald-500/20 text-slate-950 dark:text-white hover:bg-emerald-500/30"
-                    : "border-accent/60 bg-linear-to-r from-accent/15 to-accent/5 text-accent hover:bg-accent/25",
+                    ? "border-emerald-600/60 bg-emerald-100/90 text-slate-950 hover:bg-emerald-200/90 hover:border-emerald-700"
+                    : "border-amber-400 bg-amber-50 text-slate-950 hover:bg-amber-100 hover:border-amber-500",
                 )}
               >
                 <Crown
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-emerald-700 dark:text-emerald-300" : "text-accent",
+                    isSaberPro ? "text-emerald-800" : "text-amber-600",
                   )}
                 />
-                <span>Planes Pro</span>
+                <span className="text-slate-950 font-black">Planes Pro</span>
               </button>
 
               {/* 6. Selector de Perfil Rápido: Carrera en Saber Pro / Cargo en DIAN */}
