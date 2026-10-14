@@ -16,6 +16,7 @@ import { Route as FuentesRouteImport } from './routes/fuentes'
 import { Route as GuiaRouteImport } from './routes/guia'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ProgresoRouteImport } from './routes/progreso'
+import { Route as SaberProRouteImport } from './routes/saber-pro'
 import { Route as TarjetasRouteImport } from './routes/tarjetas'
 import { Route as EstudioIndexRouteImport } from './routes/estudio/index'
 import { Route as EstudioSlugRouteImport } from './routes/estudio/$slug'
@@ -57,6 +58,11 @@ const IndicadoresRoute = IndicadoresRouteImport.update({
 const ProgresoRoute = ProgresoRouteImport.update({
   id: '/progreso',
   path: '/progreso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaberProRoute = SaberProRouteImport.update({
+  id: '/saber-pro',
+  path: '/saber-pro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TarjetasRoute = TarjetasRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/guia': typeof GuiaRoute
   '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
+  '/saber-pro': typeof SaberProRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
   '/practica/$bank': typeof PracticaBankRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/guia': typeof GuiaRoute
   '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
+  '/saber-pro': typeof SaberProRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
   '/practica/$bank': typeof PracticaBankRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/guia': typeof GuiaRoute
   '/indicadores': typeof IndicadoresRoute
   '/progreso': typeof ProgresoRoute
+  '/saber-pro': typeof SaberProRoute
   '/tarjetas': typeof TarjetasRoute
   '/estudio/$slug': typeof EstudioSlugRoute
   '/practica/$bank': typeof PracticaBankRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/guia'
     | '/indicadores'
     | '/progreso'
+    | '/saber-pro'
     | '/tarjetas'
     | '/estudio/$slug'
     | '/practica/$bank'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/guia'
     | '/indicadores'
     | '/progreso'
+    | '/saber-pro'
     | '/tarjetas'
     | '/estudio/$slug'
     | '/practica/$bank'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/guia'
     | '/indicadores'
     | '/progreso'
+    | '/saber-pro'
     | '/tarjetas'
     | '/estudio/$slug'
     | '/practica/$bank'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   GuiaRoute: typeof GuiaRoute
   IndicadoresRoute: typeof IndicadoresRoute
   ProgresoRoute: typeof ProgresoRoute
+  SaberProRoute: typeof SaberProRoute
   TarjetasRoute: typeof TarjetasRoute
   EstudioSlugRoute: typeof EstudioSlugRoute
   PracticaBankRoute: typeof PracticaBankRoute
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/progreso'
       fullPath: '/progreso'
       preLoaderRoute: typeof ProgresoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saber-pro': {
+      id: '/saber-pro'
+      path: '/saber-pro'
+      fullPath: '/saber-pro'
+      preLoaderRoute: typeof SaberProRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tarjetas': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuiaRoute: GuiaRoute,
   IndicadoresRoute: IndicadoresRoute,
   ProgresoRoute: ProgresoRoute,
+  SaberProRoute: SaberProRoute,
   TarjetasRoute: TarjetasRoute,
   EstudioSlugRoute: EstudioSlugRoute,
   PracticaBankRoute: PracticaBankRoute,

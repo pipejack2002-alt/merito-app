@@ -4,11 +4,13 @@ import {
   ArrowRight,
   BookOpen,
   Briefcase,
+  Calendar,
   CheckCircle2,
   ClipboardCheck,
   Compass,
   FileText,
   Flag,
+  GraduationCap,
   Scale,
   Sparkles,
 } from "lucide-react";
@@ -134,6 +136,39 @@ function Home() {
                 <Link to="/indicadores">
                   <Sparkles className="size-4" />
                   Consultar Indicadores
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Banner Especial Saber Pro 2026 (Examen 18 Octubre) ── */}
+        <div className="mt-4 rounded-xl border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-surface p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Badge className="bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider">
+                  Módulo Extra · Saber Pro 2026
+                </Badge>
+                <span className="flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400">
+                  <Calendar className="size-3.5" />
+                  Domingo 18 de Octubre (Sprint Final)
+                </span>
+              </div>
+              <h3 className="font-display text-base sm:text-lg font-bold text-ink">
+                Entrenador Intensivo Saber Pro 2026: Genéricas y Contaduría Pública
+              </h3>
+              <p className="text-xs text-muted max-w-xl">
+                Domina la Sesión 1 obligatoria (Lectura Crítica, Razonamiento Cuantitativo, Ciudadanas, Inglés) y la Sesión 2 específica (Gestión Financiera y NIAs) con simulador oficial y chuleta de fórmulas.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-xs">
+                <Link to="/saber-pro">
+                  <GraduationCap className="size-4" />
+                  Entrenar Saber Pro
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>

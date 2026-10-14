@@ -7,6 +7,7 @@ import {
   Compass,
   Crown,
   Flag,
+  GraduationCap,
   Home,
   Layers,
   Shield,
@@ -129,6 +130,22 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Link>
 
             <div className="flex items-center gap-2 sm:gap-2.5">
+              {/* Botón de Acceso Saber Pro 2026 */}
+              <Link
+                to="/saber-pro"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-xl border border-amber-500/50 bg-amber-500/10 px-2.5 py-1.5 text-xs text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-all font-bold shadow-2xs",
+                  pathname.startsWith("/saber-pro") &&
+                    "bg-amber-500 text-white border-amber-500 shadow-xs dark:text-white",
+                )}
+              >
+                <GraduationCap className="size-3.5 text-amber-500" />
+                <span>Saber Pro</span>
+                <span className="rounded bg-amber-500/20 px-1 py-0.5 text-[9px] font-bold uppercase font-mono">
+                  18 Oct
+                </span>
+              </Link>
+
               {/* Botón de Guía Paso a Paso */}
               <button
                 type="button"
@@ -243,6 +260,28 @@ export function AppShell({ children }: { children: ReactNode }) {
                   })}
                 </nav>
               </div>
+
+              {/* Tarjeta Destacada Saber Pro 2026 (Examen 18 Oct) */}
+              <Link
+                to="/saber-pro"
+                className="w-full rounded-2xl border border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-surface to-amber-500/5 p-3.5 text-left transition-all hover:border-amber-500 hover:shadow-xs group cursor-pointer block"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 flex items-center gap-1 font-mono">
+                    <GraduationCap className="size-3 text-amber-500" />
+                    Saber Pro 2026
+                  </span>
+                  <span className="rounded bg-amber-500/20 px-1.5 py-0.5 text-[9px] font-bold text-amber-600 dark:text-amber-400 font-mono">
+                    18 Octubre
+                  </span>
+                </div>
+                <p className="mt-1 font-display font-bold text-xs text-ink">
+                  Módulo Oficial Saber Pro
+                </p>
+                <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                  Entrenador intensivo: Genéricas y Contaduría Pública con simulación oficial.
+                </p>
+              </Link>
 
               {/* Tarjeta de Guía Paso a Paso */}
               <button
