@@ -2579,7 +2579,7 @@ function SaberProGlossaryTab({
 
                     {/* Ejemplo práctico de debate o caso real */}
                     <div className="rounded-xl border border-border/80 bg-paper/60 p-3 space-y-1 font-serif">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-sans font-mono">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
                         Ejemplo real / Debate:
                       </span>
                       <p className="text-xs sm:text-sm text-ink/90 italic leading-relaxed">
