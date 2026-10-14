@@ -852,6 +852,532 @@ export const SABER_PRO_QUESTIONS: SaberProQuestion[] = [
     explanation:
       "Regla de la NIC 12: Cuando la base fiscal del activo ($90.000.000) es MAYOR que el valor en libros contable ($80.000.000), se genera una Diferencia Temporaria DEDUCIBLE ($10.000.000). En periodos futuros, la empresa podrá deducir fiscalmente ese mayor valor, reduciendo su pago de impuestos futuro. Por tanto: Activo por Impuesto Diferido = $10.000.000 × 35% = $3.500.000 COP.",
   },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 17. SESIÓN 1 · GENÉRICAS ADICIONALES · LECTURA CRÍTICA (Nivel 4 Avanzado)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-lc-05",
+    session: "generica",
+    areaId: "lectura-critica",
+    areaLabel: "Lectura Crítica",
+    competency: "Evaluar la solidez de una argumentación y detectar sesgos cognitivos en el discurso",
+    source: "Banco Oficial ICFES Saber Pro · Lectura Crítica",
+    contextText:
+      "«Las plataformas de redes sociales han optimizado sus algoritmos para maximizar el tiempo de retención mediante el sesgo de confirmación. Al priorizar contenidos que refuerzan las convicciones previas de los usuarios y ocultar puntos de vista divergentes, crean cámaras de eco impermeables al debate racional. El resultado no es una plaza pública plural, sino una fragmentación tribal donde cualquier evidencia contraria es descartada como conspiración enemiga.»",
+    stem: "¿Cuál de los siguientes enunciados representa la consecuencia argumentativa medular que se desprende de la postura del autor?",
+    choices: [
+      { id: "A", text: "La polarización digital no es un accidente técnico imprevisto, sino el resultado directo del modelo de negocio algorítmico basado en la retención emocional." },
+      { id: "B", text: "Los usuarios de redes sociales carecen de criterio moral e intelectual para navegar en internet." },
+      { id: "C", text: "El debate democrático presencial siempre ha sido inmune a las falacias y a las cámaras de eco." },
+      { id: "D", text: "Todas las redes sociales deberían ser nacionalizadas y administradas por comités estatales de censura." },
+    ],
+    correct: "A",
+    explanation:
+      "El autor articula claramente que el diseño algorítmico diseñado para maximizar la permanencia ('tiempo de retención') estimula el sesgo de confirmación y fractura el debate democrático en cámaras de eco. La opción A sintetiza esta implicación de forma rigurosa y sin exageraciones.",
+    methodTip:
+      "Técnica para Implicaciones y Consecuencias: Identifica la relación causa-efecto que propone el texto. Descarta opciones absolutistas (como 'carecen de criterio', 'siempre ha sido', 'todas deberían ser censuradas').",
+  },
+  {
+    id: "sp-lc-06",
+    session: "generica",
+    areaId: "lectura-critica",
+    areaLabel: "Lectura Crítica",
+    competency: "Identificar y evaluar falacias lógicas en debates socioeconómicos",
+    source: "Módulo Oficial Lectura Crítica ICFES",
+    contextText:
+      "En una mesa de concertación salarial, un gremio empresarial afirma: «Si aumentamos el salario mínimo por encima de la inflación proyectada, las empresas entrarán en quiebra masiva, el desempleo escalará al 30% y la economía nacional colapsará inexorablemente. Por consiguiente, el salario no puede incrementarse más de un 1%».",
+    stem: "¿Qué falacia argumentativa predomina en el razonamiento del vocero gremial?",
+    choices: [
+      { id: "A", text: "Falacia de la pendiente resbaladiza (slippery slope), al concatenar consecuencias catastróficas inevitables sin demostrar el vínculo causal necesario entre cada una." },
+      { id: "B", text: "Apelación a la autoridad (ad verecundiam), pues cita estudios del Banco Central." },
+      { id: "C", text: "Argumento ad baculum (apelación al bastón), pues amenaza con violencia física." },
+      { id: "D", text: "Generalización apresurada por inducción con muestra insuficiente." },
+    ],
+    correct: "A",
+    explanation:
+      "La falacia de la 'pendiente resbaladiza' consiste en sostener que un primer paso moderado (aumentar el salario por encima de la inflación) desencadenará de forma inexorable e incontrolable una cadena de eventos catastróficos extremos (quiebra masiva -> 30% desempleo -> colapso nacional) sin aportar pruebas de dicha inevitabilidad.",
+    methodTip:
+      "Detectar Pendiente Resbaladiza: Busca la estructura «Si ocurre A, entonces indefectiblemente ocurrirá B, luego C y finalmente la catástrofe Z». Si no se prueba la relación forzosa entre cada eslabón, es pendiente resbaladiza.",
+  },
+  {
+    id: "sp-lc-07",
+    session: "generica",
+    areaId: "lectura-critica",
+    areaLabel: "Lectura Crítica",
+    competency: "Comprensión de textos filosóficos y marcos éticos",
+    source: "ICFES Saber Pro",
+    contextText:
+      "«Obra de tal modo que uses la humanidad, tanto en tu persona como en la persona de cualquier otro, siempre como un fin al mismo tiempo y nunca meramente como un medio. Aquel que formula una promesa mentirosa con el propósito de salir de un apuro financiero utiliza a su semejante exclusivamente como un instrumento, un objeto instrumental para su conveniencia momentánea.» (Immanuel Kant, Fundamentación de la metafísica de las costumbres).",
+    stem: "¿En qué consiste la infracción moral fundamental según el imperativo categórico kantiano expuesto en el fragmento?",
+    choices: [
+      { id: "A", text: "En no calcular si la mentira produce mayor placer neto que la verdad para la mayoría de los involucrados." },
+      { id: "B", text: "En instrumentalizar la dignidad racional de otra persona reduciéndola a un simple medio para un fin egoísta." },
+      { id: "C", text: "En desacatar las leyes comerciales expedidas por el tribunal de comercio." },
+      { id: "D", text: "En prestar dinero a personas que no cuentan con garantías hipotecarias suficientes." },
+    ],
+    correct: "B",
+    explanation:
+      "La segunda formulación del imperativo categórico kantiano exige respetar el valor intrínseco de cada ser humano como fin en sí mismo. Mentir para obtener dinero vulnera la autonomía del otro y lo degrada a un mero instrumento funcional para un fin propio.",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 18. SESIÓN 1 · GENÉRICAS ADICIONALES · RAZONAMIENTO CUANTITATIVO
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-rc-05",
+    session: "generica",
+    areaId: "razonamiento-cuantitativo",
+    areaLabel: "Razonamiento Cuantitativo",
+    competency: "Formulación y ejecución de modelos de tasas de interés y matemática financiera",
+    source: "Banco Oficial ICFES Razonamiento Cuantitativo",
+    contextText:
+      "Un microempresario necesita un crédito de liquidez de $20.000.000 COP a 1 año y compara dos propuestas bancarias:\n- Banco A: Tasa del 24% Efectiva Anual (E.A.).\n- Banco B: Tasa del 2% Nominal Mes Vencido (interés mensual simple de 2% capitalizable mensualmente).",
+    stem: "Al comparar el costo financiero real de ambas ofertas al cabo del año, ¿cuál es la conclusión matemáticamente correcta?",
+    choices: [
+      { id: "A", text: "Ambas opciones son exactamente iguales porque 2% mensual multiplicado por 12 meses equivale al 24% anual." },
+      { id: "B", text: "El Banco A es más económico, porque el 2% mensual capitalizable del Banco B equivale a una Tasa Efectiva Anual superior al 26.82% (1.02^12 - 1 ≈ 26.82% E.A.)." },
+      { id: "C", text: "El Banco B es más económico porque las cuotas mensuales son fijas sin amortización." },
+      { id: "D", text: "El Banco A cobra un 4% adicional de comisión de desembolso no revelado en el enunciado." },
+    ],
+    correct: "B",
+    explanation:
+      "Debido al interés compuesto, la tasa efectiva anual correspondiente al 2% mensual es: (1 + 0.02)^12 - 1 = (1.26824) - 1 = 26.824% E.A. Por ende, el Banco A (24% E.A.) resulta más económico que el Banco B (~26.82% E.A.). Multiplicar 2% × 12 = 24% es el error común de confundir tasa nominal con tasa efectiva.",
+    methodTip:
+      "Tasa Efectiva vs. Nominal: Nunca sumes ni multipliques linealmente tasas mensuales cuando hay capitalización de intereses. La fórmula (1 + i_m)^12 siempre resulta mayor que 12 × i_m.",
+  },
+  {
+    id: "sp-rc-06",
+    session: "generica",
+    areaId: "razonamiento-cuantitativo",
+    areaLabel: "Razonamiento Cuantitativo",
+    competency: "Interpretación estadística de diagramas de caja y bigotes (Boxplot)",
+    source: "ICFES Saber Pro Cuantitativo",
+    contextText:
+      "En una auditoría de tiempos de atención, se analiza el diagrama de caja y bigotes del tiempo (en minutos) que tardan dos oficinas en resolver peticiones ciudadanas:\n- Oficina Centro: Mínimo = 5 min, Q1 = 12 min, Mediana (Q2) = 18 min, Q3 = 25 min, Máximo = 35 min.\n- Oficina Norte: Mínimo = 10 min, Q1 = 20 min, Mediana (Q2) = 28 min, Q3 = 38 min, Máximo = 50 min.",
+    stem: "Con base estricta en los parámetros del diagrama, ¿cuál afirmación es indudablemente cierta?",
+    choices: [
+      { id: "A", text: "Al menos el 50% de las peticiones en la Oficina Centro se resuelven en 18 minutos o menos, mientras que en la Oficina Norte el 50% tarda 28 minutos o menos." },
+      { id: "B", text: "La Oficina Norte atendió el doble de ciudadanos que la Oficina Centro." },
+      { id: "C", text: "El promedio aritmético de la Oficina Centro es forzosamente 18 minutos." },
+      { id: "D", text: "Ninguna petición en la Oficina Norte demoró menos de 20 minutos." },
+    ],
+    correct: "A",
+    explanation:
+      "Por definición estadística, la Mediana (Q2) divide la distribución ordenada en dos mitades exactas (50% de las observaciones por debajo y 50% por encima). En Centro la mediana es 18 min (50% ≤ 18 min) y en Norte es 28 min (50% ≤ 28 min).",
+    methodTip:
+      "Claves de Boxplot para el ICFES:\n- Q1 = percentil 25 (el 25% está por debajo).\n- Mediana (Q2) = percentil 50 (la mitad de los datos está por debajo).\n- Q3 = percentil 75.\n- El boxplot NO indica el total de personas evaluadas (la opción B es indemostrable).",
+  },
+  {
+    id: "sp-rc-07",
+    session: "generica",
+    areaId: "razonamiento-cuantitativo",
+    areaLabel: "Razonamiento Cuantitativo",
+    competency: "Modelación matemática y resolución de sistemas de inecuaciones",
+    source: "Banco Oficial ICFES Razonamiento Cuantitativo",
+    contextText:
+      "Un distribuidor farmacéutico dispone de $12.000.000 COP de presupuesto para adquirir dos medicamentos genéricos A y B. El frasco de A cuesta $30.000 COP y el frasco de B cuesta $40.000 COP. Por espacio de bodega, el número total de frascos (A + B) no puede superar las 350 unidades. Además, la secretaría de salud exige comprar al menos 100 frascos de A.",
+    stem: "¿Cuál de las siguientes combinaciones de compra es factible cumpliendo simultáneamente todas las restricciones de presupuesto, espacio y exigencia sanitaria?",
+    choices: [
+      { id: "A", text: "150 frascos de A y 200 frascos de B." },
+      { id: "B", text: "200 frascos de A y 150 frascos de B." },
+      { id: "C", text: "50 frascos de A y 250 frascos de B." },
+      { id: "D", text: "250 frascos de A y 150 frascos de B." },
+    ],
+    correct: "B",
+    explanation:
+      "Verificación para la opción B (200 de A y 150 de B):\n1) Restricción de espacio: 200 + 150 = 350 unidades (cumple, ≤ 350).\n2) Restricción sanitaria: A = 200 ≥ 100 (cumple).\n3) Restricción presupuestal: (200 × $30.000) + (150 × $40.000) = $6.000.000 + $6.000.000 = $12.000.000 COP (cumple, ≤ $12.000.000).\nLa opción A supera el presupuesto (150 × 30k + 200 × 40k = $12.5M). La C incumple A ≥ 100. La D supera el espacio (400 unidades).",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 19. SESIÓN 1 · GENÉRICAS ADICIONALES · COMPETENCIAS CIUDADANAS
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-cc-05",
+    session: "generica",
+    areaId: "competencias-ciudadanas",
+    areaLabel: "Competencias Ciudadanas",
+    competency: "Diferenciación de acciones constitucionales (Tutela vs. Popular vs. Grupo)",
+    source: "Constitución Política de Colombia (Arts. 86, 87 y 88) · ICFES",
+    contextText:
+      "El desbordamiento de una laguna de oxidación de una empresa química vierte aguas residuales tóxicas sobre un río comunal, destruyendo la fauna acuática y contaminando el agua que usan 5.000 habitantes. Adicionalmente, el agua contaminada causó la pérdida de las cosechas de peces de 40 piscicultores locales claramente individualizados, causándoles un daño patrimonial directo a cada uno.",
+    stem: "¿Cuáles son las dos acciones constitucionales que proceden respectivamente: 1) para detener la contaminación del río y proteger el derecho colectivo al medio ambiente sano; y 2) para obtener la indemnización económica individual de los perjuicios sufridos por los piscicultores?",
+    choices: [
+      { id: "A", text: "1) Acción Popular (Ley 472 de 1998); y 2) Acción de Grupo (mínimo 20 personas afectadas con causa común)." },
+      { id: "B", text: "1) Acción de Tutela; y 2) Denuncia penal por prevaricato." },
+      { id: "C", text: "1) Acción de Cumplimiento; y 2) Plebiscito municipal." },
+      { id: "D", text: "1) Acción de Repetición; y 2) Demanda de casación." },
+    ],
+    correct: "A",
+    explanation:
+      "La Acción Popular protege derechos colectivos (medio ambiente sano, moralidad administrativa, espacio público) y tiene carácter preventivo o restitutorio. La Acción de Grupo exige al menos 20 personas y persigue exclusivamente el resarcimiento indemnizatorio de perjuicios individuales derivados de una causa común.",
+    methodTip:
+      "Mnemotecnia Constitucional:\n- ¿Se busca defender a la comunidad entera sin pedir indemnización? -> Acción Popular.\n- ¿Se busca dinero/indemnización para un grupo de mínimo 20 personas con el mismo daño? -> Acción de Grupo.\n- ¿Se viola un derecho fundamental individual (vida, salud, debido proceso)? -> Tutela.",
+  },
+  {
+    id: "sp-cc-06",
+    session: "generica",
+    areaId: "competencias-ciudadanas",
+    areaLabel: "Competencias Ciudadanas",
+    competency: "Habeas Data, caducidad del dato financiero negativo y debido proceso",
+    source: "Ley Estatutaria 1266 de 2008 y Ley 2157 de 2021 (Borrón y Cuenta Nueva)",
+    contextText:
+      "Un ciudadano incurrió en una mora de 8 meses en una tarjeta de crédito en 2023. En enero de 2024 canceló la totalidad de la deuda y los intereses moratorios. En marzo de 2026 (más de dos años después de haber extinguido la obligación por completo), solicita un crédito de vivienda y es rechazado porque el banco consulta la central de riesgo y constata que la entidad financiera sigue reportando negativamente la mora histórica.",
+    stem: "De acuerdo con el derecho fundamental al Habeas Data y la jurisprudencia de la Corte Constitucional (Sentencia C-282/21), ¿es legal que el reporte negativo persista en las centrales de información?",
+    choices: [
+      { id: "A", text: "No es legal, porque el término máximo de permanencia del reporte negativo cuando se paga la deuda es del doble de la mora pero sin exceder de 4 años; al haber estado en mora 8 meses, el castigo máximo legal era de 16 meses tras el pago, plazo que ya venció." },
+      { id: "B", text: "Sí es legal, porque los reportes crediticios negativos son vitalicios e imprescriptibles en Colombia." },
+      { id: "C", text: "Sí es legal, siempre y cuando la central de riesgo cobre una tarifa de mantenimiento de datos." },
+      { id: "D", text: "No es legal, porque ninguna entidad privada puede almacenar bases de datos de personas naturales." },
+    ],
+    correct: "A",
+    explanation:
+      "La regla constitucional y legal de caducidad del dato financiero dispone que el reporte negativo permanece por el doble del tiempo de la mora (8 meses × 2 = 16 meses de sanción), contados a partir del pago, sin superar jamás los 4 años. Tras 26 meses del pago, el reporte negativo debió ser eliminado automáticamente.",
+  },
+  {
+    id: "sp-cc-07",
+    session: "generica",
+    areaId: "competencias-ciudadanas",
+    areaLabel: "Competencias Ciudadanas",
+    competency: "Ponderación de derechos y test de proporcionalidad constitucional",
+    source: "Jurisprudencia Corte Constitucional de Colombia",
+    contextText:
+      "Durante una emergencia sanitaria por pandemia, el gobierno nacional expide un decreto que prohíbe las aglomeraciones y ritos religiosos presenciales en templos e iglesias de cualquier credo durante tres semanas críticas de saturación hospitalaria. Un colectivo de feligreses interpone tutela argumentando que se les vulnera el núcleo esencial de su libertad de cultos y religión.",
+    stem: "Al aplicar el principio de ponderación y el test de proporcionalidad constitucional, ¿por qué la medida gubernamental resulta admisible bajo la Carta Política?",
+    choices: [
+      { id: "A", text: "Porque la libertad de cultos no es un derecho absoluto y puede ser restringida temporalmente para salvaguardar un bien jurídico superior y apremiante: la vida y la salud pública de la colectividad." },
+      { id: "B", text: "Porque el Estado colombiano es confesional y solo admite religiones autorizadas por el Ministerio del Interior." },
+      { id: "C", text: "Porque los feligreses deben pagar un impuesto previo para ejercer cultos en el espacio privado." },
+      { id: "D", text: "Porque el Presidente puede suspender los derechos humanos de forma definitiva en estados de excepción." },
+    ],
+    correct: "A",
+    explanation:
+      "Ningún derecho fundamental es absoluto. En la colisión entre libertad de cultos y el derecho a la vida y la salud pública, la restricción temporal, idónea y proporcionada de cultos presenciales busca evitar muertes masivas por contagio, superando el test estricto de proporcionalidad.",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 20. SESIÓN 1 · GENÉRICAS ADICIONALES · INGLÉS (CEFR B1-B2)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-in-04",
+    session: "generica",
+    areaId: "ingles",
+    areaLabel: "Inglés",
+    competency: "Reading comprehension: Business technology, governance and artificial intelligence",
+    source: "ICFES Saber Pro English Module (CEFR B2)",
+    contextText:
+      "«Modern tax authorities and regulatory bodies increasingly rely on predictive machine-learning models to combat tax evasion and cross-border profit shifting. By continuously cross-referencing electronic invoicing data, banking records, and customs declarations, algorithms detect statistical anomalies in real time. Nevertheless, legal scholars caution that algorithm transparency and human oversight remain essential to guarantee taxpayers' constitutional right to due process.»",
+    stem: "According to the passage, what is the crucial caveat emphasized by legal scholars regarding the use of predictive AI by tax authorities?",
+    choices: [
+      { id: "A", text: "That computers should be totally banned from tracking financial transactions." },
+      { id: "B", text: "That human supervision and algorithmic transparency are indispensable to preserve the taxpayer's right to due process." },
+      { id: "C", text: "That electronic invoices will soon be replaced by traditional paper receipts." },
+      { id: "D", text: "That artificial intelligence has eliminated the need for human tax inspectors." },
+    ],
+    correct: "B",
+    explanation:
+      "The text directly concludes that 'legal scholars caution that algorithm transparency and human oversight remain essential to guarantee taxpayers' constitutional right to due process'.",
+  },
+  {
+    id: "sp-in-05",
+    session: "generica",
+    areaId: "ingles",
+    areaLabel: "Inglés",
+    competency: "Grammar and Sentence Structure: Conditional Clauses in Business Contexts",
+    source: "ICFES Saber Pro English",
+    contextText:
+      "Choose the correct grammatical option to complete the statement: «If the board of directors _______ the external audit findings earlier, the company would have avoided the substantial financial penalties imposed by the securities regulator.»",
+    stem: "Which verb form correctly completes the Third Conditional sentence?",
+    choices: [
+      { id: "A", text: "had addressed" },
+      { id: "B", text: "addresses" },
+      { id: "C", text: "has addressed" },
+      { id: "D", text: "will address" },
+    ],
+    correct: "A",
+    explanation:
+      "The Third Conditional expresses a hypothetical situation in the past and its unreal past outcome. Structure: If + Past Perfect ('had addressed'), ... would have + Past Participle ('would have avoided').",
+  },
+  {
+    id: "sp-in-06",
+    session: "generica",
+    areaId: "ingles",
+    areaLabel: "Inglés",
+    competency: "Lexical Knowledge and Discourse Connectors in Corporate Reporting",
+    source: "ICFES English Grammar & Vocabulary",
+    contextText:
+      "Select the connector that logically expresses result: «The corporation experienced a sudden disruption in raw material supply chains; _______, quarterly manufacturing output contracted by fifteen percent.»",
+    stem: "Which transition word accurately indicates the consequence of the supply chain disruption?",
+    choices: [
+      { id: "A", text: "consequently" },
+      { id: "B", text: "nevertheless" },
+      { id: "C", text: "whereas" },
+      { id: "D", text: "on the contrary" },
+    ],
+    correct: "A",
+    explanation:
+      "'Consequently' is a transition adverb denoting result/effect (sinónimo de therefore / as a result). 'Nevertheless' expresses concession/contrast; 'whereas' introduces contrastive clauses; 'on the contrary' refutes a previous statement.",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 21. SESIÓN 2 · CONTADURÍA PÚBLICA · GESTIÓN FINANCIERA (Nivel Avanzado)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-cp-gf-06",
+    session: "especifica",
+    areaId: "gestion-financiera",
+    areaLabel: "Gestión Financiera",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Análisis DuPont de Rentabilidad del Patrimonio (ROE)",
+    source: "Saber Pro Contaduría Pública · Finanzas Corporativas",
+    contextText:
+      "Una empresa manufacturera presenta los siguientes indicadores en su análisis financiero:\n- Margen Neto de Utilidad (Utilidad Neta / Ventas) = 8%.\n- Rotación de Activos (Ventas / Activos Totales) = 1.5 veces al año.\n- Multiplicador del Apalancamiento Financiero (Activos Totales / Patrimonio Neto) = 2.0 veces.",
+    stem: "Al aplicar la fórmula del Modelo DuPont de 3 factores, ¿cuál es la Rentabilidad sobre el Patrimonio (ROE) generada por la empresa?",
+    choices: [
+      { id: "A", text: "12.0%" },
+      { id: "B", text: "24.0%" },
+      { id: "C", text: "16.0%" },
+      { id: "D", text: "18.5%" },
+    ],
+    correct: "B",
+    explanation:
+      "Fórmula del Modelo DuPont en 3 etapas: ROE = Margen Neto × Rotación del Activo × Multiplicador de Apalancamiento.\nROE = 8% × 1.5 × 2.0 = 12% × 2.0 = 24.0%.\nEsto demuestra que el 24% de rendimiento para los accionistas se descompone en 8% de eficiencia operativa en precios y costos, 1.5 veces de eficiencia en el uso de activos fijos/corrientes, y 2.0 veces de apalancamiento mediante deuda.",
+    methodTip:
+      "Ecuación DuPont: ROE = (UN/V) × (V/AT) × (AT/Patrimonio). Observa que Ventas y Activos se cancelan algebraicamente quedando UN/Patrimonio, pero descomponerlo te permite auditar de dónde proviene exactamente la rentabilidad.",
+  },
+  {
+    id: "sp-cp-gf-07",
+    session: "especifica",
+    areaId: "gestion-financiera",
+    areaLabel: "Gestión Financiera",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Flujo de Caja Libre (FCL) y Valor Económico Agregado (EVA)",
+    source: "ICFES Saber Pro · Finanzas Avanzadas",
+    contextText:
+      "Al cierre de ejercicio, la compañía Andina de Alimentos reporta los siguientes datos (en millones de pesos):\n- Utilidad Operativa después de Impuestos (UODI / NOPAT) = $150 millones.\n- Depreciaciones y Amortizaciones del periodo = $40 millones.\n- Inversión neta en Activos Fijos (CAPEX) = $60 millones.\n- Aumento del Capital de Trabajo Neto Operativo (ΔKTNO) = $20 millones.",
+    stem: "¿A cuánto asciende el Flujo de Caja Libre (FCL) disponible de la compañía para atender servicio de deuda y dividendos a los socios?",
+    choices: [
+      { id: "A", text: "$110 millones COP." },
+      { id: "B", text: "$150 millones COP." },
+      { id: "C", text: "$270 millones COP." },
+      { id: "D", text: "$70 millones COP." },
+    ],
+    correct: "A",
+    explanation:
+      "Fórmula de Flujo de Caja Libre de la Firma (FCFF):\nFCL = UODI + Depreciaciones - CAPEX - ΔKTNO.\nFCL = $150M + $40M - $60M - $20M = $190M - $80M = $110 millones COP.\nEste es el efectivo genuinamente disponible que genera la operación para pagar a acreedores financieros (capital + intereses) y repartir dividendos a los accionistas.",
+  },
+  {
+    id: "sp-cp-gf-08",
+    session: "especifica",
+    areaId: "gestion-financiera",
+    areaLabel: "Gestión Financiera",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Cálculo del Valor Económico Agregado (EVA)",
+    source: "Finanzas Estratégicas · Saber Pro ICFES",
+    contextText:
+      "Una empresa cuenta con Activos Netos de Operación (Capital Invertido) de $800.000.000 COP. La Utilidad Operativa después de Impuestos (UODI) del año fue de $140.000.000 COP. El Costo Promedio Ponderado de Capital (WACC) de la compañía es del 12% E.A.",
+    stem: "¿Cuál es el Valor Económico Agregado (EVA) generado por la gestión de la empresa en el periodo?",
+    choices: [
+      { id: "A", text: "+$44.000.000 COP, lo que indica que la empresa destruyó valor financiero." },
+      { id: "B", text: "+$44.000.000 COP, lo que confirma que la empresa generó una verdadera riqueza económica por encima del costo de los recursos invertidos." },
+      { id: "C", text: "-$20.000.000 COP de pérdida contable neta." },
+      { id: "D", text: "+$140.000.000 COP correspondiente al resultado operacional." },
+    ],
+    correct: "B",
+    explanation:
+      "Fórmula de EVA: EVA = UODI - (Capital Invertido × WACC).\nCosto del Capital = $800.000.000 × 12% = $96.000.000 COP.\nEVA = $140.000.000 - $96.000.000 = +$44.000.000 COP.\nUn EVA positivo (+44M) certifica que la empresa no solo cubrió todos sus costos y gastos operacionales, sino que rindió $44 millones adicionales por encima de la tasa exigida por bancos y accionistas.",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 22. SESIÓN 2 · CONTADURÍA PÚBLICA · ASEGURAMIENTO Y NIAS
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-cp-as-05",
+    session: "especifica",
+    areaId: "aseguramiento-informacion",
+    areaLabel: "Aseguramiento y Control de la Información",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "NIA 240: Responsabilidades del auditor en relación con el fraude",
+    source: "Normas Internacionales de Auditoría (NIAs) · ICFES",
+    contextText:
+      "Durante la fase de planeación de una auditoría externa, el equipo evalúa las presiones sobre la gerencia. La junta directiva ató el 70% de la remuneración variable del Director General al cumplimiento de una meta agresiva de EBITDA trimestral. Adicionalmente, el Director General tiene facultades unilaterales para anular controles automatizados en el módulo de facturación ERP.",
+    stem: "Bajo la NIA 240 (Fraude en los Estados Financieros), ¿cuáles dos condiciones del 'Triángulo del Fraude' se encuentran notoriamente configuradas?",
+    choices: [
+      { id: "A", text: "Incentivo / Presión financiera (bono agresivo por EBITDA) y Oportunidad (poder unilateral para anular controles internos en el ERP)." },
+      { id: "B", text: "Racionalización moral y colusión con auditores gubernamentales." },
+      { id: "C", text: "Incompetencia profesional y error involuntario de redondeo contable." },
+      { id: "D", text: "Fuerza mayor y caso fortuito derivado de la inflación." },
+    ],
+    correct: "A",
+    explanation:
+      "El modelo de la NIA 240 define los 3 factores de riesgo de fraude: 1) Incentivo/Presión (la remuneración ligada a metas financieras agresivas); 2) Oportunidad (capacidad de anular controles por falta de segregación o concentración de permisos); y 3) Actitud/Racionalización. Aquí se configuran nítidamente Incentivo y Oportunidad.",
+  },
+  {
+    id: "sp-cp-as-06",
+    session: "especifica",
+    areaId: "aseguramiento-informacion",
+    areaLabel: "Aseguramiento y Control de la Información",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "NIA 505: Procedimientos de confirmación externa (Circularizaciones)",
+    source: "Saber Pro Contaduría · Auditoría de Estados Financieros",
+    contextText:
+      "Al auditar el saldo de Cuentas por Cobrar Comerciales al 31 de diciembre, el auditor envía solicitudes de confirmación externa positiva a una muestra de clientes clave. La gerencia de la empresa auditada solicita por escrito al auditor que NO envíe la circularización al cliente más grande (que representa el 35% de la cartera total), argumentando que dicho cliente se encuentra en una negociación sensible y que recibir una carta de auditoría podría 'molestarlo y arruinar el negocio'.",
+    stem: "Conforme a los requerimientos taxativos de la NIA 505, ¿cómo debe proceder éticamente el auditor frente a esta negativa gerencial?",
+    choices: [
+      { id: "A", text: "Aceptar inmediatamente la solicitud de la gerencia sin indagar, para evitar que el cliente cancele contratos comerciales." },
+      { id: "B", text: "Indagar sobre las razones de la gerencia y evaluar su validez; si la negativa carece de justificación razonable y le impide obtener evidencia suficiente, debe evaluar el impacto en su dictamen (posible opinión con salvedades o abstención de opinión por limitación en el alcance)." },
+      { id: "C", text: "Llamar telefónicamente a escondidas al cliente desde un número privado sin dejar papel de trabajo." },
+      { id: "D", text: "Calcular automáticamente una provisión de cartera del 100% sobre ese cliente sin más pruebas." },
+    ],
+    correct: "B",
+    explanation:
+      "Según la NIA 505 (apartados 8 y 9): Si la dirección se niega a permitir el envío de confirmaciones, el auditor debe indagar las razones y validar su razonabilidad. Si no hay justificación válida o no es posible obtener evidencia alternativa sustitutiva suficiente, se configura una limitación en el alcance que impacta el dictamen (salvedades o abstención).",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 23. SESIÓN 2 · CONTADURÍA PÚBLICA · INFORMACIÓN CONTABLE Y TRIBUTARIA
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-cp-ct-03",
+    session: "especifica",
+    areaId: "informacion-contable",
+    areaLabel: "Información Contable y Tributaria",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Medición y reconocimiento de inventarios bajo NIC 2 (Costo vs. VNR)",
+    source: "Normas Internacionales de Información Financiera (NIIF Plenas / Pymes)",
+    contextText:
+      "Al 31 de diciembre, una empresa comercializadora tiene en bodega 1.000 unidades de un artículo con un costo de adquisición contable de $50.000 COP cada una (Costo total en libros = $50.000.000 COP). Por obsolescencia tecnológica, el precio de venta estimado en el mercado cayó a $42.000 COP por unidad, y se requiere incurrir en gastos de embalaje y flete de $2.000 COP por unidad para poder venderlas.",
+    stem: "Conforme a la NIC 2 (Inventarios), ¿cuál es el Valor Neto Realizable (VNR) y cuál es el ajuste por deterioro de inventarios que debe reconocerse en los resultados del periodo?",
+    choices: [
+      { id: "A", text: "VNR = $40.000 COP por unidad; y debe reconocerse un gasto por deterioro de $10.000.000 COP en el estado de resultados contra la provisión de inventarios." },
+      { id: "B", text: "VNR = $42.000 COP por unidad; y debe reconocerse un deterioro de $8.000.000 COP." },
+      { id: "C", text: "No debe reconocerse ningún ajuste porque el costo histórico de adquisición ($50.000) permanece inmutable hasta que los productos sean facturados." },
+      { id: "D", text: "Debe aumentarse el valor del inventario en $2.000.000 COP para compensar los fletes." },
+    ],
+    correct: "A",
+    explanation:
+      "Fórmula NIC 2: VNR = Precio estimado de venta - Costos estimados para terminar y vender.\nVNR unitario = $42.000 - $2.000 = $40.000 COP.\nComo el VNR ($40.000) es menor que el Costo ($50.000), el inventario debe medirse al menor valor (VNR).\nPérdida por deterioro unitaria = $50.000 - $40.000 = $10.000 COP.\nDeterioro total = 1.000 unidades × $10.000 = $10.000.000 COP de gasto por deterioro en el periodo.",
+  },
+  {
+    id: "sp-cp-ct-04",
+    session: "especifica",
+    areaId: "informacion-contable",
+    areaLabel: "Información Contable y Tributaria",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Reconocimiento de contratos de arrendamiento bajo NIIF 16",
+    source: "NIIF 16 Arrendamientos · Marco Técnico Contable",
+    contextText:
+      "Una empresa suscribe el 1 de enero un contrato de arrendamiento sobre una bodega industrial por un plazo no cancelable de 5 años, comprometiéndose a pagar un canon anual de $60.000.000 COP al final de cada año. La tasa de interés implícita en el arrendamiento (o tasa incremental de endeudamiento) es del 10% E.A. El valor presente de los 5 cánones descontados al 10% es de $227.447.000 COP.",
+    stem: "Bajo el modelo único de arrendatario de la NIIF 16, ¿cómo debe reconocerse la operación en el balance inicial del arrendatario al 1 de enero?",
+    choices: [
+      { id: "A", text: "Registrar simplemente un gasto de arrendamiento mensual de $5.000.000 COP en el estado de resultados a medida que se pague, sin afectar el balance general." },
+      { id: "B", text: "Reconocer en el activo un 'Activo por Derecho de Uso' por $227.447.000 COP y en el pasivo un 'Pasivo por Arrendamiento' financiero por el mismo valor de $227.447.000 COP." },
+      { id: "C", text: "Registrar un pasivo por el total nominal de los 5 años ($300.000.000 COP) sin descontar a valor presente." },
+      { id: "D", text: "Registrar la bodega como propiedad, planta y equipo en copropiedad con el arrendador." },
+    ],
+    correct: "B",
+    explanation:
+      "La NIIF 16 eliminó la distinción entre arrendamiento operativo y financiero para el arrendatario. En la fecha de inicio, todo arrendamiento debe reconocerse en el balance midiendo el 'Activo por Derecho de Uso' y el 'Pasivo por Arrendamiento' al valor presente de los pagos futuros descontados con la tasa de interés.",
+  },
+  {
+    id: "sp-cp-ct-05",
+    session: "especifica",
+    areaId: "informacion-contable",
+    areaLabel: "Información Contable y Tributaria",
+    careerId: "contaduria",
+    careerLabel: "Contaduría Pública",
+    competency: "Régimen de Retención en la Fuente a título de Renta e IVA en Colombia",
+    source: "Estatuto Tributario Nacional (Arts. 368, 392, 437-1 y 437-2)",
+    contextText:
+      "Una sociedad calificada como Gran Contribuyente y Autorretenedor de Renta por la DIAN contrata los servicios de asesoría jurídica especializada de una persona jurídica del régimen ordinario (no autorretenedora) por valor de $10.000.000 COP más IVA del 19% ($1.900.000).",
+    stem: "Al momento del pago o abono en cuenta, ¿qué retenciones en la fuente obligatorias debe practicar la empresa contratante?",
+    choices: [
+      { id: "A", text: "Retención en la fuente por servicios/honorarios de renta a la tarifa del 11% ($1.100.000 COP) y Retención de IVA (ReteIVA) a la tarifa general del 15% sobre el valor del IVA ($285.000 COP)." },
+      { id: "B", text: "Ninguna retención, porque entre personas jurídicas no existe retención en la fuente en Colombia." },
+      { id: "C", text: "Retención de ICA únicamente, pues los Grandes Contribuyentes están exentos de retener renta e IVA." },
+      { id: "D", text: "Retención del 100% del valor total de la factura para consignarlo a la DIAN." },
+    ],
+    correct: "A",
+    explanation:
+      "1) Retención en la fuente a título de renta por honorarios a personas jurídicas: 11% sobre la base antes de IVA ($10.000.000 × 11% = $1.100.000 COP). 2) Como el adquirente es Gran Contribuyente del Art. 437-2 E.T., actúa como agente retenedor del IVA frente a proveedores ordinarios: retiene el 15% del impuesto generado ($1.900.000 × 15% = $285.000 COP).",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 24. SESIÓN 2 · OTRAS CARRERAS PROFESIONALES (Administración, Derecho, Ingeniería)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    id: "sp-adm-02",
+    session: "especifica",
+    areaId: "gestion-organizaciones",
+    areaLabel: "Gestión de Organizaciones",
+    careerId: "administracion",
+    careerLabel: "Administración de Empresas",
+    competency: "Cuadro de Mando Integral (Balanced Scorecard) de Kaplan y Norton",
+    source: "Saber Pro Administración ICFES",
+    contextText:
+      "En el proceso de planeación estratégica, la alta gerencia define metas de 'Reducción del ciclo de producción en planta en 20%' e 'Implementación de metodologías ágiles Scrum en la línea de ensamble'.",
+    stem: "¿A cuál de las cuatro perspectivas del Balanced Scorecard pertenecen primordialmente estos objetivos?",
+    choices: [
+      { id: "A", text: "Perspectiva Financiera." },
+      { id: "B", text: "Perspectiva de Clientes y Mercado." },
+      { id: "C", text: "Perspectiva de Procesos Internos de Negocio." },
+      { id: "D", text: "Perspectiva de Responsabilidad Fiscal del Estado." },
+    ],
+    correct: "C",
+    explanation:
+      "La Perspectiva de Procesos Internos identifica los procesos críticos (innovación, operación, servicio postventa) en los que la empresa debe sobresalir para satisfacer las expectativas de clientes y accionistas. Reducir tiempos de ciclo y adoptar Scrum son mejoras netas de procesos internos.",
+  },
+  {
+    id: "sp-der-02",
+    session: "especifica",
+    areaId: "argumentacion-juridica",
+    areaLabel: "Investigación y Argumentación Jurídica",
+    careerId: "derecho",
+    careerLabel: "Derecho",
+    competency: "Bloque de Constitucionalidad y Control de Convencionalidad",
+    source: "Artículo 93 de la Constitución Política y Jurisprudencia Corte Constitucional",
+    contextText:
+      "Una norma con fuerza de ley expedida por el Congreso limita las garantías judiciales mínimas en procesos disciplinarios. El demandante alega que dicha ley vulnera el Artículo 8 de la Convención Americana sobre Derechos Humanos (Pacto de San José).",
+    stem: "En virtud del Artículo 93 de la Constitución Política de Colombia, ¿qué jerarquía ostenta el tratado internacional de derechos humanos ratificado por Colombia frente a la ley ordinaria?",
+    choices: [
+      { id: "A", text: "Integra el Bloque de Constitucionalidad en sentido estricto, prevalece en el orden interno y sirve como parámetro supralegal obligatorio para declarar la inexequibilidad de la ley contraria." },
+      { id: "B", text: "Es una directriz simplemente optativa que los jueces pueden inaplicar a su criterio." },
+      { id: "C", text: "Tiene rango inferior a las leyes ordinarias expedidas por el Congreso." },
+      { id: "D", text: "Solo aplica si la OEA interviene directamente en el litigio municipal." },
+    ],
+    correct: "A",
+    explanation:
+      "Por mandato del Art. 93 C.P., los tratados de derechos humanos ratificados por el Congreso integran el Bloque de Constitucionalidad y prevalecen sobre el orden interno, vinculando a todos los operadores judiciales a ejercer control de constitucionalidad y de convencionalidad.",
+  },
+  {
+    id: "sp-ing-02",
+    session: "especifica",
+    areaId: "formulacion-proyectos",
+    areaLabel: "Formulación de Proyectos",
+    careerId: "ingenieria",
+    careerLabel: "Ingeniería",
+    competency: "Gestión del Valor Ganado (EVM) en control de costos y cronograma",
+    source: "Guía PMBOK / Estándar Internacional de Gestión de Proyectos",
+    contextText:
+      "Al cierre del sexto mes de ejecución de una obra de infraestructura vial, el director de proyecto obtiene los siguientes indicadores de Valor Ganado (EVM):\n- Valor Planeado (PV) = $500 millones COP.\n- Valor Ganado (EV) = $400 millones COP.\n- Costo Real Incurrido (AC) = $480 millones COP.",
+    stem: "Al calcular el Índice de Desempeño del Cronograma (SPI = EV/PV) y el Índice de Desempeño del Costo (CPI = EV/AC), ¿cuál es el estado real del proyecto?",
+    choices: [
+      { id: "A", text: "SPI = 0.80 y CPI = 0.83; el proyecto está retrasado frente al cronograma (SPI < 1) y con sobrecostos respecto al presupuesto planeado (CPI < 1)." },
+      { id: "B", text: "SPI = 1.25 y CPI = 1.20; el proyecto va adelantado y generando ahorros financieros." },
+      { id: "C", text: "SPI = 1.00 y CPI = 1.00; el proyecto está en perfecto equilibrio según lo planeado." },
+      { id: "D", text: "El proyecto no puede evaluarse sin consultar el software Primavera P6." },
+    ],
+    correct: "A",
+    explanation:
+      "Cálculos EVM:\n1) SPI = EV / PV = $400M / $500M = 0.80. Como SPI < 1.0, el avance físico real es menor al programado (retraso en cronograma).\n2) CPI = EV / AC = $400M / $480M = 0.833. Como CPI < 1.0, por cada peso gastado solo se han generado 83 centavos de valor físico (sobrecosto en presupuesto).",
+  },
 ];
 
 /**

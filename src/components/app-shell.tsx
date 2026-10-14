@@ -88,7 +88,7 @@ const SABER_PRO_NAV = [
     shortLabel: "Entrenar",
     sub: "Genéricas y específicas explicadas",
     icon: ClipboardCheck,
-    badge: "26 Casos",
+    badge: "50+ Casos",
   },
   {
     tab: "simulacro",

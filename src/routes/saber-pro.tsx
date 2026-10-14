@@ -28,6 +28,9 @@ import {
   VolumeX,
   XCircle,
   Zap,
+  Shuffle,
+  SlidersHorizontal,
+  Filter,
 } from "lucide-react";
 import {
   SABER_PRO_CAREERS,
@@ -46,6 +49,101 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+
+// Metadatos y orden oficial del ICFES para las pruebas Saber Pro 2026
+const OFFICIAL_MODULE_METADATA: Record<
+  string,
+  {
+    label: string;
+    shortLabel: string;
+    session: "generica" | "especifica";
+    order: number;
+    badgeCode: string;
+  }
+> = {
+  // Sesión 1: Genéricas (Obligatorias Nacionales)
+  "lectura-critica": {
+    label: "Lectura Crítica",
+    shortLabel: "Lectura Crítica",
+    session: "generica",
+    order: 1,
+    badgeCode: "LC",
+  },
+  "razonamiento-cuantitativo": {
+    label: "Razonamiento Cuantitativo",
+    shortLabel: "Razonamiento",
+    session: "generica",
+    order: 2,
+    badgeCode: "RC",
+  },
+  "competencias-ciudadanas": {
+    label: "Competencias Ciudadanas",
+    shortLabel: "Ciudadanas",
+    session: "generica",
+    order: 3,
+    badgeCode: "CC",
+  },
+  "ingles": {
+    label: "Inglés (A1 - B2+)",
+    shortLabel: "Inglés",
+    session: "generica",
+    order: 4,
+    badgeCode: "ING",
+  },
+
+  // Sesión 2: Específicas Contaduría Pública
+  "gestion-financiera": {
+    label: "Gestión Financiera",
+    shortLabel: "Gestión Financiera",
+    session: "especifica",
+    order: 10,
+    badgeCode: "GF",
+  },
+  "aseguramiento-informacion": {
+    label: "Aseguramiento de la Información (NIAs)",
+    shortLabel: "Auditoría NIAs",
+    session: "especifica",
+    order: 11,
+    badgeCode: "AS",
+  },
+  "informacion-contable": {
+    label: "Información Contable y Tributaria",
+    shortLabel: "Información Contable",
+    session: "especifica",
+    order: 12,
+    badgeCode: "CT",
+  },
+
+  // Sesión 2: Específicas Otras Carreras
+  "gestion-organizaciones": {
+    label: "Gestión de Organizaciones",
+    shortLabel: "Gestión Organizaciones",
+    session: "especifica",
+    order: 20,
+    badgeCode: "GO",
+  },
+  "argumentacion-juridica": {
+    label: "Argumentación Jurídica",
+    shortLabel: "Arg. Jurídica",
+    session: "especifica",
+    order: 30,
+    badgeCode: "AJ",
+  },
+  "comunicacion-juridica": {
+    label: "Comunicación Jurídica",
+    shortLabel: "Com. Jurídica",
+    session: "especifica",
+    order: 31,
+    badgeCode: "CJ",
+  },
+  "formulacion-proyectos": {
+    label: "Formulación de Proyectos",
+    shortLabel: "Proyectos",
+    session: "especifica",
+    order: 40,
+    badgeCode: "FP",
+  },
+};
 
 export type SaberProTab =
   | "resumen"
@@ -873,6 +971,8 @@ function SaberProTrainerTab({
 }) {
   const [filterSession, setFilterSession] = useState<"all" | "generica" | "especifica">("all");
   const [selectedArea, setSelectedArea] = useState<string>("all");
+  const [isShuffled, setIsShuffled] = useState(false);
+  const [shuffleSeed, setShuffleSeed] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [speaking, setSpeaking] = useState(false);
   const [showTranslator, setShowTranslator] = useState(false);
@@ -881,14 +981,76 @@ function SaberProTrainerTab({
   const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
   const resetUserAnswers = useSaberProStore((s) => s.resetUserAnswers);
 
-  // Filtrar preguntas según sesión y carrera
-  const filteredQuestions = useMemo(() => {
+  // Pool completo para la carrera activa
+  const careerPool = useMemo(() => {
     return SABER_PRO_QUESTIONS.filter((q) => {
       if (q.session === "especifica") {
-        if (q.careerId && q.careerId !== careerId && q.careerId !== "todas") {
-          return false;
-        }
+        return q.careerId === careerId || q.careerId === "todas";
       }
+      return true;
+    });
+  }, [careerId]);
+
+  // Conteos por sesión
+  const genericCount = useMemo(() => {
+    return SABER_PRO_QUESTIONS.filter((q) => q.session === "generica").length;
+  }, []);
+
+  const specificCount = useMemo(() => {
+    return SABER_PRO_QUESTIONS.filter(
+      (q) => q.session === "especifica" && (q.careerId === careerId || q.careerId === "todas"),
+    ).length;
+  }, [careerId]);
+
+  // Módulos oficiales disponibles ordenados pedagógicamente
+  const availableModules = useMemo(() => {
+    const map = new Map<
+      string,
+      {
+        id: string;
+        label: string;
+        shortLabel: string;
+        session: "generica" | "especifica";
+        count: number;
+        order: number;
+        badgeCode: string;
+      }
+    >();
+
+    careerPool.forEach((q) => {
+      if (!map.has(q.areaId)) {
+        const meta = OFFICIAL_MODULE_METADATA[q.areaId] || {
+          label: q.areaLabel,
+          shortLabel: q.areaLabel,
+          session: q.session,
+          order: q.session === "generica" ? 5 : 50,
+          badgeCode: q.areaId.slice(0, 2).toUpperCase(),
+        };
+        map.set(q.areaId, {
+          id: q.areaId,
+          label: meta.label,
+          shortLabel: meta.shortLabel,
+          session: q.session,
+          count: 0,
+          order: meta.order,
+          badgeCode: meta.badgeCode,
+        });
+      }
+      map.get(q.areaId)!.count += 1;
+    });
+
+    return Array.from(map.values()).sort((a, b) => a.order - b.order);
+  }, [careerPool]);
+
+  // Módulos visibles según sesión activa
+  const displayedModules = useMemo(() => {
+    if (filterSession === "all") return availableModules;
+    return availableModules.filter((m) => m.session === filterSession);
+  }, [availableModules, filterSession]);
+
+  // Filtrar y ordenar preguntas según orden oficial ICFES o barajado
+  const filteredQuestions = useMemo(() => {
+    const list = careerPool.filter((q) => {
       if (filterSession !== "all" && q.session !== filterSession) {
         return false;
       }
@@ -897,7 +1059,26 @@ function SaberProTrainerTab({
       }
       return true;
     });
-  }, [careerId, filterSession, selectedArea]);
+
+    if (isShuffled) {
+      const copy = [...list];
+      let s = shuffleSeed || 42;
+      for (let i = copy.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = Math.floor((s / 233280) * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Orden Oficial ICFES Pedagógico: Genéricas primero, luego específicas de carrera
+    return [...list].sort((a, b) => {
+      const orderA = OFFICIAL_MODULE_METADATA[a.areaId]?.order ?? 99;
+      const orderB = OFFICIAL_MODULE_METADATA[b.areaId]?.order ?? 99;
+      if (orderA !== orderB) return orderA - orderB;
+      return a.id.localeCompare(b.id);
+    });
+  }, [careerPool, filterSession, selectedArea, isShuffled, shuffleSeed]);
 
   // Si se solicita salto a pregunta específica desde el diagnóstico
   useEffect(() => {
@@ -908,6 +1089,13 @@ function SaberProTrainerTab({
       onResetJumpIndex?.();
     }
   }, [initialQuestionIndex, filteredQuestions.length, onResetJumpIndex]);
+
+  // Asegurar que el índice se mantenga dentro de los límites válidos
+  useEffect(() => {
+    if (currentIndex >= filteredQuestions.length && filteredQuestions.length > 0) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex, filteredQuestions.length]);
 
   // Text-To-Speech
   const currentQ: SaberProQuestion | undefined = filteredQuestions[currentIndex];
@@ -983,74 +1171,231 @@ function SaberProTrainerTab({
 
   return (
     <div className="space-y-6">
-      {/* ── Barra de Filtros ── */}
-      <div className="rounded-xl border border-border bg-surface p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-muted">Filtrar por Sesión:</span>
-          <Button
-            size="sm"
-            variant={filterSession === "all" ? "default" : "outline"}
-            onClick={() => {
-              setFilterSession("all");
-              setSelectedArea("all");
-            }}
-            className={cn(
-              "text-xs h-8 cursor-pointer",
-              filterSession === "all" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
-            )}
-          >
-            Todas ({filteredQuestions.length})
-          </Button>
-          <Button
-            size="sm"
-            variant={filterSession === "generica" ? "default" : "outline"}
-            onClick={() => {
-              setFilterSession("generica");
-              setSelectedArea("all");
-            }}
-            className={cn(
-              "text-xs h-8 cursor-pointer",
-              filterSession === "generica" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
-            )}
-          >
-            Sesión 1: Genéricas
-          </Button>
-          <Button
-            size="sm"
-            variant={filterSession === "especifica" ? "default" : "outline"}
-            onClick={() => {
-              setFilterSession("especifica");
-              setSelectedArea("all");
-            }}
-            className={cn(
-              "text-xs h-8 cursor-pointer",
-              filterSession === "especifica" &&
-                "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
-            )}
-          >
-            Sesión 2: {careerName}
-          </Button>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="text-ok font-semibold flex items-center gap-1">
-              <CheckCircle2 className="size-3.5" />
-              Aciertos: {correctCount}
+      {/* ── Barra de Navegación y Filtros Oficiales ICFES ── */}
+      <div className="rounded-2xl border-2 border-emerald-500/30 bg-surface p-5 space-y-4 shadow-xs">
+        {/* Fila 1: Filtro por Sesión y Métricas Rápidas */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-3 border-b border-border/80">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+              Sesión ICFES:
             </span>
-            <span className="text-muted">|</span>
-            <span className="text-muted">Respondidas: {answeredCount}</span>
+            <Button
+              size="sm"
+              variant={filterSession === "all" ? "default" : "outline"}
+              onClick={() => {
+                setFilterSession("all");
+                setSelectedArea("all");
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "text-xs h-8 cursor-pointer transition-all",
+                filterSession === "all"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-2 ring-emerald-500/40"
+                  : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs",
+              )}
+            >
+              Todas las Preguntas ({careerPool.length})
+            </Button>
+            <Button
+              size="sm"
+              variant={filterSession === "generica" ? "default" : "outline"}
+              onClick={() => {
+                setFilterSession("generica");
+                setSelectedArea("all");
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "text-xs h-8 cursor-pointer transition-all",
+                filterSession === "generica"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-2 ring-emerald-500/40"
+                  : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs",
+              )}
+            >
+              Sesión 1: Genéricas ({genericCount})
+            </Button>
+            <Button
+              size="sm"
+              variant={filterSession === "especifica" ? "default" : "outline"}
+              onClick={() => {
+                setFilterSession("especifica");
+                setSelectedArea("all");
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "text-xs h-8 cursor-pointer transition-all",
+                filterSession === "especifica"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-2 ring-emerald-500/40"
+                  : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs",
+              )}
+            >
+              Sesión 2: {careerName} ({specificCount})
+            </Button>
           </div>
 
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={handleResetTrainer}
-            className="text-xs text-muted hover:text-bad h-8 gap-1 cursor-pointer"
-          >
-            <RotateCcw className="size-3.5" />
-            Reiniciar
-          </Button>
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 text-xs font-mono">
+              <span className="text-ok font-black flex items-center gap-1">
+                <CheckCircle2 className="size-4" />
+                Aciertos: {correctCount}
+              </span>
+              <span className="text-slate-400 font-bold">|</span>
+              <span className="text-slate-800 dark:text-slate-200 font-black">
+                Respondidas: {answeredCount}
+              </span>
+            </div>
+
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleResetTrainer}
+              className="text-xs text-rose-700 dark:text-rose-400 hover:bg-rose-50 border-rose-300 h-8 gap-1.5 cursor-pointer font-bold"
+            >
+              <RotateCcw className="size-3.5" />
+              Reiniciar
+            </Button>
+          </div>
+        </div>
+
+        {/* Fila 2: Chips de Módulos Oficiales ICFES */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono flex items-center gap-1.5">
+              <Filter className="size-3.5 text-emerald-600" />
+              Módulo Oficial ICFES:
+            </span>
+            <span className="text-[11px] font-mono font-bold text-muted">
+              Mostrando {filteredQuestions.length} {filteredQuestions.length === 1 ? "pregunta" : "preguntas"}
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedArea("all");
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "rounded-xl border-2 px-3 py-1.5 text-xs transition-all cursor-pointer flex items-center gap-1.5",
+                selectedArea === "all"
+                  ? "border-emerald-600 bg-emerald-600 text-white font-black shadow-xs"
+                  : "border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs",
+              )}
+            >
+              <span>Todos los Módulos</span>
+              <span
+                className={cn(
+                  "rounded-full px-1.5 py-0.2 text-[10px] font-mono",
+                  selectedArea === "all"
+                    ? "bg-white text-emerald-900 font-bold"
+                    : "bg-slate-200 text-slate-950 font-bold",
+                )}
+              >
+                {filterSession === "all"
+                  ? careerPool.length
+                  : filterSession === "generica"
+                    ? genericCount
+                    : specificCount}
+              </span>
+            </button>
+
+            {displayedModules.map((mod) => {
+              const isSelected = selectedArea === mod.id;
+              return (
+                <button
+                  key={mod.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedArea(mod.id);
+                    setCurrentIndex(0);
+                  }}
+                  className={cn(
+                    "rounded-xl border-2 px-3 py-1.5 text-xs transition-all cursor-pointer flex items-center gap-1.5",
+                    isSelected
+                      ? "border-emerald-600 bg-emerald-600 text-white font-black shadow-xs ring-2 ring-emerald-500/30"
+                      : "border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs",
+                  )}
+                >
+                  <span className="rounded bg-black/10 px-1 py-0.2 font-mono text-[9px] uppercase font-black">
+                    {mod.badgeCode}
+                  </span>
+                  <span>{mod.shortLabel}</span>
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 py-0.2 text-[10px] font-mono",
+                      isSelected
+                        ? "bg-white text-emerald-900 font-black"
+                        : "bg-slate-200 text-slate-950 font-black",
+                    )}
+                  >
+                    {mod.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Fila 3: Selector de Modo de Estudio (Orden Canónico vs Aleatorio) */}
+        <div className="pt-2 border-t border-border/60 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-black text-slate-800 dark:text-slate-200 font-mono">Modo:</span>
+            <Button
+              size="sm"
+              variant={!isShuffled ? "default" : "outline"}
+              onClick={() => {
+                setIsShuffled(false);
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "h-7 text-xs gap-1.5 cursor-pointer transition-all",
+                !isShuffled
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-2xs"
+                  : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50",
+              )}
+            >
+              <SlidersHorizontal className="size-3" />
+              <span>Orden Oficial ICFES (Pedagógico)</span>
+            </Button>
+
+            <Button
+              size="sm"
+              variant={isShuffled ? "default" : "outline"}
+              onClick={() => {
+                setIsShuffled(true);
+                setShuffleSeed(Date.now());
+                setCurrentIndex(0);
+              }}
+              className={cn(
+                "h-7 text-xs gap-1.5 cursor-pointer transition-all",
+                isShuffled
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-2xs"
+                  : "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50",
+              )}
+            >
+              <Shuffle className="size-3" />
+              <span>Aleatorio (Barajar Preguntas)</span>
+            </Button>
+
+            {isShuffled && (
+              <button
+                type="button"
+                onClick={() => {
+                  setShuffleSeed(Date.now());
+                  setCurrentIndex(0);
+                }}
+                className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 underline hover:text-emerald-950 cursor-pointer ml-1"
+              >
+                Volver a barajar
+              </button>
+            )}
+          </div>
+
+          <p className="text-[11px] text-muted hidden sm:inline">
+            {!isShuffled
+              ? "Preguntas organizadas pedagógicamente: 1º Lectura Crítica, 2º Razonamiento, 3º Ciudadanas, 4º Inglés y luego las pruebas de carrera."
+              : "Preguntas combinadas aleatoriamente para desafiar tu agilidad mental."}
+          </p>
         </div>
       </div>
 
@@ -1319,26 +1664,36 @@ function SaberProTrainerTab({
             </div>
           </div>
 
-          {/* Paleta Lateral de Preguntas */}
+          {/* Paleta Lateral de Preguntas (Question Map) Organizada */}
           <div className="space-y-4">
-            <div className="rounded-2xl border border-border bg-surface p-4 space-y-3">
-              <p className="text-xs font-bold uppercase tracking-wider text-muted font-mono">
-                Mapa de Preguntas ({filteredQuestions.length})
-              </p>
-              <div className="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto pr-1">
+            <div className="rounded-2xl border-2 border-border/80 bg-surface p-4 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-slate-100 font-mono">
+                  Mapa de Preguntas
+                </p>
+                <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
+                  {filteredQuestions.length} casos
+                </span>
+              </div>
+
+              <div className="grid grid-cols-5 gap-2 max-h-[480px] overflow-y-auto pr-1">
                 {filteredQuestions.map((q, idx) => {
                   const ans = userAnswers[q.id];
                   const isCurrent = idx === currentIndex;
                   const isRight = ans === q.correct;
+                  const meta = OFFICIAL_MODULE_METADATA[q.areaId];
+                  const badgeCode = meta?.badgeCode || q.areaId.slice(0, 2).toUpperCase();
 
-                  let btnStyle = "border-border/80 bg-paper/60 text-muted";
+                  let btnStyle =
+                    "border-2 border-slate-300 bg-white text-slate-950 font-black hover:border-emerald-600 hover:bg-emerald-50 shadow-2xs";
                   if (ans !== undefined) {
                     btnStyle = isRight
-                      ? "border-ok bg-ok/20 text-ok font-bold"
-                      : "border-bad bg-bad/20 text-bad font-bold";
+                      ? "border-2 border-emerald-500 bg-emerald-100 text-emerald-950 font-black"
+                      : "border-2 border-rose-500 bg-rose-100 text-rose-950 font-black";
                   }
                   if (isCurrent) {
-                    btnStyle += " ring-2 ring-emerald-600 border-emerald-600 text-ink";
+                    btnStyle =
+                      "border-2 border-emerald-600 bg-emerald-600 text-white font-black ring-2 ring-emerald-400 shadow-sm";
                   }
 
                   return (
@@ -1347,22 +1702,57 @@ function SaberProTrainerTab({
                       type="button"
                       onClick={() => setCurrentIndex(idx)}
                       className={cn(
-                        "h-8 rounded-lg border text-xs font-mono font-medium transition-all hover:scale-105 cursor-pointer",
+                        "h-11 rounded-xl flex flex-col items-center justify-center transition-all hover:scale-105 cursor-pointer p-0.5",
                         btnStyle,
                       )}
+                      title={`${q.areaLabel} - Pregunta ${idx + 1}`}
                     >
-                      {idx + 1}
+                      <span className="text-xs font-mono font-black leading-tight">
+                        {idx + 1}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-[9px] font-mono leading-none tracking-tight uppercase",
+                          isCurrent
+                            ? "text-emerald-100 font-black"
+                            : "text-slate-600 dark:text-slate-400 font-bold",
+                        )}
+                      >
+                        {badgeCode}
+                      </span>
                     </button>
                   );
                 })}
               </div>
+
+              {/* Leyenda del Mapa */}
+              <div className="pt-2 border-t border-border/60 text-[10px] space-y-1 font-mono text-muted">
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1">
+                    <span className="size-2 rounded-full bg-emerald-600 inline-block" />
+                    Activa
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="size-2 rounded-full bg-emerald-500 inline-block" />
+                    Acierto
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="size-2 rounded-full bg-rose-500 inline-block" />
+                    Error
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="size-2 rounded-full border border-slate-400 inline-block" />
+                    Pendiente
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Tarjeta de Recomendación Rápida */}
+            {/* Tarjeta de Recomendación Estratégica */}
             <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-2">
               <p className="text-xs font-bold text-ink flex items-center gap-1.5">
                 <Sparkles className="size-4 text-emerald-600" />
-                Estrategia ICFES Saber Pro
+                Estrategia Oficial ICFES
               </p>
               <p className="text-xs text-muted leading-relaxed">
                 En el examen oficial dispones de aproximadamente <strong>2 minutos</strong> por
@@ -1372,7 +1762,28 @@ function SaberProTrainerTab({
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="rounded-2xl border-2 border-dashed border-border p-12 text-center space-y-4 bg-surface">
+          <HelpCircle className="size-10 text-muted mx-auto" />
+          <h3 className="font-display text-lg font-bold text-ink">
+            No hay preguntas para este filtro específico
+          </h3>
+          <p className="text-xs text-muted max-w-md mx-auto">
+            Prueba seleccionando &quot;Todas las Preguntas&quot; o &quot;Todos los Módulos&quot; para continuar estudiando con el banco completo.
+          </p>
+          <Button
+            size="sm"
+            onClick={() => {
+              setFilterSession("all");
+              setSelectedArea("all");
+              setCurrentIndex(0);
+            }}
+            className="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
+          >
+            Ver Todas las Preguntas
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
@@ -1390,6 +1801,7 @@ function SaberProSimulatorTab({
 }) {
   const [examStarted, setExamStarted] = useState(false);
   const [examFinished, setExamFinished] = useState(false);
+  const [examSeed, setExamSeed] = useState<number>(() => Date.now());
   const [timeRemaining, setTimeRemaining] = useState(25 * 60);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -1400,15 +1812,74 @@ function SaberProSimulatorTab({
   const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
   const saveExamResult = useSaberProStore((s) => s.saveExamResult);
 
-  const examQuestions = useMemo(() => {
-    const list = SABER_PRO_QUESTIONS.filter((q) => {
+  // Pool completo de preguntas aplicables para esta carrera
+  const availablePool = useMemo(() => {
+    return SABER_PRO_QUESTIONS.filter((q) => {
       if (q.session === "especifica") {
         return q.careerId === careerId || q.careerId === "todas";
       }
       return true;
     });
-    return list.slice(0, batchSize);
-  }, [careerId, batchSize]);
+  }, [careerId]);
+
+  // Selección equilibrada y barajada dinámicamente según examSeed
+  const examQuestions = useMemo(() => {
+    if (batchSize >= availablePool.length) {
+      // Maratón completo barajado
+      const copy = [...availablePool];
+      let s = examSeed;
+      for (let i = copy.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = Math.floor((s / 233280) * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Agrupación por área para garantizar representación balanceada
+    const byArea: Record<string, SaberProQuestion[]> = {};
+    availablePool.forEach((q) => {
+      if (!byArea[q.areaId]) byArea[q.areaId] = [];
+      byArea[q.areaId].push(q);
+    });
+
+    // Barajar dentro de cada área
+    let s = examSeed;
+    Object.keys(byArea).forEach((area) => {
+      const arr = byArea[area];
+      for (let i = arr.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = Math.floor((s / 233280) * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    });
+
+    // Selección balanceada round-robin entre todas las competencias
+    const selected: SaberProQuestion[] = [];
+    const areaKeys = Object.keys(byArea);
+    let round = 0;
+    while (selected.length < batchSize && selected.length < availablePool.length) {
+      let addedInRound = false;
+      for (const key of areaKeys) {
+        if (selected.length >= batchSize) break;
+        if (round < byArea[key].length) {
+          selected.push(byArea[key][round]);
+          addedInRound = true;
+        }
+      }
+      if (!addedInRound) break;
+      round++;
+    }
+
+    // Barajado final del lote seleccionado
+    for (let i = selected.length - 1; i > 0; i--) {
+      s = (s * 9301 + 49297) % 233280;
+      const j = Math.floor((s / 233280) * (i + 1));
+      [selected[i], selected[j]] = [selected[j], selected[i]];
+    }
+
+    return selected;
+  }, [availablePool, batchSize, examSeed]);
 
   useEffect(() => {
     if (!examStarted || examFinished) return;
@@ -1434,7 +1905,10 @@ function SaberProSimulatorTab({
   const handleStartExam = () => {
     setAnswers({});
     setCurrentIndex(0);
-    setTimeRemaining(batchSize === 15 ? 25 * 60 : 40 * 60);
+    const durationMinutes =
+      batchSize === 15 ? 25 : batchSize === 30 ? 50 : Math.round(batchSize * 1.7);
+    setTimeRemaining(durationMinutes * 60);
+    setExamSeed(Date.now());
     setExamFinished(false);
     setExamStarted(true);
   };
@@ -1527,33 +2001,49 @@ function SaberProSimulatorTab({
           {/* Selector de número de preguntas */}
           <div className="space-y-2 pt-2">
             <label className="text-xs font-semibold text-muted">Selecciona la longitud de la prueba:</label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <button
                 type="button"
                 onClick={() => setBatchSize(15)}
                 className={cn(
-                  "rounded-xl border p-3 text-left transition-all cursor-pointer",
+                  "rounded-xl border-2 p-3 text-left transition-all cursor-pointer",
                   batchSize === 15
-                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-semibold ring-1 ring-emerald-600"
-                    : "border-border/80 bg-surface text-muted hover:border-emerald-500/50",
+                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-bold ring-2 ring-emerald-600/30"
+                    : "border-slate-300 bg-white text-slate-950 font-bold hover:border-emerald-500/50 shadow-2xs",
                 )}
               >
-                <div className="font-bold text-sm">15 Preguntas (Sprint)</div>
-                <div className="text-[11px] text-muted">Tiempo estimado: 25 Minutos</div>
+                <div className="font-bold text-sm text-slate-950 dark:text-slate-100">15 Preguntas (Sprint)</div>
+                <div className="text-[11px] text-muted">Tiempo: ~25 Minutos</div>
               </button>
 
               <button
                 type="button"
-                onClick={() => setBatchSize(26)}
+                onClick={() => setBatchSize(30)}
                 className={cn(
-                  "rounded-xl border p-3 text-left transition-all cursor-pointer",
-                  batchSize === 26
-                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-semibold ring-1 ring-emerald-600"
-                    : "border-border/80 bg-surface text-muted hover:border-emerald-500/50",
+                  "rounded-xl border-2 p-3 text-left transition-all cursor-pointer",
+                  batchSize === 30
+                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-bold ring-2 ring-emerald-600/30"
+                    : "border-slate-300 bg-white text-slate-950 font-bold hover:border-emerald-500/50 shadow-2xs",
                 )}
               >
-                <div className="font-bold text-sm">26 Preguntas (Completo)</div>
-                <div className="text-[11px] text-muted">Tiempo estimado: 40 Minutos</div>
+                <div className="font-bold text-sm text-slate-950 dark:text-slate-100">30 Preguntas (Estándar)</div>
+                <div className="text-[11px] text-muted">Tiempo: ~50 Minutos</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setBatchSize(availablePool.length)}
+                className={cn(
+                  "rounded-xl border-2 p-3 text-left transition-all cursor-pointer",
+                  batchSize === availablePool.length
+                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-bold ring-2 ring-emerald-600/30"
+                    : "border-slate-300 bg-white text-slate-950 font-bold hover:border-emerald-500/50 shadow-2xs",
+                )}
+              >
+                <div className="font-bold text-sm text-slate-950 dark:text-slate-100">
+                  Todas ({availablePool.length} Casos)
+                </div>
+                <div className="text-[11px] text-muted">Maratón Completo</div>
               </button>
             </div>
           </div>

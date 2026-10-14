@@ -107,12 +107,12 @@ export function RoadmapModal({ isOpen, onClose, isSaberPro = false }: RoadmapMod
     {
       num: "02",
       title: "Paso 1 · Entrenador de Preguntas y Casos",
-      desc: "Practica 26 preguntas oficiales tipo ICFES (Genéricas y Específicas) con retroalimentación pedagógica inmediata, justificación técnica, voz y descarte de trampas.",
+      desc: "Practica más de 50 preguntas oficiales tipo ICFES organizadas por módulos (Genéricas y Específicas) con retroalimentación pedagógica inmediata, justificación técnica, voz y descarte de trampas.",
       icon: ClipboardCheck,
       link: "/saber-pro",
       search: { tab: "practica" as const },
       cta: "Entrenar preguntas",
-      highlight: "26 Casos con Audio y Feedback",
+      highlight: "50+ Casos con Audio y Feedback",
     },
     {
       num: "03",
