@@ -7,18 +7,16 @@ import {
   BookOpen,
   Calendar,
   CheckCircle2,
-  ChevronDown,
-  ChevronUp,
   Clock,
   Compass,
   Copy,
   GraduationCap,
-  HelpCircle,
   Info,
   Layers,
   Play,
   RotateCcw,
   Search,
+  Shield,
   ShieldAlert,
   Sparkles,
   Volume2,
@@ -33,17 +31,52 @@ import {
   SABER_PRO_CHEATSHEET,
   type SaberProQuestion,
 } from "@/data/saber-pro-data";
+import { useSaberProStore, getSelectedCareer } from "@/lib/saber-pro-store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/saber-pro")({ component: SaberProPage });
+export type SaberProTab =
+  | "resumen"
+  | "practica"
+  | "simulacro"
+  | "chuleta"
+  | "estructura"
+  | "diagnostico";
 
-type ActiveTab = "practica" | "simulacro" | "chuleta" | "estructura";
+export interface SaberProSearch {
+  tab?: SaberProTab;
+}
+
+export const Route = createFileRoute("/saber-pro")({
+  validateSearch: (s: Record<string, unknown>): SaberProSearch => {
+    const validTabs: SaberProTab[] = [
+      "resumen",
+      "practica",
+      "simulacro",
+      "chuleta",
+      "estructura",
+      "diagnostico",
+    ];
+    const tab =
+      typeof s.tab === "string" && validTabs.includes(s.tab as SaberProTab)
+        ? (s.tab as SaberProTab)
+        : undefined;
+    return { tab };
+  },
+  component: SaberProPage,
+});
 
 export function SaberProPage() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>("practica");
-  const [selectedCareerId, setSelectedCareerId] = useState<string>("contaduria");
+  const { tab: searchTab } = Route.useSearch();
+  const activeTab: SaberProTab = searchTab || "resumen";
+  const navigate = Route.useNavigate();
+
+  const selectedCareerId = useSaberProStore((s) => s.selectedCareerId);
+  const selectCareer = useSaberProStore((s) => s.selectCareer);
+
+  const [trainerJumpIndex, setTrainerJumpIndex] = useState<number | null>(null);
 
   // Countdown to Saber Pro: 18 de Octubre de 2026
   const targetDate = useMemo(() => new Date(2026, 9, 18, 7, 0, 0), []);
@@ -56,22 +89,31 @@ export function SaberProPage() {
     setDaysRemaining(Math.max(0, diffDays));
   }, [targetDate]);
 
-  const selectedCareer = useMemo(
-    () => SABER_PRO_CAREERS.find((c) => c.id === selectedCareerId) ?? SABER_PRO_CAREERS[0],
-    [selectedCareerId],
-  );
+  const selectedCareer = useMemo(() => getSelectedCareer(selectedCareerId), [selectedCareerId]);
+
+  const setActiveTab = (newTab: SaberProTab) => {
+    void navigate({ search: { tab: newTab } });
+  };
+
+  const handleReviewInTrainer = (questionId: string) => {
+    const qIndex = SABER_PRO_QUESTIONS.findIndex((q) => q.id === questionId);
+    if (qIndex >= 0) {
+      setTrainerJumpIndex(qIndex);
+      setActiveTab("practica");
+    }
+  };
 
   return (
     <div className="space-y-8 pb-12">
       {/* ── Banner Superior de Cabecera Oficial ── */}
-      <section className="relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-6 sm:p-8 shadow-xs">
-        <div className="absolute inset-y-0 left-0 w-2 bg-accent" />
+      <section className="relative overflow-hidden rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 shadow-xs">
+        <div className="absolute inset-y-0 left-0 w-2 bg-amber-500" />
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-2.5 max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-accent text-accent-fg font-bold tracking-wider text-[11px] uppercase">
+              <span className="rounded-md bg-amber-500 text-slate-950 font-black tracking-wider text-[11px] uppercase px-2 py-0.5 shadow-2xs font-mono">
                 Módulo Oficial · ICFES Saber Pro 2026
-              </Badge>
+              </span>
               <span className="flex items-center gap-1.5 rounded-full border border-bad/30 bg-bad/10 px-2.5 py-0.5 text-xs font-bold text-bad">
                 <Calendar className="size-3.5" />
                 Examen: Domingo 18 de Octubre ({daysRemaining} {daysRemaining === 1 ? "día" : "días"})
@@ -96,19 +138,19 @@ export function SaberProPage() {
             {/* Selector de Carrera Profesional */}
             <div className="pt-2 flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold text-muted flex items-center gap-1">
-                <GraduationCap className="size-4 text-accent" />
+                <GraduationCap className="size-4 text-amber-500" />
                 Tu Carrera:
               </span>
               {SABER_PRO_CAREERS.map((career) => (
                 <button
                   key={career.id}
                   type="button"
-                  onClick={() => setSelectedCareerId(career.id)}
+                  onClick={() => selectCareer(career.id)}
                   className={cn(
                     "rounded-xl border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer",
                     selectedCareerId === career.id
-                      ? "border-accent bg-accent text-white shadow-xs font-semibold"
-                      : "border-border/80 bg-paper/60 text-muted hover:border-accent/60 hover:text-ink",
+                      ? "border-amber-500 bg-amber-500 text-white shadow-xs font-semibold"
+                      : "border-border/80 bg-paper/60 text-muted hover:border-amber-500/60 hover:text-ink",
                   )}
                 >
                   {career.name}
@@ -117,18 +159,18 @@ export function SaberProPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-accent/20 bg-accent/5 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-accent font-mono">
-                Sprint de 4 Días
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+                Sprint 4 Días
               </span>
-              <span className="rounded bg-accent/20 px-2 py-0.5 text-[10px] font-bold text-accent">
+              <span className="rounded bg-amber-500/20 px-2 py-0.5 text-[10px] font-black text-amber-800 dark:text-amber-200">
                 ICFES 0-300 pts
               </span>
             </div>
             <div className="space-y-1">
               <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-accent" />
+                <Sparkles className="size-3.5 text-amber-500" />
                 Objetivo Nivel 4 (Avanzado)
               </p>
               <p className="text-[11px] text-muted leading-relaxed">
@@ -136,7 +178,7 @@ export function SaberProPage() {
                 700/705 que más puntúan.
               </p>
             </div>
-            <div className="pt-2 border-t border-accent/20 flex items-center justify-between text-xs">
+            <div className="pt-2 border-t border-amber-500/20 flex items-center justify-between text-xs">
               <span className="text-muted">Carrera activa:</span>
               <span className="font-semibold text-ink truncate max-w-36">
                 {selectedCareer.name}
@@ -145,50 +187,104 @@ export function SaberProPage() {
           </div>
         </div>
 
-        {/* ── Tabs de Navegación del Módulo ── */}
+        {/* ── Tabs de Navegación del Módulo (Sincronizados con la Ruta) ── */}
         <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-border pt-4">
+          <Button
+            variant={activeTab === "resumen" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setActiveTab("resumen")}
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "resumen" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
+          >
+            <Award className="size-4" />
+            Panel Principal
+          </Button>
+
           <Button
             variant={activeTab === "practica" ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveTab("practica")}
-            className="gap-2 cursor-pointer"
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "practica" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             <BookOpen className="size-4" />
-            Entrenador de Preguntas
+            Paso 1 · Entrenador de Preguntas
           </Button>
+
           <Button
             variant={activeTab === "simulacro" ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveTab("simulacro")}
-            className="gap-2 cursor-pointer"
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "simulacro" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             <Clock className="size-4" />
-            Simulacro Cronometrado (Escala 0-300)
+            Paso 2 · Simulador Cronometrado (0-300)
           </Button>
+
           <Button
             variant={activeTab === "chuleta" ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveTab("chuleta")}
-            className="gap-2 cursor-pointer"
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "chuleta" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             <Zap className="size-4 text-amber-500" />
-            Chuleta de Fórmulas y Atajos (4 Días)
+            Paso 3 · Chuleta de Fórmulas
           </Button>
+
           <Button
             variant={activeTab === "estructura" ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveTab("estructura")}
-            className="gap-2 cursor-pointer"
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "estructura" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             <Layers className="size-4" />
-            Estructura Oficial ICFES
+            Paso 4 · Estructura ICFES
+          </Button>
+
+          <Button
+            variant={activeTab === "diagnostico" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setActiveTab("diagnostico")}
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "diagnostico" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
+          >
+            <Shield className="size-4" />
+            Paso 5 · Diagnóstico y Fallos
           </Button>
         </div>
       </section>
 
       {/* ── Contenido Según Tab Activo ── */}
+      {activeTab === "resumen" && (
+        <SaberProOverviewTab
+          selectedCareer={selectedCareer}
+          daysRemaining={daysRemaining}
+          onNavigateTab={setActiveTab}
+        />
+      )}
+
       {activeTab === "practica" && (
-        <SaberProTrainerTab careerId={selectedCareerId} careerName={selectedCareer.name} />
+        <SaberProTrainerTab
+          careerId={selectedCareerId}
+          careerName={selectedCareer.name}
+          initialQuestionIndex={trainerJumpIndex}
+          onResetJumpIndex={() => setTrainerJumpIndex(null)}
+        />
       )}
 
       {activeTab === "simulacro" && (
@@ -198,6 +294,329 @@ export function SaberProPage() {
       {activeTab === "chuleta" && <SaberProCheatsheetTab />}
 
       {activeTab === "estructura" && <SaberProStructureTab selectedCareer={selectedCareer} />}
+
+      {activeTab === "diagnostico" && (
+        <SaberProDiagnosticTab
+          selectedCareer={selectedCareer}
+          onReviewQuestion={handleReviewInTrainer}
+          onStartSimulator={() => setActiveTab("simulacro")}
+        />
+      )}
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// 0. TAB: PANEL PRINCIPAL (RESUMEN Y RUTA DE PREPARACIÓN SABER PRO)
+// ────────────────────────────────────────────────────────────────────────────
+
+function SaberProOverviewTab({
+  selectedCareer,
+  daysRemaining,
+  onNavigateTab,
+}: {
+  selectedCareer: (typeof SABER_PRO_CAREERS)[0];
+  daysRemaining: number;
+  onNavigateTab: (tab: SaberProTab) => void;
+}) {
+  const userAnswers = useSaberProStore((s) => s.userAnswers);
+
+  // Estadísticas globales de respuestas
+  const answeredCount = Object.keys(userAnswers).length;
+  const correctCount = Object.entries(userAnswers).filter(
+    ([id, ans]) => SABER_PRO_QUESTIONS.find((q) => q.id === id)?.correct === ans,
+  ).length;
+  const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+
+  // Puntaje estimado en escala ICFES 0 - 300
+  const estimatedScore =
+    answeredCount > 0 ? Math.min(300, Math.max(0, Math.round(100 + (accuracy / 100) * 190))) : 0;
+
+  return (
+    <div className="space-y-8">
+      {/* ── Tarjetas Métricas Principales del Candidato ── */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border border-border/80 bg-surface p-5 space-y-2 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
+              Tiempo al Examen
+            </span>
+            <span className="rounded bg-bad/10 px-2 py-0.5 text-[10px] font-bold text-bad font-mono">
+              18 Octubre
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">{daysRemaining}</span>
+            <span className="text-xs text-muted">días restantes</span>
+          </div>
+          <p className="text-[11px] text-muted">
+            Sprint intensivo de repaso antes de la citación oficial.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-amber-500/40 bg-surface p-5 space-y-2 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+              Puntaje Estimado
+            </span>
+            <span className="rounded bg-amber-500/20 px-2 py-0.5 text-[10px] font-black text-amber-800 dark:text-amber-200 font-mono">
+              Escala 0-300
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">
+              {estimatedScore > 0 ? estimatedScore : "---"}
+            </span>
+            <span className="text-xs text-muted">/ 300 pts</span>
+          </div>
+          <p className="text-[11px] text-muted">
+            {estimatedScore >= 180
+              ? "¡Nivel 4 Avanzado! Superas la media nacional."
+              : estimatedScore > 0
+                ? "Nivel en progreso. Resuelve más simulacros."
+                : "Responde preguntas en el entrenador para calcular."}
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-border/80 bg-surface p-5 space-y-2 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
+              Preguntas Entrenadas
+            </span>
+            <span className="rounded bg-paper px-2 py-0.5 text-[10px] font-bold text-muted font-mono border border-border">
+              Banco Oficial
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">{answeredCount}</span>
+            <span className="text-xs text-muted">/ {SABER_PRO_QUESTIONS.length} respondidas</span>
+          </div>
+          <Progress
+            value={(answeredCount / SABER_PRO_QUESTIONS.length) * 100}
+            className="h-1.5 bg-paper"
+          />
+        </div>
+
+        <div className="rounded-2xl border border-border/80 bg-surface p-5 space-y-2 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
+              Precisión Técnica
+            </span>
+            <span className="rounded bg-ok/10 px-2 py-0.5 text-[10px] font-bold text-ok font-mono">
+              {correctCount} Aciertos
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">
+              {answeredCount > 0 ? `${accuracy}%` : "---"}
+            </span>
+            <span className="text-xs text-muted">efectividad</span>
+          </div>
+          <p className="text-[11px] text-muted">
+            {accuracy >= 70
+              ? "Excelente porcentaje de aciertos en clave ICFES."
+              : "Revisa el descarte de distractores y trampas."}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Ruta de Preparación Saber Pro en 5 Pasos ── */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b border-border pb-3">
+          <div>
+            <h2 className="font-display text-xl font-bold text-ink">
+              Ruta Oficial de Preparación Saber Pro (5 Pasos)
+            </h2>
+            <p className="text-xs text-muted">
+              Sigue la secuencia metodológica diseñada para alcanzar Nivel 4 en la prueba de Estado.
+            </p>
+          </div>
+          <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 font-bold font-mono">
+            Ruta Guiada
+          </Badge>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Tarjeta Paso 1 */}
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                  Paso 1 · Entrenamiento
+                </span>
+                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                  26 Preguntas
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink">
+                Entrenador de Preguntas y Casos
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Preguntas tipo ICFES con retroalimentación inmediata, justificación técnica, técnica
+                de resolución y descarte de trampas.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={() => onNavigateTab("practica")}
+              className="w-full gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+            >
+              <span>Abrir Entrenador</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+
+          {/* Tarjeta Paso 2 */}
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                  Paso 2 · Simulación
+                </span>
+                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                  Escala 0-300
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink">
+                Simulador de Examen Cronometrado
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Prueba oficial con cronómetro en tiempo real, medición de ritmo por pregunta y cálculo
+                del puntaje final en la escala oficial de 0 a 300.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => onNavigateTab("simulacro")}
+              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+            >
+              <span>Iniciar Simulacro</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+
+          {/* Tarjeta Paso 3 */}
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                  Paso 3 · Retención Rápida
+                </span>
+                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                  Sprint 4 Días
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink">
+                Chuleta de Fórmulas y Atajos
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Memoriza los ratios contables determinantes (ROA, ROE, WACC, VPN, TIR, NIA 705) y las
+                reglas cuantitativas de alta frecuencia.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => onNavigateTab("chuleta")}
+              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+            >
+              <span>Consultar Fórmulas</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+
+          {/* Tarjeta Paso 4 */}
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                  Paso 4 · Marco Normativo
+                </span>
+                <span className="rounded bg-paper px-2 py-0.5 text-[10px] font-bold text-muted font-mono border border-border">
+                  Guía Oficial
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink">
+                Estructura Oficial ICFES
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Duración por sesión, número de preguntas por competencia y recomendaciones oficiales
+                para la presentación del domingo 18 de octubre.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => onNavigateTab("estructura")}
+              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+            >
+              <span>Ver Estructura</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+
+          {/* Tarjeta Paso 5 */}
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all sm:col-span-2 lg:col-span-2">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                  Paso 5 · Métricas y Refuerzo
+                </span>
+                <span className="rounded bg-ok/10 px-2 py-0.5 text-[10px] font-bold text-ok font-mono">
+                  Probabilidad Nivel 4
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink">
+                Diagnóstico de Desempeño y Mapa de Fallos
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Revisa exactamente las preguntas donde tuviste error, comprende la justificación
+                oficial y refuerza los conceptos antes de la prueba dominical.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={() => onNavigateTab("diagnostico")}
+              className="w-full gap-1.5 cursor-pointer bg-slate-900 text-amber-300 dark:bg-amber-500 dark:text-slate-950 font-bold"
+            >
+              <Shield className="size-3.5" />
+              <span>Ver Diagnóstico y Preguntas Falladas</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Módulos de la Carrera Activa ── */}
+      <div className="rounded-2xl border border-border/80 bg-surface p-6 space-y-4 shadow-2xs">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <GraduationCap className="size-5 text-amber-500" />
+            <h3 className="font-display text-base font-bold text-ink">
+              Módulos Evaluados para {selectedCareer.name}
+            </h3>
+          </div>
+          <Badge variant="outline" className="text-xs font-mono">
+            {selectedCareer.faculty}
+          </Badge>
+        </div>
+        <p className="text-xs text-muted">
+          Además de las 5 competencias genéricas comunes a todas las profesiones, tu prueba específica
+          incluye:
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {selectedCareer.specificModules.map((mod) => (
+            <div
+              key={mod.id}
+              className="rounded-xl border border-border bg-paper/60 p-4 space-y-1.5 border-l-4 border-l-amber-500"
+            >
+              <h4 className="font-bold text-xs text-ink">{mod.name}</h4>
+              <p className="text-[11px] text-muted leading-relaxed">{mod.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -215,7 +634,6 @@ function SaberProPedagogicalFeedback({
 }) {
   const isCorrect = selectedAnswer === question.correct;
 
-  // Si la pregunta no tiene methodTip personalizado, derivar técnica de resolución por área
   const resolvedMethodTip =
     question.methodTip ||
     (question.areaId === "razonamiento-cuantitativo"
@@ -223,14 +641,13 @@ function SaberProPedagogicalFeedback({
       : question.areaId === "lectura-critica"
         ? "Técnica para el examen: Separa la tesis central de los argumentos accesorios. Descarta opciones con afirmaciones absolutistas ('siempre', 'jamás', 'todos') o que agreguen información ajena al texto. La clave del ICFES siempre responde estrictamente a lo afirmado por el autor."
         : question.areaId === "competencias-ciudadanas"
-        ? "Técnica para el examen: Reconoce la jerarquía de derechos. Para derechos fundamentales individuales (vida, salud, debido proceso) el recurso inmediato es la Acción de Tutela. Para derechos colectivos (ambiente, espacio público) aplica la Acción Popular. Frente a decretos presidenciales en estados de excepción opera el control automático de la Corte Constitucional."
-        : question.areaId === "gestion-financiera"
-        ? "Técnica para el examen: En evaluación de proyectos, el VPN prevalece jerárquicamente sobre la TIR y el Payback. En razones de liquidez, recuerda excluir inventarios de la prueba ácida. En el WACC, aplica el escudo fiscal (1 - T) únicamente al costo de la deuda financiera."
-        : question.areaId === "aseguramiento-informacion"
-        ? "Técnica para el examen: Aplica la matriz de la NIA 705: si la incorrección es material pero no generalizada, emite opinión con salvedades («excepto por»); si es material Y generalizada, emite opinión desfavorable (adversa). Si falta evidencia y es generalizada, abstención de opinión."
-        : "Técnica para el examen: Lee atentamente la tarea evaluada en el enunciado, descarta los dos distractores más evidentes y verifica la coherencia con los principios normativos y técnicos oficiales.");
+          ? "Técnica para el examen: Reconoce la jerarquía de derechos. Para derechos fundamentales individuales (vida, salud, debido proceso) el recurso inmediato es la Acción de Tutela. Para derechos colectivos (ambiente, espacio público) aplica la Acción Popular. Frente a decretos presidenciales en estados de excepción opera el control automático de la Corte Constitucional."
+          : question.areaId === "gestion-financiera"
+            ? "Técnica para el examen: En evaluación de proyectos, el VPN prevalece jerárquicamente sobre la TIR y el Payback. En razones de liquidez, recuerda excluir inventarios de la prueba ácida. En el WACC, aplica el escudo fiscal (1 - T) únicamente al costo de la deuda financiera."
+            : question.areaId === "aseguramiento-informacion"
+              ? "Técnica para el examen: Aplica la matriz de la NIA 705: si la incorrección es material pero no generalizada, emite opinión con salvedades («excepto por»); si es material Y generalizada, emite opinión desfavorable (adversa). Si falta evidencia y es generalizada, abstención de opinión."
+              : "Técnica para el examen: Lee atentamente la tarea evaluada en el enunciado, descarta los dos distractores más evidentes y verifica la coherencia con los principios normativos y técnicos oficiales.");
 
-  // Análisis de distractores y trampas típicas
   const resolvedDistractors =
     question.distractorAnalysis ||
     "Trampas comunes del ICFES: Las opciones incorrectas emplean distractores de cálculo directo sin considerar variaciones sucesivas, confusión entre tipos de opinión de auditoría, o generalizaciones no respaldadas textualmente por el enunciado normativo.";
@@ -239,9 +656,7 @@ function SaberProPedagogicalFeedback({
     <div
       className={cn(
         "rounded-2xl border p-5 sm:p-6 space-y-4 transition-all shadow-xs animate-in fade-in-50",
-        isCorrect
-          ? "border-ok/40 bg-ok/5 text-ink"
-          : "border-bad/40 bg-bad/5 text-ink",
+        isCorrect ? "border-ok/40 bg-ok/5 text-ink" : "border-bad/40 bg-bad/5 text-ink",
       )}
     >
       {/* Banner de Estado */}
@@ -266,23 +681,19 @@ function SaberProPedagogicalFeedback({
       {/* Bloque 1: Fundamento y Justificación Técnica */}
       <div className="rounded-xl border border-border/70 bg-surface/80 p-4 space-y-1.5 shadow-2xs">
         <div className="flex items-center gap-1.5 text-xs font-bold text-ink">
-          <Sparkles className="size-4 text-accent" />
+          <Sparkles className="size-4 text-amber-500" />
           <span>¿Por qué es la opción correcta? (Fundamento Técnico)</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">
-          {question.explanation}
-        </p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{question.explanation}</p>
       </div>
 
       {/* Bloque 2: Método para Preguntas Similares en el Examen */}
-      <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 space-y-1.5 shadow-2xs">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-accent">
-          <Compass className="size-4 text-accent" />
+      <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-1.5 shadow-2xs">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
+          <Compass className="size-4 text-amber-500" />
           <span>Método de Resolución (¿Cómo resolverla si sale una parecida el domingo?)</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">
-          {resolvedMethodTip}
-        </p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedMethodTip}</p>
       </div>
 
       {/* Bloque 3: Análisis de Trampas y Distractores */}
@@ -291,9 +702,7 @@ function SaberProPedagogicalFeedback({
           <ShieldAlert className="size-4 text-bad" />
           <span>Trampas del ICFES y Descarte de las Demás Opciones</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">
-          {resolvedDistractors}
-        </p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedDistractors}</p>
       </div>
 
       {/* Pie con Competencia y Fuente Oficial */}
@@ -312,20 +721,26 @@ function SaberProPedagogicalFeedback({
 function SaberProTrainerTab({
   careerId,
   careerName,
+  initialQuestionIndex,
+  onResetJumpIndex,
 }: {
   careerId: string;
   careerName: string;
+  initialQuestionIndex?: number | null;
+  onResetJumpIndex?: () => void;
 }) {
   const [filterSession, setFilterSession] = useState<"all" | "generica" | "especifica">("all");
   const [selectedArea, setSelectedArea] = useState<string>("all");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [speaking, setSpeaking] = useState(false);
+
+  const userAnswers = useSaberProStore((s) => s.userAnswers);
+  const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
+  const resetUserAnswers = useSaberProStore((s) => s.resetUserAnswers);
 
   // Filtrar preguntas según sesión y carrera
   const filteredQuestions = useMemo(() => {
     return SABER_PRO_QUESTIONS.filter((q) => {
-      // Si es específica, solo mostrar las de la carrera seleccionada o 'todas'
       if (q.session === "especifica") {
         if (q.careerId && q.careerId !== careerId && q.careerId !== "todas") {
           return false;
@@ -341,12 +756,17 @@ function SaberProTrainerTab({
     });
   }, [careerId, filterSession, selectedArea]);
 
-  // Si cambia el filtro y el índice se desborda, reiniciar índice
+  // Si se solicita salto a pregunta específica desde el diagnóstico
   useEffect(() => {
-    setCurrentIndex(0);
-  }, [filterSession, selectedArea, careerId]);
+    if (initialQuestionIndex !== null && initialQuestionIndex !== undefined) {
+      if (initialQuestionIndex >= 0 && initialQuestionIndex < filteredQuestions.length) {
+        setCurrentIndex(initialQuestionIndex);
+      }
+      onResetJumpIndex?.();
+    }
+  }, [initialQuestionIndex, filteredQuestions.length, onResetJumpIndex]);
 
-  // Text-To-Speech (Lectura por voz)
+  // Text-To-Speech
   const currentQ: SaberProQuestion | undefined = filteredQuestions[currentIndex];
 
   const toggleSpeech = useCallback(() => {
@@ -379,7 +799,6 @@ function SaberProTrainerTab({
     window.speechSynthesis.speak(utterance);
   }, [speaking, currentQ]);
 
-  // Cancelar audio al cambiar de pregunta
   useEffect(() => {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -389,14 +808,11 @@ function SaberProTrainerTab({
 
   const handleSelectChoice = (choiceId: string) => {
     if (!currentQ) return;
-    setUserAnswers((prev) => ({
-      ...prev,
-      [currentQ.id]: choiceId,
-    }));
+    setUserAnswer(currentQ.id, choiceId);
   };
 
   const handleResetTrainer = () => {
-    setUserAnswers({});
+    resetUserAnswers();
     setCurrentIndex(0);
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -407,7 +823,6 @@ function SaberProTrainerTab({
   const currentSelection = currentQ ? userAnswers[currentQ.id] : undefined;
   const isAnswered = currentSelection !== undefined;
 
-  // Estadísticas globales del entrenador
   const answeredCount = Object.keys(userAnswers).length;
   const correctCount = Object.entries(userAnswers).filter(
     ([id, ans]) => SABER_PRO_QUESTIONS.find((q) => q.id === id)?.correct === ans,
@@ -426,7 +841,10 @@ function SaberProTrainerTab({
               setFilterSession("all");
               setSelectedArea("all");
             }}
-            className="text-xs h-8 cursor-pointer"
+            className={cn(
+              "text-xs h-8 cursor-pointer",
+              filterSession === "all" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             Todas ({filteredQuestions.length})
           </Button>
@@ -437,7 +855,10 @@ function SaberProTrainerTab({
               setFilterSession("generica");
               setSelectedArea("all");
             }}
-            className="text-xs h-8 cursor-pointer"
+            className={cn(
+              "text-xs h-8 cursor-pointer",
+              filterSession === "generica" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             Sesión 1: Genéricas
           </Button>
@@ -448,26 +869,31 @@ function SaberProTrainerTab({
               setFilterSession("especifica");
               setSelectedArea("all");
             }}
-            className="text-xs h-8 cursor-pointer"
+            className={cn(
+              "text-xs h-8 cursor-pointer",
+              filterSession === "especifica" &&
+                "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+            )}
           >
             Sesión 2: {careerName}
           </Button>
         </div>
 
-        {/* Marcador de Precisión */}
-        <div className="flex items-center gap-4 text-xs font-semibold">
-          <div className="flex items-center gap-1.5 text-ok">
-            <CheckCircle2 className="size-4" />
-            <span>Aciertos: {correctCount}</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <span className="text-ok font-semibold flex items-center gap-1">
+              <CheckCircle2 className="size-3.5" />
+              Aciertos: {correctCount}
+            </span>
+            <span className="text-muted">|</span>
+            <span className="text-muted">Respondidas: {answeredCount}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-muted">
-            <span>Respondidas: {answeredCount}</span>
-          </div>
+
           <Button
-            variant="ghost"
             size="sm"
+            variant="ghost"
             onClick={handleResetTrainer}
-            className="text-muted hover:text-ink text-xs h-8 gap-1"
+            className="text-xs text-muted hover:text-bad h-8 gap-1 cursor-pointer"
           >
             <RotateCcw className="size-3.5" />
             Reiniciar
@@ -475,71 +901,59 @@ function SaberProTrainerTab({
         </div>
       </div>
 
-      {filteredQuestions.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border p-12 text-center space-y-3">
-          <HelpCircle className="size-10 text-muted mx-auto" />
-          <p className="font-display text-base font-bold text-ink">
-            No hay preguntas disponibles con los filtros actuales
-          </p>
-          <p className="text-xs text-muted">
-            Intenta seleccionar &quot;Todas&quot; o cambia de carrera en la barra superior.
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setFilterSession("all");
-              setSelectedArea("all");
-            }}
-          >
-            Restablecer Filtros
-          </Button>
-        </div>
-      ) : currentQ ? (
-        <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
-          {/* Tarjeta Central de la Pregunta */}
-          <div className="space-y-5">
+      {/* ── Contenido de la Pregunta Activa ── */}
+      {currentQ ? (
+        <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
+          <div className="space-y-4">
             <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 space-y-6 shadow-xs">
-              {/* Encabezado de Pregunta */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 pb-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="outline" className="font-mono text-xs font-bold">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/80 pb-3">
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline" className="font-mono text-xs">
                     Pregunta {currentIndex + 1} de {filteredQuestions.length}
                   </Badge>
-                  <Badge className="bg-accent/15 text-accent border-accent/30 font-semibold text-xs">
-                    {currentQ.session === "generica" ? "Sesión 1 Genérica" : "Sesión 2 Específica"}
-                  </Badge>
-                  <span className="text-xs font-medium text-muted">{currentQ.areaLabel}</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Button
+                  <Badge
                     variant="outline"
-                    size="sm"
-                    onClick={toggleSpeech}
                     className={cn(
-                      "gap-1.5 text-xs h-8 cursor-pointer",
-                      speaking && "bg-accent text-white border-accent",
+                      "text-[10px] uppercase font-bold",
+                      currentQ.session === "generica"
+                        ? "bg-accent/10 border-accent/30 text-accent"
+                        : "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300",
                     )}
                   >
-                    {speaking ? <VolumeX className="size-3.5" /> : <Volume2 className="size-3.5" />}
-                    <span>{speaking ? "Detener" : "Escuchar"}</span>
-                  </Button>
+                    {currentQ.session === "generica" ? "Sesión 1 Genérica" : "Sesión 2 Específica"}
+                  </Badge>
+                  <span className="text-xs font-semibold text-muted">{currentQ.areaLabel}</span>
                 </div>
+
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={toggleSpeech}
+                  className="gap-1.5 text-xs h-7 cursor-pointer"
+                >
+                  {speaking ? (
+                    <>
+                      <VolumeX className="size-3.5 text-bad animate-pulse" />
+                      <span>Detener</span>
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="size-3.5" />
+                      <span>Escuchar</span>
+                    </>
+                  )}
+                </Button>
               </div>
 
-              {/* Contexto del Ítem */}
+              {/* Contexto o Lectura si existe */}
               {currentQ.contextText && (
-                <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-accent">
+                <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-amber-500">
                   {currentQ.contextText}
                 </div>
               )}
 
-              {/* Enunciado / Tarea evaluada */}
+              {/* Enunciado */}
               <div className="space-y-2">
-                <p className="text-xs font-bold uppercase tracking-wider text-muted font-mono">
-                  Enunciado:
-                </p>
                 <p className="text-base sm:text-lg font-display font-semibold text-ink leading-snug">
                   {currentQ.stem}
                 </p>
@@ -549,25 +963,28 @@ function SaberProTrainerTab({
               <div className="space-y-3 pt-2">
                 {currentQ.choices.map((choice) => {
                   const isSelected = currentSelection === choice.id;
-                  const isThisCorrect = choice.id === currentQ.correct;
+                  const isRight = choice.id === currentQ.correct;
 
                   let optionStyle =
-                    "border-border/80 bg-paper/40 hover:bg-paper hover:border-accent/60 text-ink";
-
+                    "border-border/80 bg-paper/40 hover:bg-paper hover:border-amber-500/50 text-ink";
                   if (isAnswered) {
-                    if (isThisCorrect) {
-                      optionStyle = "border-ok bg-ok/10 text-ink ring-1 ring-ok";
-                    } else if (isSelected && !isThisCorrect) {
+                    if (isRight) {
+                      optionStyle =
+                        "border-ok bg-ok/10 text-ink ring-1 ring-ok font-medium shadow-xs";
+                    } else if (isSelected) {
                       optionStyle = "border-bad bg-bad/10 text-ink ring-1 ring-bad";
                     } else {
-                      optionStyle = "border-border/60 bg-paper/20 opacity-60 text-muted";
+                      optionStyle = "border-border/50 bg-paper/20 text-muted opacity-60";
                     }
+                  } else if (isSelected) {
+                    optionStyle = "border-amber-500 bg-amber-500/10 ring-1 ring-amber-500 text-ink";
                   }
 
                   return (
                     <button
                       key={choice.id}
                       type="button"
+                      disabled={isAnswered}
                       onClick={() => handleSelectChoice(choice.id)}
                       className={cn(
                         "w-full rounded-xl border p-4 text-left transition-all flex items-start gap-3.5 cursor-pointer",
@@ -577,11 +994,13 @@ function SaberProTrainerTab({
                       <span
                         className={cn(
                           "size-7 rounded-lg border font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5",
-                          isAnswered && isThisCorrect
+                          isAnswered && isRight
                             ? "bg-ok text-white border-ok"
-                            : isAnswered && isSelected && !isThisCorrect
+                            : isAnswered && isSelected
                               ? "bg-bad text-white border-bad"
-                              : "border-border/80 bg-surface text-ink",
+                              : isSelected
+                                ? "bg-amber-500 text-white border-amber-500"
+                                : "border-border/80 bg-surface text-ink",
                         )}
                       >
                         {choice.id}
@@ -589,12 +1008,6 @@ function SaberProTrainerTab({
                       <span className="text-sm sm:text-base leading-relaxed flex-1">
                         {choice.text}
                       </span>
-                      {isAnswered && isThisCorrect && (
-                        <CheckCircle2 className="size-5 text-ok shrink-0 mt-0.5" />
-                      )}
-                      {isAnswered && isSelected && !isThisCorrect && (
-                        <XCircle className="size-5 text-bad shrink-0 mt-0.5" />
-                      )}
                     </button>
                   );
                 })}
@@ -630,7 +1043,7 @@ function SaberProTrainerTab({
                   size="sm"
                   disabled={currentIndex === filteredQuestions.length - 1}
                   onClick={() => setCurrentIndex((i) => i + 1)}
-                  className="gap-1.5 cursor-pointer"
+                  className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
                 >
                   Siguiente
                   <ArrowRight className="size-4" />
@@ -658,7 +1071,7 @@ function SaberProTrainerTab({
                       : "border-bad bg-bad/20 text-bad font-bold";
                   }
                   if (isCurrent) {
-                    btnStyle += " ring-2 ring-accent border-accent text-ink";
+                    btnStyle += " ring-2 ring-amber-500 border-amber-500 text-ink";
                   }
 
                   return (
@@ -679,9 +1092,9 @@ function SaberProTrainerTab({
             </div>
 
             {/* Tarjeta de Recomendación Rápida */}
-            <div className="rounded-2xl border border-accent/30 bg-accent/5 p-4 space-y-2">
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-2">
               <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                <Sparkles className="size-4 text-accent" />
+                <Sparkles className="size-4 text-amber-500" />
                 Estrategia ICFES Saber Pro
               </p>
               <p className="text-xs text-muted leading-relaxed">
@@ -710,14 +1123,16 @@ function SaberProSimulatorTab({
 }) {
   const [examStarted, setExamStarted] = useState(false);
   const [examFinished, setExamFinished] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState(25 * 60); // 25 minutos
+  const [timeRemaining, setTimeRemaining] = useState(25 * 60);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [batchSize, setBatchSize] = useState<number>(15);
   const [reviewFilter, setReviewFilter] = useState<"all" | "errors" | "correct">("all");
   const [expandedReviewId, setExpandedReviewId] = useState<string | null>(null);
 
-  // Selección de preguntas para el simulacro: combinamos Genéricas + Específicas
+  const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
+  const saveExamResult = useSaberProStore((s) => s.saveExamResult);
+
   const examQuestions = useMemo(() => {
     const list = SABER_PRO_QUESTIONS.filter((q) => {
       if (q.session === "especifica") {
@@ -728,7 +1143,6 @@ function SaberProSimulatorTab({
     return list.slice(0, batchSize);
   }, [careerId, batchSize]);
 
-  // Cronómetro
   useEffect(() => {
     if (!examStarted || examFinished) return;
     const timer = setInterval(() => {
@@ -753,128 +1167,137 @@ function SaberProSimulatorTab({
   const handleStartExam = () => {
     setAnswers({});
     setCurrentIndex(0);
-    setTimeRemaining(examQuestions.length * 90); // 1.5 minutos por pregunta
+    setTimeRemaining(batchSize === 15 ? 25 * 60 : 40 * 60);
     setExamFinished(false);
     setExamStarted(true);
-    setExpandedReviewId(null);
-  };
-
-  const handleFinishExam = () => {
-    setExamFinished(true);
   };
 
   const handleSelectAnswer = (qId: string, choiceId: string) => {
     setAnswers((prev) => ({ ...prev, [qId]: choiceId }));
+    setUserAnswer(qId, choiceId);
   };
 
-  // Cálculo de Resultados en Escala ICFES Oficial (0 a 300 Puntos)
-  const results = useMemo(() => {
-    const total = examQuestions.length;
+  const handleFinishExam = () => {
+    setExamFinished(true);
+
+    // Calcular estadísticas y guardar resultado en store
     let correct = 0;
+    const areaBreakdown: Record<string, { correct: number; total: number; label: string }> = {};
+
     examQuestions.forEach((q) => {
-      if (answers[q.id] === q.correct) correct++;
+      const isRight = answers[q.id] === q.correct;
+      if (isRight) correct += 1;
+      if (!areaBreakdown[q.areaId]) {
+        areaBreakdown[q.areaId] = { correct: 0, total: 0, label: q.areaLabel };
+      }
+      areaBreakdown[q.areaId].total += 1;
+      if (isRight) areaBreakdown[q.areaId].correct += 1;
     });
 
-    const missedCount = total - correct;
-    const percentage = total > 0 ? (correct / total) * 100 : 0;
-    // Escala ICFES: 0 a 300 puntos
-    const icfesScore = Math.round((percentage / 100) * 300);
+    const percent = Math.round((correct / examQuestions.length) * 100);
+    const scaledScore = Math.min(300, Math.max(0, Math.round(100 + (percent / 100) * 190)));
 
-    // Niveles Oficiales ICFES Saber Pro
-    let level = "Nivel 1 (Insuficiente)";
-    let levelBadge = "bg-bad text-white";
-    if (icfesScore >= 225) {
-      level = "Nivel 4 (Avanzado)";
-      levelBadge = "bg-emerald-600 text-white";
-    } else if (icfesScore >= 175) {
-      level = "Nivel 3 (Satisfactorio)";
-      levelBadge = "bg-accent text-white";
-    } else if (icfesScore >= 125) {
-      level = "Nivel 2 (Mínimo)";
-      levelBadge = "bg-amber-600 text-white";
-    }
+    saveExamResult({
+      score: scaledScore,
+      rawCorrect: correct,
+      totalQuestions: examQuestions.length,
+      percent,
+      careerId,
+      careerName,
+      areaBreakdown,
+    });
+  };
 
-    return { total, correct, missedCount, percentage, icfesScore, level, levelBadge };
-  }, [examQuestions, answers]);
+  // Cálculo de resultados
+  const correctCount = useMemo(() => {
+    return Object.entries(answers).filter(
+      ([id, ans]) => examQuestions.find((q) => q.id === id)?.correct === ans,
+    ).length;
+  }, [answers, examQuestions]);
 
-  const filteredReviewQuestions = useMemo(() => {
-    if (reviewFilter === "errors") {
-      return examQuestions.filter((q) => answers[q.id] !== q.correct);
-    }
-    if (reviewFilter === "correct") {
-      return examQuestions.filter((q) => answers[q.id] === q.correct);
-    }
-    return examQuestions;
-  }, [examQuestions, answers, reviewFilter]);
+  const scorePercentage = Math.round((correctCount / examQuestions.length) * 100);
+  const scaledScore = Math.min(
+    300,
+    Math.max(0, Math.round(100 + (scorePercentage / 100) * 190)),
+  );
 
-  const currentQ = examQuestions[currentIndex];
+  const currentQ: SaberProQuestion | undefined = examQuestions[currentIndex];
 
   if (!examStarted) {
     return (
-      <div className="rounded-2xl border border-border bg-surface p-8 max-w-2xl mx-auto text-center space-y-6 shadow-xs">
-        <div className="size-16 rounded-2xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center mx-auto">
-          <Clock className="size-8" />
-        </div>
+      <div className="mx-auto max-w-2xl space-y-6">
+        <div className="rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 space-y-5 shadow-xs">
+          <div className="flex items-center gap-2">
+            <span className="rounded-md bg-amber-500 text-slate-950 font-black text-xs uppercase px-2 py-0.5">
+              Simulacro Oficial
+            </span>
+            <span className="text-xs text-muted font-mono">Calibrado ICFES 2026</span>
+          </div>
 
-        <div className="space-y-2">
           <h2 className="font-display text-2xl font-bold text-ink">
-            Simulador Oficial Saber Pro 2026
+            Simulador Cronometrado Saber Pro (Escala 0 a 300)
           </h2>
+
           <p className="text-sm text-muted leading-relaxed">
-            Ponte a prueba en condiciones reales de examen. Evaluaremos preguntas de competencias
-            genéricas y de tu especialidad en <strong className="text-ink">{careerName}</strong>.
+            Experimenta la presión real del examen. La prueba combina preguntas de las competencias
+            genéricas (Lectura Crítica, Razonamiento, Ciudadanas e Inglés) y módulos específicos de{" "}
+            <strong className="text-ink">{careerName}</strong>.
           </p>
-        </div>
 
-        <div className="grid grid-cols-3 gap-3 text-left">
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5 space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
-              Modalidad
-            </span>
-            <p className="text-xs font-semibold text-ink">Cronometrado</p>
+          <div className="rounded-xl border border-border bg-paper/60 p-4 space-y-2 text-xs text-muted">
+            <p className="font-bold text-ink flex items-center gap-1.5">
+              <Clock className="size-4 text-amber-500" />
+              Condiciones de la Simulación:
+            </p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>El cronómetro corre de forma continua sin pausas automáticas.</li>
+              <li>Aproximadamente 1.7 minutos por pregunta (estándar ICFES).</li>
+              <li>Al finalizar, obtendrás tu puntaje global en escala de 0 a 300.</li>
+              <li>Podrás revisar el descarte de cada pregunta fallada con su técnica.</li>
+            </ul>
           </div>
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5 space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
-              Puntuación
-            </span>
-            <p className="text-xs font-semibold text-accent">Escala 0-300 ICFES</p>
-          </div>
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5 space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
-              Preguntas
-            </span>
-            <p className="text-xs font-semibold text-ink">{batchSize} Ítems</p>
-          </div>
-        </div>
 
-        {/* Selector de cantidad de preguntas */}
-        <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-          <span className="text-xs text-muted font-medium">Longitud de la prueba:</span>
-          {[10, 15, 20].map((size) => (
-            <button
-              key={size}
-              type="button"
-              onClick={() => setBatchSize(size)}
-              className={cn(
-                "px-3 py-1 text-xs rounded-lg border font-mono transition-all cursor-pointer",
-                batchSize === size
-                  ? "border-accent bg-accent text-white font-bold"
-                  : "border-border bg-paper/60 text-muted hover:text-ink",
-              )}
-            >
-              {size} preguntas
-            </button>
-          ))}
-        </div>
+          {/* Selector de número de preguntas */}
+          <div className="space-y-2 pt-2">
+            <label className="text-xs font-semibold text-muted">Selecciona la longitud de la prueba:</label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setBatchSize(15)}
+                className={cn(
+                  "rounded-xl border p-3 text-left transition-all cursor-pointer",
+                  batchSize === 15
+                    ? "border-amber-500 bg-amber-500/10 text-ink font-semibold ring-1 ring-amber-500"
+                    : "border-border/80 bg-surface text-muted hover:border-amber-500/50",
+                )}
+              >
+                <div className="font-bold text-sm">15 Preguntas (Sprint)</div>
+                <div className="text-[11px] text-muted">Tiempo estimado: 25 Minutos</div>
+              </button>
 
-        <div className="flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => setBatchSize(26)}
+                className={cn(
+                  "rounded-xl border p-3 text-left transition-all cursor-pointer",
+                  batchSize === 26
+                    ? "border-amber-500 bg-amber-500/10 text-ink font-semibold ring-1 ring-amber-500"
+                    : "border-border/80 bg-surface text-muted hover:border-amber-500/50",
+                )}
+              >
+                <div className="font-bold text-sm">26 Preguntas (Completo)</div>
+                <div className="text-[11px] text-muted">Tiempo estimado: 40 Minutos</div>
+              </button>
+            </div>
+          </div>
+
           <Button
             size="lg"
             onClick={handleStartExam}
-            className="gap-2 font-bold px-8 shadow-xs cursor-pointer"
+            className="w-full gap-2 font-bold cursor-pointer bg-amber-500 hover:bg-amber-600 text-white"
           >
-            <Play className="size-4 fill-white" />
-            Comenzar Simulacro Ahora
+            <Play className="size-4 fill-current" />
+            Comenzar Simulacro Cronometrado
           </Button>
         </div>
       </div>
@@ -882,219 +1305,168 @@ function SaberProSimulatorTab({
   }
 
   if (examFinished) {
+    const isLevel4 = scaledScore >= 180;
+    const isLevel3 = scaledScore >= 156 && scaledScore < 180;
+
+    const filteredReviewQuestions = examQuestions.filter((q) => {
+      const userChoice = answers[q.id];
+      const isRight = userChoice === q.correct;
+      if (reviewFilter === "errors") return !isRight;
+      if (reviewFilter === "correct") return isRight;
+      return true;
+    });
+
     return (
-      <div className="rounded-2xl border border-border bg-surface p-8 max-w-2xl mx-auto space-y-6 shadow-xs animate-in fade-in-50">
-        <div className="text-center space-y-2">
-          <div className="size-16 rounded-2xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center mx-auto">
+      <div className="mx-auto max-w-3xl space-y-8">
+        <div className="rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 space-y-6 shadow-xs text-center">
+          <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mx-auto">
             <Award className="size-8" />
           </div>
-          <h2 className="font-display text-2xl font-bold text-ink">
-            Resultado Oficial del Simulacro
-          </h2>
-          <p className="text-xs text-muted">
-            Calibrado según la escala oficial de calificación del ICFES Saber Pro.
-          </p>
-        </div>
 
-        <div className="rounded-2xl border border-accent/30 bg-accent/5 p-6 text-center space-y-3">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-accent font-mono">
-            Puntaje Global ICFES
-          </span>
-          <div className="font-display text-5xl font-black text-ink">
-            {results.icfesScore}{" "}
-            <span className="text-lg font-normal text-muted font-sans">/ 300 pts</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <Badge className={cn("text-xs font-bold px-3 py-1", results.levelBadge)}>
-              {results.level}
-            </Badge>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 text-center">
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5">
-            <p className="text-xs text-muted font-medium">Aciertos</p>
-            <p className="font-display text-lg font-bold text-ok">
-              {results.correct} / {results.total}
+          <div className="space-y-1">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+              Simulacro Finalizado
+            </h2>
+            <p className="text-xs sm:text-sm text-muted">
+              Resultados calculados con base en la escala oficial de calificación del ICFES (0 - 300).
             </p>
           </div>
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5">
-            <p className="text-xs text-muted font-medium">Porcentaje</p>
-            <p className="font-display text-lg font-bold text-ink">
-              {Math.round(results.percentage)}%
-            </p>
+
+          <div className="grid grid-cols-3 gap-3 rounded-xl border border-border bg-paper/60 p-4">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono uppercase text-muted">Puntaje Oficial</span>
+              <p className="font-display text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400">
+                {scaledScore}
+              </p>
+              <span className="text-[10px] text-muted font-mono">Escala 0-300</span>
+            </div>
+            <div className="space-y-1 border-x border-border/80">
+              <span className="text-[10px] font-mono uppercase text-muted">Aciertos</span>
+              <p className="font-display text-2xl sm:text-3xl font-bold text-ok">
+                {correctCount} / {examQuestions.length}
+              </p>
+              <span className="text-[10px] text-muted font-mono">{scorePercentage}% precisión</span>
+            </div>
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono uppercase text-muted">Nivel de Logro</span>
+              <p
+                className={cn(
+                  "font-display text-lg sm:text-2xl font-bold truncate",
+                  isLevel4 ? "text-ok" : isLevel3 ? "text-accent" : "text-bad",
+                )}
+              >
+                {isLevel4 ? "Nivel 4" : isLevel3 ? "Nivel 3" : "Nivel 2"}
+              </p>
+              <span className="text-[10px] text-muted font-mono">
+                {isLevel4 ? "Avanzado" : isLevel3 ? "Satisfactorio" : "Por Mejorar"}
+              </span>
+            </div>
           </div>
-          <div className="rounded-xl border border-border/80 bg-paper/60 p-3.5">
-            <p className="text-xs text-muted font-medium">Tiempo Restante</p>
-            <p className="font-display text-lg font-bold text-accent">
-              {formatTimer(timeRemaining)}
+
+          <div className="text-left rounded-xl border border-border bg-paper/40 p-4 text-xs text-muted space-y-1">
+            <p className="font-bold text-ink flex items-center gap-1.5">
+              <Sparkles className="size-3.5 text-amber-500" />
+              Diagnóstico ICFES Saber Pro:
+            </p>
+            <p className="leading-relaxed">
+              {isLevel4
+                ? "¡Excelente desempeño! Tu puntaje proyectado te ubicaría en el decil superior nacional y te hace elegible para exoneraciones de grado y reconocimientos del Ministerio de Educación."
+                : isLevel3
+                  ? "Buen resultado. Superas el promedio nacional (>150 pts), pero reforzar las fórmulas financieras y el criterio de auditoría te impulsará al Nivel 4 definitivo."
+                  : "Estás por debajo del rango de suficiencia deseado. Aprovecha la chuleta de fórmulas y revisa el descarte de las preguntas erradas a continuación para evitar las trampas del ICFES."}
             </p>
           </div>
         </div>
 
-        {/* Revisión Interactiva Expandible */}
-        <div className="space-y-4 pt-4 border-t border-border">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        {/* ── Revisión Detallada de Preguntas del Simulacro ── */}
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
             <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-ink font-mono">
-                Revisión Detallada de Preguntas ({examQuestions.length})
-              </h3>
+              <h3 className="font-display text-lg font-bold text-ink">Revisión Pregunta a Pregunta</h3>
               <p className="text-xs text-muted">
-                Haz clic en cualquier pregunta para ver el desglose técnico, el método para resolverla si sale una parecida y el descarte de trampas.
+                Analiza las trampas del examen y aprende la justificación técnica de cada opción.
               </p>
             </div>
 
-            {/* Filtros de Revisión */}
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-1">
               <Button
-                variant={reviewFilter === "all" ? "default" : "outline"}
                 size="sm"
+                variant={reviewFilter === "all" ? "default" : "outline"}
                 onClick={() => setReviewFilter("all")}
-                className="text-xs h-7 px-2.5 cursor-pointer"
+                className="text-xs h-7 cursor-pointer"
               >
                 Todas ({examQuestions.length})
               </Button>
               <Button
-                variant={reviewFilter === "errors" ? "danger" : "outline"}
                 size="sm"
+                variant={reviewFilter === "errors" ? "default" : "outline"}
                 onClick={() => setReviewFilter("errors")}
-                className="text-xs h-7 px-2.5 cursor-pointer"
+                className="text-xs h-7 cursor-pointer text-bad hover:text-bad"
               >
-                Fallidas ({results.missedCount})
+                Fallos ({examQuestions.length - correctCount})
               </Button>
               <Button
-                variant={reviewFilter === "correct" ? "default" : "outline"}
                 size="sm"
+                variant={reviewFilter === "correct" ? "default" : "outline"}
                 onClick={() => setReviewFilter("correct")}
-                className="text-xs h-7 px-2.5 cursor-pointer"
+                className="text-xs h-7 cursor-pointer text-ok hover:text-ok"
               >
-                Aciertos ({results.correct})
+                Correctas ({correctCount})
               </Button>
             </div>
           </div>
 
-          {/* Lista interactiva expandible */}
-          <div className="space-y-2.5 max-h-[600px] overflow-y-auto pr-1">
-            {filteredReviewQuestions.map((q, idx) => {
-              const userAns = answers[q.id];
-              const isCorrect = userAns === q.correct;
+          <div className="space-y-4">
+            {filteredReviewQuestions.map((q) => {
+              const userChoice = answers[q.id];
+              const isRight = userChoice === q.correct;
               const isExpanded = expandedReviewId === q.id;
 
               return (
                 <div
                   key={q.id}
                   className={cn(
-                    "rounded-2xl border transition-all overflow-hidden",
-                    isCorrect
-                      ? "border-ok/30 bg-surface hover:border-ok/60"
-                      : "border-bad/30 bg-surface hover:border-bad/60",
+                    "rounded-2xl border p-5 space-y-4 transition-all shadow-2xs",
+                    isRight ? "border-ok/30 bg-surface" : "border-bad/30 bg-surface",
                   )}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setExpandedReviewId(isExpanded ? null : q.id)}
-                    className="w-full p-4 text-left flex items-center justify-between gap-3 cursor-pointer hover:bg-paper/40 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="size-6 rounded-md bg-paper border border-border font-mono font-bold text-xs flex items-center justify-center shrink-0">
-                        {idx + 1}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-ink truncate">
-                          {q.stem}
-                        </p>
-                        <p className="text-[11px] text-muted">
-                          {q.areaLabel} · {q.session === "generica" ? "Sesión 1 Genéricas" : "Sesión 2 Específicas"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 shrink-0">
-                      <div className="flex items-center gap-2 text-xs font-mono">
-                        <span className={cn("px-2 py-0.5 rounded font-bold", isCorrect ? "bg-ok/10 text-ok" : "bg-bad/10 text-bad")}>
-                          Tú: {userAns ?? "Sin resp."}
-                        </span>
-                        <span className="bg-ok/10 text-ok px-2 py-0.5 rounded font-bold">
-                          Clave: {q.correct}
-                        </span>
-                      </div>
-                      {isCorrect ? (
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      {isRight ? (
                         <CheckCircle2 className="size-4 text-ok shrink-0" />
                       ) : (
                         <XCircle className="size-4 text-bad shrink-0" />
                       )}
-                      {isExpanded ? (
-                        <ChevronUp className="size-4 text-muted" />
-                      ) : (
-                        <ChevronDown className="size-4 text-muted" />
-                      )}
+                      <span className="font-bold text-xs text-ink">{q.areaLabel}</span>
+                      <Badge variant="outline" className="text-[10px] font-mono">
+                        {q.session === "generica" ? "Genérica" : "Específica"}
+                      </Badge>
                     </div>
-                  </button>
 
-                  {/* Panel Expandido con Opciones y Explicación Pedagógica */}
+                    <div className="flex items-center gap-2 text-xs font-mono">
+                      <span className="text-muted">Tu respuesta: <strong>{userChoice || "Sin responder"}</strong></span>
+                      <span className="text-muted">|</span>
+                      <span className="text-ok font-bold">Clave: {q.correct}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm font-medium text-ink leading-relaxed">
+                    {q.stem}
+                  </p>
+
+                  <div className="pt-2 border-t border-border/60 flex items-center justify-between">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setExpandedReviewId(isExpanded ? null : q.id)}
+                      className="text-xs text-amber-600 hover:text-amber-700 h-7 p-0 cursor-pointer"
+                    >
+                      {isExpanded ? "Ocultar Explicación Pedagógica ▲" : "Ver Explicación y Técnica Oficial ▼"}
+                    </Button>
+                  </div>
+
                   {isExpanded && (
-                    <div className="border-t border-border/70 p-5 bg-paper/30 space-y-5 animate-in fade-in-50">
-                      {q.contextText && (
-                        <div className="rounded-xl border border-border/80 bg-paper/60 p-4 text-xs sm:text-sm leading-relaxed text-ink font-serif italic border-l-4 border-l-accent">
-                          {q.contextText}
-                        </div>
-                      )}
-
-                      <div className="space-y-2">
-                        <p className="text-xs font-bold uppercase tracking-wider text-muted font-mono">
-                          Pregunta completa:
-                        </p>
-                        <p className="text-sm sm:text-base font-semibold text-ink">{q.stem}</p>
-                        
-                        <div className="grid gap-2 pt-2">
-                          {q.choices.map((c) => {
-                            const wasSelected = userAns === c.id;
-                            const isThisKey = c.id === q.correct;
-                            return (
-                              <div
-                                key={c.id}
-                                className={cn(
-                                  "rounded-xl border p-3.5 text-xs sm:text-sm flex items-start gap-3 transition-colors",
-                                  isThisKey
-                                    ? "border-ok bg-ok/10 text-ink font-medium ring-1 ring-ok"
-                                    : wasSelected && !isThisKey
-                                      ? "border-bad bg-bad/10 text-ink ring-1 ring-bad"
-                                      : "border-border/60 bg-surface text-muted",
-                                )}
-                              >
-                                <span className={cn(
-                                  "size-6 rounded-md font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5",
-                                  isThisKey
-                                    ? "bg-ok text-white"
-                                    : wasSelected
-                                      ? "bg-bad text-white"
-                                      : "bg-paper text-muted border border-border/60",
-                                )}>
-                                  {c.id}
-                                </span>
-                                <span className="flex-1 leading-snug">{c.text}</span>
-                                {isThisKey && (
-                                  <Badge className="bg-ok text-white text-[10px] uppercase font-bold shrink-0">
-                                    Clave Oficial
-                                  </Badge>
-                                )}
-                                {wasSelected && !isThisKey && (
-                                  <Badge className="bg-bad text-white text-[10px] uppercase font-bold shrink-0">
-                                    Tu Elección
-                                  </Badge>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Explicación Pedagógica Integral */}
-                      <SaberProPedagogicalFeedback
-                        question={q}
-                        selectedAnswer={userAns}
-                      />
-                    </div>
+                    <SaberProPedagogicalFeedback question={q} selectedAnswer={userChoice} />
                   )}
                 </div>
               );
@@ -1103,11 +1475,11 @@ function SaberProSimulatorTab({
         </div>
 
         <div className="flex items-center justify-between pt-4 border-t border-border">
-          <Button variant="outline" size="sm" onClick={handleStartExam} className="gap-1.5">
+          <Button variant="outline" size="sm" onClick={handleStartExam} className="gap-1.5 cursor-pointer">
             <RotateCcw className="size-3.5" />
             Reintentar Simulacro
           </Button>
-          <Button size="sm" onClick={() => setExamStarted(false)}>
+          <Button size="sm" onClick={() => setExamStarted(false)} className="cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold">
             Volver al Menú
           </Button>
         </div>
@@ -1120,14 +1492,14 @@ function SaberProSimulatorTab({
       {/* Barra de Estado del Simulacro */}
       <div className="rounded-xl border border-border bg-surface p-4 flex items-center justify-between shadow-2xs">
         <div className="flex items-center gap-3">
-          <Badge className="bg-accent text-accent-fg font-mono text-xs">
+          <Badge className="bg-amber-500 text-white font-mono text-xs font-bold">
             Pregunta {currentIndex + 1} de {examQuestions.length}
           </Badge>
           <span className="text-xs text-muted hidden sm:inline">{currentQ?.areaLabel}</span>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 font-mono text-sm font-bold text-accent bg-accent/10 px-3 py-1 rounded-lg">
+          <div className="flex items-center gap-1.5 font-mono text-sm font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg">
             <Clock className="size-4" />
             <span>{formatTimer(timeRemaining)}</span>
           </div>
@@ -1145,7 +1517,7 @@ function SaberProSimulatorTab({
       {currentQ && (
         <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 space-y-6 shadow-xs">
           {currentQ.contextText && (
-            <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-accent">
+            <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-amber-500">
               {currentQ.contextText}
             </div>
           )}
@@ -1167,15 +1539,15 @@ function SaberProSimulatorTab({
                   className={cn(
                     "w-full rounded-xl border p-4 text-left transition-all flex items-start gap-3.5 cursor-pointer",
                     isSelected
-                      ? "border-accent bg-accent/10 ring-1 ring-accent text-ink"
-                      : "border-border/80 bg-paper/40 hover:bg-paper hover:border-accent/50 text-ink",
+                      ? "border-amber-500 bg-amber-500/10 ring-1 ring-amber-500 text-ink"
+                      : "border-border/80 bg-paper/40 hover:bg-paper hover:border-amber-500/50 text-ink",
                   )}
                 >
                   <span
                     className={cn(
                       "size-7 rounded-lg border font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5",
                       isSelected
-                        ? "bg-accent text-white border-accent"
+                        ? "bg-amber-500 text-white border-amber-500"
                         : "border-border/80 bg-surface text-ink",
                     )}
                   >
@@ -1204,7 +1576,7 @@ function SaberProSimulatorTab({
             </span>
 
             {currentIndex === examQuestions.length - 1 ? (
-              <Button size="sm" onClick={handleFinishExam} className="gap-1.5 cursor-pointer">
+              <Button size="sm" onClick={handleFinishExam} className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold">
                 Entregar Simulacro
               </Button>
             ) : (
@@ -1212,7 +1584,7 @@ function SaberProSimulatorTab({
                 variant="default"
                 size="sm"
                 onClick={() => setCurrentIndex((i) => i + 1)}
-                className="gap-1.5 cursor-pointer"
+                className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
               >
                 Siguiente
                 <ArrowRight className="size-4" />
@@ -1254,11 +1626,11 @@ function SaberProCheatsheetTab() {
   return (
     <div className="space-y-6">
       {/* Cabecera de la Chuleta */}
-      <div className="rounded-2xl border border-accent/40 bg-linear-to-r from-accent/10 via-surface to-accent/5 p-6 space-y-3">
+      <div className="rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-surface to-amber-500/5 p-6 space-y-3">
         <div className="flex items-center gap-2">
-          <Badge className="bg-amber-500 text-white font-bold text-xs uppercase">
+          <span className="rounded bg-amber-500 text-slate-950 font-black text-xs uppercase px-2 py-0.5">
             Sprint 4 Días · 18 Octubre 2026
-          </Badge>
+          </span>
           <span className="text-xs text-muted font-mono">Alta Frecuencia ICFES</span>
         </div>
         <h2 className="font-display text-xl sm:text-2xl font-bold text-ink">
@@ -1279,7 +1651,7 @@ function SaberProCheatsheetTab() {
               placeholder="Buscar por ratio (ROA, VPN, Razón corriente, NIA 705)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-xl border border-border bg-surface pl-9 pr-4 py-2 text-xs text-ink focus:border-accent focus:outline-hidden"
+              className="w-full rounded-xl border border-border bg-surface pl-9 pr-4 py-2 text-xs text-ink focus:border-amber-500 focus:outline-hidden"
             />
           </div>
         </div>
@@ -1290,10 +1662,10 @@ function SaberProCheatsheetTab() {
         {filteredCheatsheet.map((item, idx) => (
           <div
             key={item.title}
-            className="rounded-2xl border border-border/80 bg-surface p-5 space-y-3 shadow-2xs hover:border-accent/60 transition-all flex flex-col justify-between"
+            className="rounded-2xl border border-border/80 bg-surface p-5 space-y-3 shadow-2xs hover:border-amber-500/60 transition-all flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-accent font-mono">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
                 {item.category}
               </span>
               <h3 className="font-display text-base font-bold text-ink leading-tight">
@@ -1319,7 +1691,7 @@ function SaberProCheatsheetTab() {
             <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs leading-relaxed text-ink/90 flex items-start gap-2">
               <Zap className="size-3.5 text-amber-500 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-amber-600 block text-[11px] uppercase tracking-wider">
+                <span className="font-bold text-amber-700 dark:text-amber-300 block text-[11px] uppercase tracking-wider">
                   Clave ICFES:
                 </span>
                 <p>{item.keyTip}</p>
@@ -1351,11 +1723,12 @@ function SaberProStructureTab({
               Sesión 1: Módulos Genéricos (Obligatorios Nacionales)
             </h2>
             <p className="text-xs text-muted">
-              Evaluación obligatoria para todos los estudiantes de carreras universitarias en
-              Colombia.
+              Evaluación obligatoria para todos los estudiantes de carreras universitarias en Colombia.
             </p>
           </div>
-          <Badge className="bg-accent/15 text-accent border-accent/30 font-bold">4h 40min</Badge>
+          <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 font-bold">
+            4h 40min
+          </Badge>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1384,8 +1757,7 @@ function SaberProStructureTab({
               Sesión 2: Módulos Específicos · {selectedCareer.name}
             </h2>
             <p className="text-xs text-muted">
-              Facultad: {selectedCareer.faculty} · Módulos especializados fijados por el Ministerio
-              de Educación.
+              Facultad: {selectedCareer.faculty} · Módulos especializados fijados por el Ministerio de Educación.
             </p>
           </div>
           <Badge className="bg-ok/15 text-ok border-ok/30 font-bold">~2 Horas</Badge>
@@ -1410,7 +1782,7 @@ function SaberProStructureTab({
       {/* Recomendaciones Tácticas para el 18 de Octubre */}
       <div className="rounded-2xl border border-border bg-paper/60 p-6 space-y-3">
         <h3 className="font-display text-base font-bold text-ink flex items-center gap-2">
-          <Info className="size-4 text-accent" />
+          <Info className="size-4 text-amber-500" />
           Recomendaciones Oficiales para el Domingo 18 de Octubre
         </h3>
         <ul className="text-xs text-muted space-y-2 list-disc list-inside leading-relaxed">
@@ -1432,6 +1804,325 @@ function SaberProStructureTab({
           </li>
         </ul>
       </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// 5. TAB: DIAGNÓSTICO DE DESEMPEÑO Y MAPA DE FALLOS (PASO 5)
+// ────────────────────────────────────────────────────────────────────────────
+
+function SaberProDiagnosticTab({
+  selectedCareer,
+  onReviewQuestion,
+  onStartSimulator,
+}: {
+  selectedCareer: (typeof SABER_PRO_CAREERS)[0];
+  onReviewQuestion: (questionId: string) => void;
+  onStartSimulator: () => void;
+}) {
+  const userAnswers = useSaberProStore((s) => s.userAnswers);
+  const resetUserAnswers = useSaberProStore((s) => s.resetUserAnswers);
+  const examHistory = useSaberProStore((s) => s.examHistory);
+
+  // Identificar preguntas respondidas
+  const answeredEntries = Object.entries(userAnswers);
+  const totalAnswered = answeredEntries.length;
+
+  const failedQuestions: { question: SaberProQuestion; userAns: string }[] = [];
+  const correctQuestions: SaberProQuestion[] = [];
+
+  // Desglose por áreas
+  const areaStats: Record<string, { label: string; total: number; correct: number }> = {};
+
+  answeredEntries.forEach(([qId, ans]) => {
+    const q = SABER_PRO_QUESTIONS.find((item) => item.id === qId);
+    if (!q) return;
+
+    if (!areaStats[q.areaId]) {
+      areaStats[q.areaId] = { label: q.areaLabel, total: 0, correct: 0 };
+    }
+    areaStats[q.areaId].total += 1;
+
+    if (ans === q.correct) {
+      correctQuestions.push(q);
+      areaStats[q.areaId].correct += 1;
+    } else {
+      failedQuestions.push({ question: q, userAns: ans });
+    }
+  });
+
+  const accuracy = totalAnswered > 0 ? Math.round((correctQuestions.length / totalAnswered) * 100) : 0;
+  const estimatedScore =
+    totalAnswered > 0 ? Math.min(300, Math.max(0, Math.round(100 + (accuracy / 100) * 190))) : 0;
+
+  const isLevel4 = estimatedScore >= 180;
+  const isLevel3 = estimatedScore >= 156 && estimatedScore < 180;
+
+  if (totalAnswered === 0 && examHistory.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-border bg-surface p-12 text-center space-y-4">
+        <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mx-auto">
+          <Layers className="size-8" />
+        </div>
+        <div className="space-y-1">
+          <h3 className="font-display text-lg font-bold text-ink">
+            Aún no has generado datos de diagnóstico
+          </h3>
+          <p className="text-xs text-muted max-w-md mx-auto">
+            Comienza a responder preguntas en el <strong>Entrenador de Preguntas</strong> o realiza un{" "}
+            <strong>Simulacro Cronometrado</strong> para que el sistema calcule tu puntaje proyectado en
+            la escala 0 a 300 y mapee tus fallos por competencia.
+          </p>
+        </div>
+        <Button
+          onClick={onStartSimulator}
+          className="gap-2 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+        >
+          <Play className="size-4 fill-current" />
+          Iniciar Simulacro Oficial
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-8">
+      {/* ── Resumen Cuantitativo del Diagnóstico ── */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border border-amber-500/40 bg-surface p-5 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+            Puntaje Estimado ICFES
+          </span>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">{estimatedScore}</span>
+            <span className="text-xs text-muted">/ 300</span>
+          </div>
+          <p className="text-[11px] text-muted">
+            {isLevel4
+              ? "Nivel 4 (Avanzado): Sobresaliente nacional."
+              : isLevel3
+                ? "Nivel 3 (Satisfactorio): Cerca de Nivel 4."
+                : "Nivel 2: Refuerza las preguntas falladas."}
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-border/80 bg-surface p-5 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
+            Tasa de Aciertos
+          </span>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">{accuracy}%</span>
+            <span className="text-xs text-muted">
+              ({correctQuestions.length} de {totalAnswered})
+            </span>
+          </div>
+          <Progress value={accuracy} className="h-1.5 bg-paper" />
+        </div>
+
+        <div className="rounded-2xl border border-bad/30 bg-bad/5 p-5 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-bad font-mono">
+            Preguntas con Fallo
+          </span>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-bad">
+              {failedQuestions.length}
+            </span>
+            <span className="text-xs text-muted">para corregir</span>
+          </div>
+          <p className="text-[11px] text-bad/80">
+            Conceptos críticos que debes repasar antes del domingo 18.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-border/80 bg-surface p-5 space-y-2 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-mono">
+              Simulacros Guardados
+            </span>
+            <span className="text-[10px] text-muted font-mono">Historial</span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-3xl font-bold text-ink">{examHistory.length}</span>
+            <span className="text-xs text-muted">sesiones tomadas</span>
+          </div>
+          <p className="text-[11px] text-muted">
+            {examHistory.length > 0
+              ? `Último puntaje: ${examHistory[0].score} pts`
+              : "Sin simulacros registrados aún."}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Desempeño por Competencias Evaluadas ── */}
+      <div className="rounded-2xl border border-border/80 bg-surface p-6 space-y-4 shadow-2xs">
+        <div className="flex items-center justify-between border-b border-border/60 pb-3">
+          <div>
+            <h3 className="font-display text-base font-bold text-ink">
+              Rendimiento por Competencia y Área
+            </h3>
+            <p className="text-xs text-muted">
+              Identifica en qué módulos tienes mayor solidez para {selectedCareer.name} y dónde se concentran los distractores.
+            </p>
+          </div>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={resetUserAnswers}
+            className="text-xs text-muted hover:text-bad h-8 gap-1 cursor-pointer"
+          >
+            <RotateCcw className="size-3.5" />
+            Reiniciar Diagnóstico
+          </Button>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          {Object.entries(areaStats).map(([areaId, stat]) => {
+            const areaAcc = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
+            return (
+              <div
+                key={areaId}
+                className="rounded-xl border border-border/80 bg-paper/50 p-4 space-y-2"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-ink">{stat.label}</span>
+                  <span
+                    className={cn(
+                      "text-xs font-bold font-mono",
+                      areaAcc >= 70 ? "text-ok" : areaAcc >= 50 ? "text-amber-600" : "text-bad",
+                    )}
+                  >
+                    {areaAcc}% ({stat.correct}/{stat.total})
+                  </span>
+                </div>
+                <Progress value={areaAcc} className="h-1.5 bg-paper" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Lista de Preguntas Falladas para Repaso Urgente ── */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b border-border pb-3">
+          <div>
+            <h3 className="font-display text-lg font-bold text-ink flex items-center gap-2">
+              <ShieldAlert className="size-5 text-bad" />
+              Mapa de Fallos: Preguntas para Corregir ({failedQuestions.length})
+            </h3>
+            <p className="text-xs text-muted">
+              Haz clic en &quot;Repasar en el Entrenador&quot; para abrir la pregunta con su método
+              de resolución y descarte de trampas del ICFES.
+            </p>
+          </div>
+        </div>
+
+        {failedQuestions.length === 0 ? (
+          <div className="rounded-xl border border-ok/30 bg-ok/5 p-6 text-center space-y-2">
+            <CheckCircle2 className="size-8 text-ok mx-auto" />
+            <p className="text-xs font-bold text-ok">¡No tienes preguntas falladas en este momento!</p>
+            <p className="text-xs text-muted">
+              Excelente precisión técnica en todas las preguntas que has resuelto.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {failedQuestions.map(({ question: q, userAns }) => (
+              <div
+                key={q.id}
+                className="rounded-2xl border border-bad/30 bg-surface p-5 space-y-3 shadow-2xs hover:border-bad/60 transition-all"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="size-2 rounded-full bg-bad" />
+                    <span className="font-bold text-xs text-ink">{q.areaLabel}</span>
+                    <Badge variant="outline" className="text-[10px] font-mono">
+                      {q.session === "generica" ? "Sesión 1 Genérica" : "Sesión 2 Específica"}
+                    </Badge>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs font-mono">
+                    <span className="text-bad">Tu elección: <strong>Opción {userAns}</strong></span>
+                    <span className="text-muted">|</span>
+                    <span className="text-ok font-bold">Clave Oficial: Opción {q.correct}</span>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm font-semibold text-ink leading-relaxed">
+                  {q.stem}
+                </p>
+
+                <div className="rounded-xl border border-border bg-paper/60 p-3 text-xs text-muted leading-relaxed">
+                  <p>
+                    <strong className="text-ink">Por qué es la opción {q.correct}:</strong>{" "}
+                    {q.explanation}
+                  </p>
+                </div>
+
+                <div className="pt-2 flex items-center justify-between">
+                  <span className="text-[11px] text-muted font-mono truncate max-w-sm">
+                    Competencia: {q.competency}
+                  </span>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => onReviewQuestion(q.id)}
+                    className="text-xs gap-1 cursor-pointer border-amber-500/50 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+                  >
+                    <span>Repasar en el Entrenador</span>
+                    <ArrowRight className="size-3.5" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── Historial de Simulacros Anteriores ── */}
+      {examHistory.length > 0 && (
+        <div className="rounded-2xl border border-border/80 bg-surface p-6 space-y-4 shadow-2xs">
+          <div className="flex items-center justify-between border-b border-border/60 pb-3">
+            <h3 className="font-display text-base font-bold text-ink">
+              Historial de Simulacros Cronometrados
+            </h3>
+            <span className="text-xs text-muted font-mono">{examHistory.length} simulacros</span>
+          </div>
+
+          <div className="space-y-2">
+            {examHistory.map((res, idx) => (
+              <div
+                key={res.date}
+                className="flex items-center justify-between rounded-xl border border-border bg-paper/40 p-3 text-xs"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-muted text-[11px]">#{idx + 1}</span>
+                  <span className="font-bold text-ink">
+                    {new Date(res.date).toLocaleDateString("es-CO", {
+                      day: "numeric",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                  <Badge variant="outline" className="text-[10px] font-mono">
+                    {res.careerName}
+                  </Badge>
+                </div>
+
+                <div className="flex items-center gap-4 font-mono">
+                  <span className="text-muted">
+                    {res.rawCorrect}/{res.totalQuestions} aciertos ({res.percent}%)
+                  </span>
+                  <span className="font-bold text-amber-600 dark:text-amber-400">
+                    {res.score} pts
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

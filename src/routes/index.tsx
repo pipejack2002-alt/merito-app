@@ -166,7 +166,7 @@ function Home() {
 
             <div className="flex flex-wrap items-center gap-2 shrink-0">
               <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-xs">
-                <Link to="/saber-pro">
+                <Link to="/saber-pro" search={{ tab: "resumen" }}>
                   <GraduationCap className="size-4" />
                   Entrenar Saber Pro
                   <ArrowRight className="size-4" />
