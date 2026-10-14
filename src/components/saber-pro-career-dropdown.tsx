@@ -59,12 +59,12 @@ export function SaberProCareerDropdown() {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2 rounded-xl border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs transition-all hover:bg-amber-500/20 hover:border-amber-500/60 shadow-2xs group cursor-pointer",
-          isOpen && "ring-2 ring-amber-500 border-amber-500 bg-surface",
+          "flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs transition-all hover:bg-emerald-500/20 hover:border-emerald-500/60 shadow-2xs group cursor-pointer",
+          isOpen && "ring-2 ring-emerald-500 border-emerald-500 bg-surface",
         )}
       >
-        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold group-hover:scale-105 transition-transform">
-          <GraduationCap className="size-4 text-amber-600 dark:text-amber-400" />
+        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold group-hover:scale-105 transition-transform">
+          <GraduationCap className="size-4 text-emerald-700 dark:text-emerald-300" />
         </div>
 
         <div className="flex flex-col text-left">
@@ -74,7 +74,7 @@ export function SaberProCareerDropdown() {
             </span>
             <Badge
               variant="outline"
-              className="px-1.5 py-0 text-[9px] font-bold text-amber-700 dark:text-amber-300 border-amber-500/40 bg-amber-500/15 hidden sm:inline-flex"
+              className="px-1.5 py-0 text-[9px] font-bold text-emerald-800 dark:text-emerald-200 border-emerald-500/40 bg-emerald-500/15 hidden sm:inline-flex"
             >
               Saber Pro
             </Badge>
@@ -88,7 +88,7 @@ export function SaberProCareerDropdown() {
         <ChevronDown
           className={cn(
             "size-3.5 text-muted transition-transform duration-200 shrink-0 ml-0.5",
-            isOpen && "rotate-180 text-amber-600",
+            isOpen && "rotate-180 text-emerald-600",
           )}
         />
       </button>
@@ -100,7 +100,7 @@ export function SaberProCareerDropdown() {
           <div className="flex items-center justify-between border-b border-border/80 pb-2.5 px-1">
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-amber-500" />
+                <Sparkles className="size-3.5 text-emerald-600 dark:text-emerald-400" />
                 <h4 className="text-xs font-bold text-ink">Cambiar Carrera Profesional</h4>
               </div>
               <p className="text-[10px] text-muted">
@@ -120,7 +120,7 @@ export function SaberProCareerDropdown() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar carrera (Contaduría, Derecho, etc.)..."
-              className="w-full rounded-lg border border-border bg-paper py-1.5 pl-8 pr-3 text-xs text-ink placeholder:text-muted/60 focus:border-amber-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-border bg-paper py-1.5 pl-8 pr-3 text-xs text-ink placeholder:text-muted/60 focus:border-emerald-500 focus:outline-hidden"
               autoFocus
             />
           </div>
@@ -142,7 +142,7 @@ export function SaberProCareerDropdown() {
                     className={cn(
                       "group flex w-full items-start justify-between rounded-xl p-2.5 text-left transition-all cursor-pointer",
                       isSelected
-                        ? "bg-amber-500/10 border border-amber-500/50 text-ink font-semibold"
+                        ? "bg-emerald-500/10 border border-emerald-500/50 text-ink font-semibold"
                         : "hover:bg-paper/70 text-ink border border-transparent",
                     )}
                   >
@@ -151,7 +151,7 @@ export function SaberProCareerDropdown() {
                         className={cn(
                           "flex size-7 shrink-0 items-center justify-center rounded-lg text-xs font-mono font-bold transition-colors mt-0.5",
                           isSelected
-                            ? "bg-amber-500 text-white shadow-xs"
+                            ? "bg-emerald-600 text-white shadow-xs"
                             : "bg-paper text-muted group-hover:bg-surface group-hover:text-ink",
                         )}
                       >
@@ -181,7 +181,7 @@ export function SaberProCareerDropdown() {
                     </div>
 
                     {isSelected && (
-                      <Check className="size-4 text-amber-600 dark:text-amber-400 shrink-0 mt-1 ml-1" />
+                      <Check className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-1 ml-1" />
                     )}
                   </button>
                 );

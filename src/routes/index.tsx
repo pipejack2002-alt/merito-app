@@ -144,14 +144,14 @@ function Home() {
         </div>
 
         {/* ── Banner Especial Saber Pro 2026 (Examen 18 Octubre) ── */}
-        <div className="mt-4 rounded-xl border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-surface p-4 sm:p-5">
+        <div className="mt-4 rounded-xl border border-emerald-500/40 bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-surface p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <Badge className="bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider">
+                <Badge className="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider">
                   Módulo Extra · Saber Pro 2026
                 </Badge>
-                <span className="flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400">
+                <span className="flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-300 font-mono">
                   <Calendar className="size-3.5" />
                   Domingo 18 de Octubre (Sprint Final)
                 </span>
@@ -165,7 +165,7 @@ function Home() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2 shrink-0">
-              <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-xs">
+              <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-xs">
                 <Link to="/saber-pro" search={{ tab: "resumen" }}>
                   <GraduationCap className="size-4" />
                   Entrenar Saber Pro

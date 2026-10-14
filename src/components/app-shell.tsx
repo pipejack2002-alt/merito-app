@@ -1,6 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
+  ArrowLeftRight,
   BookOpen,
   Briefcase,
   CheckCircle2,
@@ -98,7 +99,7 @@ const SABER_PRO_NAV = [
   },
   {
     tab: "chuleta",
-    label: "Paso 3 · Chuleta de Fórmulas y Atajos",
+    label: "Paso 3 · Chuleta de Fórmulas",
     shortLabel: "Chuleta",
     sub: "Ratios y normas clave (Sprint 4 Días)",
     icon: Zap,
@@ -130,6 +131,24 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   const [isRoadmapOpen, setIsRoadmapOpen] = useState(false);
   const [isPricingOpen, setIsPricingOpen] = useState(false);
+
+  // Control interactivo de ancho de barra lateral (Normal 320px vs Amplio 384px)
+  const [isSidebarWide, setIsSidebarWide] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("merito-sidebar-wide") === "true";
+    }
+    return false;
+  });
+
+  const toggleSidebarWidth = () => {
+    setIsSidebarWide((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("merito-sidebar-wide", String(next));
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     void useProgress.persist.rehydrate();
@@ -163,7 +182,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
       ) : (
         <header className="sticky top-0 z-40 border-b border-border/80 bg-surface/90 backdrop-blur-md">
-          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 lg:px-6">
+          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 lg:px-6">
             {/* Logo y Nombre del Entorno Dinámico (DIAN vs Saber Pro) */}
             <Link
               to={isSaberPro ? "/saber-pro" : "/"}
@@ -173,7 +192,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 className={cn(
                   "flex size-9 items-center justify-center rounded-xl text-white shadow-xs ring-1 ring-black/5 group-hover:scale-102 transition-transform",
                   isSaberPro
-                    ? "bg-linear-to-br from-amber-600 via-amber-700 to-amber-800"
+                    ? "bg-linear-to-br from-emerald-600 via-emerald-700 to-teal-800"
                     : "bg-linear-to-br from-slate-900 to-accent text-accent-fg",
                 )}
               >
@@ -193,7 +212,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   {isSaberPro ? (
                     <Badge
                       variant="outline"
-                      className="text-[9px] font-bold uppercase tracking-wider bg-amber-500/15 border-amber-500/50 text-amber-700 dark:text-amber-300 py-0"
+                      className="text-[9px] font-bold uppercase tracking-wider bg-emerald-500/15 border-emerald-500/50 text-emerald-800 dark:text-emerald-300 py-0"
                     >
                       SABER PRO 2026
                     </Badge>
@@ -223,7 +242,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   !isSaberPro
                     ? "bg-accent text-white shadow-xs border border-accent"
-                    : "border border-border/80 bg-paper/60 text-muted hover:text-ink hover:border-accent hover:bg-surface",
+                    : "border border-border/80 bg-paper/60 text-muted hover:text-ink hover:border-emerald-500 hover:bg-surface",
                 )}
               >
                 <Briefcase className="size-3.5" />
@@ -231,21 +250,21 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <span>DIAN 2676</span>
               </Link>
 
-              {/* Botón Switch: Saber Pro 2026 con Alto Contraste */}
+              {/* Botón Switch: Saber Pro 2026 con Paleta Esmeralda de Alto Contraste */}
               <Link
                 to="/saber-pro"
                 search={{ tab: currentSaberProTab || "resumen" }}
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   isSaberPro
-                    ? "bg-slate-900 text-amber-300 dark:bg-amber-500 dark:text-slate-950 border border-amber-500/80 shadow-xs"
-                    : "border border-amber-500/50 bg-amber-500/10 text-amber-800 dark:text-amber-300 hover:bg-amber-500/20",
+                    ? "bg-emerald-600 text-white dark:bg-emerald-500 dark:text-slate-950 border border-emerald-500 shadow-sm"
+                    : "border border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/20",
                 )}
               >
                 <GraduationCap
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-amber-300 dark:text-slate-950" : "text-amber-600 dark:text-amber-400",
+                    isSaberPro ? "text-white dark:text-slate-950" : "text-emerald-700 dark:text-emerald-300",
                   )}
                 />
                 <span>Saber Pro</span>
@@ -253,8 +272,8 @@ export function AppShell({ children }: { children: ReactNode }) {
                   className={cn(
                     "rounded px-1.5 py-0.5 text-[9px] font-black uppercase font-mono tracking-wider",
                     isSaberPro
-                      ? "bg-amber-400 text-slate-950 dark:bg-slate-950 dark:text-amber-300"
-                      : "bg-amber-500/25 text-amber-950 dark:text-amber-200 border border-amber-500/40",
+                      ? "bg-emerald-800 text-emerald-100 dark:bg-slate-950 dark:text-emerald-300 border border-emerald-400/30"
+                      : "bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/40",
                   )}
                 >
                   18 Oct
@@ -265,7 +284,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 onClick={() => setIsRoadmapOpen(true)}
-                className="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-paper/60 px-2.5 py-1.5 text-xs text-ink hover:border-accent hover:bg-surface font-semibold shadow-2xs transition-all"
+                className="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-paper/60 px-2.5 py-1.5 text-xs text-ink hover:border-accent hover:bg-surface font-semibold shadow-2xs transition-all cursor-pointer"
               >
                 <Compass className="size-3.5 text-accent" />
                 <span>¿Cómo empezar?</span>
@@ -283,7 +302,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 >
                   <Sparkles className="size-3.5" />
                   <span>Indicadores Oficiales</span>
-                  <span className="rounded bg-accent/20 px-1 py-0.5 text-[9px] font-bold uppercase">
+                  <span className="rounded bg-accent/20 px-1 py-0.5 text-[9px] font-bold uppercase font-mono">
                     24 Ejes
                   </span>
                 </Link>
@@ -293,9 +312,14 @@ export function AppShell({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 onClick={() => setIsPricingOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-accent/60 bg-linear-to-r from-accent/15 to-accent/5 px-2.5 py-1.5 text-xs text-accent hover:bg-accent/25 transition-all font-bold shadow-2xs cursor-pointer"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-2xs transition-all cursor-pointer",
+                  isSaberPro
+                    ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/20"
+                    : "border-accent/60 bg-linear-to-r from-accent/15 to-accent/5 text-accent hover:bg-accent/25",
+                )}
               >
-                <Crown className="size-3.5 text-accent" />
+                <Crown className={cn("size-3.5", isSaberPro ? "text-emerald-600 dark:text-emerald-400" : "text-accent")} />
                 <span>Planes Pro</span>
               </button>
 
@@ -310,28 +334,51 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main className="mx-auto max-w-4xl px-4 pb-12 pt-6 flex-1 w-full">{children}</main>
       ) : (
         <div className="mx-auto flex max-w-7xl w-full flex-1 gap-6 lg:px-6">
-          {/* Barra Lateral Dinámica y Calibrada al Modo Activo */}
-          <aside className="sticky top-20 hidden h-[calc(100dvh-5.5rem)] w-72 shrink-0 py-3 pr-2 lg:flex lg:flex-col lg:justify-between overflow-y-auto">
+          {/* Barra Lateral Dinámica con Ancho Ajustable y Tipografía Unificada */}
+          <aside
+            className={cn(
+              "sticky top-20 hidden h-[calc(100dvh-5.5rem)] shrink-0 py-3 pr-2 lg:flex lg:flex-col lg:justify-between overflow-y-auto transition-all duration-200",
+              isSidebarWide ? "w-92 xl:w-96" : "w-80",
+            )}
+          >
             <div className="space-y-3.5">
               {/* Bloque de Navegación Principal */}
               <div className="rounded-2xl border border-border/70 bg-surface/80 p-3 shadow-2xs backdrop-blur-xs">
-                <div className="flex items-center justify-between px-2 pb-1">
+                {/* Cabecera de la Barra con Control de Ancho Interactivo */}
+                <div className="flex items-center justify-between px-2 pb-2 border-b border-border/60">
                   <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-subtle">
                     {isSaberPro ? "Ruta Saber Pro" : "Ruta de Preparación"}
                   </p>
-                  <span
-                    className={cn(
-                      "rounded px-1.5 py-0.5 text-[9px] font-bold font-mono uppercase",
-                      isSaberPro
-                        ? "bg-amber-500/15 text-amber-700 dark:text-amber-300"
-                        : "bg-accent/10 text-accent",
-                    )}
-                  >
-                    5 Pasos
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={toggleSidebarWidth}
+                      className={cn(
+                        "rounded-md border border-border/70 bg-paper/70 px-1.5 py-0.5 text-[9px] font-mono font-medium text-muted hover:text-ink hover:border-border transition-all flex items-center gap-1 cursor-pointer",
+                        isSidebarWide &&
+                          (isSaberPro
+                            ? "border-emerald-500/40 text-emerald-800 dark:text-emerald-300 bg-emerald-500/10"
+                            : "border-accent/40 text-accent bg-accent/10"),
+                      )}
+                      title="Ajustar ancho de barra lateral (Normal / Amplio)"
+                    >
+                      <ArrowLeftRight className="size-2.5" />
+                      <span>{isSidebarWide ? "Amplio" : "Normal"}</span>
+                    </button>
+                    <span
+                      className={cn(
+                        "rounded px-1.5 py-0.5 text-[9px] font-bold font-mono uppercase",
+                        isSaberPro
+                          ? "bg-emerald-500/15 text-emerald-800 dark:text-emerald-300"
+                          : "bg-accent/10 text-accent",
+                      )}
+                    >
+                      5 Pasos
+                    </span>
+                  </div>
                 </div>
 
-                <nav className="mt-1.5 flex flex-col gap-1">
+                <nav className="mt-2 flex flex-col gap-1">
                   {isSaberPro
                     ? SABER_PRO_NAV.map((item) => {
                         const active = currentSaberProTab === item.tab;
@@ -342,45 +389,50 @@ export function AppShell({ children }: { children: ReactNode }) {
                             to="/saber-pro"
                             search={{ tab: item.tab }}
                             className={cn(
-                              "group flex items-center justify-between rounded-xl px-2.5 py-2 text-xs transition-all",
+                              "group flex items-start gap-2.5 rounded-xl px-3 py-2.5 text-xs transition-all",
                               active
-                                ? "bg-amber-500 text-white font-semibold shadow-xs"
+                                ? "bg-emerald-600 text-white font-semibold shadow-xs"
                                 : "text-muted hover:bg-paper/80 hover:text-ink",
                             )}
                           >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <Icon
-                                className={cn(
-                                  "size-4 shrink-0 transition-transform group-hover:scale-110",
-                                  active ? "text-white" : "text-subtle group-hover:text-ink",
-                                )}
-                              />
-                              <div className="flex flex-col min-w-0">
-                                <span className="leading-tight font-medium text-xs whitespace-nowrap">
-                                  {item.label}
-                                </span>
+                            <Icon
+                              className={cn(
+                                "size-4 shrink-0 mt-0.5 transition-transform group-hover:scale-110",
+                                active ? "text-white" : "text-subtle group-hover:text-ink",
+                              )}
+                            />
+                            <div className="flex flex-col min-w-0 flex-1">
+                              <div className="flex items-center justify-between gap-1.5 w-full">
                                 <span
                                   className={cn(
-                                    "text-[10px] leading-tight truncate mt-0.5 max-w-44",
-                                    active ? "text-white/90" : "text-subtle",
+                                    "leading-tight font-medium text-xs",
+                                    active ? "text-white font-bold" : "text-ink",
                                   )}
                                 >
-                                  {item.sub}
+                                  {item.label}
                                 </span>
+                                {"badge" in item ? (
+                                  <span
+                                    className={cn(
+                                      "rounded px-1.5 py-0.5 text-[9px] font-bold font-mono shrink-0 ml-1.5",
+                                      active
+                                        ? "bg-white/25 text-white"
+                                        : "bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 group-hover:bg-emerald-500/25",
+                                    )}
+                                  >
+                                    {item.badge}
+                                  </span>
+                                ) : null}
                               </div>
-                            </div>
-                            {"badge" in item ? (
                               <span
                                 className={cn(
-                                  "rounded px-1.5 py-0.5 text-[9px] font-bold shrink-0 ml-1.5",
-                                  active
-                                    ? "bg-white/20 text-white"
-                                    : "bg-amber-500/15 text-amber-700 dark:text-amber-300 group-hover:bg-amber-500/25",
+                                  "text-[10px] leading-tight truncate mt-1",
+                                  active ? "text-white/80" : "text-subtle",
                                 )}
                               >
-                                {item.badge}
+                                {item.sub}
                               </span>
-                            ) : null}
+                            </div>
                           </Link>
                         );
                       })
@@ -393,148 +445,205 @@ export function AppShell({ children }: { children: ReactNode }) {
                             key={item.to}
                             to={item.to}
                             className={cn(
-                              "group flex items-center justify-between rounded-xl px-2.5 py-2 text-xs transition-all",
+                              "group flex items-start gap-2.5 rounded-xl px-3 py-2.5 text-xs transition-all",
                               active
                                 ? "bg-accent text-white font-semibold shadow-xs"
                                 : "text-muted hover:bg-paper/80 hover:text-ink",
                             )}
                           >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <Icon
-                                className={cn(
-                                  "size-4 shrink-0 transition-transform group-hover:scale-110",
-                                  active ? "text-white" : "text-subtle group-hover:text-ink",
-                                )}
-                              />
-                              <div className="flex flex-col min-w-0">
-                                <span className="leading-tight font-medium text-xs whitespace-nowrap">
-                                  {item.label}
-                                </span>
+                            <Icon
+                              className={cn(
+                                "size-4 shrink-0 mt-0.5 transition-transform group-hover:scale-110",
+                                active ? "text-white" : "text-subtle group-hover:text-ink",
+                              )}
+                            />
+                            <div className="flex flex-col min-w-0 flex-1">
+                              <div className="flex items-center justify-between gap-1.5 w-full">
                                 <span
                                   className={cn(
-                                    "text-[10px] leading-tight truncate mt-0.5 max-w-44",
-                                    active ? "text-white/80" : "text-subtle",
+                                    "leading-tight font-medium text-xs",
+                                    active ? "text-white font-bold" : "text-ink",
                                   )}
                                 >
-                                  {item.sub}
+                                  {item.label}
                                 </span>
+                                {"badge" in item ? (
+                                  <span
+                                    className={cn(
+                                      "rounded px-1.5 py-0.5 text-[9px] font-bold font-mono shrink-0 ml-1.5",
+                                      active
+                                        ? "bg-white/20 text-white"
+                                        : "bg-accent/10 text-accent group-hover:bg-accent/20",
+                                    )}
+                                  >
+                                    {item.badge}
+                                  </span>
+                                ) : null}
                               </div>
-                            </div>
-                            {"badge" in item ? (
                               <span
                                 className={cn(
-                                  "rounded px-1.5 py-0.5 text-[9px] font-bold shrink-0 ml-1.5",
-                                  active
-                                    ? "bg-white/20 text-white"
-                                    : "bg-accent/10 text-accent group-hover:bg-accent/20",
+                                  "text-[10px] leading-tight truncate mt-1",
+                                  active ? "text-white/80" : "text-subtle",
                                 )}
                               >
-                                {item.badge}
+                                {item.sub}
                               </span>
-                            ) : null}
+                            </div>
                           </Link>
                         );
                       })}
                 </nav>
               </div>
 
-              {/* Tarjeta Contextual: Switch Inverso para Nunca Perder el Foco */}
+              {/* Tarjetas Contextuales Armonizadas por Modo Activo */}
               {isSaberPro ? (
-                <Link
-                  to="/"
-                  className="w-full rounded-2xl border border-accent/40 bg-gradient-to-br from-accent/10 via-surface to-accent/5 p-3.5 text-left transition-all hover:border-accent hover:shadow-xs group cursor-pointer block"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
-                      <Briefcase className="size-3.5 text-accent" />
-                      Concurso DIAN 2676
-                    </span>
-                    <span className="rounded bg-accent/20 px-1.5 py-0.5 text-[9px] font-bold text-accent font-mono">
-                      Volver
-                    </span>
-                  </div>
-                  <p className="mt-1.5 font-display font-bold text-xs text-ink">
-                    Regresar a Preparación DIAN
-                  </p>
-                  <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
-                    Vuelve a tu OPEC, los 24 indicadores oficiales y el simulador de examen CNSC.
-                  </p>
-                  <div className="mt-2 flex items-center text-[10px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
-                    <span>Ir a Concurso DIAN →</span>
-                  </div>
-                </Link>
+                <>
+                  {/* Tarjeta de Retorno a Concurso DIAN (Armonizada en Saber Pro) */}
+                  <Link
+                    to="/"
+                    className="w-full rounded-2xl border border-border/80 bg-paper/60 p-3.5 text-left transition-all hover:border-emerald-500/50 hover:bg-surface group cursor-pointer block shadow-2xs"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center gap-1.5 font-mono group-hover:text-ink transition-colors">
+                        <Briefcase className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                        Concurso DIAN 2676
+                      </span>
+                      <span className="rounded bg-paper px-1.5 py-0.5 text-[9px] font-bold text-muted font-mono border border-border/60">
+                        Volver
+                      </span>
+                    </div>
+                    <p className="mt-1.5 font-display font-bold text-xs text-ink">
+                      Regresar a Preparación DIAN
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Vuelve a tu OPEC, los 24 indicadores oficiales y el simulador de examen CNSC.
+                    </p>
+                    <div className="mt-2 flex items-center text-[10px] font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-0.5 transition-transform">
+                      <span>Ir a Concurso DIAN →</span>
+                    </div>
+                  </Link>
+
+                  {/* Tarjeta de Guía Paso a Paso (Paleta Esmeralda Saber Pro) */}
+                  <button
+                    type="button"
+                    onClick={() => setIsRoadmapOpen(true)}
+                    className="w-full rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-3.5 text-left transition-all hover:bg-emerald-500/10 hover:border-emerald-500/60 hover:shadow-xs group cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 flex items-center gap-1 font-mono">
+                        <Compass className="size-3 text-emerald-600 dark:text-emerald-400" />
+                        Ruta de Éxito
+                      </span>
+                      <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold group-hover:translate-x-0.5 transition-transform">
+                        Ver 5 Pasos →
+                      </span>
+                    </div>
+                    <p className="mt-1 font-display font-bold text-xs text-ink">
+                      ¿Cómo usar la plataforma?
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Aprende la secuencia exacta para asegurar tu Nivel 4 en Saber Pro.
+                    </p>
+                  </button>
+
+                  {/* Banner de Planes Pro (Paleta Esmeralda Saber Pro) */}
+                  <button
+                    type="button"
+                    onClick={() => setIsPricingOpen(true)}
+                    className="w-full rounded-2xl border border-emerald-500/40 bg-linear-to-br from-emerald-500/10 via-surface to-emerald-500/5 p-3.5 text-left transition-all hover:border-emerald-500 hover:shadow-xs group cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 flex items-center gap-1 font-mono">
+                        <Crown className="size-3 text-emerald-600 dark:text-emerald-400" />
+                        Acceso Total
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 group-hover:scale-105 transition-transform font-mono">
+                        Desde $39k
+                      </span>
+                    </div>
+                    <p className="mt-1 font-display font-bold text-xs text-ink">
+                      Activar Plan Concurrente
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Desbloquea simulacros ilimitados, audio y reportes PDF hasta el examen.
+                    </p>
+                  </button>
+                </>
               ) : (
-                <Link
-                  to="/saber-pro"
-                  search={{ tab: "resumen" }}
-                  className="w-full rounded-2xl border border-amber-500/50 bg-gradient-to-br from-amber-500/15 via-surface to-amber-500/5 p-3.5 text-left transition-all hover:border-amber-500 hover:shadow-xs group cursor-pointer block"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 flex items-center gap-1 font-mono">
-                      <GraduationCap className="size-3.5 text-amber-600 dark:text-amber-400" />
-                      Saber Pro 2026
-                    </span>
-                    <span className="rounded bg-amber-500 text-slate-950 px-1.5 py-0.5 text-[9px] font-black font-mono uppercase shadow-2xs">
-                      18 Octubre
-                    </span>
-                  </div>
-                  <p className="mt-1.5 font-display font-bold text-xs text-ink">
-                    Módulo Oficial Saber Pro
-                  </p>
-                  <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
-                    Entrenador intensivo: Genéricas y Contaduría Pública con simulación oficial.
-                  </p>
-                  <div className="mt-2 flex items-center text-[10px] font-bold text-amber-700 dark:text-amber-300 group-hover:translate-x-0.5 transition-transform">
-                    <span>Activar Saber Pro →</span>
-                  </div>
-                </Link>
+                <>
+                  {/* Tarjeta Destacada Saber Pro 2026 (Armonizada en Verde Esmeralda) */}
+                  <Link
+                    to="/saber-pro"
+                    search={{ tab: "resumen" }}
+                    className="w-full rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-500/10 via-surface to-emerald-500/5 p-3.5 text-left transition-all hover:border-emerald-500 hover:shadow-xs group cursor-pointer block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5 font-mono">
+                        <GraduationCap className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                        Saber Pro 2026
+                      </span>
+                      <span className="rounded bg-emerald-600 text-white px-1.5 py-0.5 text-[9px] font-bold font-mono uppercase shadow-2xs">
+                        18 Octubre
+                      </span>
+                    </div>
+                    <p className="mt-1.5 font-display font-bold text-xs text-ink">
+                      Módulo Oficial Saber Pro
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Entrenador intensivo: Genéricas y Contaduría Pública con simulación oficial.
+                    </p>
+                    <div className="mt-2 flex items-center text-[10px] font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-0.5 transition-transform">
+                      <span>Activar Saber Pro →</span>
+                    </div>
+                  </Link>
+
+                  {/* Tarjeta de Guía Paso a Paso (Paleta DIAN) */}
+                  <button
+                    type="button"
+                    onClick={() => setIsRoadmapOpen(true)}
+                    className="w-full rounded-2xl border border-accent/30 bg-accent/5 p-3.5 text-left transition-all hover:bg-accent/10 hover:border-accent hover:shadow-xs group cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
+                        <Compass className="size-3 text-accent" />
+                        Ruta de Éxito
+                      </span>
+                      <span className="text-[10px] text-accent font-semibold group-hover:translate-x-0.5 transition-transform">
+                        Ver 5 Pasos →
+                      </span>
+                    </div>
+                    <p className="mt-1 font-display font-bold text-xs text-ink">
+                      ¿Cómo usar la plataforma?
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Aprende la secuencia exacta para asegurar tu puntaje eliminatorio.
+                    </p>
+                  </button>
+
+                  {/* Banner de Planes Pro (Paleta DIAN) */}
+                  <button
+                    type="button"
+                    onClick={() => setIsPricingOpen(true)}
+                    className="w-full rounded-2xl border border-accent/40 bg-linear-to-br from-accent/10 via-surface to-accent/5 p-3.5 text-left transition-all hover:border-accent hover:shadow-xs group cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
+                        <Crown className="size-3 text-accent" />
+                        Acceso Total
+                      </span>
+                      <span className="text-[10px] font-bold text-accent group-hover:scale-105 transition-transform font-mono">
+                        Desde $39k
+                      </span>
+                    </div>
+                    <p className="mt-1 font-display font-bold text-xs text-ink">
+                      Activar Plan Concurrente
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
+                      Desbloquea simulacros ilimitados, audio y reportes PDF hasta el examen.
+                    </p>
+                  </button>
+                </>
               )}
-
-              {/* Tarjeta de Guía Paso a Paso */}
-              <button
-                type="button"
-                onClick={() => setIsRoadmapOpen(true)}
-                className="w-full rounded-2xl border border-accent/30 bg-accent/5 p-3.5 text-left transition-all hover:bg-accent/10 hover:border-accent hover:shadow-xs group cursor-pointer"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
-                    <Compass className="size-3 text-accent" />
-                    Ruta de Éxito
-                  </span>
-                  <span className="text-[10px] text-accent font-semibold group-hover:translate-x-0.5 transition-transform">
-                    Ver 5 Pasos →
-                  </span>
-                </div>
-                <p className="mt-1 font-display font-bold text-xs text-ink">
-                  ¿Cómo usar la plataforma?
-                </p>
-                <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
-                  Aprende la secuencia exacta para asegurar tu puntaje eliminatorio.
-                </p>
-              </button>
-
-              {/* Banner de Planes Pro en Barra Lateral */}
-              <button
-                type="button"
-                onClick={() => setIsPricingOpen(true)}
-                className="w-full rounded-2xl border border-accent/40 bg-linear-to-br from-accent/10 via-surface to-accent/5 p-3.5 text-left transition-all hover:border-accent hover:shadow-xs group cursor-pointer"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1 font-mono">
-                    <Crown className="size-3 text-accent" />
-                    Acceso Total
-                  </span>
-                  <span className="text-[10px] font-bold text-accent group-hover:scale-105 transition-transform">
-                    Desde $39k
-                  </span>
-                </div>
-                <p className="mt-1 font-display font-bold text-xs text-ink">
-                  Activar Plan Concurrente
-                </p>
-                <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
-                  Desbloquea simulacros ilimitados, audio y reportes PDF hasta el examen.
-                </p>
-              </button>
             </div>
 
             {/* Tarjeta Inferior de Garantía Institucional Calibrada */}
@@ -544,7 +653,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <Shield
                     className={cn(
                       "size-3.5",
-                      isSaberPro ? "text-amber-500" : "text-ok",
+                      isSaberPro ? "text-emerald-600 dark:text-emerald-400" : "text-ok",
                     )}
                   />
                   <span>
@@ -564,7 +673,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 className={cn(
                   "pt-1 flex items-center justify-between border-t border-border/60 text-[10px] font-semibold",
                   isSaberPro
-                    ? "text-amber-700 dark:text-amber-400"
+                    ? "text-emerald-700 dark:text-emerald-400"
                     : "text-ok",
                 )}
               >
@@ -600,13 +709,13 @@ export function AppShell({ children }: { children: ReactNode }) {
                         search={{ tab: item.tab }}
                         className={cn(
                           "flex h-14 flex-col items-center justify-center gap-1 text-[10px] font-medium transition-colors",
-                          active ? "text-amber-600 dark:text-amber-400 font-semibold" : "text-muted",
+                          active ? "text-emerald-600 dark:text-emerald-400 font-semibold" : "text-muted",
                         )}
                       >
                         <Icon
                           className={cn(
                             "size-5",
-                            active ? "text-amber-600 dark:text-amber-400" : "text-subtle",
+                            active ? "text-emerald-600 dark:text-emerald-400" : "text-subtle",
                           )}
                         />
                         <span className="truncate max-w-14">{item.shortLabel}</span>

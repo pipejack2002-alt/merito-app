@@ -106,12 +106,12 @@ export function SaberProPage() {
   return (
     <div className="space-y-8 pb-12">
       {/* ── Banner Superior de Cabecera Oficial ── */}
-      <section className="relative overflow-hidden rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 shadow-xs">
-        <div className="absolute inset-y-0 left-0 w-2 bg-amber-500" />
+      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/40 bg-surface p-6 sm:p-8 shadow-xs">
+        <div className="absolute inset-y-0 left-0 w-2 bg-emerald-600" />
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-2.5 max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-amber-500 text-slate-950 font-black tracking-wider text-[11px] uppercase px-2 py-0.5 shadow-2xs font-mono">
+              <span className="rounded-md bg-emerald-600 text-white font-bold tracking-wider text-[11px] uppercase px-2.5 py-0.5 shadow-2xs font-mono">
                 Módulo Oficial · ICFES Saber Pro 2026
               </span>
               <span className="flex items-center gap-1.5 rounded-full border border-bad/30 bg-bad/10 px-2.5 py-0.5 text-xs font-bold text-bad">
@@ -138,7 +138,7 @@ export function SaberProPage() {
             {/* Selector de Carrera Profesional */}
             <div className="pt-2 flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold text-muted flex items-center gap-1">
-                <GraduationCap className="size-4 text-amber-500" />
+                <GraduationCap className="size-4 text-emerald-600" />
                 Tu Carrera:
               </span>
               {SABER_PRO_CAREERS.map((career) => (
@@ -149,8 +149,8 @@ export function SaberProPage() {
                   className={cn(
                     "rounded-xl border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer",
                     selectedCareerId === career.id
-                      ? "border-amber-500 bg-amber-500 text-white shadow-xs font-semibold"
-                      : "border-border/80 bg-paper/60 text-muted hover:border-amber-500/60 hover:text-ink",
+                      ? "border-emerald-600 bg-emerald-600 text-white shadow-xs font-semibold"
+                      : "border-border/80 bg-paper/60 text-muted hover:border-emerald-500/60 hover:text-ink",
                   )}
                 >
                   {career.name}
@@ -159,18 +159,18 @@ export function SaberProPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
+          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 sm:p-5 flex flex-col gap-3 shrink-0 lg:max-w-xs w-full">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
                 Sprint 4 Días
               </span>
-              <span className="rounded bg-amber-500/20 px-2 py-0.5 text-[10px] font-black text-amber-800 dark:text-amber-200">
+              <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-black text-emerald-900 dark:text-emerald-200">
                 ICFES 0-300 pts
               </span>
             </div>
             <div className="space-y-1">
               <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-amber-500" />
+                <Sparkles className="size-3.5 text-emerald-600" />
                 Objetivo Nivel 4 (Avanzado)
               </p>
               <p className="text-[11px] text-muted leading-relaxed">
@@ -178,7 +178,7 @@ export function SaberProPage() {
                 700/705 que más puntúan.
               </p>
             </div>
-            <div className="pt-2 border-t border-amber-500/20 flex items-center justify-between text-xs">
+            <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs">
               <span className="text-muted">Carrera activa:</span>
               <span className="font-semibold text-ink truncate max-w-36">
                 {selectedCareer.name}
@@ -195,7 +195,7 @@ export function SaberProPage() {
             onClick={() => setActiveTab("resumen")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "resumen" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "resumen" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             <Award className="size-4" />
@@ -208,7 +208,7 @@ export function SaberProPage() {
             onClick={() => setActiveTab("practica")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "practica" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "practica" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             <BookOpen className="size-4" />
@@ -221,7 +221,7 @@ export function SaberProPage() {
             onClick={() => setActiveTab("simulacro")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "simulacro" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "simulacro" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             <Clock className="size-4" />
@@ -234,10 +234,10 @@ export function SaberProPage() {
             onClick={() => setActiveTab("chuleta")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "chuleta" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "chuleta" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
-            <Zap className="size-4 text-amber-500" />
+            <Zap className="size-4 text-emerald-600" />
             Paso 3 · Chuleta de Fórmulas
           </Button>
 
@@ -247,7 +247,7 @@ export function SaberProPage() {
             onClick={() => setActiveTab("estructura")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "estructura" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "estructura" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             <Layers className="size-4" />
@@ -260,7 +260,7 @@ export function SaberProPage() {
             onClick={() => setActiveTab("diagnostico")}
             className={cn(
               "gap-2 cursor-pointer",
-              activeTab === "diagnostico" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              activeTab === "diagnostico" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             <Shield className="size-4" />
@@ -354,12 +354,12 @@ function SaberProOverviewTab({
           </p>
         </div>
 
-        <div className="rounded-2xl border border-amber-500/40 bg-surface p-5 space-y-2 shadow-2xs">
+        <div className="rounded-2xl border border-emerald-500/40 bg-surface p-5 space-y-2 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
               Puntaje Estimado
             </span>
-            <span className="rounded bg-amber-500/20 px-2 py-0.5 text-[10px] font-black text-amber-800 dark:text-amber-200 font-mono">
+            <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-black text-emerald-900 dark:text-emerald-200 font-mono">
               Escala 0-300
             </span>
           </div>
@@ -431,20 +431,20 @@ function SaberProOverviewTab({
               Sigue la secuencia metodológica diseñada para alcanzar Nivel 4 en la prueba de Estado.
             </p>
           </div>
-          <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 font-bold font-mono">
+          <Badge className="bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/40 font-bold font-mono">
             Ruta Guiada
           </Badge>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {/* Tarjeta Paso 1 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 1 · Entrenamiento
                 </span>
-                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-700 font-mono">
                   26 Preguntas
                 </span>
               </div>
@@ -459,7 +459,7 @@ function SaberProOverviewTab({
             <Button
               size="sm"
               onClick={() => onNavigateTab("practica")}
-              className="w-full gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+              className="w-full gap-1.5 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
             >
               <span>Abrir Entrenador</span>
               <ArrowRight className="size-3.5" />
@@ -467,13 +467,13 @@ function SaberProOverviewTab({
           </div>
 
           {/* Tarjeta Paso 2 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 2 · Simulación
                 </span>
-                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-700 font-mono">
                   Escala 0-300
                 </span>
               </div>
@@ -489,7 +489,7 @@ function SaberProOverviewTab({
               size="sm"
               variant="outline"
               onClick={() => onNavigateTab("simulacro")}
-              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+              className="w-full gap-1.5 cursor-pointer hover:border-emerald-600 hover:text-emerald-700"
             >
               <span>Iniciar Simulacro</span>
               <ArrowRight className="size-3.5" />
@@ -497,13 +497,13 @@ function SaberProOverviewTab({
           </div>
 
           {/* Tarjeta Paso 3 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 3 · Retención Rápida
                 </span>
-                <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 font-mono">
+                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-700 font-mono">
                   Sprint 4 Días
                 </span>
               </div>
@@ -519,7 +519,7 @@ function SaberProOverviewTab({
               size="sm"
               variant="outline"
               onClick={() => onNavigateTab("chuleta")}
-              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+              className="w-full gap-1.5 cursor-pointer hover:border-emerald-600 hover:text-emerald-700"
             >
               <span>Consultar Fórmulas</span>
               <ArrowRight className="size-3.5" />
@@ -527,10 +527,10 @@ function SaberProOverviewTab({
           </div>
 
           {/* Tarjeta Paso 4 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 4 · Marco Normativo
                 </span>
                 <span className="rounded bg-paper px-2 py-0.5 text-[10px] font-bold text-muted font-mono border border-border">
@@ -549,7 +549,7 @@ function SaberProOverviewTab({
               size="sm"
               variant="outline"
               onClick={() => onNavigateTab("estructura")}
-              className="w-full gap-1.5 cursor-pointer hover:border-amber-500 hover:text-amber-600"
+              className="w-full gap-1.5 cursor-pointer hover:border-emerald-600 hover:text-emerald-700"
             >
               <span>Ver Estructura</span>
               <ArrowRight className="size-3.5" />
@@ -557,10 +557,10 @@ function SaberProOverviewTab({
           </div>
 
           {/* Tarjeta Paso 5 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-amber-500/60 transition-all sm:col-span-2 lg:col-span-2">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all sm:col-span-2 lg:col-span-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 5 · Métricas y Refuerzo
                 </span>
                 <span className="rounded bg-ok/10 px-2 py-0.5 text-[10px] font-bold text-ok font-mono">
@@ -578,7 +578,7 @@ function SaberProOverviewTab({
             <Button
               size="sm"
               onClick={() => onNavigateTab("diagnostico")}
-              className="w-full gap-1.5 cursor-pointer bg-slate-900 text-amber-300 dark:bg-amber-500 dark:text-slate-950 font-bold"
+              className="w-full gap-1.5 cursor-pointer bg-slate-900 text-emerald-300 dark:bg-emerald-600 dark:text-white font-bold"
             >
               <Shield className="size-3.5" />
               <span>Ver Diagnóstico y Preguntas Falladas</span>
@@ -592,7 +592,7 @@ function SaberProOverviewTab({
       <div className="rounded-2xl border border-border/80 bg-surface p-6 space-y-4 shadow-2xs">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <GraduationCap className="size-5 text-amber-500" />
+            <GraduationCap className="size-5 text-emerald-600" />
             <h3 className="font-display text-base font-bold text-ink">
               Módulos Evaluados para {selectedCareer.name}
             </h3>
@@ -609,7 +609,7 @@ function SaberProOverviewTab({
           {selectedCareer.specificModules.map((mod) => (
             <div
               key={mod.id}
-              className="rounded-xl border border-border bg-paper/60 p-4 space-y-1.5 border-l-4 border-l-amber-500"
+              className="rounded-xl border border-border bg-paper/60 p-4 space-y-1.5 border-l-4 border-l-emerald-600"
             >
               <h4 className="font-bold text-xs text-ink">{mod.name}</h4>
               <p className="text-[11px] text-muted leading-relaxed">{mod.description}</p>
@@ -681,16 +681,16 @@ function SaberProPedagogicalFeedback({
       {/* Bloque 1: Fundamento y Justificación Técnica */}
       <div className="rounded-xl border border-border/70 bg-surface/80 p-4 space-y-1.5 shadow-2xs">
         <div className="flex items-center gap-1.5 text-xs font-bold text-ink">
-          <Sparkles className="size-4 text-amber-500" />
+          <Sparkles className="size-4 text-emerald-600" />
           <span>¿Por qué es la opción correcta? (Fundamento Técnico)</span>
         </div>
         <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{question.explanation}</p>
       </div>
 
       {/* Bloque 2: Método para Preguntas Similares en el Examen */}
-      <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-1.5 shadow-2xs">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
-          <Compass className="size-4 text-amber-500" />
+      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-1.5 shadow-2xs">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400">
+          <Compass className="size-4 text-emerald-600" />
           <span>Método de Resolución (¿Cómo resolverla si sale una parecida el domingo?)</span>
         </div>
         <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedMethodTip}</p>
@@ -843,7 +843,7 @@ function SaberProTrainerTab({
             }}
             className={cn(
               "text-xs h-8 cursor-pointer",
-              filterSession === "all" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              filterSession === "all" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             Todas ({filteredQuestions.length})
@@ -857,7 +857,7 @@ function SaberProTrainerTab({
             }}
             className={cn(
               "text-xs h-8 cursor-pointer",
-              filterSession === "generica" && "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+              filterSession === "generica" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             Sesión 1: Genéricas
@@ -872,7 +872,7 @@ function SaberProTrainerTab({
             className={cn(
               "text-xs h-8 cursor-pointer",
               filterSession === "especifica" &&
-                "bg-amber-500 hover:bg-amber-600 text-white font-bold",
+                "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
             )}
           >
             Sesión 2: {careerName}
@@ -917,7 +917,7 @@ function SaberProTrainerTab({
                       "text-[10px] uppercase font-bold",
                       currentQ.session === "generica"
                         ? "bg-accent/10 border-accent/30 text-accent"
-                        : "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300",
+                        : "bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300",
                     )}
                   >
                     {currentQ.session === "generica" ? "Sesión 1 Genérica" : "Sesión 2 Específica"}
@@ -947,7 +947,7 @@ function SaberProTrainerTab({
 
               {/* Contexto o Lectura si existe */}
               {currentQ.contextText && (
-                <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-amber-500">
+                <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-emerald-600">
                   {currentQ.contextText}
                 </div>
               )}
@@ -966,7 +966,7 @@ function SaberProTrainerTab({
                   const isRight = choice.id === currentQ.correct;
 
                   let optionStyle =
-                    "border-border/80 bg-paper/40 hover:bg-paper hover:border-amber-500/50 text-ink";
+                    "border-border/80 bg-paper/40 hover:bg-paper hover:border-emerald-500/50 text-ink";
                   if (isAnswered) {
                     if (isRight) {
                       optionStyle =
@@ -977,7 +977,7 @@ function SaberProTrainerTab({
                       optionStyle = "border-border/50 bg-paper/20 text-muted opacity-60";
                     }
                   } else if (isSelected) {
-                    optionStyle = "border-amber-500 bg-amber-500/10 ring-1 ring-amber-500 text-ink";
+                    optionStyle = "border-emerald-600 bg-emerald-500/10 ring-1 ring-emerald-600 text-ink";
                   }
 
                   return (
@@ -999,7 +999,7 @@ function SaberProTrainerTab({
                             : isAnswered && isSelected
                               ? "bg-bad text-white border-bad"
                               : isSelected
-                                ? "bg-amber-500 text-white border-amber-500"
+                                ? "bg-emerald-600 text-white border-emerald-600"
                                 : "border-border/80 bg-surface text-ink",
                         )}
                       >
@@ -1043,7 +1043,7 @@ function SaberProTrainerTab({
                   size="sm"
                   disabled={currentIndex === filteredQuestions.length - 1}
                   onClick={() => setCurrentIndex((i) => i + 1)}
-                  className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+                  className="gap-1.5 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                 >
                   Siguiente
                   <ArrowRight className="size-4" />
@@ -1071,7 +1071,7 @@ function SaberProTrainerTab({
                       : "border-bad bg-bad/20 text-bad font-bold";
                   }
                   if (isCurrent) {
-                    btnStyle += " ring-2 ring-amber-500 border-amber-500 text-ink";
+                    btnStyle += " ring-2 ring-emerald-600 border-emerald-600 text-ink";
                   }
 
                   return (
@@ -1092,9 +1092,9 @@ function SaberProTrainerTab({
             </div>
 
             {/* Tarjeta de Recomendación Rápida */}
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-2">
+            <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-2">
               <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                <Sparkles className="size-4 text-amber-500" />
+                <Sparkles className="size-4 text-emerald-600" />
                 Estrategia ICFES Saber Pro
               </p>
               <p className="text-xs text-muted leading-relaxed">
@@ -1226,9 +1226,9 @@ function SaberProSimulatorTab({
   if (!examStarted) {
     return (
       <div className="mx-auto max-w-2xl space-y-6">
-        <div className="rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 space-y-5 shadow-xs">
+        <div className="rounded-2xl border border-emerald-500/40 bg-surface p-6 sm:p-8 space-y-5 shadow-xs">
           <div className="flex items-center gap-2">
-            <span className="rounded-md bg-amber-500 text-slate-950 font-black text-xs uppercase px-2 py-0.5">
+            <span className="rounded-md bg-emerald-600 text-white font-bold text-xs uppercase px-2.5 py-0.5 font-mono">
               Simulacro Oficial
             </span>
             <span className="text-xs text-muted font-mono">Calibrado ICFES 2026</span>
@@ -1246,7 +1246,7 @@ function SaberProSimulatorTab({
 
           <div className="rounded-xl border border-border bg-paper/60 p-4 space-y-2 text-xs text-muted">
             <p className="font-bold text-ink flex items-center gap-1.5">
-              <Clock className="size-4 text-amber-500" />
+              <Clock className="size-4 text-emerald-600" />
               Condiciones de la Simulación:
             </p>
             <ul className="list-disc list-inside space-y-1">
@@ -1267,8 +1267,8 @@ function SaberProSimulatorTab({
                 className={cn(
                   "rounded-xl border p-3 text-left transition-all cursor-pointer",
                   batchSize === 15
-                    ? "border-amber-500 bg-amber-500/10 text-ink font-semibold ring-1 ring-amber-500"
-                    : "border-border/80 bg-surface text-muted hover:border-amber-500/50",
+                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-semibold ring-1 ring-emerald-600"
+                    : "border-border/80 bg-surface text-muted hover:border-emerald-500/50",
                 )}
               >
                 <div className="font-bold text-sm">15 Preguntas (Sprint)</div>
@@ -1281,8 +1281,8 @@ function SaberProSimulatorTab({
                 className={cn(
                   "rounded-xl border p-3 text-left transition-all cursor-pointer",
                   batchSize === 26
-                    ? "border-amber-500 bg-amber-500/10 text-ink font-semibold ring-1 ring-amber-500"
-                    : "border-border/80 bg-surface text-muted hover:border-amber-500/50",
+                    ? "border-emerald-600 bg-emerald-500/10 text-ink font-semibold ring-1 ring-emerald-600"
+                    : "border-border/80 bg-surface text-muted hover:border-emerald-500/50",
                 )}
               >
                 <div className="font-bold text-sm">26 Preguntas (Completo)</div>
@@ -1294,7 +1294,7 @@ function SaberProSimulatorTab({
           <Button
             size="lg"
             onClick={handleStartExam}
-            className="w-full gap-2 font-bold cursor-pointer bg-amber-500 hover:bg-amber-600 text-white"
+            className="w-full gap-2 font-bold cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             <Play className="size-4 fill-current" />
             Comenzar Simulacro Cronometrado
@@ -1318,8 +1318,8 @@ function SaberProSimulatorTab({
 
     return (
       <div className="mx-auto max-w-3xl space-y-8">
-        <div className="rounded-2xl border border-amber-500/40 bg-surface p-6 sm:p-8 space-y-6 shadow-xs text-center">
-          <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mx-auto">
+        <div className="rounded-2xl border border-emerald-500/40 bg-surface p-6 sm:p-8 space-y-6 shadow-xs text-center">
+          <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 mx-auto">
             <Award className="size-8" />
           </div>
 
@@ -1335,7 +1335,7 @@ function SaberProSimulatorTab({
           <div className="grid grid-cols-3 gap-3 rounded-xl border border-border bg-paper/60 p-4">
             <div className="space-y-1">
               <span className="text-[10px] font-mono uppercase text-muted">Puntaje Oficial</span>
-              <p className="font-display text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400">
+              <p className="font-display text-2xl sm:text-3xl font-bold text-emerald-700 dark:text-emerald-400">
                 {scaledScore}
               </p>
               <span className="text-[10px] text-muted font-mono">Escala 0-300</span>
@@ -1365,7 +1365,7 @@ function SaberProSimulatorTab({
 
           <div className="text-left rounded-xl border border-border bg-paper/40 p-4 text-xs text-muted space-y-1">
             <p className="font-bold text-ink flex items-center gap-1.5">
-              <Sparkles className="size-3.5 text-amber-500" />
+              <Sparkles className="size-3.5 text-emerald-600" />
               Diagnóstico ICFES Saber Pro:
             </p>
             <p className="leading-relaxed">
@@ -1459,7 +1459,7 @@ function SaberProSimulatorTab({
                       size="sm"
                       variant="ghost"
                       onClick={() => setExpandedReviewId(isExpanded ? null : q.id)}
-                      className="text-xs text-amber-600 hover:text-amber-700 h-7 p-0 cursor-pointer"
+                      className="text-xs text-emerald-700 hover:text-emerald-800 h-7 p-0 cursor-pointer"
                     >
                       {isExpanded ? "Ocultar Explicación Pedagógica ▲" : "Ver Explicación y Técnica Oficial ▼"}
                     </Button>
@@ -1479,7 +1479,7 @@ function SaberProSimulatorTab({
             <RotateCcw className="size-3.5" />
             Reintentar Simulacro
           </Button>
-          <Button size="sm" onClick={() => setExamStarted(false)} className="cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold">
+          <Button size="sm" onClick={() => setExamStarted(false)} className="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold">
             Volver al Menú
           </Button>
         </div>
@@ -1492,14 +1492,14 @@ function SaberProSimulatorTab({
       {/* Barra de Estado del Simulacro */}
       <div className="rounded-xl border border-border bg-surface p-4 flex items-center justify-between shadow-2xs">
         <div className="flex items-center gap-3">
-          <Badge className="bg-amber-500 text-white font-mono text-xs font-bold">
+          <Badge className="bg-emerald-600 text-white font-mono text-xs font-bold">
             Pregunta {currentIndex + 1} de {examQuestions.length}
           </Badge>
           <span className="text-xs text-muted hidden sm:inline">{currentQ?.areaLabel}</span>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 font-mono text-sm font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg">
+          <div className="flex items-center gap-1.5 font-mono text-sm font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg">
             <Clock className="size-4" />
             <span>{formatTimer(timeRemaining)}</span>
           </div>
@@ -1517,7 +1517,7 @@ function SaberProSimulatorTab({
       {currentQ && (
         <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 space-y-6 shadow-xs">
           {currentQ.contextText && (
-            <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-amber-500">
+            <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-emerald-600">
               {currentQ.contextText}
             </div>
           )}
@@ -1539,15 +1539,15 @@ function SaberProSimulatorTab({
                   className={cn(
                     "w-full rounded-xl border p-4 text-left transition-all flex items-start gap-3.5 cursor-pointer",
                     isSelected
-                      ? "border-amber-500 bg-amber-500/10 ring-1 ring-amber-500 text-ink"
-                      : "border-border/80 bg-paper/40 hover:bg-paper hover:border-amber-500/50 text-ink",
+                      ? "border-emerald-600 bg-emerald-500/10 ring-1 ring-emerald-600 text-ink"
+                      : "border-border/80 bg-paper/40 hover:bg-paper hover:border-emerald-500/50 text-ink",
                   )}
                 >
                   <span
                     className={cn(
                       "size-7 rounded-lg border font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5",
                       isSelected
-                        ? "bg-amber-500 text-white border-amber-500"
+                        ? "bg-emerald-600 text-white border-emerald-600"
                         : "border-border/80 bg-surface text-ink",
                     )}
                   >
@@ -1576,7 +1576,7 @@ function SaberProSimulatorTab({
             </span>
 
             {currentIndex === examQuestions.length - 1 ? (
-              <Button size="sm" onClick={handleFinishExam} className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold">
+              <Button size="sm" onClick={handleFinishExam} className="gap-1.5 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold">
                 Entregar Simulacro
               </Button>
             ) : (
@@ -1584,7 +1584,7 @@ function SaberProSimulatorTab({
                 variant="default"
                 size="sm"
                 onClick={() => setCurrentIndex((i) => i + 1)}
-                className="gap-1.5 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+                className="gap-1.5 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
               >
                 Siguiente
                 <ArrowRight className="size-4" />
@@ -1626,9 +1626,9 @@ function SaberProCheatsheetTab() {
   return (
     <div className="space-y-6">
       {/* Cabecera de la Chuleta */}
-      <div className="rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-surface to-amber-500/5 p-6 space-y-3">
+      <div className="rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-500/15 via-surface to-emerald-500/5 p-6 space-y-3">
         <div className="flex items-center gap-2">
-          <span className="rounded bg-amber-500 text-slate-950 font-black text-xs uppercase px-2 py-0.5">
+          <span className="rounded bg-emerald-600 text-white font-bold text-xs uppercase px-2.5 py-0.5 font-mono">
             Sprint 4 Días · 18 Octubre 2026
           </span>
           <span className="text-xs text-muted font-mono">Alta Frecuencia ICFES</span>
@@ -1651,7 +1651,7 @@ function SaberProCheatsheetTab() {
               placeholder="Buscar por ratio (ROA, VPN, Razón corriente, NIA 705)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-xl border border-border bg-surface pl-9 pr-4 py-2 text-xs text-ink focus:border-amber-500 focus:outline-hidden"
+              className="w-full rounded-xl border border-border bg-surface pl-9 pr-4 py-2 text-xs text-ink focus:border-emerald-600 focus:outline-hidden"
             />
           </div>
         </div>
@@ -1662,10 +1662,10 @@ function SaberProCheatsheetTab() {
         {filteredCheatsheet.map((item, idx) => (
           <div
             key={item.title}
-            className="rounded-2xl border border-border/80 bg-surface p-5 space-y-3 shadow-2xs hover:border-amber-500/60 transition-all flex flex-col justify-between"
+            className="rounded-2xl border border-border/80 bg-surface p-5 space-y-3 shadow-2xs hover:border-emerald-500/60 transition-all flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
                 {item.category}
               </span>
               <h3 className="font-display text-base font-bold text-ink leading-tight">
@@ -1688,10 +1688,10 @@ function SaberProCheatsheetTab() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs leading-relaxed text-ink/90 flex items-start gap-2">
-              <Zap className="size-3.5 text-amber-500 shrink-0 mt-0.5" />
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-xs leading-relaxed text-ink/90 flex items-start gap-2">
+              <Zap className="size-3.5 text-emerald-600 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-amber-700 dark:text-amber-300 block text-[11px] uppercase tracking-wider">
+                <span className="font-bold text-emerald-800 dark:text-emerald-300 block text-[11px] uppercase tracking-wider">
                   Clave ICFES:
                 </span>
                 <p>{item.keyTip}</p>
@@ -1726,7 +1726,7 @@ function SaberProStructureTab({
               Evaluación obligatoria para todos los estudiantes de carreras universitarias en Colombia.
             </p>
           </div>
-          <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 font-bold">
+          <Badge className="bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/40 font-bold">
             4h 40min
           </Badge>
         </div>
@@ -1782,7 +1782,7 @@ function SaberProStructureTab({
       {/* Recomendaciones Tácticas para el 18 de Octubre */}
       <div className="rounded-2xl border border-border bg-paper/60 p-6 space-y-3">
         <h3 className="font-display text-base font-bold text-ink flex items-center gap-2">
-          <Info className="size-4 text-amber-500" />
+          <Info className="size-4 text-emerald-600" />
           Recomendaciones Oficiales para el Domingo 18 de Octubre
         </h3>
         <ul className="text-xs text-muted space-y-2 list-disc list-inside leading-relaxed">
@@ -1862,7 +1862,7 @@ function SaberProDiagnosticTab({
   if (totalAnswered === 0 && examHistory.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-border bg-surface p-12 text-center space-y-4">
-        <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mx-auto">
+        <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 mx-auto">
           <Layers className="size-8" />
         </div>
         <div className="space-y-1">
@@ -1877,7 +1877,7 @@ function SaberProDiagnosticTab({
         </div>
         <Button
           onClick={onStartSimulator}
-          className="gap-2 cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-bold"
+          className="gap-2 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
         >
           <Play className="size-4 fill-current" />
           Iniciar Simulacro Oficial
@@ -1890,8 +1890,8 @@ function SaberProDiagnosticTab({
     <div className="space-y-8">
       {/* ── Resumen Cuantitativo del Diagnóstico ── */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-2xl border border-amber-500/40 bg-surface p-5 space-y-2 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 font-mono">
+        <div className="rounded-2xl border border-emerald-500/40 bg-surface p-5 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
             Puntaje Estimado ICFES
           </span>
           <div className="flex items-baseline gap-2">
@@ -1989,7 +1989,7 @@ function SaberProDiagnosticTab({
                   <span
                     className={cn(
                       "text-xs font-bold font-mono",
-                      areaAcc >= 70 ? "text-ok" : areaAcc >= 50 ? "text-amber-600" : "text-bad",
+                      areaAcc >= 70 ? "text-ok" : areaAcc >= 50 ? "text-emerald-700" : "text-bad",
                     )}
                   >
                     {areaAcc}% ({stat.correct}/{stat.total})
@@ -2067,7 +2067,7 @@ function SaberProDiagnosticTab({
                     size="sm"
                     variant="outline"
                     onClick={() => onReviewQuestion(q.id)}
-                    className="text-xs gap-1 cursor-pointer border-amber-500/50 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+                    className="text-xs gap-1 cursor-pointer border-emerald-500/50 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/10"
                   >
                     <span>Repasar en el Entrenador</span>
                     <ArrowRight className="size-3.5" />
@@ -2114,7 +2114,7 @@ function SaberProDiagnosticTab({
                   <span className="text-muted">
                     {res.rawCorrect}/{res.totalQuestions} aciertos ({res.percent}%)
                   </span>
-                  <span className="font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-bold text-emerald-700 dark:text-emerald-400">
                     {res.score} pts
                   </span>
                 </div>
