@@ -248,29 +248,27 @@ export function AppShell({ children }: { children: ReactNode }) {
 
             {/* Selector de Modo y Acciones Principales */}
             <div className="flex items-center gap-2 sm:gap-2.5">
-              {/* 1. Botón Switch: Saber Pro 2026 (DE PRIMERO) con Letras Negras de Alto Contraste */}
+              {/* 1. Botón Switch: Saber Pro 2026 (DE PRIMERO) */}
               <Link
                 to="/saber-pro"
                 search={{ tab: currentSaberProTab || "resumen" }}
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   isSaberPro
-                    ? "bg-emerald-600 text-white dark:bg-emerald-500 dark:text-slate-950 border border-emerald-500 shadow-sm"
-                    : "border-2 border-emerald-600/70 bg-emerald-100/90 text-slate-950 dark:bg-emerald-950/70 dark:text-emerald-100 hover:bg-emerald-200/90 hover:border-emerald-700 shadow-xs",
+                    ? "bg-emerald-600 text-white border border-emerald-500 shadow-sm"
+                    : "border border-border/80 bg-paper/60 text-slate-800 hover:text-ink hover:border-accent hover:bg-surface",
                 )}
               >
                 <GraduationCap
                   className={cn(
                     "size-3.5",
-                    isSaberPro
-                      ? "text-white dark:text-slate-950"
-                      : "text-emerald-800 dark:text-emerald-300",
+                    isSaberPro ? "text-white" : "text-emerald-700 dark:text-emerald-300",
                   )}
                 />
                 <span
                   className={cn(
                     "font-extrabold tracking-tight",
-                    !isSaberPro ? "text-slate-950 dark:text-white" : "text-white dark:text-slate-950",
+                    isSaberPro ? "text-white" : "text-slate-900 dark:text-white",
                   )}
                 >
                   Saber Pro
@@ -279,8 +277,8 @@ export function AppShell({ children }: { children: ReactNode }) {
                   className={cn(
                     "rounded px-1.5 py-0.5 text-[9px] font-black uppercase font-mono tracking-wider",
                     isSaberPro
-                      ? "bg-slate-950 text-emerald-300 border border-slate-900 shadow-2xs"
-                      : "bg-slate-950 text-emerald-300 border border-slate-900 shadow-2xs",
+                      ? "bg-emerald-800 text-emerald-100 border border-emerald-400/40"
+                      : "bg-paper text-muted border border-border/70",
                   )}
                 >
                   18 Oct
@@ -294,7 +292,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   !isSaberPro
                     ? "bg-accent text-white shadow-xs border border-accent"
-                    : "border border-border/80 bg-paper/60 text-muted hover:text-ink hover:border-accent hover:bg-surface",
+                    : "border border-border/80 bg-paper/60 text-slate-800 hover:text-ink hover:border-emerald-500 hover:bg-surface",
                 )}
               >
                 <Briefcase className="size-3.5" />
@@ -302,21 +300,21 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <span>DIAN 2676</span>
               </Link>
 
-              {/* 3. Botón de Guía Paso a Paso: ¿Cómo empezar? (DE TERCERO - Visible en Saber Pro y DIAN) */}
+              {/* 3. Botón de Guía Paso a Paso: ¿Cómo empezar? (Visible en ambos modos con alto contraste) */}
               <button
                 type="button"
                 onClick={() => setIsRoadmapOpen(true)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer",
+                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-2xs transition-all cursor-pointer",
                   isSaberPro
-                    ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-950 dark:text-emerald-100 hover:border-emerald-600 hover:bg-emerald-500/20"
-                    : "border-border/80 bg-paper/60 text-ink hover:border-accent hover:bg-surface",
+                    ? "border-2 border-emerald-600/60 bg-emerald-500/20 text-slate-950 dark:text-white hover:bg-emerald-500/30"
+                    : "border border-border/80 bg-paper/60 text-slate-900 dark:text-white hover:border-accent hover:bg-surface",
                 )}
               >
                 <Compass
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-emerald-600 dark:text-emerald-400" : "text-accent",
+                    isSaberPro ? "text-emerald-700 dark:text-emerald-300" : "text-accent",
                   )}
                 />
                 <span className="hidden sm:inline">¿Cómo empezar?</span>
@@ -348,11 +346,16 @@ export function AppShell({ children }: { children: ReactNode }) {
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-2xs transition-all cursor-pointer",
                   isSaberPro
-                    ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/20"
+                    ? "border-2 border-emerald-600/60 bg-emerald-500/20 text-slate-950 dark:text-white hover:bg-emerald-500/30"
                     : "border-accent/60 bg-linear-to-r from-accent/15 to-accent/5 text-accent hover:bg-accent/25",
                 )}
               >
-                <Crown className={cn("size-3.5", isSaberPro ? "text-emerald-600 dark:text-emerald-400" : "text-accent")} />
+                <Crown
+                  className={cn(
+                    "size-3.5",
+                    isSaberPro ? "text-emerald-700 dark:text-emerald-300" : "text-accent",
+                  )}
+                />
                 <span>Planes Pro</span>
               </button>
 
@@ -604,18 +607,18 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </>
               ) : (
                 <>
-                  {/* Tarjeta Destacada Saber Pro 2026 (Armonizada en Verde Esmeralda) */}
+                  {/* Tarjeta Destacada Saber Pro 2026 (Armonizada en Azul DIAN) */}
                   <Link
                     to="/saber-pro"
                     search={{ tab: "resumen" }}
-                    className="w-full rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-500/10 via-surface to-emerald-500/5 p-3.5 text-left transition-all hover:border-emerald-500 hover:shadow-xs group cursor-pointer block"
+                    className="w-full rounded-2xl border border-accent/40 bg-linear-to-br from-accent/10 via-surface to-accent/5 p-3.5 text-left transition-all hover:border-accent hover:shadow-xs group cursor-pointer block"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5 font-mono">
-                        <GraduationCap className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-accent flex items-center gap-1.5 font-mono">
+                        <GraduationCap className="size-3.5 text-accent" />
                         Saber Pro 2026
                       </span>
-                      <span className="rounded bg-emerald-600 text-white px-1.5 py-0.5 text-[9px] font-bold font-mono uppercase shadow-2xs">
+                      <span className="rounded bg-accent text-white px-1.5 py-0.5 text-[9px] font-bold font-mono uppercase shadow-2xs">
                         18 Octubre
                       </span>
                     </div>
@@ -625,7 +628,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     <p className="mt-0.5 text-[11px] text-muted leading-relaxed">
                       Entrenador intensivo: Genéricas y Contaduría Pública con simulación oficial.
                     </p>
-                    <div className="mt-2 flex items-center text-[10px] font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-0.5 transition-transform">
+                    <div className="mt-2 flex items-center text-[10px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
                       <span>Activar Saber Pro →</span>
                     </div>
                   </Link>

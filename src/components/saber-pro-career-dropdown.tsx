@@ -59,35 +59,35 @@ export function SaberProCareerDropdown() {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs transition-all hover:bg-emerald-500/20 hover:border-emerald-500/60 shadow-2xs group cursor-pointer",
-          isOpen && "ring-2 ring-emerald-500 border-emerald-500 bg-surface",
+          "flex items-center gap-2 rounded-xl border-2 border-emerald-600/50 bg-emerald-500/15 px-2.5 py-1.5 text-xs transition-all hover:bg-emerald-500/25 hover:border-emerald-600 shadow-2xs group cursor-pointer",
+          isOpen && "ring-2 ring-emerald-500 border-emerald-600 bg-surface",
         )}
       >
-        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold group-hover:scale-105 transition-transform">
-          <GraduationCap className="size-4 text-emerald-700 dark:text-emerald-300" />
+        <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-bold group-hover:scale-105 transition-transform shadow-2xs">
+          <GraduationCap className="size-4 text-white" />
         </div>
 
         <div className="flex flex-col text-left">
           <div className="flex items-center gap-1.5">
-            <span className="font-bold text-xs leading-none text-ink truncate max-w-28 sm:max-w-36">
+            <span className="font-black text-xs leading-none text-slate-950 dark:text-white truncate max-w-28 sm:max-w-36">
               {currentCareer.name}
             </span>
             <Badge
               variant="outline"
-              className="px-1.5 py-0 text-[9px] font-bold text-emerald-800 dark:text-emerald-200 border-emerald-500/40 bg-emerald-500/15 hidden sm:inline-flex"
+              className="px-1.5 py-0 text-[9px] font-black uppercase text-emerald-950 dark:text-emerald-100 border-emerald-600/60 bg-emerald-500/25 hidden sm:inline-flex"
             >
               Saber Pro
             </Badge>
           </div>
-          <span className="text-[10px] text-muted leading-tight mt-0.5 flex items-center gap-1">
+          <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium leading-tight mt-0.5 flex items-center gap-1">
             <span>Prueba Específica</span>
-            <span className="text-subtle font-normal">· Cambiar</span>
+            <span className="text-slate-500 font-normal">· Cambiar</span>
           </span>
         </div>
 
         <ChevronDown
           className={cn(
-            "size-3.5 text-muted transition-transform duration-200 shrink-0 ml-0.5",
+            "size-3.5 text-slate-700 dark:text-slate-300 transition-transform duration-200 shrink-0 ml-0.5",
             isOpen && "rotate-180 text-emerald-600",
           )}
         />

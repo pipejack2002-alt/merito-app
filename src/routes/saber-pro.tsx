@@ -159,10 +159,10 @@ export function SaberProPage() {
                   type="button"
                   onClick={() => selectCareer(career.id)}
                   className={cn(
-                    "rounded-xl border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer",
+                    "rounded-xl border px-3 py-1.5 text-xs transition-all cursor-pointer",
                     selectedCareerId === career.id
-                      ? "border-emerald-600 bg-emerald-600 text-white shadow-xs font-semibold"
-                      : "border-border/80 bg-paper/60 text-muted hover:border-emerald-500/60 hover:text-ink",
+                      ? "border-emerald-600 bg-emerald-600 text-white shadow-xs font-black"
+                      : "border-border/90 bg-surface text-slate-800 dark:text-slate-200 font-bold hover:border-emerald-500 hover:text-emerald-950 hover:bg-emerald-50/50 shadow-2xs",
                   )}
                 >
                   {career.name}
@@ -206,8 +206,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("resumen")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "resumen" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "resumen"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <Award className="size-4" />
@@ -219,8 +221,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("practica")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "practica" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "practica"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <BookOpen className="size-4" />
@@ -232,8 +236,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("simulacro")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "simulacro" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "simulacro"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <Clock className="size-4" />
@@ -245,11 +251,13 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("chuleta")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "chuleta" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "chuleta"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
-            <Zap className="size-4 text-emerald-600" />
+            <Zap className={cn("size-4", activeTab === "chuleta" ? "text-white" : "text-emerald-600")} />
             Paso 3 · Chuleta de Fórmulas
           </Button>
 
@@ -258,8 +266,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("estructura")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "estructura" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "estructura"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <Layers className="size-4" />
@@ -271,8 +281,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("diagnostico")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "diagnostico" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "diagnostico"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <Shield className="size-4" />
@@ -284,8 +296,10 @@ export function SaberProPage() {
             size="sm"
             onClick={() => setActiveTab("glosario")}
             className={cn(
-              "gap-2 cursor-pointer",
-              activeTab === "glosario" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+              "gap-2 cursor-pointer transition-all",
+              activeTab === "glosario"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-xs ring-1 ring-emerald-500"
+                : "border-border/90 bg-surface text-slate-900 dark:text-slate-100 font-bold hover:border-emerald-600 hover:bg-emerald-50/70 hover:text-emerald-950 shadow-2xs",
             )}
           >
             <Languages className="size-4" />
