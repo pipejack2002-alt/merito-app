@@ -961,7 +961,7 @@ function SaberProTrainerTab({
   careerName,
   initialQuestionIndex,
   onResetJumpIndex,
-  onNavigateTab,
+  onNavigateTab: _onNavigateTab,
 }: {
   careerId: string;
   careerName: string;
@@ -975,7 +975,6 @@ function SaberProTrainerTab({
   const [shuffleSeed, setShuffleSeed] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [speaking, setSpeaking] = useState(false);
-  const [showTranslator, setShowTranslator] = useState(false);
 
   const userAnswers = useSaberProStore((s) => s.userAnswers);
   const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
@@ -1135,17 +1134,7 @@ function SaberProTrainerTab({
       window.speechSynthesis.cancel();
     }
     setSpeaking(false);
-    setShowTranslator(false);
   }, [currentIndex]);
-
-  const detectedTerms = useMemo(() => {
-    if (!currentQ) return [];
-    return getTermsForQuestion(
-      currentQ.stem,
-      currentQ.contextText,
-      currentQ.choices.map((c) => c.text).join(" "),
-    );
-  }, [currentQ]);
 
   const handleSelectChoice = (choiceId: string) => {
     if (!currentQ) return;
@@ -1475,101 +1464,6 @@ function SaberProTrainerTab({
                   {currentQ.stem}
                 </p>
               </div>
-
-              {/* Traductor de Jerga / Conceptos Clave en Línea */}
-              {detectedTerms.length > 0 && (
-                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 space-y-3 transition-all">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
-                        <Languages className="size-4" />
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="text-xs font-bold text-emerald-950 dark:text-emerald-200">
-                            Traductor de Jerga ICFES
-                          </p>
-                          <span className="rounded bg-emerald-600/20 text-emerald-900 dark:text-emerald-200 px-1.5 py-0.2 text-[10px] font-mono font-bold">
-                            {detectedTerms.length} {detectedTerms.length === 1 ? "término detectado" : "términos detectados"}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-emerald-800/90 dark:text-emerald-300/90 font-medium">
-                          {detectedTerms.map((t) => t.term.split("(")[0].trim()).join(" · ")}
-                        </p>
-                      </div>
-                    </div>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setShowTranslator((prev) => !prev)}
-                      className="text-xs h-8 border-emerald-600 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-600 hover:text-white cursor-pointer gap-1.5 font-bold"
-                    >
-                      <Languages className="size-3.5" />
-                      <span>{showTranslator ? "Ocultar Traductor" : "📖 Ver Traducción en Sencillo"}</span>
-                    </Button>
-                  </div>
-
-                  {showTranslator && (
-                    <div className="space-y-3 pt-3 border-t border-emerald-500/20 animate-in fade-in-50">
-                      <div className="flex items-center justify-between text-[11px] text-muted">
-                        <span>Traducción a palabras cotidianas con ejemplos reales y enlaces a Google:</span>
-                        {onNavigateTab && (
-                          <button
-                            type="button"
-                            onClick={() => onNavigateTab("glosario")}
-                            className="text-emerald-700 dark:text-emerald-400 hover:underline font-bold cursor-pointer inline-flex items-center gap-1"
-                          >
-                            <span>Ver todo el Glosario Oficial</span>
-                            <ArrowRight className="size-3" />
-                          </button>
-                        )}
-                      </div>
-
-                      <div className="grid gap-2.5 sm:grid-cols-2">
-                        {detectedTerms.map((t) => (
-                          <div
-                            key={t.id}
-                            className="rounded-xl border border-border bg-surface p-3.5 space-y-2 shadow-2xs"
-                          >
-                            <div className="flex items-start justify-between gap-1">
-                              <div>
-                                <h4 className="font-bold text-xs text-ink leading-tight">{t.term}</h4>
-                                <span className="text-[10px] text-muted font-mono">{t.categoryLabel}</span>
-                              </div>
-                              <a
-                                href={`https://www.google.com/search?q=${encodeURIComponent(
-                                  t.term + " definicion falacia icfes saber pro ejemplos",
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 hover:underline font-semibold shrink-0 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30"
-                              >
-                                <Globe className="size-2.5" />
-                                <span>Google</span>
-                                <ExternalLink className="size-2" />
-                              </a>
-                            </div>
-
-                            <p className="text-xs text-ink leading-relaxed">
-                              <strong className="text-emerald-800 dark:text-emerald-300">En palabras sencillas:</strong>{" "}
-                              {t.plainMeaning}
-                            </p>
-
-                            <p className="text-[11px] text-muted italic bg-paper/60 p-2 rounded-lg border border-border/60">
-                              <strong>Ejemplo real:</strong> {t.example}
-                            </p>
-
-                            <p className="text-[10px] text-ink/80 pt-0.5">
-                              <strong className="text-emerald-700 dark:text-emerald-400">Pista para el examen:</strong>{" "}
-                              {t.examTip}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
 
               {/* Opciones de Respuesta */}
               <div className="space-y-3 pt-2">
