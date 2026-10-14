@@ -11,6 +11,7 @@ import {
   Flag,
   GraduationCap,
   Home,
+  Languages,
   Layers,
   Shield,
   Sparkles,
@@ -119,6 +120,14 @@ const SABER_PRO_NAV = [
     sub: "Probabilidad Nivel 4 y mapa de fallos",
     icon: Layers,
     badge: "Reporte",
+  },
+  {
+    tab: "glosario",
+    label: "Paso 6 · Traductor de Jerga",
+    shortLabel: "Traductor",
+    sub: "Falacias en latín y términos explicados",
+    icon: Languages,
+    badge: "Traductor",
   },
 ] as const;
 
@@ -373,7 +382,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                           : "bg-accent/10 text-accent",
                       )}
                     >
-                      5 Pasos
+                      {isSaberPro ? "6 Pasos" : "5 Pasos"}
                     </span>
                   </div>
                 </div>

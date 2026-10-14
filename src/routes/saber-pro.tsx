@@ -10,8 +10,13 @@ import {
   Clock,
   Compass,
   Copy,
+  ExternalLink,
+  FileText,
+  Globe,
   GraduationCap,
+  HelpCircle,
   Info,
+  Languages,
   Layers,
   Play,
   RotateCcw,
@@ -31,6 +36,11 @@ import {
   SABER_PRO_CHEATSHEET,
   type SaberProQuestion,
 } from "@/data/saber-pro-data";
+import {
+  SABER_PRO_GLOSSARY,
+  getTermsForQuestion,
+  type GlossaryTerm,
+} from "@/data/saber-pro-glossary";
 import { useSaberProStore, getSelectedCareer } from "@/lib/saber-pro-store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,7 +53,8 @@ export type SaberProTab =
   | "simulacro"
   | "chuleta"
   | "estructura"
-  | "diagnostico";
+  | "diagnostico"
+  | "glosario";
 
 export interface SaberProSearch {
   tab?: SaberProTab;
@@ -58,6 +69,7 @@ export const Route = createFileRoute("/saber-pro")({
       "chuleta",
       "estructura",
       "diagnostico",
+      "glosario",
     ];
     const tab =
       typeof s.tab === "string" && validTabs.includes(s.tab as SaberProTab)
@@ -266,6 +278,19 @@ export function SaberProPage() {
             <Shield className="size-4" />
             Paso 5 · Diagnóstico y Fallos
           </Button>
+
+          <Button
+            variant={activeTab === "glosario" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setActiveTab("glosario")}
+            className={cn(
+              "gap-2 cursor-pointer",
+              activeTab === "glosario" && "bg-emerald-600 hover:bg-emerald-700 text-white font-bold",
+            )}
+          >
+            <Languages className="size-4" />
+            Paso 6 · Traductor de Jerga ICFES
+          </Button>
         </div>
       </section>
 
@@ -284,6 +309,7 @@ export function SaberProPage() {
           careerName={selectedCareer.name}
           initialQuestionIndex={trainerJumpIndex}
           onResetJumpIndex={() => setTrainerJumpIndex(null)}
+          onNavigateTab={setActiveTab}
         />
       )}
 
@@ -301,6 +327,10 @@ export function SaberProPage() {
           onReviewQuestion={handleReviewInTrainer}
           onStartSimulator={() => setActiveTab("simulacro")}
         />
+      )}
+
+      {activeTab === "glosario" && (
+        <SaberProGlossaryTab onReviewQuestion={handleReviewInTrainer} />
       )}
     </div>
   );
@@ -557,18 +587,18 @@ function SaberProOverviewTab({
           </div>
 
           {/* Tarjeta Paso 5 */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all sm:col-span-2 lg:col-span-2">
+          <div className="rounded-2xl border border-border/80 bg-surface p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/60 transition-all">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-mono">
                   Paso 5 · Métricas y Refuerzo
                 </span>
                 <span className="rounded bg-ok/10 px-2 py-0.5 text-[10px] font-bold text-ok font-mono">
-                  Probabilidad Nivel 4
+                  Reporte
                 </span>
               </div>
               <h3 className="font-display text-base font-bold text-ink">
-                Diagnóstico de Desempeño y Mapa de Fallos
+                Diagnóstico de Desempeño y Fallos
               </h3>
               <p className="text-xs text-muted leading-relaxed">
                 Revisa exactamente las preguntas donde tuviste error, comprende la justificación
@@ -577,11 +607,43 @@ function SaberProOverviewTab({
             </div>
             <Button
               size="sm"
+              variant="outline"
               onClick={() => onNavigateTab("diagnostico")}
-              className="w-full gap-1.5 cursor-pointer bg-slate-900 text-emerald-300 dark:bg-emerald-600 dark:text-white font-bold"
+              className="w-full gap-1.5 cursor-pointer hover:border-emerald-600 hover:text-emerald-700"
             >
               <Shield className="size-3.5" />
-              <span>Ver Diagnóstico y Preguntas Falladas</span>
+              <span>Ver Diagnóstico</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
+
+          {/* Tarjeta Paso 6 */}
+          <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/5 p-5 flex flex-col justify-between space-y-4 shadow-2xs hover:border-emerald-500/80 transition-all">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+                  Paso 6 · Diccionario & Traductor
+                </span>
+                <span className="rounded bg-emerald-600 px-2 py-0.5 text-[10px] font-bold text-white font-mono shadow-2xs">
+                  Traductor
+                </span>
+              </div>
+              <h3 className="font-display text-base font-bold text-ink flex items-center gap-1.5">
+                <Languages className="size-4 text-emerald-600" />
+                <span>Traductor de Jerga ICFES</span>
+              </h3>
+              <p className="text-xs text-muted leading-relaxed">
+                Traduce falacias en latín (ad hominem, ad misericordiam), figuras de la Constitución y
+                ratios financieros a lenguaje cotidiano con enlaces a Google.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={() => onNavigateTab("glosario")}
+              className="w-full gap-1.5 cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
+            >
+              <Languages className="size-3.5" />
+              <span>Abrir Traductor</span>
               <ArrowRight className="size-3.5" />
             </Button>
           </div>
@@ -652,6 +714,15 @@ function SaberProPedagogicalFeedback({
     question.distractorAnalysis ||
     "Trampas comunes del ICFES: Las opciones incorrectas emplean distractores de cálculo directo sin considerar variaciones sucesivas, confusión entre tipos de opinión de auditoría, o generalizaciones no respaldadas textualmente por el enunciado normativo.";
 
+  // Detección pedagógica de términos o falacias en las opciones y el enunciado
+  const matchedTerms = useMemo(() => {
+    return getTermsForQuestion(
+      question.stem,
+      question.contextText,
+      question.choices.map((c) => c.text).join(" "),
+    );
+  }, [question]);
+
   return (
     <div
       className={cn(
@@ -705,6 +776,61 @@ function SaberProPedagogicalFeedback({
         <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedDistractors}</p>
       </div>
 
+      {/* Bloque 4: Desglose y Traductor de Opciones (Conceptos en Sencillo) */}
+      {matchedTerms.length > 0 && (
+        <div className="rounded-xl border border-emerald-500/40 bg-surface p-4 space-y-3 shadow-2xs">
+          <div className="flex flex-wrap items-center justify-between gap-1.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-ink">
+              <Languages className="size-4 text-emerald-600" />
+              <span>Traductor de Jerga ICFES: ¿Qué significa cada concepto de las opciones?</span>
+            </div>
+            <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded">
+              {matchedTerms.length} {matchedTerms.length === 1 ? "concepto explicado" : "conceptos explicados"}
+            </span>
+          </div>
+
+          <p className="text-[11px] text-muted leading-relaxed">
+            Para que no vuelvas a dudar con términos en latín o tecnicismos, aquí tienes la traducción en lenguaje sencillo y cómo identificarlos:
+          </p>
+
+          <div className="grid gap-2.5 sm:grid-cols-2 pt-1">
+            {matchedTerms.map((term) => (
+              <div
+                key={term.id}
+                className="rounded-lg border border-border/80 bg-paper/50 p-3 space-y-1.5"
+              >
+                <div className="flex items-center justify-between gap-1">
+                  <h4 className="font-bold text-xs text-ink">{term.term}</h4>
+                  <a
+                    href={`https://www.google.com/search?q=${encodeURIComponent(
+                      term.term + " definicion icfes saber pro concepto",
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 hover:underline font-semibold"
+                    title="Buscar explicación y ejemplos en Google"
+                  >
+                    <Globe className="size-2.5" />
+                    <span>Buscar en Google</span>
+                    <ExternalLink className="size-2" />
+                  </a>
+                </div>
+                <p className="text-[11px] text-ink leading-relaxed">
+                  <strong className="text-emerald-800 dark:text-emerald-300">En palabras sencillas:</strong>{" "}
+                  {term.plainMeaning}
+                </p>
+                <p className="text-[10px] text-muted italic bg-surface/60 p-1.5 rounded border border-border/40">
+                  <strong>Ejemplo:</strong> {term.example}
+                </p>
+                <p className="text-[10px] text-muted">
+                  <strong className="text-ink">Pista ICFES:</strong> {term.examTip}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Pie con Competencia y Fuente Oficial */}
       <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[11px] text-muted font-mono border-t border-border/50">
         <span className="truncate">Competencia: {question.competency}</span>
@@ -723,16 +849,19 @@ function SaberProTrainerTab({
   careerName,
   initialQuestionIndex,
   onResetJumpIndex,
+  onNavigateTab,
 }: {
   careerId: string;
   careerName: string;
   initialQuestionIndex?: number | null;
   onResetJumpIndex?: () => void;
+  onNavigateTab?: (tab: SaberProTab) => void;
 }) {
   const [filterSession, setFilterSession] = useState<"all" | "generica" | "especifica">("all");
   const [selectedArea, setSelectedArea] = useState<string>("all");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [speaking, setSpeaking] = useState(false);
+  const [showTranslator, setShowTranslator] = useState(false);
 
   const userAnswers = useSaberProStore((s) => s.userAnswers);
   const setUserAnswer = useSaberProStore((s) => s.setUserAnswer);
@@ -804,7 +933,17 @@ function SaberProTrainerTab({
       window.speechSynthesis.cancel();
     }
     setSpeaking(false);
+    setShowTranslator(false);
   }, [currentIndex]);
+
+  const detectedTerms = useMemo(() => {
+    if (!currentQ) return [];
+    return getTermsForQuestion(
+      currentQ.stem,
+      currentQ.contextText,
+      currentQ.choices.map((c) => c.text).join(" "),
+    );
+  }, [currentQ]);
 
   const handleSelectChoice = (choiceId: string) => {
     if (!currentQ) return;
@@ -945,19 +1084,133 @@ function SaberProTrainerTab({
                 </Button>
               </div>
 
-              {/* Contexto o Lectura si existe */}
+              {/* Contexto o Lectura si existe - Diseño destacado y legible ("que se vea de verdad") */}
               {currentQ.contextText && (
-                <div className="rounded-xl border border-border/80 bg-paper/60 p-4 sm:p-5 text-sm sm:text-base leading-relaxed text-ink font-serif italic border-l-4 border-l-emerald-600">
-                  {currentQ.contextText}
+                <div className="rounded-2xl border-2 border-emerald-500/30 bg-emerald-500/5 p-5 sm:p-6 space-y-3 shadow-xs border-l-6 border-l-emerald-600">
+                  <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="flex size-6 items-center justify-center rounded-md bg-emerald-600 text-white shadow-2xs">
+                        <FileText className="size-3.5" />
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+                        Texto del Caso Oficial Evaluado
+                      </span>
+                    </div>
+                    <Badge variant="outline" className="text-[10px] font-mono bg-surface">
+                      Lectura Obligatoria
+                    </Badge>
+                  </div>
+                  <p className="text-sm sm:text-base leading-relaxed text-ink font-serif italic pl-1">
+                    {currentQ.contextText}
+                  </p>
                 </div>
               )}
 
-              {/* Enunciado */}
-              <div className="space-y-2">
-                <p className="text-base sm:text-lg font-display font-semibold text-ink leading-snug">
+              {/* Enunciado Oficial de la Pregunta */}
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted font-mono">
+                  <HelpCircle className="size-3.5 text-emerald-600" />
+                  <span>Pregunta Oficial del ICFES:</span>
+                </div>
+                <p className="text-base sm:text-lg font-display font-bold text-ink leading-snug">
                   {currentQ.stem}
                 </p>
               </div>
+
+              {/* Traductor de Jerga / Conceptos Clave en Línea */}
+              {detectedTerms.length > 0 && (
+                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 space-y-3 transition-all">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
+                        <Languages className="size-4" />
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs font-bold text-emerald-950 dark:text-emerald-200">
+                            Traductor de Jerga ICFES
+                          </p>
+                          <span className="rounded bg-emerald-600/20 text-emerald-900 dark:text-emerald-200 px-1.5 py-0.2 text-[10px] font-mono font-bold">
+                            {detectedTerms.length} {detectedTerms.length === 1 ? "término detectado" : "términos detectados"}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-emerald-800/90 dark:text-emerald-300/90 font-medium">
+                          {detectedTerms.map((t) => t.term.split("(")[0].trim()).join(" · ")}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setShowTranslator((prev) => !prev)}
+                      className="text-xs h-8 border-emerald-600 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-600 hover:text-white cursor-pointer gap-1.5 font-bold"
+                    >
+                      <Languages className="size-3.5" />
+                      <span>{showTranslator ? "Ocultar Traductor" : "📖 Ver Traducción en Sencillo"}</span>
+                    </Button>
+                  </div>
+
+                  {showTranslator && (
+                    <div className="space-y-3 pt-3 border-t border-emerald-500/20 animate-in fade-in-50">
+                      <div className="flex items-center justify-between text-[11px] text-muted">
+                        <span>Traducción a palabras cotidianas con ejemplos reales y enlaces a Google:</span>
+                        {onNavigateTab && (
+                          <button
+                            type="button"
+                            onClick={() => onNavigateTab("glosario")}
+                            className="text-emerald-700 dark:text-emerald-400 hover:underline font-bold cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <span>Ver todo el Glosario Oficial</span>
+                            <ArrowRight className="size-3" />
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="grid gap-2.5 sm:grid-cols-2">
+                        {detectedTerms.map((t) => (
+                          <div
+                            key={t.id}
+                            className="rounded-xl border border-border bg-surface p-3.5 space-y-2 shadow-2xs"
+                          >
+                            <div className="flex items-start justify-between gap-1">
+                              <div>
+                                <h4 className="font-bold text-xs text-ink leading-tight">{t.term}</h4>
+                                <span className="text-[10px] text-muted font-mono">{t.categoryLabel}</span>
+                              </div>
+                              <a
+                                href={`https://www.google.com/search?q=${encodeURIComponent(
+                                  t.term + " definicion falacia icfes saber pro ejemplos",
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 hover:underline font-semibold shrink-0 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30"
+                              >
+                                <Globe className="size-2.5" />
+                                <span>Google</span>
+                                <ExternalLink className="size-2" />
+                              </a>
+                            </div>
+
+                            <p className="text-xs text-ink leading-relaxed">
+                              <strong className="text-emerald-800 dark:text-emerald-300">En palabras sencillas:</strong>{" "}
+                              {t.plainMeaning}
+                            </p>
+
+                            <p className="text-[11px] text-muted italic bg-paper/60 p-2 rounded-lg border border-border/60">
+                              <strong>Ejemplo real:</strong> {t.example}
+                            </p>
+
+                            <p className="text-[10px] text-ink/80 pt-0.5">
+                              <strong className="text-emerald-700 dark:text-emerald-400">Pista para el examen:</strong>{" "}
+                              {t.examTip}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Opciones de Respuesta */}
               <div className="space-y-3 pt-2">
@@ -2123,6 +2376,275 @@ function SaberProDiagnosticTab({
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// 6. TAB: TRADUCTOR DE JERGA Y GLOSARIO OFICIAL SABER PRO 2026
+// ────────────────────────────────────────────────────────────────────────────
+
+function SaberProGlossaryTab({
+  onReviewQuestion,
+}: {
+  onReviewQuestion?: (questionId: string) => void;
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const categories = [
+    { id: "all", label: "Todos los Conceptos" },
+    { id: "falacias", label: "Falacias y Argumentación (Latín)" },
+    { id: "ciudadanas", label: "Constitución y Leyes" },
+    { id: "cuantitativo", label: "Razonamiento Cuantitativo" },
+    { id: "financiero", label: "Gestión Financiera" },
+    { id: "auditoria", label: "Auditoría NIA y Control" },
+  ];
+
+  const filteredTerms = useMemo(() => {
+    return SABER_PRO_GLOSSARY.filter((item) => {
+      if (selectedCategory !== "all" && item.category !== selectedCategory) {
+        return false;
+      }
+      if (!searchTerm.trim()) return true;
+      const q = searchTerm.toLowerCase();
+      return (
+        item.term.toLowerCase().includes(q) ||
+        item.plainMeaning.toLowerCase().includes(q) ||
+        item.example.toLowerCase().includes(q) ||
+        item.examTip.toLowerCase().includes(q) ||
+        item.searchTerms.some((st) => st.toLowerCase().includes(q))
+      );
+    });
+  }, [selectedCategory, searchTerm]);
+
+  // Encuentra preguntas asociadas al término en el banco
+  const getAssociatedQuestion = (term: GlossaryTerm) => {
+    return SABER_PRO_QUESTIONS.find((q) => {
+      const combined = `${q.contextText || ""} ${q.stem} ${q.choices.map((c) => c.text).join(" ")}`.toLowerCase();
+      return term.searchTerms.some((st) => combined.includes(st.toLowerCase()));
+    });
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* ── Cabecera del Traductor ── */}
+      <div className="rounded-2xl border border-emerald-500/40 bg-surface p-6 sm:p-8 space-y-4 shadow-xs">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
+                <Languages className="size-4" />
+              </span>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+                Paso 6 · Traductor Oficial Saber Pro 2026
+              </span>
+            </div>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-ink">
+              Traductor de Jerga y Términos en Latín
+            </h2>
+          </div>
+          <Badge className="bg-emerald-600 text-white font-mono font-bold text-xs py-1 px-3 self-start sm:self-center shadow-2xs">
+            {SABER_PRO_GLOSSARY.length} Conceptos Clave
+          </Badge>
+        </div>
+
+        <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-3xl">
+          El ICFES suele formular preguntas con términos en latín (<em>ad hominem</em>, <em>ad misericordiam</em>),
+          figuras jurídicas o fórmulas financieras complejas. Este traductor convierte cada concepto a{" "}
+          <strong className="text-ink">español sencillo y cotidiano</strong>, con ejemplos de la vida real,
+          trucos de descarte y enlaces directos para investigar en la web.
+        </p>
+
+        {/* ── Barra de Búsqueda y Filtros ── */}
+        <div className="space-y-3 pt-2">
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-muted" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Buscar término, falacia o concepto (ej: ad hominem, tutela, wacc, nia 705, ebitda...)"
+              className="w-full rounded-xl border border-border bg-paper/60 pl-10 pr-4 py-2.5 text-xs sm:text-sm text-ink placeholder:text-subtle focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600 shadow-2xs"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-ink cursor-pointer"
+              >
+                Limpiar
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            {categories.map((cat) => {
+              const active = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={cn(
+                    "rounded-lg px-2.5 py-1 text-xs font-medium transition-all cursor-pointer",
+                    active
+                      ? "bg-emerald-600 text-white font-bold shadow-2xs"
+                      : "border border-border/80 bg-paper/50 text-muted hover:text-ink hover:border-emerald-500/60",
+                  )}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Lista de Tarjetas del Glosario ── */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between text-xs text-muted px-1">
+          <span>
+            Mostrando <strong>{filteredTerms.length}</strong> de {SABER_PRO_GLOSSARY.length} términos
+          </span>
+          {searchTerm && (
+            <span>
+              Filtro activo: &ldquo;{searchTerm}&rdquo;
+            </span>
+          )}
+        </div>
+
+        {filteredTerms.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-border p-8 text-center space-y-2">
+            <p className="font-bold text-sm text-ink">No se encontraron términos para tu búsqueda.</p>
+            <p className="text-xs text-muted">Intenta buscar con otra palabra clave o limpia el filtro.</p>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("all");
+              }}
+              className="mt-2 text-xs cursor-pointer"
+            >
+              Restablecer Filtros
+            </Button>
+          </div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            {filteredTerms.map((item) => {
+              const relatedQ = getAssociatedQuestion(item);
+              const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(
+                item.term + " concepto definicion icfes saber pro ejemplos",
+              )}`;
+
+              return (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border border-border/80 bg-surface p-5 space-y-3.5 shadow-2xs hover:border-emerald-500/60 transition-all flex flex-col justify-between"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="space-y-1">
+                        <h3 className="font-display font-bold text-base text-ink leading-tight">
+                          {item.term}
+                        </h3>
+                        <Badge variant="outline" className="text-[10px] font-mono">
+                          {item.categoryLabel}
+                        </Badge>
+                      </div>
+
+                      <a
+                        href={googleSearchUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/30 shrink-0 cursor-pointer"
+                        title="Buscar en Google"
+                      >
+                        <Globe className="size-3" />
+                        <span>Google</span>
+                        <ExternalLink className="size-2.5" />
+                      </a>
+                    </div>
+
+                    {/* Explicación en lenguaje cotidiano */}
+                    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-mono">
+                        En palabras sencillas:
+                      </span>
+                      <p className="text-xs sm:text-sm text-ink leading-relaxed">
+                        {item.plainMeaning}
+                      </p>
+                    </div>
+
+                    {/* Ejemplo práctico de debate o caso real */}
+                    <div className="rounded-xl border border-border/80 bg-paper/60 p-3 space-y-1 font-serif">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted font-sans font-mono">
+                        Ejemplo real / Debate:
+                      </span>
+                      <p className="text-xs sm:text-sm text-ink/90 italic leading-relaxed">
+                        {item.example}
+                      </p>
+                    </div>
+
+                    {/* Cómo responder en el ICFES */}
+                    <div className="text-xs space-y-1 pt-1">
+                      <span className="font-bold text-[11px] text-ink flex items-center gap-1">
+                        <Sparkles className="size-3 text-emerald-600" />
+                        Pista para el examen del domingo:
+                      </span>
+                      <p className="text-xs text-muted leading-relaxed pl-4 border-l-2 border-emerald-600/40">
+                        {item.examTip}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Acciones del Término */}
+                  <div className="pt-2 border-t border-border/60 flex items-center justify-between gap-2">
+                    <a
+                      href={googleSearchUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-muted hover:text-ink inline-flex items-center gap-1 font-mono"
+                    >
+                      <span>Consultar fuentes web</span>
+                      <ExternalLink className="size-3" />
+                    </a>
+
+                    {relatedQ && onReviewQuestion && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => onReviewQuestion(relatedQ.id)}
+                        className="text-xs h-7 gap-1 cursor-pointer border-emerald-600 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-600 hover:text-white font-semibold"
+                      >
+                        <span>Practicar Caso Real</span>
+                        <ArrowRight className="size-3" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* ── Consejo Metodológico Oficial ── */}
+      <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-5 space-y-2">
+        <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
+          <HelpCircle className="size-4 text-emerald-600" />
+          ¿Por qué el ICFES utiliza expresiones en latín y jerga técnica?
+        </h4>
+        <p className="text-xs text-muted leading-relaxed">
+          En Lectura Crítica y Competencias Ciudadanas, el ICFES evalúa si el estudiante sabe identificar
+          errores lógicos en discursos públicos sin dejarse deslumbrar por términos técnicos. Todas las
+          falacias en latín (<em>ad hominem</em>, <em>ad misericordiam</em>, <em>ad verecundiam</em>, etc.)
+          simplemente describen formas comunes en las que una persona evita argumentar con pruebas y busca ganar
+          el debate mediante trampas retóricas. Al memorizar su significado sencillo, puedes responder en menos
+          de 45 segundos.
+        </p>
+      </div>
     </div>
   );
 }
