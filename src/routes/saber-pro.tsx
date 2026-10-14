@@ -815,15 +815,33 @@ function SaberProPedagogicalFeedback({
         ? "Técnica para el examen: Separa la tesis central de los argumentos accesorios. Descarta opciones con afirmaciones absolutistas ('siempre', 'jamás', 'todos') o que agreguen información ajena al texto. La clave del ICFES siempre responde estrictamente a lo afirmado por el autor."
         : question.areaId === "competencias-ciudadanas"
           ? "Técnica para el examen: Reconoce la jerarquía de derechos. Para derechos fundamentales individuales (vida, salud, debido proceso) el recurso inmediato es la Acción de Tutela. Para derechos colectivos (ambiente, espacio público) aplica la Acción Popular. Frente a decretos presidenciales en estados de excepción opera el control automático de la Corte Constitucional."
-          : question.areaId === "gestion-financiera"
-            ? "Técnica para el examen: En evaluación de proyectos, el VPN prevalece jerárquicamente sobre la TIR y el Payback. En razones de liquidez, recuerda excluir inventarios de la prueba ácida. En el WACC, aplica el escudo fiscal (1 - T) únicamente al costo de la deuda financiera."
-            : question.areaId === "aseguramiento-informacion"
-              ? "Técnica para el examen: Aplica la matriz de la NIA 705: si la incorrección es material pero no generalizada, emite opinión con salvedades («excepto por»); si es material Y generalizada, emite opinión desfavorable (adversa). Si falta evidencia y es generalizada, abstención de opinión."
-              : "Técnica para el examen: Lee atentamente la tarea evaluada en el enunciado, descarta los dos distractores más evidentes y verifica la coherencia con los principios normativos y técnicos oficiales.");
+          : question.areaId === "ingles"
+            ? "Exam Technique: Scan for key nouns, evaluate discourse connectors, and inspect the required grammatical agreement (such as conditional structures or prepositional verb rules)."
+            : question.areaId === "gestion-financiera" || question.areaId === "gestion-financiera-admin"
+              ? "Técnica para el examen: En evaluación de proyectos, el VPN prevalece jerárquicamente sobre la TIR y el Payback. En razones de liquidez, recuerda excluir inventarios de la prueba ácida. En el WACC, aplica el escudo fiscal (1 - T) únicamente al costo de la deuda financiera."
+              : question.areaId === "aseguramiento-informacion"
+                ? "Técnica para el examen: Aplica la matriz de la NIA 705: si la incorrección es material pero no generalizada, emite opinión con salvedades («excepto por»); si es material Y generalizada, emite opinión desfavorable (adversa). Si falta evidencia y es generalizada, abstención de opinión."
+                : question.areaId === "informacion-contable"
+                  ? "Técnica para el examen: En la NIC 12, si la Base Fiscal del activo supera su Valor en Libros, surge un Activo por Impuesto Diferido. En la NIC 2, valora siempre al menor entre Costo y Valor Neto Realizable (VNR)."
+                  : "Técnica para el examen: Lee atentamente la tarea evaluada en el enunciado, descarta los dos distractores más evidentes y verifica la coherencia con los principios normativos y técnicos oficiales.");
 
   const resolvedDistractors =
     question.distractorAnalysis ||
-    "Trampas comunes del ICFES: Las opciones incorrectas emplean distractores de cálculo directo sin considerar variaciones sucesivas, confusión entre tipos de opinión de auditoría, o generalizaciones no respaldadas textualmente por el enunciado normativo.";
+    (question.areaId === "lectura-critica"
+      ? "Trampas del ICFES en Lectura Crítica: Cuidado con las opciones que toman sentido literal ante recursos irónicos o metafóricos, las que generalizan con palabras absolutistas ('todos', 'siempre'), o las que introducen juicios personales no expresados por el autor."
+      : question.areaId === "razonamiento-cuantitativo"
+        ? "Trampas del ICFES en Razonamiento Cuantitativo: Cuidado con distractores de cálculo directo (como sumar porcentajes sucesivos en vez de multiplicar factores), operar sobre bases desactualizadas o confundir tasas nominales con efectivas."
+        : question.areaId === "competencias-ciudadanas"
+          ? "Trampas del ICFES en Competencias Ciudadanas: Cuidado con opciones que confunden acciones de tutela (derechos fundamentales individuales) con acciones populares (derechos colectivos), o que proponen medidas autoritarias que vulneran el debido proceso."
+          : question.areaId === "ingles"
+            ? "Common ICFES Distractors in English: Watch out for false cognates, mismatched verb tenses, and extreme qualifiers ('always', 'never') that contradict the factual scope of the passage."
+            : question.areaId === "gestion-financiera" || question.areaId === "gestion-financiera-admin"
+              ? "Trampas del ICFES en Gestión Financiera: Cuidado con distractores que no descuentan el escudo fiscal en el WACC, que incluyen inventarios en la prueba ácida o que eligen proyectos por Payback o TIR sin validar el VPN."
+              : question.areaId === "aseguramiento-informacion"
+                ? "Trampas del ICFES en Aseguramiento: Cuidado con confundir opinión con salvedades (material no generalizado) con opinión desfavorable (material y generalizado), o abstención con denegación."
+                : question.areaId === "informacion-contable"
+                  ? "Trampas del ICFES en Contabilidad y Tributaria: Omitir la diferencia entre base fiscal y valor contable en impuesto diferido, o confundir costos capitalizables con gastos del periodo."
+                  : "Trampas comunes del ICFES: Las opciones incorrectas suelen generalizar en exceso, invertir relaciones causa-efecto o introducir premisas ajenas a la norma técnica evaluada.");
 
   return (
     <div
@@ -852,30 +870,36 @@ function SaberProPedagogicalFeedback({
       </div>
 
       {/* Bloque 1: Fundamento y Justificación Técnica */}
-      <div className="rounded-xl border border-border/70 bg-surface/80 p-4 space-y-1.5 shadow-2xs">
+      <div className="rounded-xl border border-border/70 bg-surface/80 p-4 space-y-2 shadow-2xs">
         <div className="flex items-center gap-1.5 text-xs font-bold text-ink">
           <Sparkles className="size-4 text-emerald-600" />
           <span>¿Por qué es la opción correcta? (Fundamento Técnico)</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{question.explanation}</p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90 whitespace-pre-line">
+          {question.explanation}
+        </p>
       </div>
 
       {/* Bloque 2: Método para Preguntas Similares en el Examen */}
-      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-1.5 shadow-2xs">
+      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-2 shadow-2xs">
         <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400">
           <Compass className="size-4 text-emerald-600" />
           <span>Método de Resolución (¿Cómo resolverla si sale una parecida el domingo?)</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedMethodTip}</p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90 whitespace-pre-line">
+          {resolvedMethodTip}
+        </p>
       </div>
 
       {/* Bloque 3: Análisis de Trampas y Distractores */}
-      <div className="rounded-xl border border-bad/30 bg-bad/5 p-4 space-y-1.5 shadow-2xs">
+      <div className="rounded-xl border border-bad/30 bg-bad/5 p-4 space-y-2 shadow-2xs">
         <div className="flex items-center gap-1.5 text-xs font-bold text-bad">
           <ShieldAlert className="size-4 text-bad" />
           <span>Trampas del ICFES y Descarte de las Demás Opciones</span>
         </div>
-        <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedDistractors}</p>
+        <p className="text-xs sm:text-sm leading-relaxed text-ink/90 whitespace-pre-line">
+          {resolvedDistractors}
+        </p>
       </div>
 
       {/* Pie con Competencia y Fuente Oficial */}
