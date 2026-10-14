@@ -168,7 +168,11 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-dvh bg-bg text-ink flex flex-col selection:bg-accent/20">
       {/* Modal interactivo de Onboarding / Ruta Paso a Paso */}
-      <RoadmapModal isOpen={isRoadmapOpen} onClose={() => setIsRoadmapOpen(false)} />
+      <RoadmapModal
+        isOpen={isRoadmapOpen}
+        onClose={() => setIsRoadmapOpen(false)}
+        isSaberPro={isSaberPro}
+      />
       {/* Modal de Planes Comerciales */}
       <PricingModal isOpen={isPricingOpen} onClose={() => setIsPricingOpen(false)} />
 
@@ -244,22 +248,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
             {/* Selector de Modo y Acciones Principales */}
             <div className="flex items-center gap-2 sm:gap-2.5">
-              {/* Botón Switch: Concurso DIAN 2676 */}
-              <Link
-                to="/"
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
-                  !isSaberPro
-                    ? "bg-accent text-white shadow-xs border border-accent"
-                    : "border border-border/80 bg-paper/60 text-muted hover:text-ink hover:border-emerald-500 hover:bg-surface",
-                )}
-              >
-                <Briefcase className="size-3.5" />
-                <span className="hidden sm:inline">Concurso</span>
-                <span>DIAN 2676</span>
-              </Link>
-
-              {/* Botón Switch: Saber Pro 2026 con Paleta Esmeralda de Alto Contraste */}
+              {/* 1. Botón Switch: Saber Pro 2026 (DE PRIMERO) con Letras Negras de Alto Contraste */}
               <Link
                 to="/saber-pro"
                 search={{ tab: currentSaberProTab || "resumen" }}
@@ -267,39 +256,74 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
                   isSaberPro
                     ? "bg-emerald-600 text-white dark:bg-emerald-500 dark:text-slate-950 border border-emerald-500 shadow-sm"
-                    : "border border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/20",
+                    : "border-2 border-emerald-600/70 bg-emerald-100/90 text-slate-950 dark:bg-emerald-950/70 dark:text-emerald-100 hover:bg-emerald-200/90 hover:border-emerald-700 shadow-xs",
                 )}
               >
                 <GraduationCap
                   className={cn(
                     "size-3.5",
-                    isSaberPro ? "text-white dark:text-slate-950" : "text-emerald-700 dark:text-emerald-300",
+                    isSaberPro
+                      ? "text-white dark:text-slate-950"
+                      : "text-emerald-800 dark:text-emerald-300",
                   )}
                 />
-                <span>Saber Pro</span>
+                <span
+                  className={cn(
+                    "font-extrabold tracking-tight",
+                    !isSaberPro ? "text-slate-950 dark:text-white" : "text-white dark:text-slate-950",
+                  )}
+                >
+                  Saber Pro
+                </span>
                 <span
                   className={cn(
                     "rounded px-1.5 py-0.5 text-[9px] font-black uppercase font-mono tracking-wider",
                     isSaberPro
-                      ? "bg-emerald-800 text-emerald-100 dark:bg-slate-950 dark:text-emerald-300 border border-emerald-400/30"
-                      : "bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/40",
+                      ? "bg-slate-950 text-emerald-300 border border-slate-900 shadow-2xs"
+                      : "bg-slate-950 text-emerald-300 border border-slate-900 shadow-2xs",
                   )}
                 >
                   18 Oct
                 </span>
               </Link>
 
-              {/* Botón de Guía Paso a Paso */}
+              {/* 2. Botón Switch: Concurso DIAN 2676 (DE SEGUNDO) */}
+              <Link
+                to="/"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all shadow-2xs cursor-pointer",
+                  !isSaberPro
+                    ? "bg-accent text-white shadow-xs border border-accent"
+                    : "border border-border/80 bg-paper/60 text-muted hover:text-ink hover:border-accent hover:bg-surface",
+                )}
+              >
+                <Briefcase className="size-3.5" />
+                <span className="hidden sm:inline">Concurso</span>
+                <span>DIAN 2676</span>
+              </Link>
+
+              {/* 3. Botón de Guía Paso a Paso: ¿Cómo empezar? (DE TERCERO - Visible en Saber Pro y DIAN) */}
               <button
                 type="button"
                 onClick={() => setIsRoadmapOpen(true)}
-                className="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-paper/60 px-2.5 py-1.5 text-xs text-ink hover:border-accent hover:bg-surface font-semibold shadow-2xs transition-all cursor-pointer"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer",
+                  isSaberPro
+                    ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-950 dark:text-emerald-100 hover:border-emerald-600 hover:bg-emerald-500/20"
+                    : "border-border/80 bg-paper/60 text-ink hover:border-accent hover:bg-surface",
+                )}
               >
-                <Compass className="size-3.5 text-accent" />
-                <span>¿Cómo empezar?</span>
+                <Compass
+                  className={cn(
+                    "size-3.5",
+                    isSaberPro ? "text-emerald-600 dark:text-emerald-400" : "text-accent",
+                  )}
+                />
+                <span className="hidden sm:inline">¿Cómo empezar?</span>
+                <span className="sm:hidden">Guía</span>
               </button>
 
-              {/* Botón de Indicadores Oficiales (solo en DIAN) */}
+              {/* 4. Botón de Indicadores Oficiales (solo en DIAN) */}
               {!isSaberPro && (
                 <Link
                   to="/indicadores"
@@ -317,7 +341,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </Link>
               )}
 
-              {/* Botón de Planes Pro */}
+              {/* 5. Botón de Planes Pro */}
               <button
                 type="button"
                 onClick={() => setIsPricingOpen(true)}
@@ -332,7 +356,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <span>Planes Pro</span>
               </button>
 
-              {/* Selector de Perfil Rápido: Cargo OPEC en DIAN / Carrera Universitaria en Saber Pro */}
+              {/* 6. Selector de Perfil Rápido: Carrera en Saber Pro / Cargo en DIAN */}
               {isSaberPro ? <SaberProCareerDropdown /> : <CargoDropdownSelector />}
             </div>
           </div>
