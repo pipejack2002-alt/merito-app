@@ -41,7 +41,6 @@ import {
 } from "@/data/saber-pro-data";
 import {
   SABER_PRO_GLOSSARY,
-  getTermsForQuestion,
   type GlossaryTerm,
 } from "@/data/saber-pro-glossary";
 import { useSaberProStore, getSelectedCareer } from "@/lib/saber-pro-store";
@@ -826,15 +825,6 @@ function SaberProPedagogicalFeedback({
     question.distractorAnalysis ||
     "Trampas comunes del ICFES: Las opciones incorrectas emplean distractores de cálculo directo sin considerar variaciones sucesivas, confusión entre tipos de opinión de auditoría, o generalizaciones no respaldadas textualmente por el enunciado normativo.";
 
-  // Detección pedagógica de términos o falacias en las opciones y el enunciado
-  const matchedTerms = useMemo(() => {
-    return getTermsForQuestion(
-      question.stem,
-      question.contextText,
-      question.choices.map((c) => c.text).join(" "),
-    );
-  }, [question]);
-
   return (
     <div
       className={cn(
@@ -887,61 +877,6 @@ function SaberProPedagogicalFeedback({
         </div>
         <p className="text-xs sm:text-sm leading-relaxed text-ink/90">{resolvedDistractors}</p>
       </div>
-
-      {/* Bloque 4: Desglose y Traductor de Opciones (Conceptos en Sencillo) */}
-      {matchedTerms.length > 0 && (
-        <div className="rounded-xl border border-emerald-500/40 bg-surface p-4 space-y-3 shadow-2xs">
-          <div className="flex flex-wrap items-center justify-between gap-1.5">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-ink">
-              <Languages className="size-4 text-emerald-600" />
-              <span>Traductor de Jerga ICFES: ¿Qué significa cada concepto de las opciones?</span>
-            </div>
-            <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded">
-              {matchedTerms.length} {matchedTerms.length === 1 ? "concepto explicado" : "conceptos explicados"}
-            </span>
-          </div>
-
-          <p className="text-[11px] text-muted leading-relaxed">
-            Para que no vuelvas a dudar con términos en latín o tecnicismos, aquí tienes la traducción en lenguaje sencillo y cómo identificarlos:
-          </p>
-
-          <div className="grid gap-2.5 sm:grid-cols-2 pt-1">
-            {matchedTerms.map((term) => (
-              <div
-                key={term.id}
-                className="rounded-lg border border-border/80 bg-paper/50 p-3 space-y-1.5"
-              >
-                <div className="flex items-center justify-between gap-1">
-                  <h4 className="font-bold text-xs text-ink">{term.term}</h4>
-                  <a
-                    href={`https://www.google.com/search?q=${encodeURIComponent(
-                      term.term + " definicion icfes saber pro concepto",
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 hover:underline font-semibold"
-                    title="Buscar explicación y ejemplos en Google"
-                  >
-                    <Globe className="size-2.5" />
-                    <span>Buscar en Google</span>
-                    <ExternalLink className="size-2" />
-                  </a>
-                </div>
-                <p className="text-[11px] text-ink leading-relaxed">
-                  <strong className="text-emerald-800 dark:text-emerald-300">En palabras sencillas:</strong>{" "}
-                  {term.plainMeaning}
-                </p>
-                <p className="text-[10px] text-muted italic bg-surface/60 p-1.5 rounded border border-border/40">
-                  <strong>Ejemplo:</strong> {term.example}
-                </p>
-                <p className="text-[10px] text-muted">
-                  <strong className="text-ink">Pista ICFES:</strong> {term.examTip}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Pie con Competencia y Fuente Oficial */}
       <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[11px] text-muted font-mono border-t border-border/50">
