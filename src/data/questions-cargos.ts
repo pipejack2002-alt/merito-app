@@ -755,4 +755,329 @@ export const QUESTIONS_CARGOS: Question[] = [
     source: "Estatuto Tributario art. 684",
     difficulty: 1,
   },
+
+  // ── ANALISTA III (CÓDIGO 203 - CARTERA Y COBRO COACTIVO) ──
+  {
+    id: "a3_01",
+    track: "funcional",
+    moduleId: "cobro-coactivo",
+    kind: "sjt",
+    caseText:
+      "Como Analista III de cobranzas, al sustanciar un proyecto de embargo preventivo de cuentas bancarias sobre una persona natural deudora de IVA, identificas que el saldo se encuentra en una cuenta de ahorros y no supera el monto límite de inembargabilidad fijado semestralmente por la Superintendencia Financiera.",
+    stem: "De acuerdo con el Estatuto Tributario y las normas de inembargabilidad, debes",
+    choices: [
+      {
+        id: "a",
+        text: "embargar el 100% de la cuenta sin importar la ley para asegurar el recaudo.",
+      },
+      {
+        id: "b",
+        text: "respetar el límite legal de inembargabilidad de cuentas de ahorro en el proyecto de auto de embargo, informando al Gestor sobre la restricción legal.",
+      },
+      { id: "c", text: "archivar el expediente de cobro definitivamente sin consultar al Gestor." },
+      { id: "d", text: "llamar al contribuyente a su teléfono personal para alertarlo del embargo." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 837-1 E.T. y normas financieras: Los límites de inembargabilidad en cuentas de ahorro protegen el mínimo vital. El Analista III debe sustanciar la medida respetando el tope legal inembargable.",
+    source: "Estatuto Tributario art. 837-1 · Circular Superfinanciera",
+    difficulty: 2,
+  },
+  {
+    id: "a3_02",
+    track: "funcional",
+    moduleId: "control-extensivo",
+    kind: "sjt",
+    caseText:
+      "En un cruce de información exógena y facturación electrónica, el Analista III de fiscalización encuentra discrepancias por $450 millones en costos deducidos por un contribuyente frente a los reportes de sus proveedores.",
+    stem: "El papel de trabajo técnico que debe elaborar el Analista III para revisión del Gestor debe contener",
+    choices: [
+      {
+        id: "a",
+        text: "únicamente una captura de pantalla sin detalle ni confrontación normativa.",
+      },
+      {
+        id: "b",
+        text: "la matriz detallada con NIT de proveedores, facturas electrónicas glosadas, valores no soportados y la fundamentación jurídica de la presunta inexactitud.",
+      },
+      { id: "c", text: "un oficio verbal de conciliación informal con el contador del investigado." },
+      { id: "d", text: "la liquidación oficial definitiva firmada por el propio Analista." },
+    ],
+    correct: "b",
+    explanation:
+      "Los papeles de trabajo de fiscalización deben sustentar con pruebas documentales y trazabilidad numérica cada glosa antes de proyectar el requerimiento especial (art. 704 E.T.).",
+    source: "Estatuto Tributario arts. 684 y 704 · Manual de Fiscalización",
+    difficulty: 2,
+  },
+
+  // ── ANALISTA IV (CÓDIGO 204 - AUDITORÍA TÉCNICA Y ANÁLISIS) ──
+  {
+    id: "a4_01",
+    track: "funcional",
+    moduleId: "principios-contables-financieros",
+    kind: "sjt",
+    caseText:
+      "El Analista IV revisa el Formato 2516 (Reporte de Conciliación Fiscal) de una sociedad comercial y detecta que una provisión por deterioro de cartera calculada bajo NIIF por $800 millones fue deducida íntegramente en la declaración de renta, sin cumplir los requisitos fiscales del artículo 145 y 146 del Estatuto Tributario.",
+    stem: "En su informe técnico de auditoría, el Analista IV debe concluir que",
+    choices: [
+      {
+        id: "a",
+        text: "cualquier provisión contable NIIF es automáticamente deducible en materia fiscal.",
+      },
+      {
+        id: "b",
+        text: "se presenta una diferencia permanente por provisión contable no deducible, debiendo rechazarse la deducción y formular la glosa correspondiente conforme al artículo 21-1 y 145 del E.T.",
+      },
+      { id: "c", text: "se debe denunciar penalmente al auditor externo sin verificar la norma." },
+      { id: "d", text: "la conciliación fiscal carece de valor probatorio ante la DIAN." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 21-1 y 145 E.T.: Las provisiones contables que no cumplan las reglas fiscales de cartera dudosa no son deducibles. Se genera una diferencia en la conciliación fiscal sujeta a glosa.",
+    source: "Estatuto Tributario arts. 21-1, 145, 146 y 772-1",
+    difficulty: 3,
+  },
+
+  // ── ANALISTA V (CÓDIGO 205 - COORDINACIÓN TÉCNICA) ──
+  {
+    id: "a5_01",
+    track: "funcional",
+    moduleId: "ficha-empleo",
+    kind: "sjt",
+    caseText:
+      "Como Analista V coordinador de un grupo de sustanciación técnica de devoluciones, adviertes que faltan 5 días hábiles para que opere la devolución automática de 30 solicitudes con saldos millonarios, pero dos analistas del equipo tienen expedientes atrasados sin verificar cuenta corriente.",
+    stem: "La decisión inmediata y más coherente con tu nivel de responsabilidad técnica es",
+    choices: [
+      {
+        id: "a",
+        text: "dejar vencer los términos y culpar por escrito a los analistas rezagados.",
+      },
+      {
+        id: "b",
+        text: "redistribuir temporalmente la carga de trabajo entre el equipo técnico, priorizar la verificación de cuenta corriente y alertar al Gestor para evitar devoluciones improcedentes o intereses moratorios del Estado.",
+      },
+      { id: "c", text: "rechazar de plano todas las solicitudes sin motivación para ganar tiempo." },
+      { id: "d", text: "desconectar los computadores del área para simular una caída del sistema." },
+    ],
+    correct: "b",
+    explanation:
+      "El Analista V coordina operativamente al equipo y responde por la oportunidad y calidad del proceso. Evita tanto el pago indebido como la mora administrativa del Estado (art. 850 E.T.).",
+    source: "Estatuto Tributario art. 850 · Manual de Funciones Analista V",
+    difficulty: 2,
+  },
+
+  // ── GESTOR I FISCALIZACIÓN (CÓDIGO 301) ──
+  {
+    id: "gf01",
+    track: "funcional",
+    moduleId: "fiscalizacion-determinacion",
+    kind: "sjt",
+    caseText:
+      "Un contribuyente obligado a reportar información exógena del año gravable anterior presentó su reporte con cuatro meses de retraso y con errores en el 30% de los registros de compras.",
+    stem: "Al proyectar el pliego de cargos, el Gestor I Fiscalización debe fundamentar la sanción en",
+    choices: [
+      { id: "a", text: "el artículo 639 del Estatuto Tributario relativo a la sanción mínima." },
+      {
+        id: "b",
+        text: "el artículo 651 del Estatuto Tributario, graduando la sanción por extemporaneidad y por información errónea sin exceder el tope máximo legal de UVT.",
+      },
+      { id: "c", text: "el código penal por delito de contrabando." },
+      { id: "d", text: "la pérdida automática del registro mercantil de la sociedad." },
+    ],
+    correct: "b",
+    explanation:
+      "El artículo 651 E.T. tipifica y gradúa las sanciones relativas al incumplimiento en el envío de información exógena tributaria (no enviar, enviar con errores o extemporáneamente).",
+    source: "Estatuto Tributario art. 651 · Ley 2277 de 2022",
+    difficulty: 2,
+  },
+
+  // ── GESTOR III GRANDES CONTRIBUYENTES (CÓDIGO 303) ──
+  {
+    id: "g3_01",
+    track: "funcional",
+    moduleId: "sistema-tributario",
+    kind: "sjt",
+    caseText:
+      "En una auditoría a una empresa multinacional Gran Contribuyente, el Gestor III identifica que la filial colombiana compró materias primas a su casa matriz en el exterior a precios 60% superiores a los de transacciones comparables entre terceros independientes, reduciendo artificialmente la renta líquida en Colombia.",
+    stem: "En aplicación del régimen de precios de transferencia y la norma antiabuso, la conducta técnica que corresponde es",
+    choices: [
+      {
+        id: "a",
+        text: "aprobar la operación porque las empresas matrices pueden fijar libremente sus precios.",
+      },
+      {
+        id: "b",
+        text: "ajustar el precio al principio de plena competencia (arm's length) aplicando los métodos del artículo 260-3 E.T. y proponer la glosa en el requerimiento especial por erosión de la base imponible.",
+      },
+      { id: "c", text: "cerrar la sucursal de la multinacional de manera unilateral." },
+      { id: "d", text: "remitir el caso a la Cámara de Comercio para arbitraje privado." },
+    ],
+    correct: "b",
+    explanation:
+      "Principio de plena competencia (art. 260-1 y 260-3 E.T.): Las operaciones entre vinculados económicos deben pactarse a precios de mercado de partes independientes para evitar el traslado artificial de utilidades.",
+    source: "Estatuto Tributario arts. 260-1 a 260-11 · Directrices OCDE",
+    difficulty: 3,
+  },
+
+  // ── GESTOR IV DOCTRINA JURÍDICA (CÓDIGO 304) ──
+  {
+    id: "g4_01",
+    track: "funcional",
+    moduleId: "cpaca",
+    kind: "sjt",
+    caseText:
+      "Existe discrepancia entre dos Direcciones Seccionales de la DIAN: una sostiene que cierto servicio digital está gravado con IVA y otra que está excluido. El Gestor IV de la Dirección de Gestión Jurídica es comisionado para proyectar el concepto oficial unificado.",
+    stem: "Conforme a la Ley y la jurisprudencia administrativa, el concepto que profiera la DIAN",
+    choices: [
+      {
+        id: "a",
+        text: "es de carácter optativo y cada funcionario puede seguir aplicando su criterio personal.",
+      },
+      {
+        id: "b",
+        text: "es de obligatorio cumplimiento para todos los funcionarios de la entidad conforme al artículo 131 de la Ley 2010 de 2019, garantizando la seguridad jurídica e igualdad de trato a los contribuyentes.",
+      },
+      { id: "c", text: "solo aplica para los contribuyentes que firmaron la consulta." },
+      { id: "d", text: "debe someterse a votación pública en redes sociales." },
+    ],
+    correct: "b",
+    explanation:
+      "Art. 131 Ley 2010 de 2019: La doctrina oficial de la Dirección de Gestión Jurídica de la DIAN constituye interpretación obligatoria para los empleados públicos de la entidad tributaria.",
+    source: "Ley 2010 de 2019 art. 131 · Principio de Seguridad Jurídica",
+    difficulty: 3,
+  },
+
+  // ── INSPECTOR I ADUANAS (CÓDIGO 301) ──
+  {
+    id: "i1_01",
+    track: "funcional",
+    moduleId: "inspeccion-visitas",
+    kind: "sjt",
+    caseText:
+      "Durante una inspección aduanera en depósito habilitado, el Inspector I observa que los sellos de seguridad del contenedor están rotos y el número de precinto no coincide con el consignado en el documento de transporte multimodal.",
+    stem: "El procedimiento normativo inmediato que debe realizar el Inspector I es",
+    choices: [
+      { id: "a", text: "ignorar la rotura y autorizar el levante de la mercancía sin abrirla." },
+      {
+        id: "b",
+        text: "ordenar la inspección física total del contenedor, verificar minuciosamente el inventario de la carga frente a la declaración aduanera y levantar acta detallada de la discrepancia en el precinto.",
+      },
+      { id: "c", text: "retener el contenedor en su casa particular." },
+      { id: "d", text: "pedirle al transportador que compre un precinto nuevo en la ferretería." },
+    ],
+    correct: "b",
+    explanation:
+      "La discrepancia o violación de precintos aduaneros impone la inspección física obligatoria y el levantamiento de acta para prevenir el ingreso de mercancías ilícitas o no declaradas (Decreto 1165 de 2019).",
+    source: "Decreto 1165 de 2019 art. 583 · Control Aduanero de Carga",
+    difficulty: 2,
+  },
+
+  // ── INSPECTOR III OPERACIONES ESPECIALES (CÓDIGO 303) ──
+  {
+    id: "i3_01",
+    track: "funcional",
+    moduleId: "inspeccion-visitas",
+    kind: "sjt",
+    caseText:
+      "En una inspección contable judicial tributaria (art. 779 E.T.) en la sede de una empresa constructora, el Inspector III solicita la extracción de un respaldo de la base de datos contable del servidor principal. El gerente se niega alegando secreto comercial.",
+    stem: "Frente a la negativa, el Inspector III debe",
+    choices: [
+      { id: "a", text: "agredir al gerente para forzar la entrega del computador." },
+      {
+        id: "b",
+        text: "explicarle el alcance del artículo 684 y 779 del E.T. donde la reserva contable es inoponible a la DIAN, y en caso de persistir, levantar acta de renuencia como prueba para la sanción del artículo 654 y presunción en su contra.",
+      },
+      { id: "c", text: "retirarse pidiendo disculpas por haber interrumpido las labores de la empresa." },
+      { id: "d", text: "aceptar un pago en efectivo para no revisar la base de datos." },
+    ],
+    correct: "b",
+    explanation:
+      "La reserva contable comercial no es oponible a la administración tributaria en diligencias oficiales (art. 684 y 779 E.T.). La renuencia acarrea sanciones formales y consecuencias probatorias adversas.",
+    source: "Estatuto Tributario arts. 684, 779 y 654 · Inoponibilidad de reserva",
+    difficulty: 3,
+  },
+
+  // ── INSPECTOR IV LUCHA CONTRA EL CONTRABANDO (CÓDIGO 304) ──
+  {
+    id: "i4_01",
+    track: "funcional",
+    moduleId: "inspeccion-visitas",
+    kind: "sjt",
+    caseText:
+      "El Inspector IV dirige un operativo conjunto con la POLFA en una vía nacional. Interceptan dos tractomulas que transportan licores y cigarrillos extranjeros valorados en más de 200 salarios mínimos legales, sin tornaguías, facturas ni declaraciones de importación.",
+    stem: "Conforme a la Ley Anticontrabando (Ley 1762 de 2015) y el Decreto 1165 de 2019, la actuación correspondiente es",
+    choices: [
+      {
+        id: "a",
+        text: "dejar seguir a los conductores cobrándoles un peaje extraordinario informal.",
+      },
+      {
+        id: "b",
+        text: "practicar la aprehensión inmediata de las mercancías y los vehículos, poner a disposición de la Fiscalía General de la Nación a los conductores por presunto delito de contrabando (art. 319 C.P.) y asegurar el inventario en recinto aduanero habilitado.",
+      },
+      { id: "c", text: "distribuir el licor entre los miembros del retén policial." },
+      { id: "d", text: "destruir las botellas inmediatamente en la vía pública sin levantar acta." },
+    ],
+    correct: "b",
+    explanation:
+      "Ley 1762 de 2015 y Código Penal art. 319: El transporte de mercancías extranjeras sin documentos que amparen su legal ingreso que superen la cuantía legal configura delito penal de contrabando y decomiso aduanero.",
+    source: "Ley 1762 de 2015 · Código Penal art. 319 · D. 1165/2019",
+    difficulty: 3,
+  },
+
+  // ── FACILITADOR I (CÓDIGO 101 - NIVEL ASISTENCIAL - RADICACIÓN Y MENSAJERÍA) ──
+  {
+    id: "fa01",
+    track: "funcional",
+    moduleId: "mipg-archivo",
+    kind: "sjt",
+    caseText:
+      "Al final de la jornada de atención al público, un ciudadano se acerca a la ventanilla del Facilitador I a radicar un derecho de petición y el sistema informático institucional presenta una caída temporal de red.",
+    stem: "En estricto cumplimiento del Código de Procedimiento Administrativo (CPACA) y las políticas de la DIAN, debes",
+    choices: [
+      {
+        id: "a",
+        text: "rechazar el documento y decirle al ciudadano que regrese el día siguiente.",
+      },
+      {
+        id: "b",
+        text: "recibir el documento físico, estampar el sello manual de radicación con fecha y hora exacta en la copia del ciudadano, e ingresar el registro en el sistema corporativo tan pronto se restablezca la conexión.",
+      },
+      { id: "c", text: "romper la petición porque el sistema se cayó." },
+      { id: "d", text: "cobrarle una tarifa especial para guardárselo en el casillero." },
+    ],
+    correct: "b",
+    explanation:
+      "CPACA art. 15 y políticas de servicio: Las fallas tecnológicas no justifican la negativa a recibir peticiones de los ciudadanos. Se radica con sello de contingencia manual respetando los términos de ley.",
+    source: "CPACA (Ley 1437/2011) art. 15 · Protocolos de Contingencia DIAN",
+    difficulty: 1,
+  },
+
+  // ── FACILITADOR IV (CÓDIGO 104 - COORDINACIÓN DE VENTANILLA) ──
+  {
+    id: "fa04",
+    track: "funcional",
+    moduleId: "servicio-pqrsf",
+    kind: "sjt",
+    caseText:
+      "En el Punto de Contacto de la seccional, un usuario se encuentra sumamente alterado en la sala de espera porque lleva 45 minutos esperando turno para actualizar su RUT y alega que perderá un contrato laboral hoy si no lo obtiene de inmediato.",
+    stem: "Como Facilitador IV coordinador de la ventanilla única, tu intervención debe caracterizarse por",
+    choices: [
+      {
+        id: "a",
+        text: "solicitar a los vigilantes que expulsen por la fuerza al ciudadano sin escucharlo.",
+      },
+      {
+        id: "b",
+        text: "acercarte con serenidad, escuchar activamente su situación, verificar el estado del turno en el sistema de gestión de colas, explicarle con lenguaje claro el procedimiento y canalizar su atención con el primer módulo disponible sin romper el trato equitativo.",
+      },
+      { id: "c", text: "gritarle al usuario para que aprenda a respetar a la autoridad fiscal." },
+      { id: "d", text: "esconderte en la oficina del fondo para evitar el reclamo." },
+    ],
+    correct: "b",
+    explanation:
+      "Atributos del servicio público DIAN y competencia de Orientación al Usuario: El Facilitador IV debe liderar la resolución asertiva de quejas, desescalar tensiones y brindar soluciones empáticas y oportunas.",
+    source: "Protocolo de Atención al Ciudadano DIAN · Código de Integridad",
+    difficulty: 2,
+  },
 ];
