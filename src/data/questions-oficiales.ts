@@ -3,7 +3,7 @@ import type { Question } from "./types";
 /** Ítems anclados al Anexo técnico DIAN 2676, Acuerdo 21 de 2025, D.L. 927 y normas citadas. */
 export const QUESTIONS_OFICIALES: Question[] = [
   {
-    id: "f71",
+    id: "of01",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -24,7 +24,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f72",
+    id: "of02",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -45,7 +45,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f73",
+    id: "of03",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -66,7 +66,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f74",
+    id: "of04",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -87,7 +87,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f75",
+    id: "of05",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -108,7 +108,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f76",
+    id: "of06",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -129,7 +129,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f77",
+    id: "of07",
     track: "funcional",
     moduleId: "ficha-empleo",
     kind: "knowledge",
@@ -150,7 +150,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f78",
+    id: "of08",
     track: "funcional",
     moduleId: "cobro-coactivo",
     kind: "knowledge",
@@ -168,7 +168,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f79",
+    id: "of09",
     track: "funcional",
     moduleId: "cobro-coactivo",
     kind: "knowledge",
@@ -189,7 +189,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f80",
+    id: "of10",
     track: "funcional",
     moduleId: "medidas-cautelares",
     kind: "knowledge",
@@ -207,7 +207,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f81",
+    id: "of11",
     track: "funcional",
     moduleId: "cobro-persuasivo",
     kind: "knowledge",
@@ -228,7 +228,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f82",
+    id: "of12",
     track: "funcional",
     moduleId: "sistema-tributario",
     kind: "knowledge",
@@ -246,7 +246,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f83",
+    id: "of13",
     track: "funcional",
     moduleId: "control-extensivo",
     kind: "knowledge",
@@ -264,7 +264,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f84",
+    id: "of14",
     track: "funcional",
     moduleId: "sistema-tributario",
     kind: "knowledge",
@@ -285,7 +285,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f85",
+    id: "of15",
     track: "funcional",
     moduleId: "cpaca",
     kind: "knowledge",
@@ -303,7 +303,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f86",
+    id: "of16",
     track: "funcional",
     moduleId: "cpaca",
     kind: "knowledge",
@@ -324,7 +324,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f87",
+    id: "of17",
     track: "funcional",
     moduleId: "constitucion-funcion",
     kind: "knowledge",
@@ -345,7 +345,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f88",
+    id: "of18",
     track: "funcional",
     moduleId: "constitucion-funcion",
     kind: "knowledge",
@@ -366,7 +366,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f89",
+    id: "of19",
     track: "funcional",
     moduleId: "mipg-archivo",
     kind: "knowledge",
@@ -384,7 +384,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f90",
+    id: "of20",
     track: "funcional",
     moduleId: "mipg-archivo",
     kind: "knowledge",
@@ -405,7 +405,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "f91",
+    id: "of21",
     track: "funcional",
     moduleId: "devoluciones-compensaciones",
     kind: "sjt",
@@ -428,7 +428,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "f92",
+    id: "of22",
     track: "funcional",
     moduleId: "recaudo-ear",
     kind: "knowledge",
@@ -446,7 +446,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "i36",
+    id: "of23",
     track: "integridad",
     moduleId: "codigo-integridad",
     kind: "knowledge",
@@ -467,7 +467,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 1,
   },
   {
-    id: "i37",
+    id: "of24",
     track: "integridad",
     moduleId: "valores-cinco",
     kind: "dilemma",
@@ -490,7 +490,7 @@ export const QUESTIONS_OFICIALES: Question[] = [
     difficulty: 2,
   },
   {
-    id: "c36",
+    id: "of25",
     track: "comportamental",
     moduleId: "comportamiento-etico",
     kind: "sjt",

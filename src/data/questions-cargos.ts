@@ -1027,7 +1027,7 @@ export const QUESTIONS_CARGOS: Question[] = [
 
   // ── FACILITADOR I (CÓDIGO 101 - NIVEL ASISTENCIAL - RADICACIÓN Y MENSAJERÍA) ──
   {
-    id: "fa01",
+    id: "fa01_radicacion",
     track: "funcional",
     moduleId: "mipg-archivo",
     kind: "sjt",
@@ -1055,7 +1055,7 @@ export const QUESTIONS_CARGOS: Question[] = [
 
   // ── FACILITADOR IV (CÓDIGO 104 - COORDINACIÓN DE VENTANILLA) ──
   {
-    id: "fa04",
+    id: "fa04_coord",
     track: "funcional",
     moduleId: "servicio-pqrsf",
     kind: "sjt",

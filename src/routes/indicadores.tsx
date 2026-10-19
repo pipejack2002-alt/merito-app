@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowRight,
   Award,
@@ -17,6 +17,7 @@ import { fetchAreandinaIndicators } from "@/lib/areandina-client";
 import { REGISTROS_OFICIALES_AREANDINA } from "@/data/areandina-indicadores";
 import type { AreandinaRecord } from "@/data/types";
 import { useCargoStore } from "@/lib/cargo-store";
+import { useCargo } from "@/lib/use-cargo";
 import { CATALOG } from "@/data/cargos";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -197,10 +198,14 @@ const CARGOS_RAPIDOS = [
 ];
 
 function IndicadoresPage() {
+  const { cargo, ficha } = useCargo();
   const selectCargo = useCargoStore((s) => s.select);
+  const activeOpec = ficha.opec || "236831";
 
-  const [inputNum, setInputNum] = useState("236831");
-  const [record, setRecord] = useState<AreandinaRecord>(REGISTROS_OFICIALES_AREANDINA["236831"]);
+  const [inputNum, setInputNum] = useState(activeOpec);
+  const [record, setRecord] = useState<AreandinaRecord>(
+    REGISTROS_OFICIALES_AREANDINA[activeOpec] || REGISTROS_OFICIALES_AREANDINA["236831"],
+  );
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"inscr" | "cargos">("inscr");
   const [filterType, setFilterType] = useState<
@@ -208,6 +213,16 @@ function IndicadoresPage() {
   >("todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (ficha.opec) {
+      setInputNum(ficha.opec);
+      const match = REGISTROS_OFICIALES_AREANDINA[ficha.opec];
+      if (match) {
+        setRecord(match);
+      }
+    }
+  }, [cargo.id, ficha.opec]);
 
   async function handleConsultar(numParaConsultar?: string) {
     const num = (numParaConsultar || inputNum).trim();

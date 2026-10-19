@@ -152,6 +152,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel técnico. Ejecutas clasificación de cartera, recaudo, devoluciones y cobro hasta el coactivo.",
     ficha: {
+      opec: "236831",
       formato: FICHA.formato,
       denominacion: FICHA.denominacion,
       codigo: FICHA.codigo,
@@ -209,6 +210,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional. Coordina al equipo técnico, controla términos y proyecta actos de recaudo.",
     ficha: {
+      opec: "236840",
       denominacion: "Gestor I",
       codigo: "301",
       grado: "01",
@@ -293,6 +295,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Mayor complejidad y cuantía. Dirige Analistas, suscribe más actos y responde por la meta de recaudo con debido proceso.",
     ficha: {
+      opec: "236849",
       denominacion: "Gestor II",
       codigo: "302",
       grado: "02",
@@ -373,6 +376,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Armas el expediente de inexactos y omisos: cruces, emplazamientos y proyectos de requerimiento.",
     ficha: {
+      opec: "236835",
       denominacion: "Analista II",
       codigo: "202",
       grado: "02",
@@ -468,6 +472,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Determina: requerimiento especial, liquidación de revisión o aforo, según competencia y término.",
     ficha: {
+      opec: "236850",
       denominacion: "Gestor II",
       codigo: "302",
       grado: "02",
@@ -565,6 +570,7 @@ export const CATALOG: CargoProfile[] = [
     processLabel: "Fiscalización tributaria",
     blurb: "Practica visitas, recoge pruebas y deja actas. No determina el tributo en el predio.",
     ficha: {
+      opec: "236860",
       denominacion: "Inspector II",
       codigo: "302",
       grado: "02",
@@ -660,6 +666,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel técnico (Código 201). Apoyas labores técnicas en recepción, verificación preliminar de declaraciones y archivo de expedientes.",
     ficha: {
+      opec: "236829",
       denominacion: "Analista I",
       codigo: "201",
       grado: "01",
@@ -728,6 +735,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel técnico superior (Código 203, Grado 03). Sustanciación técnica de expedientes complejos, cruces masivos y apoyo al cobro coactivo.",
     ficha: {
+      opec: "236838",
       denominacion: "Analista III",
       codigo: "203",
       grado: "03",
@@ -808,6 +816,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel asistencial (Código 103). Atención presencial al ciudadano, radicación de PQRSF, gestión de correspondencia y apoyo logístico.",
     ficha: {
+      opec: "236815",
       denominacion: "Facilitador III",
       codigo: "103",
       grado: "03",
@@ -907,6 +916,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel asistencial (Código 102). Digitación de datos, apoyo en archivo, mensajería interna y logística de expedientes.",
     ficha: {
+      opec: "236810",
       denominacion: "Facilitador II",
       codigo: "102",
       grado: "02",
@@ -995,6 +1005,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional (Código 301). Desaduanamiento, inspección física y documental de mercancías, control arancelario y valoración.",
     ficha: {
+      opec: "236845",
       denominacion: "Gestor I",
       codigo: "301",
       grado: "01",
@@ -1085,6 +1096,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional (Código 302). Proyectas decisiones de recursos de reconsideración, excepciones en cobro coactivo y defensa judicial.",
     ficha: {
+      opec: "236855",
       denominacion: "Gestor II",
       codigo: "302",
       grado: "02",
@@ -1175,6 +1187,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel asistencial (Código 101, Grado 01). Apoyo logístico preliminar, radicación simple, mensajería interna y recepción física.",
     ficha: {
+      opec: "236805",
       denominacion: "Facilitador I",
       codigo: "101",
       grado: "01",
@@ -1264,6 +1277,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel asistencial superior (Código 104, Grado 04). Coordinación operativa de ventanilla única, supervisión de radicación masiva y archivo central.",
     ficha: {
+      opec: "236820",
       denominacion: "Facilitador IV",
       codigo: "104",
       grado: "04",
@@ -1353,6 +1367,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel técnico (Código 203, Grado 03). Cruces complejos de exógena, perfilamiento de contribuyentes y apoyo a liquidaciones de revisión.",
     ficha: {
+      opec: "236839",
       denominacion: "Analista III",
       codigo: "203",
       grado: "03",
@@ -1444,6 +1459,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel técnico superior (Código 204, Grado 04). Auditoría analítica de declaraciones, sustanciación de controversias y apoyo a peritajes técnicos.",
     ficha: {
+      opec: "236842",
       denominacion: "Analista IV",
       codigo: "204",
       grado: "04",
@@ -1534,6 +1550,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Máximo nivel técnico (Código 205, Grado 05). Coordinación de grupos de analistas técnicos, control de calidad del expediente y enlace con gestores.",
     ficha: {
+      opec: "236844",
       denominacion: "Analista V",
       codigo: "205",
       grado: "05",
@@ -1612,6 +1629,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional (Código 301, Grado 01). Programas de control extensivo, emplazamientos para declarar y proyectos de requerimiento especial.",
     ficha: {
+      opec: "236848",
       denominacion: "Gestor I",
       codigo: "301",
       grado: "01",
@@ -1695,6 +1713,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional superior (Código 303, Grado 03). Auditoría a Grandes Contribuyentes, precios de transferencia, operaciones internacionales y planificación fiscal agresiva.",
     ficha: {
+      opec: "236858",
       denominacion: "Gestor III",
       codigo: "303",
       grado: "03",
@@ -1781,6 +1800,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Máximo nivel profesional (Código 304, Grado 04). Unificación de doctrina tributaria, coordinación técnica de directrices y fallos de máxima cuantía.",
     ficha: {
+      opec: "236859",
       denominacion: "Gestor IV",
       codigo: "304",
       grado: "04",
@@ -1866,6 +1886,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional (Código 301, Grado 01). Inspección física de mercancías, aforo aduanero y verificación de cumplimiento arancelario en zona primaria.",
     ficha: {
+      opec: "236862",
       denominacion: "Inspector I",
       codigo: "301",
       grado: "01",
@@ -1949,6 +1970,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Nivel profesional superior (Código 303, Grado 03). Visitas tributarias integrales, inspecciones contables judiciales y control cambiario en puertos y zonas francas.",
     ficha: {
+      opec: "236865",
       denominacion: "Inspector III",
       codigo: "303",
       grado: "03",
@@ -2032,6 +2054,7 @@ export const CATALOG: CargoProfile[] = [
     blurb:
       "Máximo nivel de inspección (Código 304, Grado 04). Dirección de operativos especiales contra el contrabando, decomiso masivo y coordinación interinstitucional.",
     ficha: {
+      opec: "236868",
       denominacion: "Inspector IV",
       codigo: "304",
       grado: "04",
