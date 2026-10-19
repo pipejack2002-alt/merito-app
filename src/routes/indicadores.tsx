@@ -26,18 +26,19 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/indicadores")({ component: IndicadoresPage });
 
 const CARGOS_RAPIDOS = [
-  {
-    id: "analista-ii-cartera",
-    label: "Analista II Cartera",
-    opec: "236831",
-    inscr: "236831",
-    nivel: "Técnico",
-  },
+  // Analistas
   {
     id: "analista-i-apoyo",
     label: "Analista I Apoyo Técnico",
     opec: "236829",
     inscr: "236829",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-ii-cartera",
+    label: "Analista II Cartera y Recaudo",
+    opec: "236831",
+    inscr: "236831",
     nivel: "Técnico",
   },
   {
@@ -48,6 +49,36 @@ const CARGOS_RAPIDOS = [
     nivel: "Técnico",
   },
   {
+    id: "analista-iii-cartera",
+    label: "Analista III Cartera y Cobro",
+    opec: "236838",
+    inscr: "236838",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-iii-fiscalizacion",
+    label: "Analista III Fiscalización",
+    opec: "236839",
+    inscr: "236839",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-iv-gestion",
+    label: "Analista IV Auditoría Técnica",
+    opec: "236842",
+    inscr: "236842",
+    nivel: "Técnico",
+  },
+  {
+    id: "analista-v-coordinacion",
+    label: "Analista V Coordinación Técnica",
+    opec: "236844",
+    inscr: "236844",
+    nivel: "Técnico",
+  },
+
+  // Gestores
+  {
     id: "gestor-i-cartera",
     label: "Gestor I Cartera",
     opec: "236840",
@@ -55,10 +86,24 @@ const CARGOS_RAPIDOS = [
     nivel: "Profesional",
   },
   {
+    id: "gestor-i-fiscalizacion",
+    label: "Gestor I Fiscalización",
+    opec: "236848",
+    inscr: "236848",
+    nivel: "Profesional",
+  },
+  {
     id: "gestor-i-aduanas",
     label: "Gestor I Aduanas",
     opec: "236845",
     inscr: "236845",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-ii-cartera",
+    label: "Gestor II Cartera Mayor Cuantía",
+    opec: "236849",
+    inscr: "236849",
     nivel: "Profesional",
   },
   {
@@ -70,9 +115,32 @@ const CARGOS_RAPIDOS = [
   },
   {
     id: "gestor-ii-juridico",
-    label: "Gestor II Jurídica",
+    label: "Gestor II Jurídica y Cobro",
     opec: "236855",
     inscr: "236855",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-iii-grandes-contribuyentes",
+    label: "Gestor III Grandes Contribuyentes",
+    opec: "236858",
+    inscr: "236858",
+    nivel: "Profesional",
+  },
+  {
+    id: "gestor-iv-doctrina",
+    label: "Gestor IV Doctrina Jurídica",
+    opec: "236859",
+    inscr: "236859",
+    nivel: "Profesional",
+  },
+
+  // Inspectores
+  {
+    id: "inspector-i-aduanas",
+    label: "Inspector I Aduanas y Frontera",
+    opec: "236862",
+    inscr: "236862",
     nivel: "Profesional",
   },
   {
@@ -83,10 +151,26 @@ const CARGOS_RAPIDOS = [
     nivel: "Profesional",
   },
   {
-    id: "facilitador-iii-servicio",
-    label: "Facilitador III Servicio y PQRSF",
-    opec: "236815",
-    inscr: "236815",
+    id: "inspector-iii-operaciones",
+    label: "Inspector III Operaciones Especiales",
+    opec: "236865",
+    inscr: "236865",
+    nivel: "Profesional",
+  },
+  {
+    id: "inspector-iv-control",
+    label: "Inspector IV Lucha contra el Contrabando",
+    opec: "236868",
+    inscr: "236868",
+    nivel: "Profesional",
+  },
+
+  // Facilitadores
+  {
+    id: "facilitador-i-apoyo",
+    label: "Facilitador I Apoyo Operativo",
+    opec: "236805",
+    inscr: "236805",
     nivel: "Asistencial",
   },
   {
@@ -94,6 +178,20 @@ const CARGOS_RAPIDOS = [
     label: "Facilitador II Operativo y Archivo",
     opec: "236810",
     inscr: "236810",
+    nivel: "Asistencial",
+  },
+  {
+    id: "facilitador-iii-servicio",
+    label: "Facilitador III Servicio y PQRSF",
+    opec: "236815",
+    inscr: "236815",
+    nivel: "Asistencial",
+  },
+  {
+    id: "facilitador-iv-coordinacion",
+    label: "Facilitador IV Coordinación de Ventanilla",
+    opec: "236820",
+    inscr: "236820",
     nivel: "Asistencial",
   },
 ];
@@ -148,13 +246,23 @@ function IndicadoresPage() {
   }
 
   function handleActivarCargo() {
-    const matching = CATALOG.find(
-      (c) =>
-        c.ficha.codigo === record.codigo &&
-        c.ficha.denominacion
-          .toLowerCase()
-          .includes(record.denominacion.toLowerCase().split(" ")[0]),
-    );
+    const cleanDenom = record.denominacion.toLowerCase().split(" ")[0];
+    const cleanGrado = record.grado.padStart(2, "0");
+
+    const matching =
+      CATALOG.find(
+        (c) =>
+          c.ficha.codigo === record.codigo &&
+          c.ficha.grado === cleanGrado &&
+          c.ficha.denominacion.toLowerCase().includes(cleanDenom),
+      ) ||
+      CATALOG.find(
+        (c) =>
+          c.ficha.codigo === record.codigo &&
+          c.ficha.denominacion.toLowerCase().includes(cleanDenom),
+      ) ||
+      CATALOG.find((c) => c.ficha.codigo === record.codigo);
+
     if (matching) {
       selectCargo(matching.id);
       setFeedback(`🎯 ¡Cargo ${matching.shortLabel} activado como tu empleo principal de estudio!`);
