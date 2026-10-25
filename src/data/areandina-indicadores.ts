@@ -1,4 +1,4 @@
-import type { AreandinaIndicator, AreandinaRecord } from "./types";
+import type { AreandinaIndicator, AreandinaRecord, CargoProfile } from "./types";
 
 export const INDICADORES_OFICIALES_BASE: AreandinaIndicator[] = [
   // 9 Funcionales
@@ -311,11 +311,29 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
     fechaExamen: "Domingo, 8 de noviembre de 2026",
     indicadores: INDICADORES_OFICIALES_BASE.map((ind) => {
       if (ind.id === "ind-01")
-        return { ...ind, nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS" };
+        return {
+          ...ind,
+          nombre: "RECEPCION Y VERIFICACION DE DECLARACIONES TRIBUTARIAS",
+          moduleId: "sistema-tributario",
+          descripcion:
+            "Revisión formal de declaraciones tributarias, verificación de requisitos de validez, firmas, NIT y consistencia de formularios oficiales.",
+        };
       if (ind.id === "ind-02")
-        return { ...ind, nombre: "SISTEMAS CORPORATIVOS Y REGISTRO UNICO TRIBUTARIO (RUT)" };
-      if (ind.id === "ind-08")
-        return { ...ind, nombre: "PROCEDIMIENTOS ADMINISTRATIVOS BASICOS Y DERECHO DE PETICION" };
+        return {
+          ...ind,
+          nombre: "SISTEMAS CORPORATIVOS Y REGISTRO UNICO TRIBUTARIO (RUT)",
+          moduleId: "ofimatica-dian",
+          descripcion:
+            "Inscripción, actualización y suspensión del RUT, operación del sistema Muisca y reserva de la información tributaria (art. 583 E.T.).",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "PROCEDIMIENTOS ADMINISTRATIVOS BASICOS Y DERECHO DE PETICION",
+          moduleId: "cpaca",
+          descripcion:
+            "Términos legales del derecho de petición (15, 10 y 30 días), notificaciones de actos administrativos y principios del CPACA.",
+        };
       return ind;
     }),
     coberturaGlobal: 100,
@@ -624,6 +642,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "APOYO LOGISTICO Y MENSAJERIA INTERNA",
           moduleId: "mipg-archivo",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "ATENCION PRELIMINAR Y ORIENTACION BASICA AL CIUDADANO",
+          moduleId: "servicio-pqrsf",
+        };
       return ind;
     }),
     coberturaGlobal: 100,
@@ -651,6 +675,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           ...ind,
           nombre: "SUPERVISION DE PQRSF Y TRANSFERENCIA DOCUMENTAL",
           moduleId: "mipg-archivo",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "CONTROL DE TERMINOS DE PETICION Y PROCEDIMIENTO ADMINISTRATIVO",
+          moduleId: "cpaca",
         };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 2" };
       return ind;
@@ -681,6 +711,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "PAPELES DE TRABAJO E INFORMES TECNICOS DE INEXACTITUD",
           moduleId: "fiscalizacion-determinacion",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "APOYO PROBATORIO EN INSPECCIONES Y VISITAS TRIBUTARIAS",
+          moduleId: "inspeccion-visitas",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
     }),
@@ -710,6 +746,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "ESTRUCTURACION DE DICTAMENES E INFORMES TECNICOS",
           moduleId: "fiscalizacion-determinacion",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "REGIMEN SANCIONATORIO Y FIRMEZA DE DECLARACIONES",
+          moduleId: "sistema-tributario",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
     }),
@@ -737,7 +779,13 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
         return {
           ...ind,
           nombre: "COORDINACION OPERATIVA Y CUMPLIMIENTO DE TERMINOS",
-          moduleId: "ficha-empleo",
+          moduleId: "rol-gestor",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "PROCEDIMIENTO ADMINISTRATIVO Y RECURSOS EN SEDE ADMINISTRATIVA",
+          moduleId: "cpaca",
         };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
@@ -766,6 +814,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
         return {
           ...ind,
           nombre: "EXAMEN DE LIBROS DE CONTABILIDAD Y SANCION DEL ART. 651",
+          moduleId: "fiscalizacion-determinacion",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "REQUERIMIENTO ESPECIAL Y FIRMEZA DE DECLARACIONES (ART. 714)",
           moduleId: "fiscalizacion-determinacion",
         };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
@@ -826,6 +880,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "PRECIOS DE TRANSFERENCIA Y CONVENIOS DE DOBLE IMPOSICION (CDI)",
           moduleId: "sistema-tributario",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "AUDITORIA INTERNACIONAL Y CONCILIACION FISCAL DE GRUPOS EMPRESARIALES",
+          moduleId: "principios-contables-financieros",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 4" };
       return ind;
     }),
@@ -854,6 +914,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           ...ind,
           nombre: "LITIGIO CONTENCIOSO ADMINISTRATIVO Y SEGURIDAD JURIDICA",
           moduleId: "constitucion-funcion",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "HERMENEUTICA TRIBUTARIA, ADUANERA Y CAMBIARIA VINCULANTE",
+          moduleId: "sistema-tributario",
         };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 4" };
       return ind;
@@ -884,6 +950,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "CLASIFICACION ARANCELARIA Y VALORACION EN ZONA PRIMARIA",
           moduleId: "sistema-tributario",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "APREHENSION, DECOMISO Y EXTINCION DE LA OBLIGACION ADUANERA",
+          moduleId: "cobro-coactivo",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
     }),
@@ -912,6 +984,12 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           ...ind,
           nombre: "CONTROL CAMBIARIO Y CADENA DE CUSTODIA DE PRUEBAS DIGITALES",
           moduleId: "sistema-tributario",
+        };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "REGIMEN PROBATORIO Y DETERMINACION OFICIAL TRIBUTARIA",
+          moduleId: "fiscalizacion-determinacion",
         };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 3" };
       return ind;
@@ -942,12 +1020,26 @@ export const REGISTROS_OFICIALES_AREANDINA: Record<string, AreandinaRecord> = {
           nombre: "APREHENSION, DECOMISO Y COORDINACION INTERINSTITUCIONAL",
           moduleId: "sistema-tributario",
         };
+      if (ind.id === "ind-03")
+        return {
+          ...ind,
+          nombre: "EXTINCION DE OBLIGACIONES ADUANERAS Y EJECUCION DE MEDIDAS",
+          moduleId: "cobro-coactivo",
+        };
       if (ind.id === "ind-16") return { ...ind, nivel: "Nivel 4" };
       return ind;
     }),
     coberturaGlobal: 100,
   },
 };
+
+export function indicatorsForCargo(cargo: CargoProfile): AreandinaIndicator[] {
+  const opec = cargo.ficha.opec;
+  if (opec && REGISTROS_OFICIALES_AREANDINA[opec]) {
+    return REGISTROS_OFICIALES_AREANDINA[opec].indicadores;
+  }
+  return INDICADORES_OFICIALES_BASE;
+}
 
 export function getAreandinaRecord(query: string): AreandinaRecord | null {
   const clean = query.trim().replace(/\D/g, "");

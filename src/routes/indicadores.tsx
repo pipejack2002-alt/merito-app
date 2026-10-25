@@ -6,6 +6,7 @@ import {
   BookOpen,
   Calendar,
   CheckCircle2,
+  Circle,
   ExternalLink,
   LoaderCircle,
   Play,
@@ -18,6 +19,7 @@ import { REGISTROS_OFICIALES_AREANDINA } from "@/data/areandina-indicadores";
 import type { AreandinaRecord } from "@/data/types";
 import { useCargoStore } from "@/lib/cargo-store";
 import { useCargo } from "@/lib/use-cargo";
+import { useProgress } from "@/lib/progress-store";
 import { CATALOG } from "@/data/cargos";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -200,6 +202,8 @@ const CARGOS_RAPIDOS = [
 function IndicadoresPage() {
   const { cargo, ficha } = useCargo();
   const selectCargo = useCargoStore((s) => s.select);
+  const readModules = useProgress((s) => s.readModules);
+  const toggleRead = useProgress((s) => s.toggleRead);
   const activeOpec = ficha.opec || "236831";
 
   const [inputNum, setInputNum] = useState(activeOpec);
@@ -265,6 +269,7 @@ function IndicadoresPage() {
     const cleanGrado = record.grado.padStart(2, "0");
 
     const matching =
+      CATALOG.find((c) => c.ficha.opec === record.opec) ||
       CATALOG.find(
         (c) =>
           c.ficha.codigo === record.codigo &&
@@ -492,28 +497,32 @@ function IndicadoresPage() {
               simular su prueba escrita:
             </p>
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-              {CARGOS_RAPIDOS.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => handleSelectCargoRapido(c)}
-                  className={cn(
-                    "flex flex-col text-left rounded-xl border p-3 transition-all hover:border-accent/60 hover:bg-paper/80",
-                    record.opec === c.opec
-                      ? "border-accent bg-accent/10 font-semibold"
-                      : "border-border bg-paper/40",
-                  )}
-                >
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-xs font-bold text-ink">{c.label}</span>
-                    <Badge variant="outline" className="text-[10px]">
-                      {c.nivel}
-                    </Badge>
-                  </div>
-                  <span className="mt-1 text-[11px] text-muted font-mono">
-                    OPEC {c.opec} · {c.nivel} Grado {c.opec === "236831" ? "02" : "01"}
-                  </span>
-                </button>
-              ))}
+              {CARGOS_RAPIDOS.map((c) => {
+                const cat = CATALOG.find((item) => item.id === c.id);
+                const gradoReal = cat?.ficha.grado ?? "01";
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => handleSelectCargoRapido(c)}
+                    className={cn(
+                      "flex flex-col text-left rounded-xl border p-3 transition-all hover:border-accent/60 hover:bg-paper/80",
+                      record.opec === c.opec
+                        ? "border-accent bg-accent/10 font-semibold"
+                        : "border-border bg-paper/40",
+                    )}
+                  >
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-xs font-bold text-ink">{c.label}</span>
+                      <Badge variant="outline" className="text-[10px]">
+                        {c.nivel}
+                      </Badge>
+                    </div>
+                    <span className="mt-1 text-[11px] text-muted font-mono">
+                      OPEC {c.opec} · {c.nivel} Grado {gradoReal}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
@@ -760,22 +769,47 @@ function IndicadoresPage() {
                 </div>
               </div>
 
-              <div className="mt-3 flex items-center justify-between border-t border-border/60 pt-2.5">
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-2.5">
                 {ind.moduleId ? (
-                  <Link
-                    to="/estudio/$slug"
-                    params={{ slug: ind.moduleId }}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
-                  >
-                    <BookOpen className="size-3.5" />
-                    Estudiar módulo
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Link
+                      to="/estudio/$slug"
+                      params={{ slug: ind.moduleId }}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+                    >
+                      <BookOpen className="size-3.5" />
+                      Estudiar módulo
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => ind.moduleId && toggleRead(ind.moduleId)}
+                      className={cn(
+                        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium transition-colors cursor-pointer",
+                        readModules[ind.moduleId]
+                          ? "border-ok/40 bg-ok-soft text-ok hover:border-warn/40 hover:bg-warn-soft hover:text-warn"
+                          : "border-border bg-paper text-muted hover:text-ink",
+                      )}
+                    >
+                      {readModules[ind.moduleId] ? (
+                        <>
+                          <CheckCircle2 className="size-3" />
+                          Leído · Pasar a no leído
+                        </>
+                      ) : (
+                        <>
+                          <Circle className="size-3" />
+                          No leído · Marcar leído
+                        </>
+                      )}
+                    </button>
+                  </div>
                 ) : (
                   <span className="text-[11px] text-muted">Evaluado transversalmente</span>
                 )}
 
                 <Link
-                  to="/practica"
+                  to={ind.moduleId ? "/practica/$bank" : "/practica"}
+                  params={ind.moduleId ? { bank: `mod-${ind.moduleId}` } : undefined}
                   className="inline-flex items-center gap-1 text-xs text-muted hover:text-ink"
                 >
                   Practicar preguntas

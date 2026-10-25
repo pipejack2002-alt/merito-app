@@ -7,10 +7,28 @@ import { QUESTIONS_CARGOS } from "@/data/questions-cargos";
 import type { CargoProfile, Flashcard, Module, Question } from "@/data/types";
 
 const EXTRA_BY_ID = new Map(CARGO_MODULES.map((m) => [m.id, m]));
+const CORE_BY_ID = new Map(MODULES.map((m) => [m.id, m]));
 
 function adapt(text: string, cargo: CargoProfile): string {
   if (cargo.id === "analista-ii-cartera") return text;
-  return text.replaceAll("Analista II", cargo.shortLabel);
+  return text
+    .replaceAll("Analista II", cargo.shortLabel)
+    .replaceAll("FT-TAH-1824", cargo.ficha.codigoFicha ?? `OPEC ${cargo.ficha.opec ?? ""}`);
+}
+
+function adaptModule(m: Module, cargo: CargoProfile): Module {
+  const adapted: Module = {
+    ...m,
+    title: adapt(m.title, cargo),
+    summary: adapt(m.summary, cargo),
+    why: adapt(m.why, cargo),
+    points: m.points.map((p) => ({
+      title: adapt(p.title, cargo),
+      body: adapt(p.body, cargo),
+    })),
+    examTips: m.examTips.map((t) => adapt(t, cargo)),
+  };
+  return m.id === "ficha-empleo" ? overlayFichaModule(adapted, cargo) : adapted;
 }
 
 function overlayFichaModule(base: Module, cargo: CargoProfile): Module {
@@ -57,20 +75,7 @@ function overlayFichaModule(base: Module, cargo: CargoProfile): Module {
 
 export function modulesForCargo(cargo: CargoProfile): Module[] {
   const ids = new Set(cargo.moduleIds);
-  const fromCore = MODULES.filter((m) => ids.has(m.id)).map((m) => {
-    const adapted: Module = {
-      ...m,
-      title: adapt(m.title, cargo),
-      summary: adapt(m.summary, cargo),
-      why: adapt(m.why, cargo),
-      points: m.points.map((p) => ({
-        title: p.title,
-        body: adapt(p.body, cargo),
-      })),
-      examTips: m.examTips.map((t) => adapt(t, cargo)),
-    };
-    return m.id === "ficha-empleo" ? overlayFichaModule(adapted, cargo) : adapted;
-  });
+  const fromCore = MODULES.filter((m) => ids.has(m.id)).map((m) => adaptModule(m, cargo));
   const extras = [
     ...new Map(
       cargo.moduleIds
@@ -79,10 +84,13 @@ export function modulesForCargo(cargo: CargoProfile): Module[] {
           if (!m) return false;
           return !fromCore.some((x) => x.id === m.id);
         })
-        .map((m) => [m.id, m]),
+        .map((m) => [m.id, adaptModule(m, cargo)]),
     ).values(),
   ];
-  return [...fromCore, ...extras];
+  return [...fromCore, ...extras].map((m, idx) => ({
+    ...m,
+    number: String(idx + 1).padStart(2, "0"),
+  }));
 }
 
 export function questionsForCargo(cargo: CargoProfile): Question[] {
@@ -98,8 +106,15 @@ export function flashcardsForCargo(cargo: CargoProfile): Flashcard[] {
   return FLASHCARDS.filter((c) => ids.has(c.moduleId));
 }
 
-export function getCargoModule(cargo: CargoProfile, id: string) {
-  return modulesForCargo(cargo).find((m) => m.id === id);
+export function isModuleInCargoPlan(cargo: CargoProfile, id: string): boolean {
+  return cargo.moduleIds.includes(id);
+}
+
+export function getCargoModule(cargo: CargoProfile, id: string): Module | undefined {
+  const inPlan = modulesForCargo(cargo).find((m) => m.id === id);
+  if (inPlan) return inPlan;
+  const fallback = CORE_BY_ID.get(id) ?? EXTRA_BY_ID.get(id);
+  return fallback ? adaptModule(fallback, cargo) : undefined;
 }
 
 export function defaultCargo(): CargoProfile {

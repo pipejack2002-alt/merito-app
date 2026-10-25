@@ -23,8 +23,20 @@ interface ProgressState {
   readModules: Record<string, number>;
   bookmarks: string[];
   simulacros: SimulacroRecord[];
+  /** Apuntes personales por lección. */
+  lessonNotes: Record<string, string>;
+  /** Artículos de la biblioteca normativa guardados por el usuario. */
+  savedArticles: string[];
+  /** Última lección abierta, para «Continuar donde quedaste». */
+  lastLesson: string | null;
   recordAnswer: (id: string, choice: string, correct: boolean) => void;
   markRead: (moduleId: string) => void;
+  unmarkRead: (moduleId: string) => void;
+  toggleRead: (moduleId: string) => void;
+  unmarkMany: (moduleIds: string[]) => void;
+  setNote: (moduleId: string, text: string) => void;
+  toggleSavedArticle: (articleId: string) => void;
+  setLastLesson: (moduleId: string) => void;
   toggleBookmark: (id: string) => void;
   addSimulacro: (row: Omit<SimulacroRecord, "id" | "at">) => void;
   reset: () => void;
@@ -37,6 +49,9 @@ export const useProgress = create<ProgressState>()(
       readModules: {},
       bookmarks: [],
       simulacros: [],
+      lessonNotes: {},
+      savedArticles: [],
+      lastLesson: null,
       recordAnswer: (id, choice, correct) =>
         set({
           answers: {
@@ -48,6 +63,35 @@ export const useProgress = create<ProgressState>()(
         set({
           readModules: { ...get().readModules, [moduleId]: Date.now() },
         }),
+      unmarkRead: (moduleId) => {
+        const next = { ...get().readModules };
+        delete next[moduleId];
+        set({ readModules: next });
+      },
+      toggleRead: (moduleId) => {
+        if (get().readModules[moduleId]) get().unmarkRead(moduleId);
+        else get().markRead(moduleId);
+      },
+      unmarkMany: (moduleIds) => {
+        const next = { ...get().readModules };
+        for (const id of moduleIds) delete next[id];
+        set({ readModules: next });
+      },
+      setNote: (moduleId, text) => {
+        const next = { ...get().lessonNotes };
+        if (text.trim()) next[moduleId] = text;
+        else delete next[moduleId];
+        set({ lessonNotes: next });
+      },
+      toggleSavedArticle: (articleId) => {
+        const has = get().savedArticles.includes(articleId);
+        set({
+          savedArticles: has
+            ? get().savedArticles.filter((a) => a !== articleId)
+            : [...get().savedArticles, articleId],
+        });
+      },
+      setLastLesson: (moduleId) => set({ lastLesson: moduleId }),
       toggleBookmark: (id) => {
         const has = get().bookmarks.includes(id);
         set({
@@ -65,7 +109,16 @@ export const useProgress = create<ProgressState>()(
             ...get().simulacros,
           ].slice(0, 12),
         }),
-      reset: () => set({ answers: {}, readModules: {}, bookmarks: [], simulacros: [] }),
+      reset: () =>
+        set({
+          answers: {},
+          readModules: {},
+          bookmarks: [],
+          simulacros: [],
+          lessonNotes: {},
+          savedArticles: [],
+          lastLesson: null,
+        }),
     }),
     { name: "cuaderno-2676-progress", skipHydration: true },
   ),
