@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import {
+  ArrowRight,
   BookCheck,
   BookMarked,
   BookOpen,
@@ -11,13 +12,13 @@ import {
   Circle,
   ClipboardCheck,
   Compass,
-  FileText,
-  Layers,
+  Play,
   RotateCcw,
   Scale,
   Search,
   Sparkles,
   StickyNote,
+  Trophy,
   X,
 } from "lucide-react";
 import { TRACKS, type TrackId } from "@/data/types";
@@ -54,6 +55,7 @@ function EstudioIndex() {
   const lastLesson = useProgress((s) => s.lastLesson);
   const lessonNotes = useProgress((s) => s.lessonNotes);
   const savedArticles = useProgress((s) => s.savedArticles);
+  const answers = useProgress((s) => s.answers);
 
   const { cargo, modules, questions, flashcards } = useCargo();
   const cargoIndicators = useMemo(() => indicatorsForCargo(cargo), [cargo]);
@@ -68,7 +70,6 @@ function EstudioIndex() {
   const [normaQuery, setNormaQuery] = useState("");
   const [expandAllNorms, setExpandAllNorms] = useState<boolean | null>(null);
 
-  // Si se navega con hash #art-... o #normas, abrir automáticamente la pestaña normativa
   useEffect(() => {
     if (typeof window === "undefined") return;
     const h = window.location.hash;
@@ -89,6 +90,17 @@ function EstudioIndex() {
     [modules, lessonNotes],
   );
   const readPct = modules.length ? Math.round((totalReadCount / modules.length) * 100) : 0;
+
+  // Siguiente paso lógico en orden (01 -> 02 -> 03...)
+  const nextRecommended = useMemo(
+    () => modules.find((m) => !read[m.id]) ?? modules[0],
+    [modules, read],
+  );
+
+  const lastModule = useMemo(
+    () => (lastLesson ? modules.find((m) => m.id === lastLesson) : undefined),
+    [lastLesson, modules],
+  );
 
   const filtered = useMemo(() => {
     return modules.filter((m) => {
@@ -135,11 +147,6 @@ function EstudioIndex() {
     });
   }, [normaFilter, normaQuery, savedArticles]);
 
-  const lastModule = useMemo(
-    () => (lastLesson ? modules.find((m) => m.id === lastLesson) : undefined),
-    [lastLesson, modules],
-  );
-
   const handleMarkAllRead = () => {
     for (const m of modules) {
       markRead(m.id);
@@ -151,64 +158,33 @@ function EstudioIndex() {
   };
 
   return (
-    <div className="space-y-7">
-      {/* ── Encabezado Principal ── */}
-      <header className="space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-muted font-mono">
-            Paso 2 · Centro Integrado de Estudio · {cargo.shortLabel} (OPEC {cargo.ficha.opec})
-          </p>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className="font-mono text-[11px]">
-              {modules.length} módulos del cargo
-            </Badge>
-            <Badge variant="outline" className="font-mono text-[11px]">
-              {ARTICULOS.length} artículos transcritos
-            </Badge>
-            <Badge variant="outline" className="font-mono text-[11px]">
-              {questions.length} preguntas
-            </Badge>
-          </div>
-        </div>
-        <h1 className="font-display text-3xl font-semibold text-ink">
-          Material de Estudio, Normativa y Guía en un Solo Lugar
-        </h1>
-        <p className="max-w-3xl text-sm text-muted leading-relaxed">
-          Todo el desarrollo teórico, artículos exactos de ley (E.T., CPACA, Constitución, Aduanas,
-          MIPG e Integridad), paso a paso procedimental y los{" "}
-          <strong className="text-ink">24 indicadores oficiales de Areandina</strong> para{" "}
-          <strong className="text-ink">{cargo.ficha.denominacion}</strong> ({cargo.processLabel})
-          integrados aquí mismo, con control total de lecciones{" "}
-          <strong className="text-ink">leídas y no leídas</strong>.
-        </p>
-      </header>
-
-      {/* ── Panel de Progreso de Lectura y Control Leído / No Leído ── */}
-      <section className="rounded-2xl border border-border bg-surface p-5 shadow-xs space-y-4">
+    <div className="space-y-6">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          1. RUTA GUIADA PASO A PASO (PARA QUE CUALQUIER PERSONA SEPA QUÉ SEGUIR)
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="rounded-2xl border-2 border-accent/35 bg-surface p-5 sm:p-6 shadow-xs space-y-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="space-y-1.5 flex-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="font-display text-base font-semibold text-ink">
-                Progreso de lectura en {cargo.shortLabel}
-              </span>
-              <Badge variant={totalReadCount === modules.length ? "ok" : "rule"}>
-                {totalReadCount} de {modules.length} leídos ({readPct}%)
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge className="bg-accent text-white font-mono text-[11px]">
+                RUTA GUIADA PASO A PASO · {cargo.shortLabel.toUpperCase()}
               </Badge>
-              {totalUnreadCount > 0 && (
-                <Badge variant="outline" className="text-muted">
-                  {totalUnreadCount} pendiente{totalUnreadCount === 1 ? "" : "s"} por leer
-                </Badge>
-              )}
+              <Badge variant="outline" className="font-mono text-[11px]">
+                OPEC {cargo.ficha.opec} · {cargo.ficha.denominacion}
+              </Badge>
             </div>
-            <Progress value={readPct} className="h-2.5" />
-            <p className="text-xs text-muted">
-              Puedes marcar o desmarcar cualquier módulo como{" "}
-              <strong className="text-ink">Leído ✓</strong> o{" "}
-              <strong className="text-ink">No leído</strong> directamente desde cada tarjeta o
-              dentro de la lección.
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">
+              Tu Plan de Estudio en Orden (Paso 01 al {String(modules.length).padStart(2, "0")})
+            </h1>
+            <p className="text-xs sm:text-sm text-muted max-w-2xl leading-relaxed">
+              No tienes que adivinar por dónde empezar: sigue las lecciones en orden numérico (
+              <strong>01 El Cargo → 02 → 03…</strong>). Dentro de cada lección tienes{" "}
+              <strong>4 pasos dinámicos</strong>: 1) Explicación y rol, 2) Artículos de ley, 3)
+              Fichas de memoria y 4) Casos prácticos con validación inmediata.
             </p>
           </div>
 
+          {/* Botones globales Leído / No leído */}
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             {totalUnreadCount > 0 && (
               <Button
@@ -219,7 +195,7 @@ function EstudioIndex() {
                 className="gap-1.5 text-xs cursor-pointer"
               >
                 <BookCheck className="size-3.5 text-ok" />
-                Marcar todos como leídos
+                Marcar todo leído
               </Button>
             )}
             {totalReadCount > 0 && (
@@ -231,73 +207,101 @@ function EstudioIndex() {
                 className="gap-1.5 text-xs border-warn/40 text-warn hover:bg-warn-soft/50 cursor-pointer"
               >
                 <RotateCcw className="size-3.5" />
-                Pasar todos a No leído ({totalReadCount})
+                Poner todo como No leído ({totalReadCount})
               </Button>
             )}
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="gap-1.5 text-xs border-accent/40 text-accent hover:bg-accent/10"
-            >
-              <Link to="/indicadores">
-                <Sparkles className="size-3.5" />
-                24 Indicadores
-              </Link>
-            </Button>
           </div>
         </div>
 
-        {/* Continuar donde quedaste */}
-        {lastModule && (
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent/25 bg-accent/5 px-4 py-3">
-            <div className="flex items-center gap-3 min-w-0">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-white font-mono text-xs font-bold">
-                {lastModule.number}
+        {/* Tarjeta destacada: TU SIGUIENTE LECCIÓN AHORA MISMO */}
+        {nextRecommended && (
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-accent/40 bg-accent/5 p-4 sm:p-5">
+            <div className="flex items-start gap-3.5 min-w-0">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent text-white font-mono text-base font-bold shadow-xs">
+                {nextRecommended.number}
               </span>
-              <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-accent">
-                  Última lección abierta
-                </p>
-                <p className="truncate font-display text-sm font-semibold text-ink">
-                  {lastModule.title}
+              <div className="min-w-0 space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                    {totalReadCount === 0
+                      ? "▶ Empieza aquí tu preparación (Lección 01)"
+                      : totalReadCount === modules.length
+                        ? "🎉 ¡Completaste todas las lecciones! Repasa desde la 01"
+                        : `▶ Tu siguiente paso en orden (${totalReadCount} de ${modules.length} leídos)`}
+                  </span>
+                  {lastModule && lastModule.id !== nextRecommended.id && (
+                    <Link
+                      to="/estudio/$slug"
+                      params={{ slug: lastModule.id }}
+                      className="text-[11px] font-medium text-muted underline hover:text-ink"
+                    >
+                      (O retomar última visitada: {lastModule.number} · {lastModule.title})
+                    </Link>
+                  )}
+                </div>
+                <h2 className="font-display text-lg sm:text-xl font-bold text-ink">
+                  Lección {nextRecommended.number}: {nextRecommended.title}
+                </h2>
+                <p className="text-xs sm:text-sm text-muted line-clamp-2">
+                  {nextRecommended.summary}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => toggleRead(lastModule.id)}
-                className={cn(
-                  "inline-flex h-8 items-center gap-1.5 rounded-lg border px-2.5 text-xs font-medium transition-colors cursor-pointer",
-                  read[lastModule.id]
-                    ? "border-ok/40 bg-ok-soft text-ok hover:bg-ok-soft/70"
-                    : "border-border bg-surface text-muted hover:text-ink",
-                )}
-              >
-                {read[lastModule.id] ? (
-                  <>
-                    <CheckCircle2 className="size-3.5" />
-                    Leído · Pasar a no leído
-                  </>
-                ) : (
-                  <>
-                    <Circle className="size-3.5" />
-                    No leído · Marcar leído
-                  </>
-                )}
-              </button>
-              <Button asChild size="sm" className="h-8 text-xs">
-                <Link to="/estudio/$slug" params={{ slug: lastModule.id }}>
-                  Continuar lección →
-                </Link>
-              </Button>
-            </div>
+
+            <Button asChild size="sm" className="shrink-0 gap-2 font-bold shadow-xs">
+              <Link to="/estudio/$slug" params={{ slug: nextRecommended.id }}>
+                <Play className="size-4 fill-current" />
+                Estudiar Lección {nextRecommended.number} ahora →
+              </Link>
+            </Button>
           </div>
         )}
+
+        {/* Mapa visual de bolitas/pasos (01 -> 02 -> 03 -> ...) */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-semibold text-ink">
+              Mapa de avance ({totalReadCount} de {modules.length} lecciones leídas · {readPct}%)
+            </span>
+            <span className="text-[11px] text-muted">
+              Haz clic en cualquier número para ir directo a esa lección
+            </span>
+          </div>
+          <Progress value={readPct} className="h-2" />
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            {modules.map((m) => {
+              const isRead = Boolean(read[m.id]);
+              const isNext = nextRecommended?.id === m.id && !isRead;
+              return (
+                <Link
+                  key={m.id}
+                  to="/estudio/$slug"
+                  params={{ slug: m.id }}
+                  title={`${m.number} · ${m.title} (${isRead ? "Leído" : "No leído"})`}
+                  className={cn(
+                    "inline-flex items-center gap-1 rounded-lg border px-2 py-1 font-mono text-[11px] font-bold transition-all",
+                    isRead
+                      ? "border-ok/40 bg-ok-soft text-ok hover:bg-ok-soft/80"
+                      : isNext
+                        ? "border-accent bg-accent text-white shadow-2xs ring-2 ring-accent/30"
+                        : "border-border bg-paper text-muted hover:border-accent/50 hover:text-ink",
+                  )}
+                >
+                  <span>{m.number}</span>
+                  <span className="hidden md:inline font-sans font-medium max-w-28 truncate">
+                    {m.title.replace(/^El cargo:\s*/i, "")}
+                  </span>
+                  {isRead && <CheckCircle2 className="size-3 shrink-0" />}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
-      {/* ── Pestañas de Navegación Todo-en-Uno ── */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          2. PESTAÑAS DE NAVEGACIÓN DEL CENTRO DE ESTUDIO
+         ═══════════════════════════════════════════════════════════════════════ */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border pb-3">
         <button
           type="button"
@@ -310,15 +314,7 @@ function EstudioIndex() {
           )}
         >
           <BookOpen className="size-4" />
-          Lecciones del Cargo
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-[11px] font-mono",
-              activeTab === "lecciones" ? "bg-white/20 text-white" : "bg-paper text-muted",
-            )}
-          >
-            {modules.length}
-          </span>
+          1. Ruta de Lecciones ({modules.length})
         </button>
 
         <button
@@ -332,15 +328,7 @@ function EstudioIndex() {
           )}
         >
           <Scale className="size-4" />
-          Biblioteca Normativa (Artículos de Ley)
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-[11px] font-mono",
-              activeTab === "normativa" ? "bg-white/20 text-white" : "bg-paper text-muted",
-            )}
-          >
-            {ARTICULOS.length}
-          </span>
+          2. Biblioteca de Leyes ({ARTICULOS.length} Artículos)
         </button>
 
         <button
@@ -354,15 +342,7 @@ function EstudioIndex() {
           )}
         >
           <Compass className="size-4" />
-          Cómo Resolver según tu Cargo y Ficha
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-[11px] font-mono",
-              activeTab === "guia" ? "bg-white/20 text-white" : "bg-paper text-muted",
-            )}
-          >
-            {cargo.functionGuides.length}
-          </span>
+          3. Resumen de Rol y Funciones ({cargo.shortLabel})
         </button>
 
         <button
@@ -376,24 +356,16 @@ function EstudioIndex() {
           )}
         >
           <StickyNote className="size-4" />
-          Mis Apuntes y Guardados
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-[11px] font-mono",
-              activeTab === "apuntes" ? "bg-white/20 text-white" : "bg-paper text-muted",
-            )}
-          >
-            {totalNotesCount + savedArticles.length}
-          </span>
+          4. Mis Apuntes y Guardados ({totalNotesCount + savedArticles.length})
         </button>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PESTAÑA 1: LECCIONES DEL CARGO (CON VISTA RÁPIDA EN LA MISMA PÁGINA)
+          PESTAÑA 1: RUTA DE LECCIONES PASO A PASO
          ═══════════════════════════════════════════════════════════════════════ */}
       {activeTab === "lecciones" && (
         <div className="space-y-6">
-          {/* Barra de búsqueda + Filtros Leído / No leído */}
+          {/* Buscador + Filtros Leído / No leído */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="relative flex-1">
               <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
@@ -402,7 +374,7 @@ function EstudioIndex() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Buscar tema, artículo (ej. 828, 703, 817), mandamiento, cautelares, Likert…"
+                placeholder="Buscar tema o artículo (ej. cobro persuasivo, coactivo, 828, 703, Likert)…"
                 className="h-11 w-full rounded-xl border border-border bg-surface py-2 pl-10 pr-10 text-sm placeholder:text-subtle focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
               />
               {query && (
@@ -446,8 +418,7 @@ function EstudioIndex() {
           {filtered.length === 0 ? (
             <div className="rounded-xl border border-border bg-surface px-5 py-10 text-center space-y-3">
               <p className="text-sm text-muted">
-                No hay módulos que coincidan con el filtro actual{" "}
-                {searchQ ? `(«${query}»)` : `(${readFilter})`}.
+                No hay módulos que coincidan con el filtro actual.
               </p>
               <Button
                 type="button"
@@ -458,11 +429,11 @@ function EstudioIndex() {
                   setReadFilter("todos");
                 }}
               >
-                Mostrar todos los módulos
+                Ver todas las lecciones
               </Button>
             </div>
           ) : (
-            ORDER.map((track) => {
+            ORDER.map((track, trackIdx) => {
               const list = filtered.filter((m) => m.track === track);
               if (list.length === 0) return null;
               const allInTrack = modules.filter((m) => m.track === track);
@@ -471,31 +442,37 @@ function EstudioIndex() {
 
               return (
                 <section key={track} className="space-y-3">
-                  <div className="flex flex-wrap items-end justify-between gap-3">
+                  <div className="flex flex-wrap items-end justify-between gap-3 rounded-xl border border-border bg-paper/70 px-4 py-3">
                     <div>
-                      <h2 className="font-display text-xl font-semibold text-ink">
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-accent">
+                        Bloque {trackIdx + 1} de 3 ·{" "}
+                        {track === "funcional"
+                          ? "ELIMINATORIA (Mínimo 70,00 puntos)"
+                          : "CLASIFICATORIA"}
+                      </span>
+                      <h2 className="font-display text-xl font-bold text-ink">
                         {TRACKS[track].label}
                       </h2>
-                      <p className="text-sm text-muted">{TRACKS[track].nature}</p>
+                      <p className="text-xs text-muted">{TRACKS[track].blurb}</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-xs tabular-nums text-muted font-medium">
+                      <span className="text-xs tabular-nums text-ink font-semibold">
                         {done}/{allInTrack.length} leídos
                       </span>
                       {done > 0 ? (
                         <button
                           type="button"
                           onClick={() => unmarkMany(trackIds)}
-                          className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1 text-[11px] font-medium text-muted hover:border-warn/50 hover:text-warn cursor-pointer"
+                          className="inline-flex items-center gap-1 rounded-lg border border-warn/40 bg-warn-soft/50 px-2.5 py-1 text-[11px] font-semibold text-warn hover:bg-warn-soft cursor-pointer"
                         >
                           <RotateCcw className="size-3" />
-                          Marcar bloque como no leído
+                          Poner bloque como No leído
                         </button>
                       ) : (
                         <button
                           type="button"
                           onClick={() => trackIds.forEach((id) => markRead(id))}
-                          className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1 text-[11px] font-medium text-muted hover:border-ok/50 hover:text-ok cursor-pointer"
+                          className="inline-flex items-center gap-1 rounded-lg border border-border bg-surface px-2.5 py-1 text-[11px] font-semibold text-muted hover:text-ok cursor-pointer"
                         >
                           <BookCheck className="size-3" />
                           Marcar bloque como leído
@@ -504,14 +481,19 @@ function EstudioIndex() {
                     </div>
                   </div>
 
-                  <Progress value={allInTrack.length ? (done / allInTrack.length) * 100 : 0} />
-
                   <ul className="grid gap-4 sm:grid-cols-2">
                     {list.map((m) => {
-                      const nQ = questions.filter((qItem) => qItem.moduleId === m.id).length;
+                      const modQs = questions.filter((qItem) => qItem.moduleId === m.id);
+                      const nQ = modQs.length;
+                      const answeredInMod = modQs.filter((qItem) => Boolean(answers[qItem.id])).length;
+                      const correctInMod = modQs.filter((qItem) => answers[qItem.id]?.correct).length;
+                      const modAcc =
+                        answeredInMod > 0 ? Math.round((correctInMod / answeredInMod) * 100) : null;
+
                       const nCards = flashcards.filter((fItem) => fItem.moduleId === m.id).length;
                       const modArticles = articlesForModule(m.id);
                       const isRead = Boolean(read[m.id]);
+                      const isNextStep = nextRecommended?.id === m.id && !isRead;
                       const hasNote = Boolean(lessonNotes[m.id]?.trim());
                       const coveredIndicators = cargoIndicators.filter(
                         (ind) => ind.moduleId === m.id,
@@ -526,30 +508,40 @@ function EstudioIndex() {
                         <li
                           key={m.id}
                           className={cn(
-                            "flex flex-col rounded-xl border bg-surface transition-all",
+                            "flex flex-col rounded-2xl border bg-surface transition-all",
                             isQuickOpen
                               ? "sm:col-span-2 border-accent shadow-sm"
-                              : isRead
-                                ? "border-ok/35 hover:border-accent/60"
-                                : "border-border hover:border-accent/60",
+                              : isNextStep
+                                ? "border-accent ring-1 ring-accent/40 shadow-xs"
+                                : isRead
+                                  ? "border-ok/40 hover:border-accent/60"
+                                  : "border-border hover:border-accent/60",
                           )}
                         >
                           <div className="flex flex-1 flex-col p-5">
-                            {/* Cabecera de la tarjeta con botón directo Leído / No leído */}
+                            {/* Cabecera de la tarjeta: Paso N + Botón directo Leído / No leído */}
                             <div className="flex flex-wrap items-center justify-between gap-2">
-                              <div className="flex items-center gap-2">
-                                <span className="flex size-6 items-center justify-center rounded-md bg-paper font-mono text-[11px] font-semibold text-ink">
-                                  {m.number}
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span
+                                  className={cn(
+                                    "inline-flex items-center rounded-lg px-2.5 py-1 font-mono text-xs font-bold",
+                                    isRead
+                                      ? "bg-ok text-white"
+                                      : isNextStep
+                                        ? "bg-accent text-white"
+                                        : "bg-paper text-ink border border-border",
+                                  )}
+                                >
+                                  Paso {m.number}
                                 </span>
+                                {isNextStep && (
+                                  <Badge variant="rule" className="text-[10px]">
+                                    Siguiente a estudiar
+                                  </Badge>
+                                )}
                                 <Badge variant="outline" className="text-[11px]">
                                   {m.minutes} min
                                 </Badge>
-                                {modArticles.length > 0 && (
-                                  <Badge variant="paper" className="gap-1 text-[11px]">
-                                    <Scale className="size-3 text-accent" />
-                                    {modArticles.length} art{modArticles.length === 1 ? "." : "s."}
-                                  </Badge>
-                                )}
                                 {hasNote && (
                                   <Badge variant="warn" className="gap-1 text-[10px]">
                                     <StickyNote className="size-3" />
@@ -561,11 +553,6 @@ function EstudioIndex() {
                               <button
                                 type="button"
                                 onClick={() => toggleRead(m.id)}
-                                title={
-                                  isRead
-                                    ? "Haz clic para marcar como NO leído"
-                                    : "Haz clic para marcar como leído"
-                                }
                                 className={cn(
                                   "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer",
                                   isRead
@@ -587,12 +574,13 @@ function EstudioIndex() {
                               </button>
                             </div>
 
+                            {/* Título y Resumen */}
                             <Link
                               to="/estudio/$slug"
                               params={{ slug: m.id }}
                               className="group mt-3 block"
                             >
-                              <h3 className="font-display text-lg font-semibold leading-snug text-ink group-hover:text-accent transition-colors">
+                              <h3 className="font-display text-lg font-bold leading-snug text-ink group-hover:text-accent transition-colors">
                                 {m.title}
                               </h3>
                               <p className="mt-1.5 text-sm text-muted leading-relaxed">
@@ -600,12 +588,45 @@ function EstudioIndex() {
                               </p>
                             </Link>
 
-                            {/* Indicadores Oficiales Areandina del cargo activo que cubre este módulo */}
+                            {/* Qué incluye esta lección (Píldoras muy fáciles de entender) */}
+                            <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
+                              <span className="rounded-lg border border-border bg-paper px-2.5 py-1 text-[11px] font-medium text-ink">
+                                📘 {m.points.length} conceptos clave
+                              </span>
+                              {modArticles.length > 0 && (
+                                <span className="rounded-lg border border-border bg-paper px-2.5 py-1 text-[11px] font-medium text-ink">
+                                  ⚖️ {modArticles.length} leyes/artículos
+                                </span>
+                              )}
+                              {nCards > 0 && (
+                                <span className="rounded-lg border border-border bg-paper px-2.5 py-1 text-[11px] font-medium text-ink">
+                                  🗂 {nCards} fichas
+                                </span>
+                              )}
+                              {nQ > 0 && (
+                                <span
+                                  className={cn(
+                                    "rounded-lg border px-2.5 py-1 text-[11px] font-semibold",
+                                    modAcc !== null && modAcc >= 70
+                                      ? "border-ok/40 bg-ok-soft text-ok"
+                                      : modAcc !== null
+                                        ? "border-warn/40 bg-warn-soft text-warn"
+                                        : "border-accent/30 bg-accent/5 text-accent",
+                                  )}
+                                >
+                                  🎯{" "}
+                                  {answeredInMod > 0
+                                    ? `Casos: ${correctInMod}/${nQ} bien (${modAcc}%)`
+                                    : `${nQ} casos prácticos para validar`}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Indicadores Areandina */}
                             {coveredIndicators.length > 0 && (
-                              <div className="mt-3 rounded-lg border border-accent/20 bg-accent/5 px-3 py-2 text-[11px]">
+                              <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-3 py-2 text-[11px]">
                                 <span className="font-bold text-accent">
-                                  Cubre {coveredIndicators.length} indicador
-                                  {coveredIndicators.length > 1 ? "es" : ""} de {cargo.shortLabel}:
+                                  Indicador Areandina:
                                 </span>{" "}
                                 <span className="text-ink font-medium">
                                   {coveredIndicators.map((ci) => ci.nombre).join(" · ")}
@@ -613,89 +634,52 @@ function EstudioIndex() {
                               </div>
                             )}
 
-                            {/* Pie de tarjeta con botón "Estudiar aquí mismo" + "Abrir lección completa" */}
-                            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-border/50 text-xs">
-                              <div className="flex flex-wrap items-center gap-2 text-[11px] text-subtle">
-                                <span>{m.points.length} puntos clave</span>
-                                <span>·</span>
-                                <span>{nQ} preguntas</span>
-                                {nCards > 0 && (
+                            {/* Botones de Acción Claros */}
+                            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-border/60">
+                              <button
+                                type="button"
+                                onClick={() => setExpandedQuickId(isQuickOpen ? null : m.id)}
+                                className="inline-flex items-center gap-1 rounded-xl border border-border bg-paper px-3 py-2 text-xs font-semibold text-ink hover:border-accent/50 hover:text-accent transition-colors cursor-pointer"
+                              >
+                                {isQuickOpen ? (
                                   <>
-                                    <span>·</span>
-                                    <span>{nCards} fichas</span>
+                                    <ChevronUp className="size-3.5" />
+                                    Cerrar vista rápida
+                                  </>
+                                ) : (
+                                  <>
+                                    <ChevronDown className="size-3.5" />
+                                    Vista rápida aquí
                                   </>
                                 )}
-                              </div>
+                              </button>
 
-                              <div className="flex items-center gap-2">
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setExpandedQuickId(isQuickOpen ? null : m.id)
-                                  }
-                                  className="inline-flex items-center gap-1 rounded-lg border border-border bg-paper px-2.5 py-1.5 text-xs font-medium text-ink hover:border-accent/50 hover:text-accent transition-colors cursor-pointer"
-                                >
-                                  {isQuickOpen ? (
-                                    <>
-                                      <ChevronUp className="size-3.5" />
-                                      Ocultar resumen
-                                    </>
-                                  ) : (
-                                    <>
-                                      <ChevronDown className="size-3.5" />
-                                      Ver todo aquí mismo
-                                    </>
-                                  )}
-                                </button>
-
-                                <Link
-                                  to="/estudio/$slug"
-                                  params={{ slug: m.id }}
-                                  className="inline-flex items-center gap-1 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent/90 transition-colors"
-                                >
-                                  Abrir lección →
-                                </Link>
-                              </div>
+                              <Link
+                                to="/estudio/$slug"
+                                params={{ slug: m.id }}
+                                className="inline-flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2 text-xs font-bold text-white hover:bg-accent/90 transition-colors shadow-2xs"
+                              >
+                                Entrar a la Lección (4 Pasos)
+                                <ArrowRight className="size-3.5" />
+                              </Link>
                             </div>
                           </div>
 
-                          {/* ── Desplegable Todo-En-La-Misma-Parte ── */}
+                          {/* ── Vista Rápida Desplegable en la misma tarjeta ── */}
                           {isQuickOpen && (
-                            <div className="border-t border-border bg-paper/60 p-5 space-y-5 animate-in fade-in-0 duration-200">
-                              {/* Cómo se resuelve en tu cargo */}
+                            <div className="border-t border-border bg-paper/60 p-5 space-y-4 animate-in fade-in-0 duration-200">
                               {(guide || topic) && (
-                                <div className="rounded-xl border border-accent/30 bg-surface p-4 space-y-2.5">
-                                  <div className="flex items-center justify-between gap-2">
-                                    <h4 className="font-display text-sm font-bold text-accent uppercase tracking-wider">
-                                      Cómo se resuelve en {cargo.shortLabel}
-                                    </h4>
-                                    <Badge variant="paper" className="text-[10px]">
-                                      Aplicación en el cargo
-                                    </Badge>
-                                  </div>
-                                  <p className="text-sm text-ink leading-relaxed">
+                                <div className="rounded-xl border border-accent/30 bg-surface p-4 space-y-2">
+                                  <h4 className="font-display text-sm font-bold text-accent">
+                                    Cómo se resuelve en {cargo.shortLabel}:
+                                  </h4>
+                                  <p className="text-xs sm:text-sm text-ink leading-relaxed">
                                     {guide?.howToResolve ?? topic?.how}
                                   </p>
-                                  {guide?.roleNote && (
-                                    <p className="text-xs font-medium text-muted border-l-2 border-accent pl-2.5">
-                                      <strong>Límite de tu rol:</strong> {guide.roleNote}
-                                    </p>
-                                  )}
-                                  {(guide?.steps ?? topic?.steps) && (
-                                    <ol className="mt-2 space-y-1.5 pl-4 list-decimal text-xs text-ink">
-                                      {(guide?.steps ?? topic?.steps ?? []).map((st, idx) => (
-                                        <li key={idx} className="leading-relaxed">
-                                          {st}
-                                        </li>
-                                      ))}
-                                    </ol>
-                                  )}
                                   <div className="grid gap-2 sm:grid-cols-2 pt-1">
                                     {(guide?.typicalFail ?? topic?.trap) && (
                                       <div className="rounded-lg border border-bad/25 bg-bad-soft/50 p-2.5 text-xs">
-                                        <strong className="text-bad block">
-                                          Trampa típica en el examen:
-                                        </strong>
+                                        <strong className="text-bad block">❌ Trampa típica:</strong>
                                         <span className="text-ink">
                                           {guide?.typicalFail ?? topic?.trap}
                                         </span>
@@ -703,7 +687,9 @@ function EstudioIndex() {
                                     )}
                                     {(guide?.correctMove ?? topic?.correctMove) && (
                                       <div className="rounded-lg border border-ok/25 bg-ok-soft/50 p-2.5 text-xs">
-                                        <strong className="text-ok block">Jugada correcta:</strong>
+                                        <strong className="text-ok block">
+                                          ✅ Jugada ganadora:
+                                        </strong>
                                         <span className="text-ink">
                                           {guide?.correctMove ?? topic?.correctMove}
                                         </span>
@@ -713,100 +699,28 @@ function EstudioIndex() {
                                 </div>
                               )}
 
-                              {/* Puntos clave del módulo */}
-                              <div className="space-y-2.5">
-                                <h4 className="font-display text-sm font-semibold text-ink">
-                                  Desarrollo punto a punto ({m.points.length})
-                                </h4>
-                                <div className="grid gap-2.5 sm:grid-cols-2">
-                                  {m.points.map((pt, idx) => (
-                                    <div
-                                      key={pt.title}
-                                      className="rounded-xl border border-border bg-surface p-3.5"
-                                    >
-                                      <p className="font-display text-sm font-semibold text-ink">
-                                        {idx + 1}. {pt.title}
-                                      </p>
-                                      <p className="mt-1 text-xs leading-relaxed text-muted">
-                                        {pt.body}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Claves de examen */}
-                              <div className="rounded-xl border border-warn/30 bg-warn-soft/40 p-4 space-y-2">
-                                <h4 className="font-display text-sm font-semibold text-ink">
-                                  Claves fijas de examen
-                                </h4>
-                                <ul className="space-y-1 text-xs text-ink list-disc pl-4">
-                                  {m.examTips.map((tip) => (
-                                    <li key={tip} className="leading-relaxed">
-                                      {tip}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              {/* Artículos de ley del módulo directamente aquí */}
-                              {modArticles.length > 0 && (
-                                <div className="space-y-2.5">
-                                  <h4 className="font-display text-sm font-semibold text-ink flex items-center gap-1.5">
-                                    <Scale className="size-4 text-accent" />
-                                    Normativa transcrita de este módulo ({modArticles.length}{" "}
-                                    artículos)
-                                  </h4>
-                                  <div className="space-y-2">
-                                    {modArticles.map((art) => (
-                                      <ArticleCard key={art.id} articulo={art} />
-                                    ))}
+                              <div className="grid gap-2.5 sm:grid-cols-2">
+                                {m.points.map((pt, idx) => (
+                                  <div
+                                    key={pt.title}
+                                    className="rounded-xl border border-border bg-surface p-3.5"
+                                  >
+                                    <p className="font-display text-xs sm:text-sm font-bold text-ink">
+                                      {idx + 1}. {pt.title}
+                                    </p>
+                                    <p className="mt-1 text-xs leading-relaxed text-muted">
+                                      {pt.body}
+                                    </p>
                                   </div>
-                                </div>
-                              )}
+                                ))}
+                              </div>
 
-                              <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
-                                <button
-                                  type="button"
-                                  onClick={() => toggleRead(m.id)}
-                                  className={cn(
-                                    "inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold cursor-pointer",
-                                    isRead
-                                      ? "border-warn/40 bg-warn-soft text-warn"
-                                      : "border-ok/40 bg-ok-soft text-ok",
-                                  )}
-                                >
-                                  {isRead ? (
-                                    <>
-                                      <RotateCcw className="size-3.5" />
-                                      Marcar como NO leído
-                                    </>
-                                  ) : (
-                                    <>
-                                      <CheckCircle2 className="size-3.5" />
-                                      Marcar como Leído ✓
-                                    </>
-                                  )}
-                                </button>
-
-                                <div className="flex flex-wrap items-center gap-2">
-                                  {nQ > 0 && (
-                                    <Button asChild variant="outline" size="sm">
-                                      <Link
-                                        to="/practica/$bank"
-                                        params={{ bank: `mod-${m.id}` }}
-                                      >
-                                        <ClipboardCheck className="size-3.5" />
-                                        Practicar {nQ} preguntas
-                                      </Link>
-                                    </Button>
-                                  )}
-                                  <Button asChild size="sm">
-                                    <Link to="/estudio/$slug" params={{ slug: m.id }}>
-                                      Ver vista completa con fichas y apuntes →
-                                    </Link>
-                                  </Button>
-                                </div>
+                              <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
+                                <Button asChild size="sm">
+                                  <Link to="/estudio/$slug" params={{ slug: m.id }}>
+                                    Abrir lección interactiva y validar los {nQ} casos prácticos →
+                                  </Link>
+                                </Button>
                               </div>
                             </div>
                           )}
@@ -822,7 +736,7 @@ function EstudioIndex() {
       )}
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PESTAÑA 2: BIBLIOTECA NORMATIVA INTEGRADA (TODOS LOS ARTÍCULOS AQUÍ)
+          PESTAÑA 2: BIBLIOTECA DE LEYES (ARTÍCULOS TRANSCRITOS)
          ═══════════════════════════════════════════════════════════════════════ */}
       {activeTab === "normativa" && (
         <section id="normas" className="space-y-6">
@@ -834,9 +748,9 @@ function EstudioIndex() {
                   artículos)
                 </h2>
                 <p className="text-xs sm:text-sm text-muted">
-                  Lee aquí mismo el texto literal y las claves de examen del Estatuto Tributario,
-                  Constitución, CPACA, Ley 1755, Ley 1066, Ley 1116, Ley 594, MIPG, Régimen Aduanero
-                  y Código de Integridad.
+                  Texto literal y claves de examen del Estatuto Tributario, Constitución, CPACA,
+                  Ley 1755, Ley 1066, Ley 1116, Ley 594, MIPG, Régimen Aduanero y Código de
+                  Integridad.
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -861,7 +775,6 @@ function EstudioIndex() {
               </div>
             </div>
 
-            {/* Buscador de artículos */}
             <div className="relative">
               <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
               <input
@@ -882,7 +795,6 @@ function EstudioIndex() {
               )}
             </div>
 
-            {/* Filtros por cuerpo normativo */}
             <div className="flex flex-wrap items-center gap-1.5">
               <button
                 type="button"
@@ -957,7 +869,7 @@ function EstudioIndex() {
                               params={{ slug: rm.id }}
                               className="inline-flex items-center gap-1 rounded-md border border-border bg-paper px-2 py-0.5 text-[11px] font-medium text-ink hover:border-accent hover:text-accent"
                             >
-                              {rm.number} · {rm.title}
+                              Paso {rm.number} · {rm.title}
                             </Link>
                           ))}
                         </div>
@@ -972,11 +884,10 @@ function EstudioIndex() {
       )}
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          PESTAÑA 3: GUÍA PRÁCTICA DE FUNCIONES Y ROL DEL CARGO
+          PESTAÑA 3: RESUMEN DE ROL Y FUNCIONES DEL CARGO
          ═══════════════════════════════════════════════════════════════════════ */}
       {activeTab === "guia" && (
         <section className="space-y-6">
-          {/* Resumen de Ficha y Límites del Rol */}
           <div className="rounded-2xl border border-border bg-surface p-5 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
@@ -998,7 +909,7 @@ function EstudioIndex() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="rounded-xl border border-ok/30 bg-ok-soft/40 p-4 space-y-2">
                 <h3 className="font-display text-sm font-bold text-ok uppercase tracking-wide">
-                  Lo que SÍ hace tu rol
+                  ✅ Lo que SÍ hace tu rol
                 </h3>
                 <ul className="space-y-1.5 text-xs text-ink list-disc pl-4">
                   {cargo.rolBoundary.youDo.map((item) => (
@@ -1011,7 +922,7 @@ function EstudioIndex() {
 
               <div className="rounded-xl border border-bad/30 bg-bad-soft/40 p-4 space-y-2">
                 <h3 className="font-display text-sm font-bold text-bad uppercase tracking-wide">
-                  Lo que NO debes hacer (Trampa)
+                  ❌ Lo que NO debes hacer (Trampa)
                 </h3>
                 <ul className="space-y-1.5 text-xs text-ink list-disc pl-4">
                   {cargo.rolBoundary.youDont.map((item) => (
@@ -1024,7 +935,7 @@ function EstudioIndex() {
 
               <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 space-y-2">
                 <h3 className="font-display text-sm font-bold text-accent uppercase tracking-wide">
-                  Diferencia frente a otros cargos
+                  ⚖️ Diferencia frente a otros cargos
                 </h3>
                 <p className="text-xs text-ink leading-relaxed">{cargo.rolBoundary.vsOthers}</p>
                 <div className="pt-2 border-t border-border/60">
@@ -1041,7 +952,6 @@ function EstudioIndex() {
             </div>
           </div>
 
-          {/* Guías paso a paso por función */}
           <div className="space-y-3">
             <h3 className="font-display text-lg font-semibold text-ink">
               Guía de resolución paso a paso por función ({cargo.functionGuides.length})
@@ -1078,7 +988,7 @@ function EstudioIndex() {
                             params={{ slug: relMod.id }}
                             className="text-xs font-semibold text-accent hover:underline"
                           >
-                            Ir a la lección {relMod.number} →
+                            Ir al Paso {relMod.number} →
                           </Link>
                         </div>
                       )}
@@ -1101,11 +1011,11 @@ function EstudioIndex() {
 
                     <div className="grid gap-3 sm:grid-cols-2 pt-1">
                       <div className="rounded-lg border border-bad/25 bg-bad-soft/50 p-3 text-xs">
-                        <strong className="text-bad block mb-0.5">Fallo típico en examen:</strong>
+                        <strong className="text-bad block mb-0.5">❌ Fallo típico en examen:</strong>
                         <span className="text-ink">{g.typicalFail}</span>
                       </div>
                       <div className="rounded-lg border border-ok/25 bg-ok-soft/50 p-3 text-xs">
-                        <strong className="text-ok block mb-0.5">Jugada correcta:</strong>
+                        <strong className="text-ok block mb-0.5">✅ Jugada correcta:</strong>
                         <span className="text-ink">{g.correctMove}</span>
                       </div>
                     </div>
@@ -1129,9 +1039,8 @@ function EstudioIndex() {
             </h2>
             {totalNotesCount === 0 ? (
               <div className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">
-                Aún no has escrito apuntes personales. Entra a cualquier lección y escribe tus
-                resúmenes o nemotecnias en la sección <strong>«Mis apuntes personales»</strong>; se
-                guardan automáticamente en tu dispositivo.
+                Aún no has escrito apuntes personales. Entra a cualquier lección y abre el botón{" "}
+                <strong>«Apuntes»</strong> arriba a la derecha; se guardan solos en tu dispositivo.
               </div>
             ) : (
               <div className="grid gap-3 sm:grid-cols-2">
@@ -1144,14 +1053,14 @@ function EstudioIndex() {
                     >
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-mono text-xs text-accent font-semibold">
-                          Lección {m.number} · {m.title}
+                          Paso {m.number} · {m.title}
                         </span>
                         <Link
                           to="/estudio/$slug"
                           params={{ slug: m.id }}
                           className="text-xs font-semibold text-accent hover:underline"
                         >
-                          Editar en lección →
+                          Abrir lección →
                         </Link>
                       </div>
                       <p className="whitespace-pre-wrap text-xs sm:text-sm text-ink bg-paper p-3 rounded-lg border border-border">
@@ -1171,13 +1080,13 @@ function EstudioIndex() {
             {savedArticles.length === 0 ? (
               <div className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">
                 No tienes artículos guardados todavía. Usa el botón <strong>«Guardar»</strong> en
-                cualquier artículo dentro de las lecciones o en la pestaña{" "}
+                cualquier artículo dentro de las lecciones o en la{" "}
                 <button
                   type="button"
                   onClick={() => setActiveTab("normativa")}
                   className="text-accent underline cursor-pointer"
                 >
-                  Biblioteca Normativa
+                  Biblioteca de Leyes
                 </button>{" "}
                 para tenerlos a mano antes del examen.
               </div>

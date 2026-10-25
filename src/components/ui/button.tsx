@@ -4,22 +4,25 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[opacity,transform,background-color,color,border-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:pointer-events-none disabled:opacity-45 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:pointer-events-none disabled:opacity-45 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-accent text-accent-fg hover:bg-accent/90",
-        secondary: "bg-paper text-ink border border-border hover:bg-surface",
-        outline: "border border-border bg-transparent text-ink hover:bg-paper",
+        default:
+          "bg-linear-to-r from-accent to-sky-600 text-accent-fg shadow-xs hover:brightness-105 hover:shadow-sm",
+        secondary:
+          "bg-paper text-ink border border-border hover:bg-surface hover:border-accent/40 shadow-2xs",
+        outline:
+          "border border-border bg-surface/80 text-ink hover:bg-paper hover:border-accent/40 shadow-2xs",
         ghost: "text-ink hover:bg-paper",
-        rule: "bg-rule text-accent-fg hover:bg-rule/90",
-        danger: "bg-bad text-accent-fg hover:bg-bad/90",
+        rule: "bg-linear-to-r from-rule to-teal-700 text-accent-fg shadow-xs hover:brightness-105",
+        danger: "bg-bad text-accent-fg shadow-xs hover:bg-bad/90",
         link: "text-accent underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-4",
-        sm: "h-9 rounded-sm px-3 text-[13px]",
-        lg: "h-12 rounded-lg px-5",
+        sm: "h-9 rounded-lg px-3.5 text-[13px]",
+        lg: "h-12 rounded-xl px-6 text-base",
         icon: "size-11",
       },
     },

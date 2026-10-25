@@ -20,8 +20,10 @@ import {
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/lib/progress-store";
 import { useCargoStore } from "@/lib/cargo-store";
+import { useCargo } from "@/lib/use-cargo";
 import { useSaberProStore } from "@/lib/saber-pro-store";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { CargoDropdownSelector } from "@/components/cargo-dropdown";
 import { SaberProCareerDropdown } from "@/components/saber-pro-career-dropdown";
 import { RoadmapModal } from "@/components/roadmap-modal";
@@ -140,6 +142,20 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   const [isRoadmapOpen, setIsRoadmapOpen] = useState(false);
   const [isPricingOpen, setIsPricingOpen] = useState(false);
+
+  const { cargo, modules, questions } = useCargo();
+  const readModules = useProgress((s) => s.readModules);
+  const answers = useProgress((s) => s.answers);
+  const simulacros = useProgress((s) => s.simulacros);
+
+  const readCount = modules.filter((m) => readModules[m.id]).length;
+  const readPct = modules.length ? Math.round((readCount / modules.length) * 100) : 0;
+  const cargoQIds = new Set(questions.map((q) => q.id));
+  const answeredCount = Object.keys(answers).filter((id) => cargoQIds.has(id)).length;
+  const correctCount = Object.entries(answers).filter(
+    ([id, a]) => cargoQIds.has(id) && a.correct,
+  ).length;
+  const accPct = answeredCount ? Math.round((correctCount / answeredCount) * 100) : 0;
 
   // Control interactivo de ancho de barra lateral (Normal 320px vs Amplio 384px)
   const [isSidebarWide, setIsSidebarWide] = useState<boolean>(() => {
@@ -476,6 +492,16 @@ export function AppShell({ children }: { children: ReactNode }) {
                         const active =
                           item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
                         const Icon = item.icon;
+                        const dynamicBadge =
+                          item.to === "/estudio"
+                            ? `${readCount}/${modules.length}`
+                            : item.to === "/practica"
+                              ? `${answeredCount}/${questions.length}`
+                              : item.to === "/simulacro" && simulacros.length > 0
+                                ? `${simulacros.length} Hechos`
+                                : "badge" in item
+                                  ? item.badge
+                                  : null;
                         return (
                           <Link
                             key={item.to}
@@ -483,7 +509,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                             className={cn(
                               "group flex items-start gap-2.5 rounded-xl px-3 py-2.5 text-xs transition-all",
                               active
-                                ? "bg-accent text-white font-semibold shadow-xs"
+                                ? "bg-linear-to-r from-accent to-sky-600 text-white font-semibold shadow-sm"
                                 : "text-muted hover:bg-paper/80 hover:text-ink",
                             )}
                           >
@@ -503,23 +529,23 @@ export function AppShell({ children }: { children: ReactNode }) {
                                 >
                                   {item.label}
                                 </span>
-                                {"badge" in item ? (
+                                {dynamicBadge ? (
                                   <span
                                     className={cn(
-                                      "rounded px-1.5 py-0.5 text-[9px] font-bold font-mono shrink-0 ml-1.5",
+                                      "rounded-md px-1.5 py-0.5 text-[9px] font-bold font-mono shrink-0 ml-1.5",
                                       active
-                                        ? "bg-white/20 text-white"
+                                        ? "bg-white/25 text-white"
                                         : "bg-accent/10 text-accent group-hover:bg-accent/20",
                                     )}
                                   >
-                                    {item.badge}
+                                    {dynamicBadge}
                                   </span>
                                 ) : null}
                               </div>
                               <span
                                 className={cn(
                                   "text-[10px] leading-tight truncate mt-1",
-                                  active ? "text-white/80" : "text-subtle",
+                                  active ? "text-white/85" : "text-subtle",
                                 )}
                               >
                                 {item.sub}
@@ -529,6 +555,22 @@ export function AppShell({ children }: { children: ReactNode }) {
                         );
                       })}
                 </nav>
+
+                {!isSaberPro && (
+                  <div className="mt-3 rounded-xl border border-border/80 bg-paper/70 p-2.5 space-y-2">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="font-bold uppercase tracking-wider text-muted truncate">
+                        Avance · {cargo.shortLabel}
+                      </span>
+                      <span className="font-mono font-bold text-accent">{readPct}% leído</span>
+                    </div>
+                    <Progress value={readPct} className="h-1.5" />
+                    <div className="flex items-center justify-between text-[10px] text-muted font-mono">
+                      <span>📚 {readCount}/{modules.length} temas</span>
+                      <span>🎯 {accPct}% acierto ({answeredCount})</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Tarjetas Contextuales Armonizadas por Modo Activo */}

@@ -1,5 +1,18 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { Check, ChevronRight, CircleHelp, Flag, Square, Volume2, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import {
+  BookOpen,
+  Check,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  CircleHelp,
+  Flag,
+  RotateCcw,
+  Square,
+  Volume2,
+  X,
+} from "lucide-react";
 import type { Question } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -127,13 +140,37 @@ export function QuizEngine({
   const pct = total ? Math.round(((done ? total : index) / total) * 100) : 0;
   const result = useMemo(() => tally(questions, log), [questions, log]);
 
-  function commit(choice: string) {
-    if (!q || picked) return;
+  function selectChoice(choice: string) {
+    if (!q) return;
+    if (mode === "practice" && revealed) return;
     setPicked(choice);
-    const ok = choice === q.correct;
-    setLog((prev) => ({ ...prev, [q.id]: choice }));
-    recordAnswer(q.id, choice, ok);
-    if (mode === "practice") setRevealed(true);
+    if (mode === "exam") {
+      const ok = choice === q.correct;
+      setLog((prev) => ({ ...prev, [q.id]: choice }));
+      recordAnswer(q.id, choice, ok);
+    }
+  }
+
+  function validatePractice() {
+    if (!q || !picked || revealed) return;
+    const ok = picked === q.correct;
+    setLog((prev) => ({ ...prev, [q.id]: picked }));
+    recordAnswer(q.id, picked, ok);
+    setRevealed(true);
+  }
+
+  function retryCurrent() {
+    setPicked(null);
+    setRevealed(false);
+  }
+
+  function prev() {
+    if (index <= 0) return;
+    const prevQ = questions[index - 1];
+    const prevSaved = prevQ ? log[prevQ.id] ?? null : null;
+    setIndex((i) => i - 1);
+    setPicked(prevSaved);
+    setRevealed(mode === "practice" && Boolean(prevSaved));
   }
 
   function next() {
@@ -283,13 +320,13 @@ export function QuizEngine({
               <li key={c.id}>
                 <button
                   type="button"
-                  onClick={() => commit(c.id)}
-                  disabled={Boolean(picked) && mode === "practice"}
+                  onClick={() => selectChoice(c.id)}
+                  disabled={Boolean(revealed) && mode === "practice"}
                   className={cn(
-                    "flex min-h-12 w-full items-start gap-3 rounded-lg border px-4 py-3.5 text-left text-sm transition-colors",
+                    "flex min-h-12 w-full items-start gap-3 rounded-lg border px-4 py-3.5 text-left text-sm transition-colors cursor-pointer",
                     state === "idle" &&
                       "border-border bg-raised hover:border-accent/40 hover:bg-paper",
-                    state === "picked" && "border-accent bg-paper",
+                    state === "picked" && "border-accent bg-accent/10 ring-1 ring-accent/30",
                     state === "ok" && "border-ok bg-ok-soft",
                     state === "bad" && "border-bad bg-bad-soft",
                     mode === "exam" && picked && !selected && "opacity-60",
@@ -319,20 +356,82 @@ export function QuizEngine({
           })}
         </ul>
 
+        {mode === "practice" && !showKey ? (
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-4">
+            <span className="text-xs text-muted">
+              {picked
+                ? `Opción ${picked.toUpperCase()} seleccionada. Pulsa «Validar respuesta» para comprobar.`
+                : "Selecciona una opción (A, B, C o D) y pulsa «Validar respuesta»."}
+            </span>
+            <Button
+              type="button"
+              onClick={validatePractice}
+              disabled={!picked}
+              className="gap-1.5 font-semibold cursor-pointer"
+            >
+              <CheckCircle2 className="size-4" />
+              Validar respuesta ✓
+            </Button>
+          </div>
+        ) : null}
+
         {showKey ? (
-          <div className="mt-5 rounded-md bg-paper px-4 py-3">
-            <p className="mb-1 flex items-center gap-1.5 text-[11px] uppercase tracking-[0.14em] text-muted">
-              <CircleHelp className="size-3.5" />
-              Clave
+          <div
+            className={cn(
+              "mt-5 rounded-xl border-2 p-4 space-y-2.5",
+              picked === q.correct
+                ? "border-ok/40 bg-ok-soft/50"
+                : "border-bad/40 bg-bad-soft/40",
+            )}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ink">
+                <CircleHelp className="size-4 text-accent" />
+                {picked === q.correct
+                  ? "✓ ¡Respuesta Correcta! Explicación oficial:"
+                  : `✕ Respuesta Incorrecta · La correcta es la ${q.correct.toUpperCase()}:`}
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={retryCurrent}
+                  className="inline-flex items-center gap-1 rounded-lg border border-border bg-surface px-2.5 py-1 text-xs font-semibold text-ink hover:border-accent cursor-pointer"
+                >
+                  <RotateCcw className="size-3" />
+                  Intentar de nuevo
+                </button>
+                {q.moduleId && (
+                  <Link
+                    to="/estudio/$slug"
+                    params={{ slug: q.moduleId }}
+                    className="inline-flex items-center gap-1 rounded-lg border border-accent/40 bg-surface px-2.5 py-1 text-xs font-semibold text-accent hover:bg-accent/10"
+                  >
+                    <BookOpen className="size-3" />
+                    Ver lección del tema
+                  </Link>
+                )}
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-ink bg-surface p-3 rounded-lg border border-border">
+              {q.explanation}
             </p>
-            <p className="text-sm leading-relaxed text-ink">{q.explanation}</p>
           </div>
         ) : null}
       </article>
 
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs tabular-nums text-subtle">Respondidas {answeredCount}</p>
-        <Button onClick={next} disabled={mode === "practice" ? !revealed : !picked}>
+        <div className="flex items-center gap-2">
+          {index > 0 && (
+            <Button type="button" variant="outline" size="sm" onClick={prev} className="cursor-pointer">
+              <ChevronLeft className="size-4" />
+              Anterior
+            </Button>
+          )}
+          <p className="text-xs tabular-nums text-subtle">
+            Respondidas {answeredCount} de {total}
+          </p>
+        </div>
+        <Button onClick={next} disabled={mode === "practice" ? !revealed : !picked} className="cursor-pointer">
           {index + 1 >= total ? (
             <>
               <Flag className="size-4" />
@@ -340,7 +439,7 @@ export function QuizEngine({
             </>
           ) : (
             <>
-              Siguiente
+              Siguiente caso
               <ChevronRight className="size-4" />
             </>
           )}

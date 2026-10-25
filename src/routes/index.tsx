@@ -176,24 +176,32 @@ function Home() {
           </div>
         </div>
 
-        {/* ── Tarjeta de Cargo Activo ── */}
-        <div className="mt-4 rounded-xl border border-border/90 bg-paper/70 p-4 sm:p-5">
+        {/* ── Tarjeta de Cargo Activo con Sello 100% Cobertura Oficial ── */}
+        <div className="mt-4 rounded-2xl border-2 border-accent/35 bg-linear-to-r from-accent/8 via-surface to-rule/5 p-4 sm:p-5 shadow-2xs">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="flex size-2 rounded-full bg-ok animate-pulse" />
-                <p className="text-[11px] uppercase tracking-[0.14em] text-muted font-medium">
-                  Cargo activo de estudio:
+            <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="flex size-2.5 rounded-full bg-ok animate-pulse" />
+                <p className="text-[11px] uppercase tracking-[0.14em] text-accent font-bold">
+                  Cargo activo configurado
                 </p>
-                <Badge variant="outline" className="text-xs font-semibold bg-surface">
+                <Badge variant="outline" className="text-[11px] font-bold bg-surface">
                   {ficha.nivel || "Nivel Técnico / Profesional"}
+                </Badge>
+                {ficha.opec ? (
+                  <Badge variant="rule" className="text-[10px] font-mono">
+                    OPEC {ficha.opec}
+                  </Badge>
+                ) : null}
+                <Badge variant="ok" className="text-[10px]">
+                  ✓ 100% Cobertura MERF + 24 Ejes Areandina
                 </Badge>
               </div>
               <h2 className="font-display text-lg sm:text-xl font-bold text-ink">
                 {ficha.denominacion}
                 {ficha.codigo !== "—" ? ` · Cód. ${ficha.codigo} Grado ${ficha.grado}` : ""}
               </h2>
-              <p className="text-xs text-muted max-w-xl">
+              <p className="text-xs text-muted max-w-2xl leading-relaxed">
                 {cargo.processLabel} ·{" "}
                 {isCustom ? "Manual personalizado cargado por el usuario" : cargo.blurb}
               </p>
@@ -201,18 +209,156 @@ function Home() {
 
             <div className="flex flex-wrap items-center gap-2 shrink-0">
               <Button asChild size="sm">
-                <Link to="/guia">
-                  Ver guía del cargo
+                <Link to="/estudio">
+                  <BookOpen className="size-4" />
+                  Ir al Material ({readCount}/{modules.length})
                   <ArrowRight className="size-4" />
                 </Link>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <Link to="/guia">Ver ficha MERF</Link>
               </Button>
               <Button asChild variant="secondary" size="sm">
                 <Link to="/cargo">
                   <Briefcase className="size-4" />
-                  Cambiar / Subir manual
+                  Cambiar cargo
                 </Link>
               </Button>
             </div>
+          </div>
+        </div>
+
+        {/* ── Ruta Guiada en 5 Pasos (Súper Fácil de Seguir) ── */}
+        <div className="mt-6 rounded-2xl border border-border bg-paper/60 p-4 sm:p-5">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.14em] text-accent font-bold">
+                ¿No sabes por dónde empezar? Sigue este orden de 1 a 5
+              </p>
+              <h3 className="font-display text-base sm:text-lg font-bold text-ink">
+                Ruta Paso a Paso para Ganar tu Plaza en la DIAN
+              </h3>
+            </div>
+            <span className="rounded-full bg-surface px-3 py-1 text-xs font-mono font-bold text-ink border border-border">
+              📚 {readCount}/{modules.length} temas · 🎯 {acc}% acierto
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
+            <Link
+              to="/indicadores"
+              className="group flex flex-col justify-between rounded-xl border border-border bg-surface p-3.5 transition-all hover:border-accent hover:shadow-xs"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-md bg-accent/10 px-2 py-0.5 font-mono text-[10px] font-bold text-accent">
+                    PASO 1
+                  </span>
+                  <Sparkles className="size-4 text-accent" />
+                </div>
+                <p className="mt-2 font-display text-sm font-bold text-ink">
+                  24 Indicadores Oficiales
+                </p>
+                <p className="mt-1 text-[11px] text-muted leading-relaxed">
+                  Mira exactamente los 24 temas que Areandina te va a evaluar en tu OPEC.
+                </p>
+              </div>
+              <span className="mt-3 text-[11px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
+                Abrir Paso 1 →
+              </span>
+            </Link>
+
+            <Link
+              to="/estudio"
+              className="group flex flex-col justify-between rounded-xl border-2 border-accent/50 bg-accent/5 p-3.5 transition-all hover:border-accent hover:shadow-xs"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-md bg-accent px-2 py-0.5 font-mono text-[10px] font-bold text-white">
+                    PASO 2 · CLAVE
+                  </span>
+                  <BookOpen className="size-4 text-accent" />
+                </div>
+                <p className="mt-2 font-display text-sm font-bold text-ink">
+                  Material Paso a Paso
+                </p>
+                <p className="mt-1 text-[11px] text-muted leading-relaxed">
+                  Estudia las {modules.length} lecciones en orden (01 → {String(modules.length).padStart(2, "0")}) con leyes y casos validados.
+                </p>
+              </div>
+              <span className="mt-3 text-[11px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
+                Estudiar ({readCount}/{modules.length}) →
+              </span>
+            </Link>
+
+            <Link
+              to="/practica"
+              className="group flex flex-col justify-between rounded-xl border border-border bg-surface p-3.5 transition-all hover:border-accent hover:shadow-xs"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-md bg-accent/10 px-2 py-0.5 font-mono text-[10px] font-bold text-accent">
+                    PASO 3
+                  </span>
+                  <ClipboardCheck className="size-4 text-accent" />
+                </div>
+                <p className="mt-2 font-display text-sm font-bold text-ink">
+                  Entrenador de Casos
+                </p>
+                <p className="mt-1 text-[11px] text-muted leading-relaxed">
+                  Elige tu respuesta, dale a «Validar» y aprende por qué cada opción es correcta o trampa.
+                </p>
+              </div>
+              <span className="mt-3 text-[11px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
+                Practicar ({answered}/{questions.length}) →
+              </span>
+            </Link>
+
+            <Link
+              to="/simulacro"
+              className="group flex flex-col justify-between rounded-xl border border-border bg-surface p-3.5 transition-all hover:border-accent hover:shadow-xs"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-md bg-accent/10 px-2 py-0.5 font-mono text-[10px] font-bold text-accent">
+                    PASO 4
+                  </span>
+                  <Flag className="size-4 text-accent" />
+                </div>
+                <p className="mt-2 font-display text-sm font-bold text-ink">
+                  Simulador Examen CNSC
+                </p>
+                <p className="mt-1 text-[11px] text-muted leading-relaxed">
+                  Ponte a prueba con o sin reloj en las 3 pruebas oficiales (umbral 70,00 pts).
+                </p>
+              </div>
+              <span className="mt-3 text-[11px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
+                Iniciar simulacro →
+              </span>
+            </Link>
+
+            <Link
+              to="/progreso"
+              className="group flex flex-col justify-between rounded-xl border border-border bg-surface p-3.5 transition-all hover:border-accent hover:shadow-xs"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-md bg-accent/10 px-2 py-0.5 font-mono text-[10px] font-bold text-accent">
+                    PASO 5
+                  </span>
+                  <CheckCircle2 className="size-4 text-ok" />
+                </div>
+                <p className="mt-2 font-display text-sm font-bold text-ink">
+                  Diagnóstico y Fallos
+                </p>
+                <p className="mt-1 text-[11px] text-muted leading-relaxed">
+                  Revisa tu probabilidad de aprobar y repasa únicamente las preguntas que has fallado.
+                </p>
+              </div>
+              <span className="mt-3 text-[11px] font-bold text-accent group-hover:translate-x-0.5 transition-transform">
+                Ver diagnóstico →
+              </span>
+            </Link>
           </div>
         </div>
 

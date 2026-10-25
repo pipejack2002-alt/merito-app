@@ -439,6 +439,18 @@ export const ARTICULOS: Articulo[] = [
     clave: "Interrumpen: mandamiento notificado, facilidad de pago, concordato/insolvencia y liquidación forzosa.",
   },
   {
+    id: "et-820",
+    norma: "et",
+    numero: "820",
+    titulo: "Remisión de las deudas tributarias (Extinción de la obligación)",
+    texto: [
+      "Los Directores Seccionales de Impuestos y/o Aduanas Nacionales quedan facultados para suprimir de los registros y cuentas de los contribuyentes de su jurisdicción, las deudas a cargo de personas que hubieren muerto sin dejar bienes. Para poder hacer uso de esta facultad deberán dichos funcionarios dictar la correspondiente resolución allegando previamente al expediente la partida de defunción del contribuyente y las pruebas que acrediten satisfactoriamente la circunstancia de no haber dejado bienes.",
+      "Podrán igualmente suprimir las deudas que no obstante las diligencias que se hayan efectuado para su cobro, estén sin respaldo alguno por no existir bienes embargados, ni garantía alguna, siempre que, además de no tenerse noticia del deudor, la deuda tenga una antigüedad de más de cinco (5) años […].",
+    ],
+    clave: "Remisión (forma de extinción): la decreta mediante resolución motivada el Director Seccional (nunca el Analista ‘a mano’), por muerte sin bienes o por deudas sin respaldo ni bienes tras los plazos y requisitos de ley.",
+    extracto: true,
+  },
+  {
     id: "et-823",
     norma: "et",
     numero: "823",
@@ -1200,7 +1212,7 @@ const VALORES = ["int-honestidad", "int-respeto", "int-compromiso", "int-diligen
 /** Artículos que se estudian dentro de cada lección. */
 export const MODULE_ARTICLES: Record<string, string[]> = {
   "ficha-empleo": ["cp-122", "cp-125", "cp-209"],
-  "cobro-persuasivo": ["l1066-1", "et-814", "et-817", "et-818", "et-841"],
+  "cobro-persuasivo": ["l1066-1", "et-814", "et-817", "et-818", "et-820", "et-841"],
   "cobro-coactivo": [
     "et-823",
     "et-824",
@@ -1218,6 +1230,7 @@ export const MODULE_ARTICLES: Record<string, string[]> = {
     "et-836",
     "et-817",
     "et-818",
+    "et-820",
   ],
   "medidas-cautelares": ["et-837", "et-838", "et-825-1", "et-836", "et-841", "et-833"],
   "devoluciones-compensaciones": ["et-815", "et-816", "et-850", "et-854", "et-855", "et-857", "et-860", "adu-727"],
