@@ -91,7 +91,10 @@ export const useProgress = create<ProgressState>()(
             : [...get().savedArticles, articleId],
         });
       },
-      setLastLesson: (moduleId) => set({ lastLesson: moduleId }),
+      setLastLesson: (moduleId) => {
+        if (get().lastLesson === moduleId) return;
+        set({ lastLesson: moduleId });
+      },
       toggleBookmark: (id) => {
         const has = get().bookmarks.includes(id);
         set({

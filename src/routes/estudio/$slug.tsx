@@ -93,10 +93,10 @@ function ModulePage() {
   const [showNotesDrawer, setShowNotesDrawer] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
-  // Al cambiar de módulo, reiniciar vista guiada al Paso 1 y guardar última lección
+  // Al cambiar de módulo (slug), reiniciar vista guiada al Paso 1 y guardar última lección
   useEffect(() => {
-    if (mod) {
-      setLastLesson(mod.id);
+    if (slug) {
+      setLastLesson(slug);
     }
     setActiveStep("teoria");
     setCheckedPoints({});
@@ -110,8 +110,8 @@ function ModulePage() {
       window.speechSynthesis.cancel();
     }
     setSpeaking(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [mod, setLastLesson]);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [slug, setLastLesson]);
 
   const modQuestions = useMemo(() => {
     if (!mod) return [];
