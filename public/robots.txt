@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /practica/
+Disallow: /estudio/$slug
+Disallow: /practica/$bank
+Disallow: /*?tab=*
+
+Sitemap: https://merito.tributoapp.me/sitemap.xml

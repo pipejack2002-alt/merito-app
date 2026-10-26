@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { useMemo } from "react";
 import { QuizEngine } from "@/components/quiz-engine";
@@ -9,6 +9,9 @@ import { useCargo } from "@/lib/use-cargo";
 import { loadPracticeSession } from "@/lib/quiz-session";
 
 export const Route = createFileRoute("/practica/$bank")({
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, nofollow" }],
+  }),
   component: PracticaBank,
 });
 
@@ -83,3 +86,4 @@ function PracticaBank() {
     </div>
   );
 }
+

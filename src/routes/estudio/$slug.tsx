@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
@@ -46,6 +46,21 @@ import { QUESTIONS_CARGOS } from "@/data/questions-cargos";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/estudio/$slug")({
+  head: ({ params }) => {
+    if (!params?.slug || params.slug === "`$slug") {
+      return {
+        meta: [{ name: "robots", content: "noindex, nofollow" }],
+      };
+    }
+    return {
+      links: [
+        {
+          rel: "canonical",
+          href: `https://merito.tributoapp.me/estudio/${params.slug}`,
+        },
+      ],
+    };
+  },
   component: ModulePage,
 });
 
@@ -1430,3 +1445,4 @@ function ModulePage() {
     </article>
   );
 }
+

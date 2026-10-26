@@ -1,4 +1,4 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+﻿import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
@@ -20,6 +20,7 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#1A2332" },
     ],
     links: [
+      { rel: "canonical", href: "https://merito.tributoapp.me/" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -49,3 +50,5 @@ export const Route = createRootRoute({
     </html>
   ),
 });
+
+
